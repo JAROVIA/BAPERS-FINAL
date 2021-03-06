@@ -1,16 +1,17 @@
-package BAPERS3.PROCESS;
+package PROCESS;
 
-import BAPERS3.PROCESS.I_PROCESS.*;
+import java.sql.Date;
 
-public class Job implements SetUrgency {
+public class Job implements I_PROCESS {
 
 	private int JobID;
-	private string Urgency = Normal;
-	private TimeStamp JobDeadline;
-	private string JobStatus = Started;
+	private String Urgency = "Normal";
+	//TODO set this type (was timestamp)
+	private String JobDeadline;
+	private String JobStatus = "Started";
 	private int NumberOfTasks = 0;
-	private date DateOfJob;
-	private string TaskProgress;
+	private Date DateOfJob;
+	private String TaskProgress;
 	private float JobPrice;
 	private float CustomUrgencyTime = 0;
 
@@ -18,7 +19,7 @@ public class Job implements SetUrgency {
 	 * 
 	 * @param TaskData
 	 */
-	public boolean AddTaskToJob(string TaskData) {
+	public boolean AddTaskToJob(String TaskData) {
 		// TODO - implement Job.AddTaskToJob
 		throw new UnsupportedOperationException();
 	}
@@ -27,7 +28,7 @@ public class Job implements SetUrgency {
 	 * 
 	 * @param TaskID
 	 */
-	public Task RetreiveTasks(int TaskID) {
+	public Task RetrieveTasks(int TaskID) {
 		// TODO - implement Job.RetreiveTasks
 		throw new UnsupportedOperationException();
 	}
@@ -45,7 +46,7 @@ public class Job implements SetUrgency {
 	 * 
 	 * @param TaskData
 	 */
-	public boolean UpdateTask(string TaskData) {
+	public boolean UpdateTask(String TaskData) {
 		// TODO - implement Job.UpdateTask
 		throw new UnsupportedOperationException();
 	}
@@ -64,7 +65,7 @@ public class Job implements SetUrgency {
 		throw new UnsupportedOperationException();
 	}
 
-	public string getJobStatus() {
+	public String getJobStatus() {
 		// TODO - implement Job.getJobStatus
 		throw new UnsupportedOperationException();
 	}
@@ -73,17 +74,18 @@ public class Job implements SetUrgency {
 	 * 
 	 * @param NewJobStatus
 	 */
-	public string setJobStatus(string NewJobStatus) {
+	public void setJobStatus(String NewJobStatus) {
 		// TODO - implement Job.setJobStatus
 		throw new UnsupportedOperationException();
 	}
 
-	public TimeStamp CalculateDeadline() {
+	// TODO set this type (was timestamp)
+	public String CalculateDeadline() {
 		// TODO - implement Job.CalculateDeadline
 		throw new UnsupportedOperationException();
 	}
 
-	public string ViewTaskProgress() {
+	public String ViewTaskProgress() {
 		// TODO - implement Job.ViewTaskProgress
 		throw new UnsupportedOperationException();
 	}
@@ -92,7 +94,7 @@ public class Job implements SetUrgency {
 	 * 
 	 * @param NewUrgency
 	 */
-	public boolean SetUrgency(string NewUrgency) {
+	public boolean SetUrgency(String NewUrgency) {
 		// TODO - implement Job.SetUrgency
 		throw new UnsupportedOperationException();
 	}
@@ -101,7 +103,7 @@ public class Job implements SetUrgency {
 	 * 
 	 * @param JobData
 	 */
-	public boolean StoreJob(string JobData) {
+	public boolean StoreJob(String JobData) {
 		// TODO - implement Job.StoreJob
 		throw new UnsupportedOperationException();
 	}
@@ -118,6 +120,36 @@ public class Job implements SetUrgency {
 	public void setJobPrice(float JobPrice) {
 		// TODO - implement Job.setJobPrice
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean CreateJob(String NewJobData) {
+		return false;
+	}
+
+	@Override
+	public boolean AddNewTask(String TaskDescription, String TaskLocation, float TaskPrice, int TaskDuration) {
+		return false;
+	}
+
+	@Override
+	public void CompleteTask() {
+
+	}
+
+	@Override
+	public void StartTask() {
+
+	}
+
+	@Override
+	public void GetTaskID() {
+
+	}
+
+	@Override
+	public void GetTaskPrice() {
+
 	}
 
 	public int getNumberOfTasks() {
@@ -143,7 +175,7 @@ public class Job implements SetUrgency {
 	 * @param NumberOfTasks
 	 * @param JobPrice
 	 */
-	public static Job Job(int JobData, string Normal, Date Deadline, string JobStatus, int NumberOfTasks, float JobPrice) {
+	public static Job Job(int JobData, String Normal, Date Deadline, String JobStatus, int NumberOfTasks, float JobPrice) {
 		// TODO - implement Job.Job
 		throw new UnsupportedOperationException();
 	}

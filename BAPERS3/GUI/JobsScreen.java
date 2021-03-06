@@ -1,14 +1,19 @@
-package BAPERS3.GUI;
+package GUI;
 
-import BAPERS3.PROCESS.*;
+import PROCESS.*;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 public class JobsScreen extends Window {
 
+	/*
 	private Button CreateJobOrderButton;
 	private Button ViewJobProgress;
 	private Button RecordPayment;
-	private TextArea SearchJob;
-	private Table JobsTable;
+
+	 */
+	private TextField SearchJob;
+	private TableView JobsTable;
 
 	/**
 	 * 
@@ -29,7 +34,7 @@ public class JobsScreen extends Window {
 		throw new UnsupportedOperationException();
 	}
 
-	public TextArea RetrieveTextArea() {
+	public String RetrieveTextArea() {
 		// TODO - implement JobsScreen.RetrieveTextArea
 		throw new UnsupportedOperationException();
 	}
@@ -42,7 +47,7 @@ public class JobsScreen extends Window {
 	 * @param ySize
 	 * @param icon
 	 */
-	public static JobsScreen JobsScreen(int x, int y, int xSize, int ySize, string icon) {
+	public static JobsScreen JobsScreen(int x, int y, int xSize, int ySize, String icon) {
 		// TODO - implement JobsScreen.JobsScreen
 		throw new UnsupportedOperationException();
 	}

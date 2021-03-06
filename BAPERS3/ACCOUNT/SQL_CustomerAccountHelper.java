@@ -1,6 +1,6 @@
-package BAPERS3.ACCOUNT;
+package ACCOUNT;
 
-import BAPERS3.ADMIN.*;
+import ADMIN.*;
 
 public class SQL_CustomerAccountHelper extends SQLHelper {
 
@@ -9,7 +9,7 @@ public class SQL_CustomerAccountHelper extends SQLHelper {
 	 * @param o
 	 * @param direction
 	 */
-	public string Generate(object o, string direction) {
+	public String Generate(Object o, String direction) {
 		// TODO - implement SQL_CustomerAccountHelper.Generate
 		throw new UnsupportedOperationException();
 	}

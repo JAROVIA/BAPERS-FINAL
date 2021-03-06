@@ -1,10 +1,12 @@
-package BAPERS3.GUI;
+package GUI;
 
-public class l extends Window {
+import javafx.scene.control.TextField;
 
-	private Button MyButton;
-	private TextArea UsernameTextArea;
-	private TextArea PasswordTextArea;
+public class Login extends Window {
+
+	//private Button MyButton;
+	private TextField UsernameTextArea;
+	private TextField PasswordTextArea;
 
 	public void Login() {
 		// TODO - implement l.Login
@@ -16,7 +18,7 @@ public class l extends Window {
 		throw new UnsupportedOperationException();
 	}
 
-	public string RetrieveTextArea() {
+	public String RetrieveTextArea() {
 		// TODO - implement l.RetrieveTextArea
 		throw new UnsupportedOperationException();
 	}
@@ -31,9 +33,12 @@ public class l extends Window {
 	 * @param Text
 	 * @param Button
 	 */
-	public static l LoginScreen(int x, int y, int xSize, int ySize, string icon, string Text, Button Button) {
+	/*
+	public static Login LoginScreen(int x, int y, int xSize, int ySize, string icon, string Text, Button Button) {
 		// TODO - implement l.LoginScreen
 		throw new UnsupportedOperationException();
 	}
+
+	 */
 
 }

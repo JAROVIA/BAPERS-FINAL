@@ -1,12 +1,18 @@
-package BAPERS3.GUI;
+package GUI;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 public class ActiveJobScreen extends Window {
-
+	/*
 	private Button ViewJobProgressButton;
 	private Button CreateJobButton;
 	private Button LogOutButton;
-	private Table JobsTable;
-	private TextArea SearchAccountTextArea;
+	*/
+	@FXML
+	private TableView JobsTable;
+	private TextField SearchAccountTextArea;
 
 	public void OnClick() {
 		// TODO - implement ActiveJobScreen.OnClick
@@ -22,7 +28,7 @@ public class ActiveJobScreen extends Window {
 	 * 
 	 * @param AccountNo
 	 */
-	public string SearchAccount(int AccountNo) {
+	public String SearchAccount(int AccountNo) {
 		// TODO - implement ActiveJobScreen.SearchAccount
 		throw new UnsupportedOperationException();
 	}
@@ -37,9 +43,11 @@ public class ActiveJobScreen extends Window {
 	 * @param Text
 	 * @param Button
 	 */
-	public ActiveJobScreen JobScreen(int x, int y, int xSize, int ySize, string icon, string Text, Button Button) {
+	/*
+	public ActiveJobScreen JobScreen(int x, int y, int xSize, int ySize, String icon, String Text, Button Button) {
 		// TODO - implement ActiveJobScreen.JobScreen
 		throw new UnsupportedOperationException();
 	}
+	 */
 
 }

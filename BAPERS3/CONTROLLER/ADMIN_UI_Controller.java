@@ -1,6 +1,8 @@
-package BAPERS3.CONTROLLER;
+package CONTROLLER;
 
-import BAPERS3.ADMIN.*;
+import ADMIN.*;
+
+import java.sql.Date;
 
 public class ADMIN_UI_Controller {
 
@@ -8,7 +10,7 @@ public class ADMIN_UI_Controller {
 	 * 
 	 * @param Username
 	 */
-	public UserAccount SearchUser(string Username) {
+	public UserAccount SearchUser(String Username) {
 		// TODO - implement ADMIN_UI_Controller.SearchUser
 		throw new UnsupportedOperationException();
 	}
@@ -17,7 +19,7 @@ public class ADMIN_UI_Controller {
 	 * 
 	 * @param UserDetails
 	 */
-	public boolean SaveUser(string[] UserDetails) {
+	public boolean SaveUser(String[] UserDetails) {
 		// TODO - implement ADMIN_UI_Controller.SaveUser
 		throw new UnsupportedOperationException();
 	}
@@ -26,7 +28,7 @@ public class ADMIN_UI_Controller {
 	 * 
 	 * @param Username
 	 */
-	public UserAccount RetrieveUser(string Username) {
+	public UserAccount RetrieveUser(String Username) {
 		// TODO - implement ADMIN_UI_Controller.RetrieveUser
 		throw new UnsupportedOperationException();
 	}

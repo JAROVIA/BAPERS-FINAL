@@ -1,14 +1,16 @@
-package BAPERS3.PAYMENT;
+package PAYMENT;
+
+import java.sql.Date;
 
 public class CardDetails {
 
-	private string cardType;
+	private String cardType;
 	private int cardNumber;
-	private string cardHolderName;
-	private date expiryDate;
+	private String cardHolderName;
+	private Date expiryDate;
 	private int CVCNumber;
 
-	public string getCardType() {
+	public String getCardType() {
 		return this.cardType;
 	}
 
@@ -16,7 +18,7 @@ public class CardDetails {
 		return this.cardNumber;
 	}
 
-	public string getCardHolderName() {
+	public String getCardHolderName() {
 		return this.cardHolderName;
 	}
 
@@ -34,7 +36,7 @@ public class CardDetails {
 	 * 
 	 * @param CardDetailsData
 	 */
-	public static CardDetails CardDetails(string CardDetailsData) {
+	public static CardDetails CardDetails(String CardDetailsData) {
 		// TODO - implement CardDetails.CardDetails
 		throw new UnsupportedOperationException();
 	}

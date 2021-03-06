@@ -1,4 +1,4 @@
-package BAPERS3.ADMIN;
+package ADMIN;
 
 public abstract interface Database {
 }

@@ -1,22 +1,28 @@
-package BAPERS3.GUI;
+package GUI;
+
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 
 public class EditCustomerDetailsScreen extends Window {
 
-	private TextArea EditUsername;
-	private TextArea EditAddressTextArea;
-	private Menu AmmendAccountStatusMenu;
+	private TextField EditUsername;
+	private TextField EditAddressTextArea;
+	private ComboBox AmmendAccountStatusMenu;
+	/*
 	private Button SaveDetailsButton;
 	private Button DeleteCustomerButton;
 	private Button LogoutButton;
-	private TextArea EditPhoneTextArea;
-	private TextArea EditMemorableWordTextArea;
+
+	 */
+	private TextField EditPhoneTextArea;
+	private TextField EditMemorableWordTextArea;
 
 	public void OnClickButton() {
 		// TODO - implement EditCustomerDetailsScreen.OnClickButton
 		throw new UnsupportedOperationException();
 	}
 
-	public string RetrieveTextArea() {
+	public String RetrieveTextArea() {
 		// TODO - implement EditCustomerDetailsScreen.RetrieveTextArea
 		throw new UnsupportedOperationException();
 	}
@@ -30,7 +36,7 @@ public class EditCustomerDetailsScreen extends Window {
 	 * 
 	 * @param CustomerDetails
 	 */
-	public void SaveCustomer(string[] CustomerDetails) {
+	public void SaveCustomer(String[] CustomerDetails) {
 		// TODO - implement EditCustomerDetailsScreen.SaveCustomer
 		throw new UnsupportedOperationException();
 	}
@@ -45,9 +51,12 @@ public class EditCustomerDetailsScreen extends Window {
 	 * @param Text
 	 * @param Button
 	 */
+	/*
 	public EditCustomerDetailsScreen(int x, int y, int xSize, int ySize, string icon, string Text, Button Button) {
 		// TODO - implement EditCustomerDetailsScreen.EditCustomerDetailsScreen
 		throw new UnsupportedOperationException();
 	}
+
+	 */
 
 }

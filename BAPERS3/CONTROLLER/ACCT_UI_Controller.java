@@ -1,6 +1,6 @@
-package BAPERS3.CONTROLLER;
+package CONTROLLER;
 
-import BAPERS3.ACCOUNT.*;
+import ACCOUNT.*;
 
 public class ACCT_UI_Controller {
 
@@ -8,7 +8,7 @@ public class ACCT_UI_Controller {
 	 * 
 	 * @param AccountNum
 	 */
-	public string SearchCustomer(int AccountNum) {
+	public String SearchCustomer(int AccountNum) {
 		// TODO - implement ACCT_UI_Controller.SearchCustomer
 		throw new UnsupportedOperationException();
 	}
@@ -17,7 +17,7 @@ public class ACCT_UI_Controller {
 	 * 
 	 * @param CustomerData
 	 */
-	public boolean Submit(string[] CustomerData) {
+	public boolean Submit(String[] CustomerData) {
 		// TODO - implement ACCT_UI_Controller.Submit
 		throw new UnsupportedOperationException();
 	}

@@ -1,8 +1,8 @@
-package BAPERS3.PROCESS;
+package PROCESS;
 
-public class Task implements I_PROCESS {
+public class Task {
 
-	private string TaskStatus;
+	private String TaskStatus;
 	private int Duration;
 	private int TaskID;
 	private float TaskPrice;
@@ -14,7 +14,7 @@ public class Task implements I_PROCESS {
 	 * @param TaskPrice
 	 * @param TaskDuration
 	 */
-	public boolean AddNewTask(string TaskDescription, string TaskLocation, float TaskPrice, int TaskDuration) {
+	public boolean AddNewTask(String TaskDescription, String TaskLocation, float TaskPrice, int TaskDuration) {
 		// TODO - implement Task.AddNewTask
 		throw new UnsupportedOperationException();
 	}
@@ -26,9 +26,9 @@ public class Task implements I_PROCESS {
 
 	/**
 	 * 
-	 * @param TaskData
+	 * @param TaskID
 	 */
-	public boolean RemoveTask(string TaskData) {
+	public boolean RemoveTask(int TaskID) {
 		// TODO - implement Task.RemoveTask
 		throw new UnsupportedOperationException();
 	}
@@ -37,7 +37,7 @@ public class Task implements I_PROCESS {
 	 * 
 	 * @param TaskID
 	 */
-	public Task RetrieveTask(int TaskID) {
+	public Task RetrieveTasks(int TaskID) {
 		// TODO - implement Task.RetrieveTask
 		throw new UnsupportedOperationException();
 	}
@@ -56,7 +56,7 @@ public class Task implements I_PROCESS {
 	 * 
 	 * @param TaskData
 	 */
-	public void UpdateTask(string TaskData) {
+	public boolean UpdateTask(String TaskData) {
 		// TODO - implement Task.UpdateTask
 		throw new UnsupportedOperationException();
 	}
@@ -75,8 +75,13 @@ public class Task implements I_PROCESS {
 	 * 
 	 * @param TaskData
 	 */
-	public static Task Task(string TaskData) {
+	public static Task Task(String TaskData) {
 		// TODO - implement Task.Task
+		throw new UnsupportedOperationException();
+	}
+
+	public boolean AddTaskToJob(String TaskData){
+		//TODO
 		throw new UnsupportedOperationException();
 	}
 

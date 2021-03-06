@@ -1,4 +1,4 @@
-package BAPERS3.ACCOUNT;
+package ACCOUNT;
 
 public class Impl_CustomerAccount implements I_CustomerAccount {
 
@@ -12,7 +12,7 @@ public class Impl_CustomerAccount implements I_CustomerAccount {
 	 * @param Phone
 	 * @param AccountStatus
 	 */
-	public boolean AddCustomer(int AccountNumber, string UserName, string Email, int Phone, string AccountStatus) {
+	public boolean AddCustomer(int AccountNumber, String UserName, String Email, int Phone, String AccountStatus) {
 		// TODO - implement Impl_CustomerAccount.AddCustomer
 		throw new UnsupportedOperationException();
 	}
@@ -31,16 +31,21 @@ public class Impl_CustomerAccount implements I_CustomerAccount {
 	 * @param AccountNumber
 	 * @param NewCustomerStatus
 	 */
-	public string SetCustomerAccStatus(int AccountNumber, string NewCustomerStatus) {
+	public String SetCustomerAccStatus(int AccountNumber, String NewCustomerStatus) {
 		// TODO - implement Impl_CustomerAccount.SetCustomerAccStatus
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean CreateCustomer(String CustomerData) {
+		return false;
 	}
 
 	/**
 	 * 
 	 * @param PaymentType
 	 */
-	public void MakePayment(string PaymentType) {
+	public void MakePayment(String PaymentType) {
 		// TODO - implement Impl_CustomerAccount.MakePayment
 		throw new UnsupportedOperationException();
 	}

@@ -1,14 +1,14 @@
-package BAPERS3.ACCOUNT;
+package ACCOUNT;
 
 public class CustomerAccountDetails {
 
 	SQL_CustomerAccountHelper sql_helper;
 	private int AccountNumber;
-	private string UserName;
+	private String UserName;
 	private int PhoneNumber;
-	private string Email;
-	private string ProofOfIdentity;
-	private string AccountStatus = Non-Valued;
+	private String Email;
+	private String ProofOfIdentity;
+	private String AccountStatus = "Non-Valued";
 	private float VolumePerMonth = 0;
 
 	public int getAccountNumber() {
@@ -20,17 +20,17 @@ public class CustomerAccountDetails {
 	 * 
 	 * @param NewName
 	 */
-	public void setName(string NewName) {
+	public void setName(String NewName) {
 		// TODO - implement CustomerAccountDetails.setName
 		throw new UnsupportedOperationException();
 	}
 
-	public string getName() {
+	public String getName() {
 		// TODO - implement CustomerAccountDetails.getName
 		throw new UnsupportedOperationException();
 	}
 
-	public string getAccountStatus() {
+	public String getAccountStatus() {
 		// TODO - implement CustomerAccountDetails.getAccountStatus
 		throw new UnsupportedOperationException();
 	}
@@ -39,7 +39,7 @@ public class CustomerAccountDetails {
 	 * 
 	 * @param AccountStatus
 	 */
-	public void setAccountStatus(string AccountStatus) {
+	public void setAccountStatus(String AccountStatus) {
 		// TODO - implement CustomerAccountDetails.setAccountStatus
 		throw new UnsupportedOperationException();
 	}
@@ -84,7 +84,7 @@ public class CustomerAccountDetails {
 	 * @param AccountNumber
 	 * @param VolumePerMonth
 	 */
-	public static CustomerAccountDetails CustomerAccountDetails(string UserName, string Email, string AccountStatus, int AccountNumber, float VolumePerMonth) {
+	public static CustomerAccountDetails CustomerAccountDetails(String UserName, String Email, String AccountStatus, int AccountNumber, float VolumePerMonth) {
 		// TODO - implement CustomerAccountDetails.CustomerAccountDetails
 		throw new UnsupportedOperationException();
 	}

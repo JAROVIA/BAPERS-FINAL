@@ -1,6 +1,6 @@
-package BAPERS3.CUSTOMER;
+package CUSTOMER;
 
-import BAPERS3.PROCESS.*;
+import PROCESS.*;
 
 public class FixedDiscountRate extends Discount {
 

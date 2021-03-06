@@ -1,4 +1,4 @@
-package BAPERS3.ACCOUNT;
+package ACCOUNT;
 
 public interface I_CustomerAccount {
 
@@ -7,19 +7,19 @@ public interface I_CustomerAccount {
 	 * @param AccountNumber
 	 * @param NewCustomerStatus
 	 */
-	abstract string SetCustomerAccStatus(int AccountNumber, string NewCustomerStatus);
+	abstract String SetCustomerAccStatus(int AccountNumber, String NewCustomerStatus);
 
 	/**
 	 * 
 	 * @param CustomerData
 	 */
-	abstract boolean CreateCustomer(string CustomerData);
+	abstract boolean CreateCustomer(String CustomerData);
 
 	/**
 	 * 
 	 * @param PaymentType
 	 */
-	abstract void MakePayment(string PaymentType);
+	abstract void MakePayment(String PaymentType);
 
 	/**
 	 * 
@@ -29,7 +29,7 @@ public interface I_CustomerAccount {
 	 * @param Phone
 	 * @param AccountStatus
 	 */
-	abstract boolean AddCustomer(int AccountNumber, string UserName, string Email, int Phone, string AccountStatus);
+	abstract boolean AddCustomer(int AccountNumber, String UserName, String Email, int Phone, String AccountStatus);
 
 	/**
 	 * 

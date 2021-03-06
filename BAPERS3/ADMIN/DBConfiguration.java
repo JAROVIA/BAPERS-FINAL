@@ -1,4 +1,6 @@
-package BAPERS3.ADMIN;
+package ADMIN;
+
+import java.sql.Date;
 
 public class DBConfiguration {
 

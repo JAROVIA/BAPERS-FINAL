@@ -1,15 +1,19 @@
-package BAPERS3.GUI;
+package GUI;
+
+import javafx.scene.control.TextField;
 
 public class ReportsScreen extends Window {
 
+	/*
 	private Button LogOutButton;
 	private Button GenerateCustomerReportButton;
 	private Menu GenerationReportDropDownMenu;
 	private Button GenerateStaffReport;
 	private Button GenerateSummaryReport;
-	private TextArea AccountNumber;
-	private TextArea InputDate;
-	private TextArea InputShift;
+	 */
+	private TextField AccountNumber;
+	private TextField InputDate;
+	private TextField InputShift;
 
 	public void OnClick() {
 		// TODO - implement ReportsScreen.OnClick
@@ -36,9 +40,12 @@ public class ReportsScreen extends Window {
 	 * @param Text
 	 * @param Button
 	 */
+	/*
 	public static ReportsScreen ReportsScreen(int x, int y, int xSize, int ySize, string icon, string Text, Button Button) {
 		// TODO - implement ReportsScreen.ReportsScreen
 		throw new UnsupportedOperationException();
 	}
+
+	 */
 
 }

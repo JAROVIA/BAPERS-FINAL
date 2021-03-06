@@ -1,10 +1,10 @@
-package BAPERS3.GUI;
+package GUI;
 
 public class HomeScreen extends Window {
 
 	private int CreateUserButton;
-	private Button LogoutButton;
-	private Menu MyMenu;
+	//private Button LogoutButton;
+	//private Menu MyMenu;
 
 	public void OnClickButton() {
 		// TODO - implement HomeScreen.OnClickButton
@@ -31,9 +31,12 @@ public class HomeScreen extends Window {
 	 * @param Button
 	 * @param MyMenu
 	 */
+	/*
 	public static HomeScreen HomeScreen(int x, int y, int xSize, int ySize, string icon, string Text, Button Button, Menu MyMenu) {
 		// TODO - implement HomeScreen.HomeScreen
 		throw new UnsupportedOperationException();
 	}
+
+	 */
 
 }

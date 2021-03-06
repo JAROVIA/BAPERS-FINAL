@@ -1,9 +1,11 @@
-package BAPERS3.REPORT;
+package REPORT;
+
+import java.sql.Date;
 
 public class SummaryReport extends Report {
 
 	private int ShiftID;
-	private string Department;
+	private String Department;
 	private float TimeInCopyRoom;
 	private float TimeInDevelopment;
 	private float TimeInFinishing;
@@ -15,7 +17,7 @@ public class SummaryReport extends Report {
 	 * @param Date
 	 * @param ReportData
 	 */
-	public boolean GenerateReport(int ReportID, Date Date, string ReportData) {
+	public boolean GenerateReport(int ReportID, Date Date, String ReportData) {
 		// TODO - implement SummaryReport.GenerateReport
 		throw new UnsupportedOperationException();
 	}
@@ -26,7 +28,7 @@ public class SummaryReport extends Report {
 	 * @param Date
 	 * @param ReportData
 	 */
-	public static SummaryReport SummaryReport(int ReportID, Date Date, string ReportData) {
+	public static SummaryReport SummaryReport(int ReportID, Date Date, String ReportData) {
 		// TODO - implement SummaryReport.SummaryReport
 		throw new UnsupportedOperationException();
 	}

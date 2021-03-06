@@ -1,10 +1,12 @@
-package BAPERS3.REPORT;
+package REPORT;
+
+import java.sql.Date;
 
 public class StaffReport extends Report {
 
-	private string EmployeeName;
+	private String EmployeeName;
 	private int TaskID;
-	private string Department;
+	private String Department;
 	private double StartTime;
 	private int TimeTakenPerTask;
 	private int TotalTimeTaken;
@@ -15,7 +17,7 @@ public class StaffReport extends Report {
 	 * @param Date
 	 * @param ReportData
 	 */
-	public boolean GenerateReport(int ReportID, Date Date, string ReportData) {
+	public boolean GenerateReport(int ReportID, Date Date, String ReportData) {
 		// TODO - implement StaffReport.GenerateReport
 		throw new UnsupportedOperationException();
 	}
@@ -26,7 +28,7 @@ public class StaffReport extends Report {
 	 * @param Date
 	 * @param ReportData
 	 */
-	public static StaffReport StaffReport(int ReportID, Date Date, string ReportData) {
+	public static StaffReport StaffReport(int ReportID, Date Date, String ReportData) {
 		// TODO - implement StaffReport.StaffReport
 		throw new UnsupportedOperationException();
 	}
