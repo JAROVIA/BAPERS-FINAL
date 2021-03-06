@@ -1,4 +1,6 @@
-package BAPERS3.ADMIN;
+package ADMIN;
+
+import java.sql.Connection;
 
 public class DatabaseConnectivity implements I_DatabaseConnectivity {
 
@@ -6,7 +8,8 @@ public class DatabaseConnectivity implements I_DatabaseConnectivity {
 	 * 
 	 * @param SQL
 	 */
-	public Connection Connect(string SQL) {
+
+	public Connection Connect(String SQL) {
 		// TODO - implement DatabaseConnectivity.Connect
 		throw new UnsupportedOperationException();
 	}
@@ -16,7 +19,7 @@ public class DatabaseConnectivity implements I_DatabaseConnectivity {
 	 * @param SQL
 	 * @param conn
 	 */
-	public void Read(string SQL, connection conn) {
+	public void Read(String SQL, Connection conn) {
 		// TODO - implement DatabaseConnectivity.Read
 		throw new UnsupportedOperationException();
 	}
@@ -25,7 +28,7 @@ public class DatabaseConnectivity implements I_DatabaseConnectivity {
 	 * 
 	 * @param SQL
 	 */
-	public int Write(string SQL) {
+	public int Write(String SQL) {
 		// TODO - implement DatabaseConnectivity.Write
 		throw new UnsupportedOperationException();
 	}

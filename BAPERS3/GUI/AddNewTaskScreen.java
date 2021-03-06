@@ -1,14 +1,18 @@
-package BAPERS3.GUI;
+package GUI;
+
+import javafx.scene.control.TextField;
 
 public class AddNewTaskScreen extends Window {
 
-	private TextArea NewTaskDescription;
-	private TextArea NewTaskLocation;
-	private TextArea NewTaskDuration;
-	private TextArea NewTaskPrice;
+	private TextField NewTaskDescription;
+	private TextField NewTaskLocation;
+	private TextField NewTaskDuration;
+	private TextField NewTaskPrice;
+	/*
 	private Button CancelTask;
 	private Button ConfirmNewTask;
 	private Button Logout;
+	 */
 
 	public void ConfirmNewTask() {
 		// TODO - implement AddNewTaskScreen.ConfirmNewTask
@@ -33,7 +37,7 @@ public class AddNewTaskScreen extends Window {
 	 * @param ySize
 	 * @param icon
 	 */
-	public static AddNewTaskScreen AddNewTaskScreen(int x, int y, int xSize, int ySize, string icon) {
+	public static AddNewTaskScreen AddNewTaskScreen(int x, int y, int xSize, int ySize, String icon) {
 		// TODO - implement AddNewTaskScreen.AddNewTaskScreen
 		throw new UnsupportedOperationException();
 	}

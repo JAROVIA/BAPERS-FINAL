@@ -1,11 +1,13 @@
-package BAPERS3.PAYMENT;
+package PAYMENT;
+
+import java.sql.Date;
 
 public class Payment implements I_Payment {
 
 	SQL_PaymentHelper sql_helper;
 	private int PaymentID;
-	private string PaymentType;
-	private date DateOfPayment;
+	private String PaymentType;
+	private Date DateOfPayment;
 	private float FinalPrice;
 	private float JobPrice;
 
@@ -28,12 +30,12 @@ public class Payment implements I_Payment {
 		throw new UnsupportedOperationException();
 	}
 
-	public string getPaymentType() {
+	public String getPaymentType() {
 		// TODO - implement Payment.getPaymentType
 		throw new UnsupportedOperationException();
 	}
 
-	public date getDateOfPayment() {
+	public Date getDateOfPayment() {
 		// TODO - implement Payment.getDateOfPayment
 		throw new UnsupportedOperationException();
 	}
@@ -56,7 +58,7 @@ public class Payment implements I_Payment {
 	 * 
 	 * @param PaymentType
 	 */
-	public void setPaymentType(string PaymentType) {
+	public void setPaymentType(String PaymentType) {
 		// TODO - implement Payment.setPaymentType
 		throw new UnsupportedOperationException();
 	}
@@ -67,7 +69,7 @@ public class Payment implements I_Payment {
 	 * @param cvc
 	 * @param PaymentType
 	 */
-	public Payment MakePayment(float JobPrice, int cvc, string PaymentType) {
+	public Payment MakePayment(float JobPrice, int cvc, String PaymentType) {
 		// TODO - implement Payment.MakePayment
 		throw new UnsupportedOperationException();
 	}
@@ -89,7 +91,7 @@ public class Payment implements I_Payment {
 	 * @param DateOfPayment
 	 * @param PaymentID
 	 */
-	public static Payment Payment(float FinalPrice, string PaymentType, Date DateOfPayment, int PaymentID) {
+	public static Payment Payment(float FinalPrice, String PaymentType, Date DateOfPayment, int PaymentID) {
 		// TODO - implement Payment.Payment
 		throw new UnsupportedOperationException();
 	}

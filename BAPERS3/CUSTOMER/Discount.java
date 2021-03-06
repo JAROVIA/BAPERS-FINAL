@@ -1,4 +1,4 @@
-package BAPERS3.CUSTOMER;
+package CUSTOMER;
 
 public abstract class Discount {
 

@@ -1,9 +1,9 @@
-package BAPERS3.GUI;
+package GUI;
 
 public class Window {
 
 	private int backgroundColour = 0;
-	private string foregroundColour = rgb(192,192,192);
+	private String foregroundColour = "rgb(192,192,192)";
 	private int X = 0;
 	private int Y = 0;
 	private int xSize = 1920;
@@ -38,7 +38,7 @@ public class Window {
 	 * @param ySize
 	 * @param icon
 	 */
-	public Window Window(int x, int y, int xSize, int ySize, string icon) {
+	public Window Window(int x, int y, int xSize, int ySize, String icon) {
 		// TODO - implement Window.Window
 		throw new UnsupportedOperationException();
 	}

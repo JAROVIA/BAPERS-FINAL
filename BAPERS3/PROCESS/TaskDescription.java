@@ -1,11 +1,11 @@
-package BAPERS3.PROCESS;
+package PROCESS;
 
 public class TaskDescription {
 
 	private int TaskID;
-	private string TaskLocation;
+	private String TaskLocation;
 	private float TaskPrice;
-	private string DescriptionOfTask;
+	private String DescriptionOfTask;
 	private int Duration;
 
 	public float RetrievePrice() {
@@ -27,7 +27,7 @@ public class TaskDescription {
 		throw new UnsupportedOperationException();
 	}
 
-	public string getTaskLocation() {
+	public String getTaskLocation() {
 		// TODO - implement TaskDescription.getTaskLocation
 		throw new UnsupportedOperationException();
 	}
@@ -36,7 +36,7 @@ public class TaskDescription {
 	 * 
 	 * @param TaskLocation
 	 */
-	public void setTaskLocation(string TaskLocation) {
+	public void setTaskLocation(String TaskLocation) {
 		// TODO - implement TaskDescription.setTaskLocation
 		throw new UnsupportedOperationException();
 	}
@@ -45,7 +45,7 @@ public class TaskDescription {
 	 * 
 	 * @param TaskData
 	 */
-	public boolean StoreTask(string TaskData) {
+	public boolean StoreTask(String TaskData) {
 		// TODO - implement TaskDescription.StoreTask
 		throw new UnsupportedOperationException();
 	}
@@ -58,7 +58,7 @@ public class TaskDescription {
 	 * @param DecriptionOfTask
 	 * @param Duration
 	 */
-	public static TaskDescription TaskDescription(int TaskID, string TaskLocation, float TaskPrice, string DecriptionOfTask, float Duration) {
+	public static TaskDescription TaskDescription(int TaskID, String TaskLocation, float TaskPrice, String DecriptionOfTask, float Duration) {
 		// TODO - implement TaskDescription.TaskDescription
 		throw new UnsupportedOperationException();
 	}

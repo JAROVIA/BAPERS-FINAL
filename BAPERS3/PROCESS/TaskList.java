@@ -1,4 +1,4 @@
-package BAPERS3.PROCESS;
+package PROCESS;
 
 public class TaskList {
 
@@ -8,7 +8,7 @@ public class TaskList {
 	 * 
 	 * @param TaskData
 	 */
-	public boolean RemoveTask(string TaskData) {
+	public boolean RemoveTask(String TaskData) {
 		// TODO - implement TaskList.RemoveTask
 		throw new UnsupportedOperationException();
 	}
@@ -17,7 +17,7 @@ public class TaskList {
 	 * 
 	 * @param TaskData
 	 */
-	public boolean AddTask(string TaskData) {
+	public boolean AddTask(String TaskData) {
 		// TODO - implement TaskList.AddTask
 		throw new UnsupportedOperationException();
 	}

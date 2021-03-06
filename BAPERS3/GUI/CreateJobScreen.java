@@ -1,20 +1,27 @@
-package BAPERS3.GUI;
+package GUI;
 
-import BAPERS3.ACCOUNT.*;
+import ACCOUNT.*;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
 public class CreateJobScreen extends Window {
 
+	/*
 	private Button LogOutButton;
 	private Button CreateCustomerAccButton;
 	private Button CancelJobButton;
 	private Button ConfirmJobButton;
-	private TextArea SearchAccountTextArea;
-	private DropDownMenu SelectTaskDropDown;
-	private DropDownMenu SelectUrgencyDropDown;
-	private DropDownMenu SelectTaskID;
-	private TextArea TypeOfDiscount;
-	private TextArea EnterDiscountRate;
-	private DisplayBox DisplayJobPrice;
+
+	 */
+	private TextField SearchAccountTextArea;
+	//Comboboox = drop down in javaFx
+	private ComboBox SelectTaskDropDown;
+	private ComboBox SelectUrgencyDropDown;
+	private ComboBox SelectTaskID;
+	private TextField TypeOfDiscount;
+	private TextField EnterDiscountRate;
+	private TextArea DisplayJobPrice;
 
 	public void LogOut() {
 		// TODO - implement CreateJobScreen.LogOut
@@ -49,7 +56,7 @@ public class CreateJobScreen extends Window {
 	 * @param ySize
 	 * @param icon
 	 */
-	public static CreateJobScreen CreateJobScreen(int x, int y, int xSize, int ySize, string icon) {
+	public static CreateJobScreen CreateJobScreen(int x, int y, int xSize, int ySize, String icon) {
 		// TODO - implement CreateJobScreen.CreateJobScreen
 		throw new UnsupportedOperationException();
 	}

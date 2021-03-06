@@ -1,4 +1,4 @@
-package BAPERS3.CONTROLLER;
+package CONTROLLER;
 
 public class UI_Controller {
 
@@ -6,7 +6,7 @@ public class UI_Controller {
 	 * 
 	 * @param PaymentDetails
 	 */
-	public boolean SavePayment(string[] PaymentDetails) {
+	public boolean SavePayment(String[] PaymentDetails) {
 		// TODO - implement UI_Controller.SavePayment
 		throw new UnsupportedOperationException();
 	}

@@ -1,24 +1,24 @@
-package BAPERS3.PROCESS;
+package PROCESS;
 
 public class SQLHelper2 {
 
-	private string sql;
+	private String sql;
 
 	/**
 	 * 
 	 * @param o
 	 * @param direction
 	 */
-	public string generate(object o, string direction) {
+	public String generate(Object o, String direction) {
 		// TODO - implement SQLHelper2.generate
 		throw new UnsupportedOperationException();
 	}
 
-	public string getSql() {
+	public String getSql() {
 		return this.sql;
 	}
 
-	public string setSql() {
+	public String setSql() {
 		// TODO - implement SQLHelper2.setSql
 		throw new UnsupportedOperationException();
 	}

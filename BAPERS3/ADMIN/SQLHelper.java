@@ -1,24 +1,24 @@
-package BAPERS3.ADMIN;
+package ADMIN;
 
 public class SQLHelper {
 
-	private string sql;
+	private String sql;
 
 	/**
 	 * 
 	 * @param o
 	 * @param direction
 	 */
-	public string generate(object o, string direction) {
+	public String generate(Object o, String direction) {
 		// TODO - implement SQLHelper.generate
 		throw new UnsupportedOperationException();
 	}
 
-	public string getSql() {
+	public String getSql() {
 		return this.sql;
 	}
 
-	public string setSql() {
+	public String setSql() {
 		// TODO - implement SQLHelper.setSql
 		throw new UnsupportedOperationException();
 	}

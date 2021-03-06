@@ -1,16 +1,20 @@
-package BAPERS3.GUI;
+package GUI;
 
-import BAPERS3.PROCESS.*;
+import PROCESS.*;
+import javafx.scene.control.TextField;
 
 public class UpdateExistingTaskScreen extends Window {
 
-	private TextArea TaskDescription;
-	private TextArea TaskLocation;
-	private TextArea TaskPrice;
-	private TextArea TaskDuration;
+	private TextField TaskDescription;
+	private TextField TaskLocation;
+	private TextField TaskPrice;
+	private TextField TaskDuration;
+	/*
 	private Button ConfirmChanges;
 	private Button CancelChanges;
 	private Button LogOut;
+
+	 */
 
 	public void OnClick() {
 		// TODO - implement UpdateExistingTaskScreen.OnClick
@@ -35,9 +39,12 @@ public class UpdateExistingTaskScreen extends Window {
 	 * @param ySize
 	 * @param icon
 	 */
+	/*
 	public static UpdateExistingTaskScreen UpdateExistingTaskScreen(int x, int y, int xSize, int ySize, string icon) {
 		// TODO - implement UpdateExistingTaskScreen.UpdateExistingTaskScreen
 		throw new UnsupportedOperationException();
 	}
+
+	 */
 
 }

@@ -1,22 +1,27 @@
-package BAPERS3.GUI;
+package GUI;
 
-import BAPERS3.ACCOUNT.*;
+import ACCOUNT.*;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 public class CustomerAccountScreen extends Window {
 
+	/*
 	private Button RegisterNewCustomerButton;
 	private Button LogOutButton;
-	private TextArea SearchCustomerTextArea;
 	private Button EditCustomerButton;
 	private Button DeleteCustomerButton;
-	private Table CustomerAccountTable;
+
+	 */
+	private TextField SearchCustomerTextArea;
+	private TableView CustomerAccountTable;
 
 	public void OnClickButton() {
 		// TODO - implement CustomerAccountScreen.OnClickButton
 		throw new UnsupportedOperationException();
 	}
 
-	public string RetrieveTextArea() {
+	public String RetrieveTextArea() {
 		// TODO - implement CustomerAccountScreen.RetrieveTextArea
 		throw new UnsupportedOperationException();
 	}
@@ -35,7 +40,7 @@ public class CustomerAccountScreen extends Window {
 	 * 
 	 * @param CustomerAccDetails
 	 */
-	public CustomerAccountDetails SearchCustomerAcc(string CustomerAccDetails) {
+	public CustomerAccountDetails SearchCustomerAcc(String CustomerAccDetails) {
 		// TODO - implement CustomerAccountScreen.SearchCustomerAcc
 		throw new UnsupportedOperationException();
 	}
@@ -55,9 +60,12 @@ public class CustomerAccountScreen extends Window {
 	 * @param Text
 	 * @param Button
 	 */
-	public CustomerAccountScreen(int x, int y, int xSize, int ySize, string icon, string Text, Button Button) {
+	/*
+	public CustomerAccountScreen(int x, int y, int xSize, int ySize, String icon, String Text, Button Button) {
 		// TODO - implement CustomerAccountScreen.CustomerAccountScreen
 		throw new UnsupportedOperationException();
 	}
+
+	 */
 
 }

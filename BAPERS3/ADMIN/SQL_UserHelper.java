@@ -1,4 +1,4 @@
-package BAPERS3.ADMIN;
+package ADMIN;
 
 public class SQL_UserHelper extends SQLHelper {
 
@@ -7,7 +7,7 @@ public class SQL_UserHelper extends SQLHelper {
 	 * @param o
 	 * @param direction
 	 */
-	public string Generate(object o, string direction) {
+	public String Generate(Object o, String direction) {
 		// TODO - implement SQL_UserHelper.Generate
 		throw new UnsupportedOperationException();
 	}

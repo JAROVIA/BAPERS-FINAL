@@ -1,15 +1,15 @@
-package BAPERS3.ADMIN;
+package ADMIN;
 
 public class Alert {
 
-	private string AlertMessage;
+	private String AlertMessage;
 	private boolean MessageSeen;
 
 	/**
 	 * 
 	 * @param AlertMessage
 	 */
-	public static Alert Alert(string AlertMessage) {
+	public static Alert Alert(String AlertMessage) {
 		// TODO - implement Alert.Alert
 		throw new UnsupportedOperationException();
 	}

@@ -1,4 +1,6 @@
-package BAPERS3.PAYMENT;
+package PAYMENT;
+
+import java.sql.Date;
 
 public interface I_Payment {
 
@@ -10,7 +12,7 @@ public interface I_Payment {
 	 * @param cvc
 	 * @param PaymentType
 	 */
-	abstract Payment MakePayment(float JobPrice, int cvc, string PaymentType);
+	abstract Payment MakePayment(float JobPrice, int cvc, String PaymentType);
 
 	abstract Payment GetPayment();
 
@@ -26,7 +28,7 @@ public interface I_Payment {
 	 * 
 	 * @param PaymentType
 	 */
-	abstract void setPaymentType(string PaymentType);
+	abstract void setPaymentType(String PaymentType);
 
 	abstract float getFinalPrice();
 

@@ -1,4 +1,4 @@
-package BAPERS3.ACCOUNT;
+package ACCOUNT;
 
 public class ListOfCustomers {
 
@@ -13,7 +13,7 @@ public class ListOfCustomers {
 	 * @param Phone
 	 * @param AccountStatus
 	 */
-	public CustomerAccountDetails AddItem(int AccountNumber, string Name, string Email, int Phone, string AccountStatus) {
+	public CustomerAccountDetails AddItem(int AccountNumber, String Name, String Email, int Phone, String AccountStatus) {
 		// TODO - implement ListOfCustomers.AddItem
 		throw new UnsupportedOperationException();
 	}
@@ -22,7 +22,7 @@ public class ListOfCustomers {
 	 * 
 	 * @param CustomerData
 	 */
-	public boolean RemoveItem(string CustomerData) {
+	public boolean RemoveItem(String CustomerData) {
 		// TODO - implement ListOfCustomers.RemoveItem
 		throw new UnsupportedOperationException();
 	}

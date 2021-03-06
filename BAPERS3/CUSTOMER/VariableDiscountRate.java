@@ -1,10 +1,15 @@
-package BAPERS3.CUSTOMER;
+package CUSTOMER;
 
 public class VariableDiscountRate extends Discount {
 
 	private int VariableDiscountRate;
 	private int[] TaskDiscountRate;
 	private int TaskID;
+
+	@Override
+	public int setDiscountRate(int DiscountRate) {
+		return 0;
+	}
 
 	/**
 	 * 

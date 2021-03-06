@@ -1,21 +1,26 @@
-package BAPERS3.GUI;
+package GUI;
 
-import BAPERS3.ADMIN.*;
+import ADMIN.*;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 public class UserAccountScreen extends Window {
 
+	/*
 	private Button RegisterNewUserButton;
 	private Button LogoutButton;
-	private TextArea SearchUserTextArea;
 	private Button EditUserButton;
 	private Button DeleteUserButton;
-	private Table UserAccountTable;
+
+	 */
+	private TextField SearchUserTextArea;
+	private TableView UserAccountTable;
 
 	/**
 	 * 
 	 * @param UserAccountDetails
 	 */
-	public UserAccount[] SearchUser(string UserAccountDetails) {
+	public UserAccount[] SearchUser(String UserAccountDetails) {
 		// TODO - implement UserAccountScreen.SearchUser
 		throw new UnsupportedOperationException();
 	}
@@ -30,7 +35,7 @@ public class UserAccountScreen extends Window {
 		throw new UnsupportedOperationException();
 	}
 
-	public string RetrieveTextArea() {
+	public String RetrieveTextArea() {
 		// TODO - implement UserAccountScreen.RetrieveTextArea
 		throw new UnsupportedOperationException();
 	}
@@ -43,7 +48,7 @@ public class UserAccountScreen extends Window {
 	 * @param ySize
 	 * @param icon
 	 */
-	public static UserAccountScreen LogOut(int x, int y, int xSize, int ySize, string icon) {
+	public static UserAccountScreen LogOut(int x, int y, int xSize, int ySize, String icon) {
 		// TODO - implement UserAccountScreen.LogOut
 		throw new UnsupportedOperationException();
 	}

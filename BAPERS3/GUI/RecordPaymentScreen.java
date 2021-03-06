@@ -1,14 +1,20 @@
-package BAPERS3.GUI;
+package GUI;
+
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 
 public class RecordPaymentScreen extends Window {
 
-	private Button LogOutButton;
-	private TextArea FinalPriceTextArea;
-	private TextArea CardNumberTextArea;
-	private TextArea NameOnCardTextArea;
-	private DropDownMenu PaymentMethodDropDown;
+	//private Button LogOutButton;
+	private TextField FinalPriceTextArea;
+	private TextField CardNumberTextArea;
+	private TextField NameOnCardTextArea;
+	private ComboBox PaymentMethodDropDown;
+	/*
 	private Button CancelRecordButton;
 	private Button ConfirmRecordButton;
+
+	 */
 
 	public void OnClick() {
 		// TODO - implement RecordPaymentScreen.OnClick
@@ -25,7 +31,7 @@ public class RecordPaymentScreen extends Window {
 		throw new UnsupportedOperationException();
 	}
 
-	public string RetrieveTextArea() {
+	public String RetrieveTextArea() {
 		// TODO - implement RecordPaymentScreen.RetrieveTextArea
 		throw new UnsupportedOperationException();
 	}
@@ -40,9 +46,12 @@ public class RecordPaymentScreen extends Window {
 	 * @param Text
 	 * @param Button
 	 */
+	/*
 	public static RecordPaymentScreen RecordPaymentScreen(int x, int y, int xSize, int ySize, string icon, string Text, Button Button) {
 		// TODO - implement RecordPaymentScreen.RecordPaymentScreen
 		throw new UnsupportedOperationException();
 	}
+
+	 */
 
 }

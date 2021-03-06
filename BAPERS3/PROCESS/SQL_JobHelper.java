@@ -1,4 +1,4 @@
-package BAPERS3.PROCESS;
+package PROCESS;
 
 public class SQL_JobHelper extends SQLHelper2 {
 
@@ -7,7 +7,7 @@ public class SQL_JobHelper extends SQLHelper2 {
 	 * @param o
 	 * @param direction
 	 */
-	public string Generate(object o, string direction) {
+	public String Generate(Object o, String direction) {
 		// TODO - implement SQL_JobHelper.Generate
 		throw new UnsupportedOperationException();
 	}

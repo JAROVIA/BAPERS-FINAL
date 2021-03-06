@@ -1,7 +1,7 @@
-package BAPERS3.CONTROLLER;
+package CONTROLLER;
 
-import BAPERS3.ACCOUNT.*;
-import BAPERS3.PROCESS.*;
+import ACCOUNT.*;
+import PROCESS.*;
 
 public class PROC_UI_Controller {
 
@@ -10,7 +10,7 @@ public class PROC_UI_Controller {
 	 * @param JobID
 	 * @param urgency
 	 */
-	public boolean SetUrgency(int JobID, string urgency) {
+	public boolean SetUrgency(int JobID, String urgency) {
 		// TODO - implement PROC_UI_Controller.SetUrgency
 		throw new UnsupportedOperationException();
 	}
@@ -19,7 +19,7 @@ public class PROC_UI_Controller {
 	 * 
 	 * @param JobID
 	 */
-	public string retrieveJobStatus(int JobID) {
+	public String retrieveJobStatus(int JobID) {
 		// TODO - implement PROC_UI_Controller.retrieveJobStatus
 		throw new UnsupportedOperationException();
 	}
@@ -29,7 +29,7 @@ public class PROC_UI_Controller {
 	 * @param JobID
 	 * @param JobData
 	 */
-	public boolean saveJob(int JobID, string JobData) {
+	public boolean saveJob(int JobID, String JobData) {
 		// TODO - implement PROC_UI_Controller.saveJob
 		throw new UnsupportedOperationException();
 	}
@@ -39,7 +39,7 @@ public class PROC_UI_Controller {
 	 * @param JobID
 	 * @param TaskData
 	 */
-	public boolean removeTask(int JobID, string TaskData) {
+	public boolean removeTask(int JobID, String TaskData) {
 		// TODO - implement PROC_UI_Controller.removeTask
 		throw new UnsupportedOperationException();
 	}
@@ -49,7 +49,7 @@ public class PROC_UI_Controller {
 	 * @param jobID
 	 * @param TaskData
 	 */
-	public boolean addTask(int jobID, string TaskData) {
+	public boolean addTask(int jobID, String TaskData) {
 		// TODO - implement PROC_UI_Controller.addTask
 		throw new UnsupportedOperationException();
 	}
@@ -69,7 +69,7 @@ public class PROC_UI_Controller {
 	 * @param Urgency
 	 * @param TypeOfDiscount
 	 */
-	public boolean ConfirmJob(int NumberTasks, string Urgency, string TypeOfDiscount) {
+	public boolean ConfirmJob(int NumberTasks, String Urgency, String TypeOfDiscount) {
 		// TODO - implement PROC_UI_Controller.ConfirmJob
 		throw new UnsupportedOperationException();
 	}

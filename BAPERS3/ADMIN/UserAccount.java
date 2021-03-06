@@ -1,16 +1,18 @@
-package BAPERS3.ADMIN;
+package ADMIN;
 
-import java.util.*;
-import BAPERS3.PROCESS.*;
+import PROCESS.*;
+
+import java.util.Collection;
+import java.util.Date;
 
 public class UserAccount {
 
 	Collection<Job> Job;
-	private string UserRole;
+	private String UserRole;
 	private int EmployeeID;
-	private string Username;
-	private string Password;
-	private string EmployeeName;
+	private String Username;
+	private String Password;
+	private String EmployeeName;
 
 	public void Login() {
 		// TODO - implement UserAccount.Login
@@ -26,12 +28,12 @@ public class UserAccount {
 	 * 
 	 * @param UserData
 	 */
-	public void DestroyAccount(string UserData) {
+	public void DestroyAccount(String UserData) {
 		// TODO - implement UserAccount.DestroyAccount
 		throw new UnsupportedOperationException();
 	}
 
-	public string getEmployeeName() {
+	public String getEmployeeName() {
 		// TODO - implement UserAccount.getEmployeeName
 		throw new UnsupportedOperationException();
 	}
@@ -40,12 +42,12 @@ public class UserAccount {
 	 * 
 	 * @param NewJobData
 	 */
-	public boolean CreateJob(string NewJobData) {
+	public boolean CreateJob(String NewJobData) {
 		// TODO - implement UserAccount.CreateJob
 		throw new UnsupportedOperationException();
 	}
 
-	public string SetCustomerAccountStatus() {
+	public String SetCustomerAccountStatus() {
 		// TODO - implement UserAccount.SetCustomerAccountStatus
 		throw new UnsupportedOperationException();
 	}
@@ -86,7 +88,7 @@ public class UserAccount {
 	 * 
 	 * @param ReportData
 	 */
-	public void GenerateReport(string ReportData) {
+	public void GenerateReport(String ReportData) {
 		// TODO - implement UserAccount.GenerateReport
 		throw new UnsupportedOperationException();
 	}
@@ -99,7 +101,7 @@ public class UserAccount {
 	 * @param EmployeeName
 	 * @param UserRole
 	 */
-	public static UserAccount UserAccount(string UserData, string UserName, int EmployeeID, string EmployeeName, string UserRole) {
+	public static UserAccount UserAccount(String UserData, String UserName, int EmployeeID, String EmployeeName, String UserRole) {
 		// TODO - implement UserAccount.UserAccount
 		throw new UnsupportedOperationException();
 	}

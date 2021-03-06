@@ -1,12 +1,18 @@
-package BAPERS3.GUI;
+package GUI;
+
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TableView;
 
 public class JobProgressScreen extends Window {
 
+	/*
 	private Button LogOutButton;
 	private Button StartTaskButton;
 	private Button CompleteTaskButton;
-	private Table JobProgressTable;
-	private Bar ProgressBar;
+
+	 */
+	private TableView JobProgressTable;
+	private ProgressBar ProgressBar;
 
 	public void OnClick() {
 		// TODO - implement JobProgressScreen.OnClick
@@ -28,9 +34,12 @@ public class JobProgressScreen extends Window {
 	 * @param Text
 	 * @param Button
 	 */
+	/*
 	public static JobProgressScreen JobProgressScreen(int x, int y, int xSize, int ySize, string icon, string Text, Button Button) {
 		// TODO - implement JobProgressScreen.JobProgressScreen
 		throw new UnsupportedOperationException();
 	}
+
+	 */
 
 }

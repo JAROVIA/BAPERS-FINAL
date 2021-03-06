@@ -1,18 +1,23 @@
-package BAPERS3.PROCESS;
+package PROCESS;
 
 public interface I_PROCESS {
 
+	/*
+	TODO should the abstract methods be abstract?
+	 Task implements this in the design, if this is the case some methods should not be abstract
+	 or we remove the implementation
+	 */
 	/**
 	 * 
 	 * @param TaskData
 	 */
-	abstract boolean AddTaskToJob(string TaskData);
+	abstract boolean AddTaskToJob(String TaskData);
 
 	/**
 	 * 
 	 * @param TaskID
 	 */
-	abstract Task RetreiveTasks(int TaskID);
+	abstract Task RetrieveTasks(int TaskID);
 
 	/**
 	 * 
@@ -24,7 +29,7 @@ public interface I_PROCESS {
 	 * 
 	 * @param TaskData
 	 */
-	abstract boolean UpdateTask(string TaskData);
+	abstract boolean UpdateTask(String TaskData);
 
 	abstract int getJobID();
 
@@ -32,7 +37,7 @@ public interface I_PROCESS {
 	 * 
 	 * @param NewUrgency
 	 */
-	abstract boolean SetUrgency(string NewUrgency);
+	abstract boolean SetUrgency(String NewUrgency);
 
 	abstract float getJobPrice();
 
@@ -46,7 +51,7 @@ public interface I_PROCESS {
 	 * 
 	 * @param NewJobData
 	 */
-	abstract boolean CreateJob(string NewJobData);
+	abstract boolean CreateJob(String NewJobData);
 
 	/**
 	 * 
@@ -55,7 +60,7 @@ public interface I_PROCESS {
 	 * @param TaskPrice
 	 * @param TaskDuration
 	 */
-	abstract boolean AddNewTask(string TaskDescription, string TaskLocation, float TaskPrice, int TaskDuration);
+	abstract boolean AddNewTask(String TaskDescription, String TaskLocation, float TaskPrice, int TaskDuration);
 
 	abstract void CompleteTask();
 

@@ -1,21 +1,23 @@
-package BAPERS3.GUI;
+package GUI;
+
+import javafx.scene.control.TextField;
 
 public class RegisterNewCustomerScreen extends Window {
 
-	private Menu AccountStatusMenu;
-	private TextArea Username;
-	private TextArea MemorableWord;
-	private Button LogoutButton;
-	private Button SubmitButton;
-	private TextArea PhoneNumber;
-	private TextArea Address;
+	//private Menu AccountStatusMenu;
+	private TextField Username;
+	private TextField MemorableWord;
+	//private Button LogoutButton;
+	//private Button SubmitButton;
+	private TextField PhoneNumber;
+	private TextField Address;
 
 	public void OnClick() {
 		// TODO - implement RegisterNewCustomerScreen.OnClick
 		throw new UnsupportedOperationException();
 	}
 
-	public string RetrieveTextArea() {
+	public String RetrieveTextArea() {
 		// TODO - implement RegisterNewCustomerScreen.RetrieveTextArea
 		throw new UnsupportedOperationException();
 	}
@@ -24,7 +26,7 @@ public class RegisterNewCustomerScreen extends Window {
 	 * 
 	 * @param CustomerData
 	 */
-	public boolean Submit(string[] CustomerData) {
+	public boolean Submit(String[] CustomerData) {
 		// TODO - implement RegisterNewCustomerScreen.Submit
 		throw new UnsupportedOperationException();
 	}
@@ -39,9 +41,12 @@ public class RegisterNewCustomerScreen extends Window {
 	 * @param Text
 	 * @param Button
 	 */
+	/*
 	public RegisterNewCustomerScreen(int x, int y, int xSize, int ySize, string icon, string Text, Button Button) {
 		// TODO - implement RegisterNewCustomerScreen.RegisterNewCustomerScreen
 		throw new UnsupportedOperationException();
 	}
+
+	 */
 
 }
