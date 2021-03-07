@@ -2,8 +2,12 @@ package ADMIN;
 
 import PROCESS.*;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Date;
+import java.sql.*;
 
 public class UserAccount {
 
@@ -13,6 +17,21 @@ public class UserAccount {
 	private String Username;
 	private String Password;
 	private String EmployeeName;
+	String tablename = "UserAccounts";
+
+	static String url = "jdbc:mysql://localhost:3306/Bapers";
+	static String username = "jaroviadb";
+	static String password = "Jarovia123#@!";
+	static Connection connection;
+
+	static {
+		try {
+			connection = DriverManager.getConnection(
+					url, username, password);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void Login() {
 		// TODO - implement UserAccount.Login
@@ -94,16 +113,34 @@ public class UserAccount {
 	}
 
 	/**
-	 * 
-	 * @param UserData
-	 * @param UserName
-	 * @param EmployeeID
+	 * AUTHOR: Javonne
+	 * Description: This constructor will write a new user account to the db with information from this table+
+//	 * @param UserData
+//	 * @param UserName
+//	 * @param EmployeeID
 	 * @param EmployeeName
 	 * @param UserRole
 	 */
-	public static UserAccount UserAccount(String UserData, String UserName, int EmployeeID, String EmployeeName, String UserRole) {
-		// TODO - implement UserAccount.UserAccount
-		throw new UnsupportedOperationException();
+	public static void UserAccount(String tablename, String EmployeeName, String Username, String password, String UserRole) throws SQLException {
+
 	}
+
+	public UserAccount(String userRole, String username, String password, String employeeName) throws SQLException {
+		this.UserRole = userRole;
+		this.Username = username;
+		this.Password = password;
+		this.EmployeeName = employeeName;
+
+		String sql = "INSERT INTO " + tablename + "(Username, RoleName, Password, StaffName) " + "VALUES(\"" + EmployeeName + "\", \"" + Username + "\", \"" + password + "\", \"" + UserRole + "\");" ;
+		Statement statement = connection.createStatement();
+		statement.executeUpdate(sql);
+	}
+
+	public static void main(String[] args) throws SQLException {
+
+		UserAccount root = new UserAccount("superuser", "root", "user", "n/a");
+
+	}
+
 
 }
