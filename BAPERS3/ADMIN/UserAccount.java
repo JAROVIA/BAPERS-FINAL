@@ -2,8 +2,13 @@ package ADMIN;
 
 import PROCESS.*;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.sql.*;
 
 public class UserAccount {
 
@@ -13,6 +18,21 @@ public class UserAccount {
 	private String Username;
 	private String Password;
 	private String EmployeeName;
+	static String tablename = "UserAccounts";
+
+	static String url = "jdbc:mysql://localhost:3306/Bapers";
+	static String username = "jaroviadb";
+	static String password = "Jarovia123#@!";
+	static Connection connection;
+
+	static {
+		try {
+			connection = DriverManager.getConnection(
+					url, username, password);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void Login() {
 		// TODO - implement UserAccount.Login
@@ -93,17 +113,77 @@ public class UserAccount {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param UserData
-	 * @param UserName
-	 * @param EmployeeID
-	 * @param EmployeeName
-	 * @param UserRole
-	 */
-	public static UserAccount UserAccount(String UserData, String UserName, int EmployeeID, String EmployeeName, String UserRole) {
-		// TODO - implement UserAccount.UserAccount
-		throw new UnsupportedOperationException();
+
+	public static void UserAccount(String tablename, String EmployeeName, String Username, String password, String UserRole) throws SQLException {
+
 	}
+
+	/**
+	 * Adds all user accoutns to a list
+	 * @return A list of all UserAccounts in the database
+	 * */
+	// TODO: Change method to work for UserAccounts table
+	public static ArrayList<String[]> GetUserList() throws SQLException {
+//		String tablename = this.tablename;
+		Statement statement = connection.createStatement();
+		String sql = "SELECT * FROM " + tablename;
+		ResultSet resultSet = statement.executeQuery(sql);
+
+		ArrayList<String[]> arrayList = new ArrayList<String[]>();
+		String tuple;
+		// adding changes to an array list
+		while (resultSet.next()){
+
+			int employeeID = resultSet.getInt("EmployeeID");
+			String username = resultSet.getString("Username");
+			String roleName = resultSet.getString("RoleName");
+			String password = resultSet.getString("Password");
+			String staffName = resultSet.getString("StaffName");
+
+			tuple = "employeeID: " + employeeID +
+					" username: " + username +
+					" roleName: " + roleName +
+					" password: " + password +
+					" staffName: " + staffName;
+
+			arrayList.add(tuple.split(","));
+
+		}
+		return arrayList;
+	}
+
+	/**
+	 * This constructor will write a new user account to the db with information from its parameters.
+	 * It needs a userrole, username, employeename, and password to do so.
+	 */
+	public UserAccount(String userRole, String username, String password, String employeeName) throws SQLException {
+		this.UserRole = userRole;
+		this.Username = username;
+		this.Password = password;
+		this.EmployeeName = employeeName;
+
+		String sql = "INSERT INTO " + tablename + "(Username, RoleName, Password, StaffName) " + "VALUES(\"" + EmployeeName + "\", \"" + Username + "\", \"" + password + "\", \"" + UserRole + "\");" ;
+		Statement statement = connection.createStatement();
+		statement.executeUpdate(sql);
+	}
+
+	public static void main(String[] args) throws SQLException {
+
+		// create a new user
+		UserAccount root = new UserAccount("superuser", "root", "user", "n/a");
+
+		// adds users to a list
+		ArrayList<String[]> al = UserAccount.GetUserList();
+
+		// test to ensure correct alist format
+		for(String[] col: al){
+			for (String a: col){
+				System.out.println(a);
+
+			}
+		}
+
+	}
+
 
 }
