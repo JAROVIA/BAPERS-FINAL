@@ -58,6 +58,9 @@ public class Main extends Application {
         procUiController = new PROC_UI_Controller(this);
         uiController = new UI_Controller(this);
 
+        System.out.println(System.getProperty("java.version"));
+        System.out.println(System.getProperty("javafx.version"));
+
         scene = new Scene(adminUiController.getLoginScreen().getParent());
         stage.setScene(scene);
         stage.show();
