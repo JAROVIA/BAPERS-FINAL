@@ -90,7 +90,8 @@ public class Window {
 
 	public static Window newGuiFromFxml(String fxml) throws IOException {
 		//load fxml
-		String url = "/gui/fxml/" + fxml + ".fxml";
+//		String url = "/gui/fxml/" + fxml + ".fxml";
+		String url = "fxml/" + fxml + ".fxml";
 		System.out.println(url);
 		FXMLLoader loader = new FXMLLoader(Window.class.getResource(url));
 		//get the parent element in fxml

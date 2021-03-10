@@ -85,7 +85,7 @@
         </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #ffffff;" VBox.vgrow="ALWAYS">
       <children>
             <ImageView fitHeight="51.0" fitWidth="221.0" layoutX="7.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                <image>

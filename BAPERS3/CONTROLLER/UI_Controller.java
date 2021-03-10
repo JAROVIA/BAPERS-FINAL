@@ -19,7 +19,7 @@ public class UI_Controller {
 	private String reportsFxml = "";
 
 	private HomeScreen homeScreen;
-	private String homeFxml = "homescreen";
+	private String homeFxml = "HomeScreen";
 
 	/**
 	 * 

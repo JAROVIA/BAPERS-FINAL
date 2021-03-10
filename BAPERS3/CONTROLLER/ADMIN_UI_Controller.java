@@ -12,7 +12,7 @@ public class ADMIN_UI_Controller {
 
 	//gui handled by this controller
 	private Login loginScreen;
-	private String loginFxml = "login";
+	private String loginFxml = "BAPERS Login Page";
 
 	private UserAccountScreen userAccountScreen;
 	private String userAccFxml = "userAccounts";
@@ -21,7 +21,7 @@ public class ADMIN_UI_Controller {
 	private String editUserFxml = "";
 
 	private RegisterNewUserScreen registerNewUserScreen;
-	private String registerUserFxml = "BAPERS register a new user page";
+	private String registerUserFxml = "BAPERS Register a New User Page";
 
 	private DatabaseScreen databaseScreen;
 	private String databaseFxml = "";

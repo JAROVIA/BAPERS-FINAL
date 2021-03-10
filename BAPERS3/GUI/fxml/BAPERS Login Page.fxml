@@ -45,7 +45,7 @@
   <children>
     <AnchorPane VBox.vgrow="ALWAYS">
       <children>
-            <Button id="LoginButton" layoutX="600.0" layoutY="497.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="79.0" style="-fx-background-color: #DDF8FF; -fx-border-color: #000000;" text="Login">
+            <Button id="LoginButton" onAction="#onClickLoginButton" layoutX="600.0" layoutY="497.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="79.0" style="-fx-background-color: #DDF8FF; -fx-border-color: #000000;" text="Login">
                <font>
                   <Font size="18.0" />
                </font></Button>

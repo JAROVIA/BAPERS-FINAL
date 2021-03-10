@@ -50,7 +50,7 @@ public class RegisterNewUserScreen extends Window implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		roleBox.getItems().removeAll(roleBox.getItems());
-		roleBox.getItems().addAll("Option A", "Option B", "Option C");
-		roleBox.getSelectionModel().select("Option B");
+		roleBox.getItems().addAll("Office Manager", "Shift Manager", "Recptionist", "Technician");
+		roleBox.getSelectionModel().select("Select role");
 	}
 }
