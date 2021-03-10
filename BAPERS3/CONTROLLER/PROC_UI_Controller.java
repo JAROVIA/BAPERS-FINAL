@@ -1,9 +1,31 @@
 package CONTROLLER;
 
 import ACCOUNT.*;
+import GUI.*;
 import PROCESS.*;
 
 public class PROC_UI_Controller {
+
+	private Main main;
+
+	//gui handled by this controller
+	private JobsScreen jobsScreen;
+	private String jobFxml = "";
+
+	private AddNewTaskScreen addNewTaskScreen;
+	private String newTaskFxml = "";
+
+	private TasksScreen tasksScreen;
+	private String taskFxml = "";
+
+	private CreateJobScreen createJobScreen;
+	private String createJobFxml = "";
+
+	private UpdateExistingTaskScreen updateExistingTaskScreen;
+	private String existingTaskFxml = "";
+
+	private JobProgressScreen jobProgressScreen;
+	private String jobProgressFxml = "";
 
 	/**
 	 * 
@@ -111,9 +133,37 @@ public class PROC_UI_Controller {
 		throw new UnsupportedOperationException();
 	}
 
-	public static PROC_UI_Controller PROC_UI_Controller() {
+	public JobsScreen getJobsScreen() {
+		return jobsScreen;
+	}
+
+	public TasksScreen getTasksScreen() {
+		return tasksScreen;
+	}
+
+	public CreateJobScreen getCreateJobScreen() {
+		return createJobScreen;
+	}
+
+	public JobProgressScreen getJobProgressScreen() {
+		return jobProgressScreen;
+	}
+
+	public AddNewTaskScreen getAddNewTaskScreen() {
+		return addNewTaskScreen;
+	}
+
+	public UpdateExistingTaskScreen getUpdateExistingTaskScreen() {
+		return updateExistingTaskScreen;
+	}
+
+	public Main getMain() {
+		return main;
+	}
+
+	public PROC_UI_Controller(Main main) {
 		// TODO - implement PROC_UI_Controller.PROC_UI_Controller
-		throw new UnsupportedOperationException();
+		// TODO instantiate the gui
 	}
 
 }

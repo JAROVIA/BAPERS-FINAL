@@ -23,6 +23,11 @@ public class Login extends Window {
 		throw new UnsupportedOperationException();
 	}
 
+	public void onClickLoginButton(){
+		//adminUiController.getMain().showScreen("home");
+		adminUiController.getMain().showScreen(adminUiController.getMain().getUiController().getHomeScreen().getParent());
+	}
+
 	/**
 	 * 
 	 * @param x
@@ -38,7 +43,6 @@ public class Login extends Window {
 		// TODO - implement l.LoginScreen
 		throw new UnsupportedOperationException();
 	}
-
 	 */
 
 }

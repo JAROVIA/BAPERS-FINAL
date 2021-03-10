@@ -40,6 +40,10 @@ public class UserAccountScreen extends Window {
 		throw new UnsupportedOperationException();
 	}
 
+	public void toCreateUser(){
+		adminUiController.getMain().showScreen(adminUiController.getRegisterNewUserScreen().getParent());
+	}
+
 	/**
 	 * 
 	 * @param x
