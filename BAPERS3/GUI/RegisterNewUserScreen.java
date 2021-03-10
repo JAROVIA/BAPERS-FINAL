@@ -1,16 +1,27 @@
 package GUI;
 
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-public class RegisterNewUserScreen extends Window {
+import java.net.URL;
+import java.util.ResourceBundle;
 
-	private TextField StaffName;
-	private TextField UsernameTextArea;
-	private TextField PasswordTextArea;
-	private ComboBox StaffRole;
-	//private Button SubmitButton;
-	//private int LogoutButton;
+public class RegisterNewUserScreen extends Window implements Initializable {
+
+	@FXML
+	private TextField staffNameField;
+
+	@FXML
+	private TextField userNameField;
+
+	@FXML
+	private PasswordField pwField;
+
+	@FXML
+	private ComboBox roleBox;
 
 	public void OnClick() {
 		// TODO - implement RegisterNewUserScreen.OnClick
@@ -24,29 +35,22 @@ public class RegisterNewUserScreen extends Window {
 
 	/**
 	 * 
-	 * @param UserDetails
+	 * @param
 	 */
-	public void SaveUser(String[] UserDetails) {
+	public void SaveUser() {
 		// TODO - implement RegisterNewUserScreen.SaveUser
-		throw new UnsupportedOperationException();
+		String a = staffNameField.getText();
+		String b = userNameField.getText();
+		String c = pwField.getText();
+		String d = (String) roleBox.getValue();
+
+		//userAccount(a,b,c,d);
 	}
 
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param xSize
-	 * @param ySize
-	 * @param icon
-	 * @param Text
-	 * @param Button
-	 */
-	/*
-	public static RegisterNewUserScreen RegisterNewUserScreen(int x, int y, int xSize, int ySize, string icon, string Text, Button Button) {
-		// TODO - implement RegisterNewUserScreen.RegisterNewUserScreen
-		throw new UnsupportedOperationException();
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		roleBox.getItems().removeAll(roleBox.getItems());
+		roleBox.getItems().addAll("Option A", "Option B", "Option C");
+		roleBox.getSelectionModel().select("Option B");
 	}
-
-	 */
-
 }

@@ -1,6 +1,25 @@
 package CONTROLLER;
 
+import GUI.HomeScreen;
+import GUI.RecordPaymentScreen;
+import GUI.ReportsScreen;
+import GUI.Window;
+
+import java.io.IOException;
+
 public class UI_Controller {
+
+	private Main main;
+
+	//gui handled by this controller
+	private RecordPaymentScreen recordPaymentScreen;
+	private String recordPaymentFxml = "";
+
+	private ReportsScreen reportsScreen;
+	private String reportsFxml = "";
+
+	private HomeScreen homeScreen;
+	private String homeFxml = "homescreen";
 
 	/**
 	 * 
@@ -21,9 +40,27 @@ public class UI_Controller {
 		throw new UnsupportedOperationException();
 	}
 
-	public static UI_Controller UI_Controller() {
-		// TODO - implement UI_Controller.UI_Controller
-		throw new UnsupportedOperationException();
+	public HomeScreen getHomeScreen() {
+		return homeScreen;
 	}
 
+	public ReportsScreen getReportsScreen() {
+		return reportsScreen;
+	}
+
+	public RecordPaymentScreen getRecordPaymentScreen() {
+		return recordPaymentScreen;
+	}
+
+	public Main getMain() {
+		return main;
+	}
+
+	public UI_Controller(Main main) throws IOException {
+		// TODO - implement UI_Controller.UI_Controller
+		this.main = main;
+
+		homeScreen = (HomeScreen) Window.newGuiFromFxml(homeFxml);
+		homeScreen.setUiController(this);
+	}
 }

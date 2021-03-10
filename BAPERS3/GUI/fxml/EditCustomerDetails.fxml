@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="434.0" prefWidth="668.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" text="New" />
+            <MenuItem mnemonicParsing="false" text="Open…" />
+            <Menu mnemonicParsing="false" text="Open Recent" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Close" />
+            <MenuItem mnemonicParsing="false" text="Save" />
+            <MenuItem mnemonicParsing="false" text="Save As…" />
+            <MenuItem mnemonicParsing="false" text="Revert" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Preferences…" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Quit" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Edit">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Undo" />
+            <MenuItem mnemonicParsing="false" text="Redo" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Cut" />
+            <MenuItem mnemonicParsing="false" text="Copy" />
+            <MenuItem mnemonicParsing="false" text="Paste" />
+            <MenuItem mnemonicParsing="false" text="Delete" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Select All" />
+            <MenuItem mnemonicParsing="false" text="Unselect All" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: White;" VBox.vgrow="ALWAYS">
+      <children>
+            <Button layoutX="601.0" layoutY="7.0" mnemonicParsing="false" prefHeight="2.0" prefWidth="59.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Logout">
+               <font>
+                  <Font size="9.0" />
+               </font></Button>
+            <TextField layoutX="127.0" layoutY="142.0" prefHeight="25.0" prefWidth="167.0" promptText="Edit Username" style="-fx-border-color: Black;" />
+            <TextField layoutX="344.0" layoutY="142.0" prefHeight="25.0" prefWidth="167.0" promptText="Edit Phone Number" style="-fx-border-color: black;" />
+            <TextField layoutX="344.0" layoutY="193.0" prefHeight="25.0" prefWidth="167.0" promptText="Edit Address Line 1" style="-fx-border-color: black;" />
+            <TextField layoutX="128.0" layoutY="299.0" prefHeight="25.0" prefWidth="167.0" promptText="Edit Memorable Word" style="-fx-border-color: black;" />
+            <TextField layoutX="344.0" layoutY="248.0" prefHeight="25.0" prefWidth="167.0" promptText="Edit Address Line 2" style="-fx-border-color: black;" />
+            <TextField layoutX="344.0" layoutY="299.0" prefHeight="25.0" prefWidth="167.0" promptText="Edit Post Code" style="-fx-border-color: black;" />
+            <ChoiceBox accessibleRole="CHECK_BOX" layoutX="128.0" layoutY="193.0" prefHeight="25.0" prefWidth="167.0" style="-fx-background-color: White; -fx-border-color: Black;" />
+            <ImageView fitHeight="55.0" fitWidth="205.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/BapersLogo.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="39.0" fitWidth="258.0" layoutX="190.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/Edit-Customer-Details-Page.jpg" />
+               </image>
+            </ImageView>
+            <Button layoutX="334.0" layoutY="353.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" style="-fx-background-color: #95ed82; -fx-border-color: Black;" text="Save Details">
+               <font>
+                  <Font name="System Bold" size="9.0" />
+               </font></Button>
+            <Label layoutX="132.0" layoutY="198.0" prefHeight="17.0" prefWidth="133.0" text="Change Account Status" textFill="#a8a3a3" />
+            <Button layoutX="212.0" layoutY="353.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" style="-fx-background-color: #f26d6d; -fx-border-color: Black;" text="Delete Customer">
+               <font>
+                  <Font name="System Bold" size="9.0" />
+               </font>
+            </Button>
+            <Label layoutX="421.0" layoutY="7.0" prefHeight="21.0" prefWidth="174.0" style="-fx-border-color: Black;" text="Welcome [logged in user]" textAlignment="RIGHT" />
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>

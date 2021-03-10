@@ -27,7 +27,7 @@
         </rowConstraints>
          <children>
             <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button alignment="CENTER" mnemonicParsing="false" text="Button" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+            <Button onAction="#onClickLoginButton" alignment="CENTER" mnemonicParsing="false" text="Button" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
             <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
          </children>

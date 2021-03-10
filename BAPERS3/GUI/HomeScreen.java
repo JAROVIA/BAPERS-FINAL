@@ -20,6 +20,10 @@ public class HomeScreen extends Window {
 		throw new UnsupportedOperationException();
 	}
 
+	public void toCreateUser(){
+		uiController.getMain().showScreen(uiController.getMain().getAdminUiController().getUserAccountScreen().getParent());
+	}
+
 	/**
 	 * 
 	 * @param x

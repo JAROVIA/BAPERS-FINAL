@@ -1,8 +1,26 @@
 package CONTROLLER;
 
 import ACCOUNT.*;
+import GUI.ActiveJobScreen;
+import GUI.CustomerAccountScreen;
+import GUI.EditCustomerDetailsScreen;
+import GUI.RegisterNewCustomerScreen;
 
 public class ACCT_UI_Controller {
+	private Main main;
+
+	//gui this controller handles
+	private ActiveJobScreen activeJobScreen;
+	private String activeJobFxml = "";
+
+	private EditCustomerDetailsScreen editCustomerDetailsScreen;
+	private String editCustomerFxml = "";
+
+	private RegisterNewCustomerScreen registerNewCustomerScreen;
+	private String registerCustomerFxml = "";
+
+	private CustomerAccountScreen customerAccountScreen;
+	private String customerFxml = "";
 
 	/**
 	 * 
@@ -37,9 +55,29 @@ public class ACCT_UI_Controller {
 		throw new UnsupportedOperationException();
 	}
 
-	public ACCT_UI_Controller() {
+	public RegisterNewCustomerScreen getRegisterNewCustomerScreen() {
+		return registerNewCustomerScreen;
+	}
+
+	public ActiveJobScreen getActiveJobScreen() {
+		return activeJobScreen;
+	}
+
+	public CustomerAccountScreen getCustomerAccountScreen() {
+		return customerAccountScreen;
+	}
+
+	public EditCustomerDetailsScreen getEditCustomerDetailsScreen() {
+		return editCustomerDetailsScreen;
+	}
+
+	public Main getMain() {
+		return main;
+	}
+
+	//constructor
+	public ACCT_UI_Controller(Main main) {
 		// TODO - implement ACCT_UI_Controller.ACCT_UI_Controller
-		throw new UnsupportedOperationException();
 	}
 
 }
