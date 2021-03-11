@@ -6,15 +6,7 @@ import javafx.scene.Parent;
 
 import java.io.IOException;
 
-public class Window {
-
-	private int backgroundColour = 0;
-	private String foregroundColour = "rgb(192,192,192)";
-	private int X = 0;
-	private int Y = 0;
-	private int xSize = 1920;
-	private int ySize = 1080;
-	private int Icon;
+public abstract class Window {
 
 	protected ACCT_UI_Controller acctUiController;
 	protected ADMIN_UI_Controller adminUiController;
@@ -22,26 +14,6 @@ public class Window {
 	protected UI_Controller uiController;
 
 	protected Parent parent;
-
-	public void show() {
-		// TODO - implement Window.show
-		throw new UnsupportedOperationException();
-	}
-
-	public void hide() {
-		// TODO - implement Window.hide
-		throw new UnsupportedOperationException();
-	}
-
-	public void resize() {
-		// TODO - implement Window.resize
-		throw new UnsupportedOperationException();
-	}
-
-	public void close() {
-		// TODO - implement Window.close
-		throw new UnsupportedOperationException();
-	}
 
 	//access each controller so each gui knows which controller to report back to
 	//getter setter for account ui
@@ -90,7 +62,6 @@ public class Window {
 
 	public static Window newGuiFromFxml(String fxml) throws IOException {
 		//load fxml
-//		String url = "/gui/fxml/" + fxml + ".fxml";
 		String url = "fxml/" + fxml + ".fxml";
 		System.out.println(url);
 		FXMLLoader loader = new FXMLLoader(Window.class.getResource(url));

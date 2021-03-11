@@ -12,19 +12,19 @@ public class ADMIN_UI_Controller {
 
 	//gui handled by this controller
 	private Login loginScreen;
-	private String loginFxml = "BAPERS Login Page";
+	private String loginFxml = "Login";
 
 	private UserAccountScreen userAccountScreen;
-	private String userAccFxml = "userAccounts";
+	private String userAccFxml = "UserAccounts";
 
 	private EditUserScreen editUserScreen;
-	private String editUserFxml = "";
+	private String editUserFxml = "EditUserDetails";
 
 	private RegisterNewUserScreen registerNewUserScreen;
-	private String registerUserFxml = "BAPERS Register a New User Page";
+	private String registerUserFxml = "RegisterNewUser";
 
 	private DatabaseScreen databaseScreen;
-	private String databaseFxml = "";
+	private String databaseFxml = "Database";
 
 	/**
 	 * 
@@ -105,26 +105,32 @@ public class ADMIN_UI_Controller {
 		return main;
 	}
 
+	private void guiSetup(Window gui, String fxml){
+	}
+
 	public ADMIN_UI_Controller(Main main) throws IOException {
 		//get main class
 		this.main = main;
 
 		//the method in main initialises gui classes with fxml, the returned screen is assigned to the class variables
 		loginScreen = (Login) Window.newGuiFromFxml(loginFxml);
+		main.addScreen(loginFxml, loginScreen.getParent());
 		loginScreen.setAdminUiController(this);
 
 		userAccountScreen = (UserAccountScreen) Window.newGuiFromFxml(userAccFxml);
+		main.addScreen(userAccFxml, userAccountScreen.getParent());
 		userAccountScreen.setAdminUiController(this);
 
 		registerNewUserScreen = (RegisterNewUserScreen) Window.newGuiFromFxml(registerUserFxml);
+		main.addScreen(registerUserFxml, registerNewUserScreen.getParent());
 		registerNewUserScreen.setAdminUiController(this);
 
-		/*
-		userAccountScreen = (UserAccountScreen) main.newGuiFromFxml("userAccount", userAccFxml);
-		registerNewUserScreen = (RegisterNewUserScreen) main.newGuiFromFxml("registerUser", registerUserFxml);
-		editUserScreen = (EditUserScreen) main.newGuiFromFxml("editUser", editUserFxml);
-		databaseScreen = (DatabaseScreen) main.newGuiFromFxml("database", databaseFxml);
+		editUserScreen = (EditUserScreen) Window.newGuiFromFxml(editUserFxml);
+		main.addScreen(editUserFxml, editUserScreen.getParent());
+		editUserScreen.setAdminUiController(this);
 
-		 */
+		databaseScreen = (DatabaseScreen) Window.newGuiFromFxml(databaseFxml);
+		main.addScreen(databaseFxml, databaseScreen.getParent());
+		databaseScreen.setAdminUiController(this);
 	}
 }

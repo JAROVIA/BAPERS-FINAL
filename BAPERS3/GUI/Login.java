@@ -24,8 +24,9 @@ public class Login extends Window {
 	}
 
 	public void onClickLoginButton(){
-		//adminUiController.getMain().showScreen("home");
-		adminUiController.getMain().showScreen(adminUiController.getMain().getUiController().getHomeScreen().getParent());
+		adminUiController.getMain().showScreen("HomeScreen");
+		System.out.println("clicked");
+		//adminUiController.getMain().showScreen("UserAccounts");
 	}
 
 	/**
