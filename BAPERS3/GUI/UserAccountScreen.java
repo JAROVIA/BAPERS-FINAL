@@ -11,6 +11,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.util.Callback;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UserAccountScreen extends Window {
@@ -58,12 +60,15 @@ public class UserAccountScreen extends Window {
 		throw new UnsupportedOperationException();
 	}
 
-	public void showContent(){
+	public void showContent() throws SQLException {
 		//TODO get data here
 		//below is just for test
-		ArrayList<String[]> list = new ArrayList<>();
-		list.add(new String[]{"a", "b", "c", "d"});
-		list.add(new String[]{"e", "f", "g", "h"});
+
+//		ArrayList<String[]> list = new ArrayList<>();
+		ArrayList<String[]> list = null;
+		list = UserAccount.GetUserList();
+//		list.add(new String[]{"a", "b", "c", "d"});
+//		list.add(new String[]{"e", "f", "g", "h"});
 
 		ObservableList<String[]> data = FXCollections.observableArrayList();
 		data.addAll(list);
@@ -91,6 +96,21 @@ public class UserAccountScreen extends Window {
 		 */
 
 		userAccountTable.setItems(data);
+	}
+
+	public static void main(String[] args) {
+		ArrayList<String[]> list = new ArrayList<>();
+		list.add(new String[]{"a", "b", "c", "d"});
+		list.add(new String[]{"e", "f", "g", "h"});
+
+		// test to ensure correct alist format
+		for(String[] col: list){
+			for (String a: col){
+				System.out.println(a);
+
+			}
+		}
+
 	}
 
 	public void toRegisterUser(){

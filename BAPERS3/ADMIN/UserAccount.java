@@ -114,15 +114,15 @@ public class UserAccount {
 	}
 
 
-	public static void UserAccount(String tablename, String EmployeeName, String Username, String password, String UserRole) throws SQLException {
-
-	}
+//	public static void UserAccount(String tablename, String EmployeeName, String Username, String password, String UserRole) throws SQLException {
+//
+//	}
 
 	/**
 	 * Adds all user accoutns to a list
 	 * @return A list of all UserAccounts in the database
 	 * */
-	// TODO: Change method to work for UserAccounts table
+
 	public static ArrayList<String[]> GetUserList() throws SQLException {
 //		String tablename = this.tablename;
 		Statement statement = connection.createStatement();
@@ -140,13 +140,17 @@ public class UserAccount {
 			String password = resultSet.getString("Password");
 			String staffName = resultSet.getString("StaffName");
 
-			tuple = "employeeID: " + employeeID +
-					" username: " + username +
-					" roleName: " + roleName +
-					" password: " + password +
-					" staffName: " + staffName;
+//			tuple = "employeeID: " + employeeID +
+//					" username: " + username +
+//					" roleName: " + roleName +
+//					" staffName: " + staffName;
 
-			arrayList.add(tuple.split(","));
+			tuple = employeeID + " "
+					+ username + " "
+					+ roleName + " "
+					+ staffName;
+
+			arrayList.add(tuple.split(" "));
 
 		}
 		return arrayList;
@@ -170,7 +174,7 @@ public class UserAccount {
 	public static void main(String[] args) throws SQLException {
 
 		// create a new user
-		UserAccount root = new UserAccount("superuser", "root", "user", "n/a");
+//		UserAccount root = new UserAccount("superuser", "root", "user", "n/a");
 
 		// adds users to a list
 		ArrayList<String[]> al = UserAccount.GetUserList();

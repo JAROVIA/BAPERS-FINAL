@@ -1,5 +1,6 @@
 package GUI;
 
+import ADMIN.UserAccount;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -7,6 +8,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class RegisterNewUserScreen extends Window implements Initializable {
@@ -37,7 +39,7 @@ public class RegisterNewUserScreen extends Window implements Initializable {
 	 * 
 	 * @param
 	 */
-	public void SaveUser() {
+	public void SaveUser() throws SQLException {
 		// TODO - implement RegisterNewUserScreen.SaveUser
 		String a = staffNameField.getText();
 		String b = userNameField.getText();
@@ -45,6 +47,11 @@ public class RegisterNewUserScreen extends Window implements Initializable {
 		String d = (String) roleBox.getValue();
 
 		//userAccount(a,b,c,d);
+		new UserAccount(a, b, c, d);
+	}
+
+	public void GoHome() {
+		adminUiController.getMain().showScreen("HomeScreen");
 	}
 
 	@Override

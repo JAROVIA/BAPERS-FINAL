@@ -1,5 +1,7 @@
 package GUI;
 
+import java.sql.SQLException;
+
 public class HomeScreen extends Window {
 
 	private int CreateUserButton;
@@ -20,7 +22,7 @@ public class HomeScreen extends Window {
 		throw new UnsupportedOperationException();
 	}
 
-	public void toUserAccounts(){
+	public void toUserAccounts() throws SQLException {
 		uiController.getMain().showScreen("UserAccounts");
 		uiController.getMain().getAdminUiController().getUserAccountScreen().showContent();
 	}

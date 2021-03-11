@@ -116,3 +116,5 @@ out/production/BAPERS-FINAL/GUI/images/Register-New-Customer-User-Icon.png
 out/production/BAPERS-FINAL/GUI/images/Reports-Icon.png
 out/production/BAPERS-FINAL/GUI/images/ReportsIcon.png
 out/production/BAPERS-FINAL/GUI/images/RestoreIcon.jpg
+*.iml
+out/*

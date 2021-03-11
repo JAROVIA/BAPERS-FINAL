@@ -15,7 +15,7 @@ public class PROC_UI_Controller {
 	private String jobFxml = "Jobs";
 
 	private AddNewTaskScreen addNewTaskScreen;
-	private String newTaskFxml = "AddnewTask";
+	private String newTaskFxml = "AddNewTask";
 
 	private TasksScreen tasksScreen;
 	private String taskFxml = "Tasks";
