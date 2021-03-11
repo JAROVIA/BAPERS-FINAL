@@ -4,26 +4,29 @@ import ACCOUNT.*;
 import GUI.*;
 import PROCESS.*;
 
+import java.io.IOException;
+
 public class PROC_UI_Controller {
 
 	private Main main;
 
 	//gui handled by this controller
 	private JobsScreen jobsScreen;
-	private String jobFxml = "";
+	private String jobFxml = "Jobs";
 
 	private AddNewTaskScreen addNewTaskScreen;
-	private String newTaskFxml = "";
+	private String newTaskFxml = "AddnewTask";
 
 	private TasksScreen tasksScreen;
-	private String taskFxml = "";
+	private String taskFxml = "Tasks";
 
 	private CreateJobScreen createJobScreen;
-	private String createJobFxml = "";
+	private String createJobFxml = "CreateJobOrder";
 
 	private UpdateExistingTaskScreen updateExistingTaskScreen;
-	private String existingTaskFxml = "";
+	private String updateTasksFxml = "UpdateTasks";
 
+	//TODO which screen is this
 	private JobProgressScreen jobProgressScreen;
 	private String jobProgressFxml = "";
 
@@ -161,9 +164,29 @@ public class PROC_UI_Controller {
 		return main;
 	}
 
-	public PROC_UI_Controller(Main main) {
+	public PROC_UI_Controller(Main main) throws IOException {
 		// TODO - implement PROC_UI_Controller.PROC_UI_Controller
 		// TODO instantiate the gui
+
+		jobsScreen = (JobsScreen) Window.newGuiFromFxml(jobFxml);
+		main.addScreen(jobFxml, jobsScreen.getParent());
+		jobsScreen.setProcUiController(this);
+
+		tasksScreen = (TasksScreen) Window.newGuiFromFxml(taskFxml);
+		main.addScreen(taskFxml, tasksScreen.getParent());
+		tasksScreen.setProcUiController(this);
+
+		addNewTaskScreen = (AddNewTaskScreen) Window.newGuiFromFxml(newTaskFxml);
+		main.addScreen(newTaskFxml, jobsScreen.getParent());
+		addNewTaskScreen.setProcUiController(this);
+
+		createJobScreen = (CreateJobScreen) Window.newGuiFromFxml(createJobFxml);
+		main.addScreen(createJobFxml, createJobScreen.getParent());
+		createJobScreen.setProcUiController(this);
+
+		updateExistingTaskScreen = (UpdateExistingTaskScreen) Window.newGuiFromFxml(updateTasksFxml);
+		main.addScreen(updateTasksFxml, updateExistingTaskScreen.getParent());
+		updateExistingTaskScreen.setProcUiController(this);
 	}
 
 }

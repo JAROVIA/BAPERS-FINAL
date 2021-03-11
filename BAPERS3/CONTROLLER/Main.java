@@ -43,35 +43,19 @@ public class Main extends Application {
         stage.setWidth(bounds.getWidth());
         stage.setHeight(bounds.getHeight());
 
-        //the path to the fxml file for the initial page, and load
-        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/login.fxml"));
-        //Parent parent = loader.load();
-
-        //create a scene (page)
-        //Scene scene = new Scene(parent);
-
-        //set the scene to the window
-        //stage.setScene(scene);
-
         adminUiController = new ADMIN_UI_Controller(this);
         acctUiController = new ACCT_UI_Controller(this);
         procUiController = new PROC_UI_Controller(this);
         uiController = new UI_Controller(this);
 
-        System.out.println(System.getProperty("java.version"));
-        System.out.println(System.getProperty("javafx.version"));
-
         scene = new Scene(adminUiController.getLoginScreen().getParent());
         stage.setScene(scene);
         stage.show();
-        //showScreen("login");
-
-        //show the page
-        //stage.show();
     }
 
     //add screen to the map
     public void addScreen(String name, Parent parent){
+        System.out.println(name);
         screens.put(name, parent);
     }
 
@@ -91,22 +75,6 @@ public class Main extends Application {
     public void showScreen(Parent parent){
         scene.setRoot(parent);
         stage.show();
-    }
-
-    public Window newGuiFromFxml(String name, String fxml) throws IOException {
-        //load fxml
-        String url = "/gui/fxml/" + fxml + ".fxml";
-        System.out.println(url);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(url));
-        //get the parent element in fxml
-        //parent is used to construct the scene, which is assigned to the stage(window) to show
-        Parent parent = loader.load();
-        //add the screen to the collection so it is accessible
-        addScreen(name, parent);
-        //get the gui class
-        Window gui = loader.getController();
-        gui.setParentElement(parent);
-        return gui;
     }
 
     public UI_Controller getUiController() {

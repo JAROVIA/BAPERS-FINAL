@@ -13,10 +13,10 @@ public class UI_Controller {
 
 	//gui handled by this controller
 	private RecordPaymentScreen recordPaymentScreen;
-	private String recordPaymentFxml = "";
+	private String recordPaymentFxml = "RecordPayment";
 
 	private ReportsScreen reportsScreen;
-	private String reportsFxml = "";
+	private String reportsFxml = "Reports";
 
 	private HomeScreen homeScreen;
 	private String homeFxml = "HomeScreen";
@@ -61,6 +61,15 @@ public class UI_Controller {
 		this.main = main;
 
 		homeScreen = (HomeScreen) Window.newGuiFromFxml(homeFxml);
+		main.addScreen(homeFxml, homeScreen.getParent());
 		homeScreen.setUiController(this);
+
+		recordPaymentScreen = (RecordPaymentScreen) Window.newGuiFromFxml(recordPaymentFxml);
+		main.addScreen(recordPaymentFxml, recordPaymentScreen.getParent());
+		recordPaymentScreen.setUiController(this);
+
+		reportsScreen = (ReportsScreen) Window.newGuiFromFxml(reportsFxml);
+		main.addScreen(reportsFxml, reportsScreen.getParent());
+		reportsScreen.setUiController(this);
 	}
 }

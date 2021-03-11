@@ -142,7 +142,7 @@
             </Label>
             <Label layoutX="281.0" layoutY="86.0" prefHeight="126.0" prefWidth="140.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-border-width: 3;">
                <graphic>
-                  <Button fx:id="userAccountButton"  onAction="#toCreateUser" mnemonicParsing="false" prefHeight="114.0" prefWidth="134.0" style="-fx-background-color: White;">
+                  <Button fx:id="userAccountButton" onAction="#toUserAccounts" mnemonicParsing="false" prefHeight="114.0" prefWidth="134.0" style="-fx-background-color: White;">
                      <graphic>
                         <ImageView fitHeight="97.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
                            <image>
