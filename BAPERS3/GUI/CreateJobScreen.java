@@ -70,6 +70,7 @@ public class CreateJobScreen extends Window {
 	}
 
 	public void onShow(){
+		list.clear();
 		//get all tasks operable by BIPL
 		try {
 			int i = 0;
@@ -82,9 +83,8 @@ public class CreateJobScreen extends Window {
 			e.printStackTrace();
 		}
 		tasksComboBox.getItems().removeAll(tasksComboBox.getItems());
-		for(TaskDescription t : list){
-			System.out.println("TEST");
-			tasksComboBox.getItems().add(t.getTaskID() + ", " + t.getDescriptionOfTask() + ", " + t.getTaskLocation() + ", " + String.format("%.02f",t.getTaskPrice()));
+			for(TaskDescription t : list){
+				tasksComboBox.getItems().add(t.getTaskID() + ", " + t.getDescriptionOfTask() + ", " + t.getTaskLocation() + ", " + String.format("%.02f",t.getTaskPrice()));
 		}
 		data.clear();
 		taskTable.setItems(data);
