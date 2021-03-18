@@ -11,7 +11,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class RegisterNewUserScreen extends Window implements Initializable {
+public class RegisterNewUserScreen extends Window{
 
 	@FXML
 	private TextField staffNameField;
@@ -25,16 +25,6 @@ public class RegisterNewUserScreen extends Window implements Initializable {
 	@FXML
 	private ComboBox roleBox;
 
-	public void OnClick() {
-		// TODO - implement RegisterNewUserScreen.OnClick
-		throw new UnsupportedOperationException();
-	}
-
-	public String RetrieveTextArea() {
-		// TODO - implement RegisterNewUserScreen.RetrieveTextArea
-		throw new UnsupportedOperationException();
-	}
-
 	/**
 	 * 
 	 * @param
@@ -46,18 +36,23 @@ public class RegisterNewUserScreen extends Window implements Initializable {
 		String c = pwField.getText();
 		String d = (String) roleBox.getValue();
 
-		//userAccount(a,b,c,d);
-		new UserAccount(a, b, c, d);
+		adminUiController.saveUser(a,b,c,d);
 	}
 
-	public void GoHome() {
-		adminUiController.getMain().showScreen("HomeScreen");
+	@FXML
+	public void initialize() {
+		super.initialize();
+		roleBox.getItems().removeAll(roleBox.getItems());
+		roleBox.getItems().addAll("Office Manager", "Shift Manager", "Receptionist", "Technician");
+		roleBox.setPromptText("Select role");
 	}
 
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		roleBox.getItems().removeAll(roleBox.getItems());
-		roleBox.getItems().addAll("Office Manager", "Shift Manager", "Recptionist", "Technician");
-		roleBox.getSelectionModel().select("Select role");
+	public void onShow(){
+		staffNameField.setText("");
+		userNameField.setText("");
+		pwField.setText("");
+		roleBox.getSelectionModel().clearSelection();
+		roleBox.setPromptText("Select role");
 	}
 }

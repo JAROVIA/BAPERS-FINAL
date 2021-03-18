@@ -10,18 +10,18 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:controller="GUI.AddNewTaskScreen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AddNewTaskScreen">
    <children>
-      <Button layoutX="1180.0" layoutY="14.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Logout">
+      <Button fx:id="logoutButton" layoutX="1180.0" layoutY="14.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Logout">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
       <TextField layoutX="473.0" layoutY="307.0" prefHeight="36.0" prefWidth="337.0" promptText="New Task Description" style="-fx-border-color: black;" />
       <TextField layoutX="471.0" layoutY="364.0" prefHeight="36.0" prefWidth="337.0" promptText="New Tasl Location" style="-fx-border-color: black;" />
-      <ImageView fitHeight="219.0" fitWidth="463.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="homeButton" fitHeight="219.0" fitWidth="463.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@BAPERS%20Logo%20Final.png" />
+            <Image url="@../images/BAPERS%20Logo%20Final.png" />
          </image>
       </ImageView>
       <Label layoutX="925.0" layoutY="14.0" prefHeight="36.0" prefWidth="239.0" style="-fx-border-color: Black;" text="Welcome [logged in user]" textAlignment="RIGHT">
@@ -36,12 +36,12 @@
          </font>
       </Text>
       <PasswordField layoutX="471.0" layoutY="475.0" prefHeight="36.0" prefWidth="337.0" promptText="New Task Duration" style="-fx-border-color: black;" />
-      <Button layoutX="656.0" layoutY="561.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="138.0" style="-fx-background-color: #95ed82; -fx-border-color: Black;" text="Confirm New Task">
+      <Button fx:id="confirmButton" layoutX="656.0" layoutY="561.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="138.0" style="-fx-background-color: #95ed82; -fx-border-color: Black;" text="Confirm New Task">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
-      <Button layoutX="486.0" layoutY="561.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="138.0" style="-fx-background-color: #f26d6d; -fx-border-color: Black;" text="Cancel; New task">
+      <Button fx:id="cancelButton" layoutX="486.0" layoutY="561.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="138.0" style="-fx-background-color: #f26d6d; -fx-border-color: Black;" text="Cancel; New task">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

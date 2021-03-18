@@ -77,6 +77,8 @@ public class Main extends Application {
         stage.show();
     }
 
+    public Scene getScene(){return scene;}
+
     public UI_Controller getUiController() {
         return uiController;
     }

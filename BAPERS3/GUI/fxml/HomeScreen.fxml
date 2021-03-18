@@ -85,14 +85,14 @@
         </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #ffffff;" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
       <children>
             <ImageView fitHeight="51.0" fitWidth="221.0" layoutX="7.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/BapersLogo.jpg" />
                </image>
             </ImageView>
-            <Button layoutX="612.0" layoutY="6.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="83.0" style="-fx-background-color: #DDF8FF; -fx-border-color: black;" text="Logout" />
+            <Button fx:id="logoutButton" layoutX="612.0" layoutY="6.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="83.0" style="-fx-background-color: #DDF8FF; -fx-border-color: black;" text="Logout" />
             <Label layoutX="85.0" layoutY="208.0" prefHeight="33.0" prefWidth="127.0" text="Customer Account">
                <font>
                   <Font name="System Bold" size="14.0" />
@@ -108,7 +108,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <ImageView fitHeight="60.0" fitWidth="221.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="homeButton" fitHeight="60.0" fitWidth="221.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/BapersLogo.jpg" />
                </image></ImageView>
@@ -129,7 +129,7 @@
             </Label>
             <Label layoutX="80.0" layoutY="87.0" prefHeight="126.0" prefWidth="140.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-border-width: 3;">
                <graphic>
-                  <Button mnemonicParsing="false" style="-fx-background-color: white;">
+                  <Button fx:id="customerAccountButton" mnemonicParsing="false" style="-fx-background-color: white;">
                      <graphic>
                         <ImageView fitHeight="111.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -142,7 +142,7 @@
             </Label>
             <Label layoutX="281.0" layoutY="86.0" prefHeight="126.0" prefWidth="140.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-border-width: 3;">
                <graphic>
-                  <Button fx:id="userAccountButton" onAction="#toUserAccounts" mnemonicParsing="false" prefHeight="114.0" prefWidth="134.0" style="-fx-background-color: White;">
+                  <Button fx:id="userAccountButton" mnemonicParsing="false" prefHeight="114.0" prefWidth="134.0" style="-fx-background-color: White;">
                      <graphic>
                         <ImageView fitHeight="97.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -155,7 +155,7 @@
             </Label>
             <Label layoutX="474.0" layoutY="87.0" prefHeight="126.0" prefWidth="140.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-border-width: 3;">
                <graphic>
-                  <Button mnemonicParsing="false" prefHeight="114.0" prefWidth="134.0" style="-fx-background-color: white;">
+                  <Button fx:id="databaseButton" mnemonicParsing="false" prefHeight="114.0" prefWidth="134.0" style="-fx-background-color: white;">
                      <graphic>
                         <ImageView fitHeight="96.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -169,7 +169,7 @@
             <Label layoutX="78.0" layoutY="250.0" prefHeight="126.0" prefWidth="141.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-border-radius: 10;" />
             <Label layoutX="276.0" layoutY="247.0" prefHeight="126.0" prefWidth="141.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-border-width: 3;" />
             <Label layoutX="473.0" layoutY="251.0" prefHeight="120.0" prefWidth="141.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-border-width: 3;" />
-            <Button layoutX="484.0" layoutY="260.0" mnemonicParsing="false" prefHeight="97.0" prefWidth="105.0" style="-fx-background-color: white;">
+            <Button fx:id="reportsButton" layoutX="484.0" layoutY="260.0" mnemonicParsing="false" prefHeight="97.0" prefWidth="105.0" style="-fx-background-color: white;">
                <graphic>
                   <ImageView fitHeight="97.0" fitWidth="102.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -178,7 +178,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutX="284.0" layoutY="259.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="121.0" style="-fx-background-color: white;">
+            <Button fx:id="tasksButton" layoutX="284.0" layoutY="259.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="121.0" style="-fx-background-color: white;">
                <graphic>
                   <ImageView fitHeight="103.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -187,7 +187,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutX="86.0" layoutY="259.0" mnemonicParsing="false" prefHeight="107.0" prefWidth="110.0" style="-fx-background-color: white;">
+            <Button fx:id="jobsButton" layoutX="86.0" layoutY="259.0" mnemonicParsing="false" prefHeight="107.0" prefWidth="110.0" style="-fx-background-color: white;">
                <graphic>
                   <ImageView fitHeight="100.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="true">
                      <image>

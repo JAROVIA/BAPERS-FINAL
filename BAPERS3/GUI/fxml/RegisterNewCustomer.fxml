@@ -46,7 +46,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:controller="GUI.RegisterNewCustomerScreen" prefHeight="434.0" prefWidth="668.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="434.0" prefWidth="668.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.RegisterNewCustomerScreen">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -89,7 +89,7 @@
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: White;" VBox.vgrow="ALWAYS">
       <children>
-            <Button layoutX="601.0" layoutY="4.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="59.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Logout">
+            <Button fx:id="logoutButton" layoutX="601.0" layoutY="4.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="59.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Logout">
                <font>
                   <Font size="9.0" />
                </font></Button>
@@ -100,7 +100,7 @@
             <TextField layoutX="344.0" layoutY="248.0" prefHeight="25.0" prefWidth="167.0" promptText="Address Line 2" style="-fx-border-color: black;" />
             <TextField layoutX="344.0" layoutY="299.0" prefHeight="25.0" prefWidth="167.0" promptText="Post Code" style="-fx-border-color: black;" />
             <ChoiceBox accessibleRole="CHECK_BOX" accessibleText="jlivf" layoutX="127.0" layoutY="193.0" prefHeight="25.0" prefWidth="167.0" style="-fx-background-color: White; -fx-border-color: Black;" />
-            <ImageView fitHeight="55.0" fitWidth="205.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="homeButton" fitHeight="55.0" fitWidth="205.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/BapersLogo.jpg" />
                </image>
@@ -110,7 +110,7 @@
                   <Image url="@../images/Register-New-Customer-Page.jpg" />
                </image>
             </ImageView>
-            <Button layoutX="292.0" layoutY="356.0" mnemonicParsing="false" prefHeight="14.0" prefWidth="53.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Submit">
+            <Button fx:id="submitButton" layoutX="292.0" layoutY="356.0" mnemonicParsing="false" prefHeight="14.0" prefWidth="53.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Submit">
                <font>
                   <Font size="9.0" />
                </font></Button>

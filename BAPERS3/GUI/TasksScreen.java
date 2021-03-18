@@ -1,59 +1,42 @@
 package GUI;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 
 public class TasksScreen extends Window {
 
-	/*
-	private Button LogOutButton;
-	private Button DeleteTaskButton;
-	private Button UpdateTaskButton;
-	private Button AddNewTaskButton;
+	@FXML
+	private Button deleteTaskButton;
+	@FXML
+	private Button editTaskButton;
+	@FXML
+	private Button addNewTaskButton;
 
-	 */
 	private TableView TasksTable;
 
-	public void OnClickButton() {
-		// TODO - implement TasksScreen.OnClickButton
-		throw new UnsupportedOperationException();
-	}
+	//only for OM
 
 	public void RemoveTask() {
 		// TODO - implement TasksScreen.RemoveTask
 		throw new UnsupportedOperationException();
 	}
 
-	public void AddTask() {
-		// TODO - implement TasksScreen.AddTask
-		throw new UnsupportedOperationException();
+	public void toAddTask() {
+		procUiController.getMain().showScreen("AddNewTask");
 	}
 
-	public void EditTask() {
-		// TODO - implement TasksScreen.EditTask
-		throw new UnsupportedOperationException();
-	}
-
-	public void LogOut() {
-		// TODO - implement TasksScreen.LogOut
-		throw new UnsupportedOperationException();
+	public void toEditTask() {
+		procUiController.getMain().showScreen("EditExistingTasks");
 	}
 
 	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param xSize
-	 * @param ySize
-	 * @param icon
-	 * @param Text
-	 * @param Button
 	 */
-	/*
-	public TasksScreen(int x, int y, int xSize, int ySize, string icon, string Text, Button Button) {
-		// TODO - implement TasksScreen.TasksScreen
-		throw new UnsupportedOperationException();
+	@FXML
+	public void initialize(){
+		super.initialize();
+		editTaskButton.setOnAction(actionEvent -> toEditTask());
+		addNewTaskButton.setOnAction(actionEvent -> toAddTask());
 	}
-
-	 */
 
 }
