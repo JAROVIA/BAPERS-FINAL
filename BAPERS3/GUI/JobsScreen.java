@@ -80,7 +80,7 @@ public class JobsScreen extends Window {
 	public void onShow(){
 		ArrayList<Job> list = new ArrayList<>();
 		//get list of jobs here
-		list.add(new Job(1, 2, "a", 2, "a", "a", "a",2.00f));
+
 		ObservableList<Job> data = FXCollections.observableArrayList();
 		data.addAll(list);
 		jobsTable.setItems(data);
@@ -94,10 +94,11 @@ public class JobsScreen extends Window {
 		createJobOrderButton.setOnAction(actionEvent -> toCreateJobOrder());
 		processTasksButton.setOnAction(actionEvent -> toProcessTasks());
 
+		/*
 		accountNumberColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Job, Number>, ObservableValue<Number>>() {
 			@Override
 			public ObservableValue<Number> call(TableColumn.CellDataFeatures<Job, Number> property) {
-				return new SimpleIntegerProperty((property.getValue().getAccountNumber()));
+				return new SimpleIntegerProperty((property.getValue().get));
 			}
 		});
 
@@ -128,6 +129,8 @@ public class JobsScreen extends Window {
 				return new SimpleFloatProperty((property.getValue().getJobPrice()));
 			}
 		});
+
+		 */
 	}
 
 }

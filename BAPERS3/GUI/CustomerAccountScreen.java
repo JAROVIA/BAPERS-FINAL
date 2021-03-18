@@ -85,8 +85,6 @@ public class CustomerAccountScreen extends Window {
 	public void onShow(){
 		ArrayList<CustomerAccountDetails> list = new ArrayList<>();
 		//TODO assign the customer account details list here
-		list.add(new CustomerAccountDetails(12, "a", "a", "a", 1,1000));
-		list.add(new CustomerAccountDetails(1000, "bacac", "asdas", "qwdqdsa", 12414123,1000));
 
 		ObservableList<CustomerAccountDetails> data = FXCollections.observableArrayList();
 		data.addAll(list);
@@ -103,6 +101,7 @@ public class CustomerAccountScreen extends Window {
 		processTasksButton.setOnAction(actionEvent -> toProcessTasks());
 		registerNewCustomerButton.setOnAction(actionEvent -> toRegisterNewCustomer());
 
+		/*
 		accountNumberColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<CustomerAccountDetails, Number>, ObservableValue<Number>>() {
 			@Override
 			public ObservableValue<Number> call(TableColumn.CellDataFeatures<CustomerAccountDetails, Number> property) {
@@ -120,7 +119,7 @@ public class CustomerAccountScreen extends Window {
 		phoneColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<CustomerAccountDetails, Number>, ObservableValue<Number>>() {
 			@Override
 			public ObservableValue<Number> call(TableColumn.CellDataFeatures<CustomerAccountDetails, Number> property) {
-				return new SimpleLongProperty((property.getValue().getPhoneNumber()));
+				return new SimpleLongProperty((property.getValue()));
 			}
 		});
 
@@ -151,6 +150,8 @@ public class CustomerAccountScreen extends Window {
 				return new SimpleStringProperty((property.getValue().getUserName()));
 			}
 		});
+
+		 */
 	}
 
 }

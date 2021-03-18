@@ -36,12 +36,15 @@ public class HomeScreen extends Window {
 	}
 
 	private void toUserAccounts() throws SQLException {
+		/*
 		System.out.println("user's role is " + uiController.getMain().getAdminUiController().getLoggedInUser().getUserRole());
 		 if(uiController.getMain().getAdminUiController().getLoggedInUser().getUserRole().equals("Office Manager")){
 		 	//goes to user account page
 			uiController.getMain().showScreen("UserAccounts");
 			 uiController.getMain().getAdminUiController().getUserAccountScreen().showContent();
 		}
+
+		 */
 	}
 
 	private void toCustomerAccounts(){

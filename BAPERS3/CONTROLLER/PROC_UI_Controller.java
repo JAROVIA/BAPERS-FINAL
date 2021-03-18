@@ -30,7 +30,7 @@ public class PROC_UI_Controller {
 	private String processTasksFxml = "ProgressTasks";
 
 	private I_PROCESS job;
-	private Task task;
+	private TaskDescription taskDescription;
 
 	/**
 	 * 
