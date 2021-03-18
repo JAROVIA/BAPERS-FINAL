@@ -17,7 +17,7 @@ public interface I_PROCESS {
 	 * 
 	 * @param TaskID
 	 */
-	abstract Task RetrieveTasks(int TaskID);
+	abstract TaskInAJob RetrieveTasks(int TaskID);
 
 	/**
 	 * 

@@ -1,6 +1,6 @@
 package PROCESS;
 
-public class Task {
+public class TaskInAJob {
 
 	private String TaskStatus;
 	private int Duration;
@@ -37,7 +37,7 @@ public class Task {
 	 * 
 	 * @param TaskID
 	 */
-	public Task RetrieveTasks(int TaskID) {
+	public TaskInAJob RetrieveTasks(int TaskID) {
 		// TODO - implement Task.RetrieveTask
 		throw new UnsupportedOperationException();
 	}
@@ -75,7 +75,7 @@ public class Task {
 	 * 
 	 * @param TaskData
 	 */
-	public static Task Task(String TaskData) {
+	public static TaskInAJob Task(String TaskData) {
 		// TODO - implement Task.Task
 		throw new UnsupportedOperationException();
 	}

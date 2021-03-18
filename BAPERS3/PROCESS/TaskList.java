@@ -22,7 +22,7 @@ public class TaskList {
 		throw new UnsupportedOperationException();
 	}
 
-	public Task GetNextItem() {
+	public TaskInAJob GetNextItem() {
 		// TODO - implement TaskList.GetNextItem
 		throw new UnsupportedOperationException();
 	}

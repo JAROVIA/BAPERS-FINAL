@@ -145,12 +145,12 @@ public class UserAccount {
 //					" roleName: " + roleName +
 //					" staffName: " + staffName;
 
-			tuple = employeeID + " "
-					+ username + " "
-					+ roleName + " "
+			tuple = employeeID + "`"
+					+ username + "`"
+					+ roleName + "`"
 					+ staffName;
 
-			arrayList.add(tuple.split(" "));
+			arrayList.add(tuple.split("`"));
 
 		}
 		return arrayList;

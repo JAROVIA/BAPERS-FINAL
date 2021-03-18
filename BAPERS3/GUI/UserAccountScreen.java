@@ -62,13 +62,11 @@ public class UserAccountScreen extends Window {
 
 	public void showContent() throws SQLException {
 		//TODO get data here
-		//below is just for test
 
-//		ArrayList<String[]> list = new ArrayList<>();
-		ArrayList<String[]> list = null;
-		list = UserAccount.GetUserList();
+		ArrayList<String[]> list = new ArrayList<>();
 //		list.add(new String[]{"a", "b", "c", "d"});
 //		list.add(new String[]{"e", "f", "g", "h"});
+		list = UserAccount.GetUserList();
 
 		ObservableList<String[]> data = FXCollections.observableArrayList();
 		data.addAll(list);

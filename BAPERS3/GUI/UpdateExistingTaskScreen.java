@@ -21,7 +21,7 @@ public class UpdateExistingTaskScreen extends Window {
 		throw new UnsupportedOperationException();
 	}
 
-	public Task RetrieveTask() {
+	public TaskInAJob RetrieveTask() {
 		// TODO - implement UpdateExistingTaskScreen.RetrieveTask
 		throw new UnsupportedOperationException();
 	}
