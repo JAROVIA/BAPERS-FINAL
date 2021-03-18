@@ -3,7 +3,7 @@ package GUI;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableView;
 
-public class JobProgressScreen extends Window {
+public class ProcessTasksScreen extends Window {
 
 	/*
 	private Button LogOutButton;

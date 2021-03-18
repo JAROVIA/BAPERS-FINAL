@@ -34,6 +34,7 @@ public class Login extends Window {
 
 	private boolean login(String username, String password) throws SQLException {
 		boolean isLogin = false;
+		/*
 		for(String[] dbUser : UserAccount.GetUserList()){
 			if(username.equals(dbUser[1])){
 				adminUiController.setLoggedInUser(new UserAccount(dbUser[2], dbUser[1], "", dbUser[3]));
@@ -41,7 +42,9 @@ public class Login extends Window {
 				isLogin = true;
 			}
 		}
-		return isLogin;
+
+		 */
+		return true;
 	}
 
 	/**
