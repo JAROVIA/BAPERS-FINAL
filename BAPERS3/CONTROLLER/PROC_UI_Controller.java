@@ -23,12 +23,14 @@ public class PROC_UI_Controller {
 	private CreateJobScreen createJobScreen;
 	private String createJobFxml = "CreateJobOrder";
 
-	private UpdateExistingTaskScreen updateExistingTaskScreen;
-	private String updateTasksFxml = "UpdateTasks";
+	private EditExistingTaskScreen editExistingTaskScreen;
+	private String editExistingTasks = "EditExistingTasks";
 
-	//TODO which screen is this
-	private JobProgressScreen jobProgressScreen;
-	private String jobProgressFxml = "";
+	private ProcessTasksScreen processTasksScreen;
+	private String processTasksFxml = "ProgressTasks";
+
+	private I_PROCESS job;
+	private Task task;
 
 	/**
 	 * 
@@ -148,16 +150,16 @@ public class PROC_UI_Controller {
 		return createJobScreen;
 	}
 
-	public JobProgressScreen getJobProgressScreen() {
-		return jobProgressScreen;
+	public ProcessTasksScreen getJobProgressScreen() {
+		return processTasksScreen;
 	}
 
 	public AddNewTaskScreen getAddNewTaskScreen() {
 		return addNewTaskScreen;
 	}
 
-	public UpdateExistingTaskScreen getUpdateExistingTaskScreen() {
-		return updateExistingTaskScreen;
+	public EditExistingTaskScreen getUpdateExistingTaskScreen() {
+		return editExistingTaskScreen;
 	}
 
 	public Main getMain() {
@@ -168,6 +170,8 @@ public class PROC_UI_Controller {
 		// TODO - implement PROC_UI_Controller.PROC_UI_Controller
 		// TODO instantiate the gui
 
+		this.main = main;
+
 		jobsScreen = (JobsScreen) Window.newGuiFromFxml(jobFxml);
 		main.addScreen(jobFxml, jobsScreen.getParent());
 		jobsScreen.setProcUiController(this);
@@ -177,16 +181,21 @@ public class PROC_UI_Controller {
 		tasksScreen.setProcUiController(this);
 
 		addNewTaskScreen = (AddNewTaskScreen) Window.newGuiFromFxml(newTaskFxml);
-		main.addScreen(newTaskFxml, jobsScreen.getParent());
+		main.addScreen(newTaskFxml, addNewTaskScreen.getParent());
 		addNewTaskScreen.setProcUiController(this);
 
 		createJobScreen = (CreateJobScreen) Window.newGuiFromFxml(createJobFxml);
 		main.addScreen(createJobFxml, createJobScreen.getParent());
 		createJobScreen.setProcUiController(this);
 
-		updateExistingTaskScreen = (UpdateExistingTaskScreen) Window.newGuiFromFxml(updateTasksFxml);
-		main.addScreen(updateTasksFxml, updateExistingTaskScreen.getParent());
-		updateExistingTaskScreen.setProcUiController(this);
+		editExistingTaskScreen = (EditExistingTaskScreen) Window.newGuiFromFxml(editExistingTasks);
+		main.addScreen(editExistingTasks, editExistingTaskScreen.getParent());
+		editExistingTaskScreen.setProcUiController(this);
+
+		processTasksScreen = (ProcessTasksScreen) Window.newGuiFromFxml(processTasksFxml);
+		main.addScreen(processTasksFxml, processTasksScreen.getParent());
+		processTasksScreen.setProcUiController(this);
+
 	}
 
 }
