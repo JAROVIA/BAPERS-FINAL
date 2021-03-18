@@ -1,12 +1,25 @@
 package GUI;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+
 import java.sql.SQLException;
 
 public class HomeScreen extends Window {
 
 	private int CreateUserButton;
-	//private Button LogoutButton;
-	//private Menu MyMenu;
+	@FXML
+	private Button userAccountButton;
+	@FXML
+	private Button customerAccountButton;
+	@FXML
+	private Button databaseButton;
+	@FXML
+	private Button jobsButton;
+	@FXML
+	private Button tasksButton;
+	@FXML
+	private Button reportsButton;
 
 	public void OnClickButton() {
 		// TODO - implement HomeScreen.OnClickButton
@@ -22,28 +35,60 @@ public class HomeScreen extends Window {
 		throw new UnsupportedOperationException();
 	}
 
-	public void toUserAccounts() throws SQLException {
-		uiController.getMain().showScreen("UserAccounts");
-		uiController.getMain().getAdminUiController().getUserAccountScreen().showContent();
+	private void toUserAccounts() throws SQLException {
+		System.out.println("user's role is " + uiController.getMain().getAdminUiController().getLoggedInUser().getUserRole());
+		 if(uiController.getMain().getAdminUiController().getLoggedInUser().getUserRole().equals("Office Manager")){
+		 	//goes to user account page
+			uiController.getMain().showScreen("UserAccounts");
+			 uiController.getMain().getAdminUiController().getUserAccountScreen().showContent();
+		}
+	}
+
+	private void toCustomerAccounts(){
+		//goes to customer account page
+		uiController.getMain().showScreen("CustomerAccounts");
+		uiController.getMain().getAcctUiController().getCustomerAccountScreen().onShow();
+	}
+
+	private void toJob(){
+		//goes to jobs page
+		uiController.getMain().showScreen("Jobs");
+		uiController.getMain().getProcUiController().getJobsScreen().onShow();
+	}
+
+	private void toDatabase(){
+		//goes to database page
+		uiController.getMain().showScreen("Database");
+	}
+
+	private void toReport(){
+		//goes to reports page
+		uiController.getMain().showScreen("Reports");
+	}
+
+	private void toTask(){
+		//goes to task page
+		uiController.getMain().showScreen("Tasks");
 	}
 
 	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param xSize
-	 * @param ySize
-	 * @param icon
-	 * @param Text
-	 * @param Button
-	 * @param MyMenu
 	 */
-	/*
-	public static HomeScreen HomeScreen(int x, int y, int xSize, int ySize, string icon, string Text, Button Button, Menu MyMenu) {
-		// TODO - implement HomeScreen.HomeScreen
-		throw new UnsupportedOperationException();
+	@Override
+	public void initialize(){
+		//set buttons their on action
+		super.initialize();
+		userAccountButton.setOnAction(actionEvent -> {
+			try {
+				toUserAccounts();
+			} catch (SQLException throwables) {
+				throwables.printStackTrace();
+			}
+		});
+		customerAccountButton.setOnAction(actionEvent -> toCustomerAccounts());
+		databaseButton.setOnAction(actionEvent -> toDatabase());
+		jobsButton.setOnAction(actionEvent -> toJob());
+		tasksButton.setOnAction(actionEvent -> toTask());
+		reportsButton.setOnAction(actionEvent -> toReport());
 	}
-
-	 */
 
 }

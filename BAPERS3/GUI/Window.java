@@ -1,19 +1,28 @@
 package GUI;
 
 import CONTROLLER.*;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-
+import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import java.io.IOException;
 
-public abstract class Window {
+public abstract class Window{
 
-	protected ACCT_UI_Controller acctUiController;
-	protected ADMIN_UI_Controller adminUiController;
-	protected PROC_UI_Controller procUiController;
-	protected UI_Controller uiController;
+	protected ACCT_UI_Controller acctUiController = null;
+	protected ADMIN_UI_Controller adminUiController = null;
+	protected PROC_UI_Controller procUiController = null;
+	protected UI_Controller uiController = null;
 
 	protected Parent parent;
+
+	@FXML
+	private ImageView homeButton;
+
+	@FXML
+	private Button logoutButton;
 
 	//access each controller so each gui knows which controller to report back to
 	//getter setter for account ui
@@ -71,20 +80,56 @@ public abstract class Window {
 		//get the gui class
 		Window gui = loader.getController();
 		gui.setParentElement(parent);
+
 		return gui;
 	}
 
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param xSize
-	 * @param ySize
-	 * @param icon
-	 */
-	public Window Window(int x, int y, int xSize, int ySize, String icon) {
+	public void logout(){
+		System.out.println("out");
+		if(getProcUiController() != null){
+			getProcUiController().getMain().showScreen("Login");
+		}
+		if(getAcctUiController() != null){
+			getAcctUiController().getMain().showScreen("Login");
+		}
+		if(getUiController() != null){
+			getUiController().getMain().showScreen("Login");
+		}
+		if(getAdminUiController() != null){
+			getAdminUiController().getMain().showScreen("Login");
+		}
+	}
+
+	public void toMain(){
+		System.out.println("main");
+		if(getProcUiController() != null){
+			getProcUiController().getMain().showScreen("HomeScreen");
+		}
+		if(getAcctUiController() != null){
+			getAcctUiController().getMain().showScreen("HomeScreen");
+		}
+		if(getUiController() != null){
+			getUiController().getMain().showScreen("HomeScreen");
+		}
+		if(getAdminUiController() != null){
+			getAdminUiController().getMain().showScreen("HomeScreen");
+		}
+	}
+
+	protected void onShow(){
+		//do what the screen needs to do on show
+	}
+
+	@FXML
+	public void initialize() {
 		// TODO - implement Window.Window
-		throw new UnsupportedOperationException();
+
+		if(logoutButton != null) {
+			logoutButton.setOnAction(actionEvent -> logout());
+		}
+		if(homeButton != null) {
+			homeButton.setOnMouseClicked(mouseEvent -> toMain());
+		}
 	}
 
 }

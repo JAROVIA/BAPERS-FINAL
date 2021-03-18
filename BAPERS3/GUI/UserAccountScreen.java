@@ -6,24 +6,20 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.util.Callback;
 
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 public class UserAccountScreen extends Window {
 
-	/*
-	private Button RegisterNewUserButton;
-	private Button LogoutButton;
-	private Button EditUserButton;
-	private Button DeleteUserButton;
-
-	 */
 	private TextField searchUserTextArea;
 	@FXML
 	private TableView<String[]> userAccountTable;
@@ -35,6 +31,10 @@ public class UserAccountScreen extends Window {
 	private TableColumn<String[], String> usernameColumn;
 	@FXML
 	private TableColumn<String[], String> roleColumn;
+	@FXML
+	private Button editUserButton;
+	@FXML
+	private Button registerNewUserButton;
 
 	/**
 	 * 
@@ -64,11 +64,7 @@ public class UserAccountScreen extends Window {
 		//TODO get data here
 		//below is just for test
 
-//		ArrayList<String[]> list = new ArrayList<>();
-		ArrayList<String[]> list = null;
-		list = UserAccount.GetUserList();
-//		list.add(new String[]{"a", "b", "c", "d"});
-//		list.add(new String[]{"e", "f", "g", "h"});
+		ArrayList<String[]> list = UserAccount.GetUserList();
 
 		ObservableList<String[]> data = FXCollections.observableArrayList();
 		data.addAll(list);
@@ -84,50 +80,26 @@ public class UserAccountScreen extends Window {
 			});
 		}
 
-		/*
-		TableColumn<String[], String> userIdColumn = new TableColumn<>();
-		userIdColumn.setText("userID");
-		TableColumn<String[], String> staffNameColumn = new TableColumn<>();
-		staffNameColumn.setText("staffName");
-		TableColumn<String[], String> usernameColumn = new TableColumn<>();
-		usernameColumn.setText("username");
-		TableColumn<String[], String> roleColumn = new TableColumn<>();
-		roleColumn.setText("Role");
-		 */
-
 		userAccountTable.setItems(data);
-	}
-
-	public static void main(String[] args) {
-		ArrayList<String[]> list = new ArrayList<>();
-		list.add(new String[]{"a", "b", "c", "d"});
-		list.add(new String[]{"e", "f", "g", "h"});
-
-		// test to ensure correct alist format
-		for(String[] col: list){
-			for (String a: col){
-				System.out.println(a);
-
-			}
-		}
-
 	}
 
 	public void toRegisterUser(){
 		adminUiController.getMain().showScreen("RegisterNewUser");
+		adminUiController.getRegisterNewUserScreen().onShow();
 	}
 
+	private void toEditUser(){
+		adminUiController.getMain().showScreen("EditUserDetails");
+	}
+
+
 	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param xSize
-	 * @param ySize
-	 * @param icon
 	 */
-	public static UserAccountScreen LogOut(int x, int y, int xSize, int ySize, String icon) {
-		// TODO - implement UserAccountScreen.LogOut
-		throw new UnsupportedOperationException();
+	@FXML
+	public void initialize(){
+		super.initialize();
+		editUserButton.setOnAction(actionEvent -> toEditUser());
+		registerNewUserButton.setOnAction(actionEvent -> toRegisterUser());
 	}
 
 }

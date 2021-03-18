@@ -3,7 +3,7 @@ package GUI;
 import PROCESS.*;
 import javafx.scene.control.TextField;
 
-public class UpdateExistingTaskScreen extends Window {
+public class EditExistingTaskScreen extends Window {
 
 	private TextField TaskDescription;
 	private TextField TaskLocation;

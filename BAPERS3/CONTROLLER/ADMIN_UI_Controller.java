@@ -5,6 +5,7 @@ import GUI.*;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.SQLException;
 
 public class ADMIN_UI_Controller {
 
@@ -26,22 +27,30 @@ public class ADMIN_UI_Controller {
 	private DatabaseScreen databaseScreen;
 	private String databaseFxml = "Database";
 
+	private UserAccount loggedInUser = null;
+	private UserAccount editingUser = null;
+
 	/**
 	 * 
 	 * @param Username
 	 */
-	public UserAccount SearchUser(String Username) {
+	public UserAccount searchUser(String Username) {
 		// TODO - implement ADMIN_UI_Controller.SearchUser
 		throw new UnsupportedOperationException();
 	}
 
 	/**
 	 * 
-	 * @param UserDetails
+	 * @param role
+	 * @param name
+	 * @param password
+	 * @param username
+	 *
 	 */
-	public boolean SaveUser(String[] UserDetails) {
-		// TODO - implement ADMIN_UI_Controller.SaveUser
-		throw new UnsupportedOperationException();
+	public boolean saveUser(String role, String name, String password, String username) throws SQLException {
+		new UserAccount(role, username, password, name);
+		// TODO - return appropriate boolean
+		return true;
 	}
 
 	/**
@@ -105,7 +114,20 @@ public class ADMIN_UI_Controller {
 		return main;
 	}
 
-	private void guiSetup(Window gui, String fxml){
+	public UserAccount getLoggedInUser() {
+		return loggedInUser;
+	}
+
+	public void setLoggedInUser(UserAccount loggedInUser) {
+		this.loggedInUser = loggedInUser;
+	}
+
+	public UserAccount getEditingUser() {
+		return editingUser;
+	}
+
+	public void setEditingUser(UserAccount editingUser) {
+		this.editingUser = editingUser;
 	}
 
 	public ADMIN_UI_Controller(Main main) throws IOException {

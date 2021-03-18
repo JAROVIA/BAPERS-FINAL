@@ -22,6 +22,8 @@ public class ACCT_UI_Controller {
 	private CustomerAccountScreen customerAccountScreen;
 	private String customerFxml = "CustomerAccounts";
 
+	private I_CustomerAccount customerAccountHandler;
+
 	/**
 	 * 
 	 * @param AccountNum
@@ -78,13 +80,10 @@ public class ACCT_UI_Controller {
 	//constructor
 	public ACCT_UI_Controller(Main main) throws IOException {
 		// TODO - implement ACCT_UI_Controller.ACCT_UI_Controller
-		/*
-		activeJobScreen = (ActiveJobScreen) Window.newGuiFromFxml(activeJobFxml);
-		main.addScreen(activeJobFxml, activeJobScreen.getParent());
-		activeJobScreen.setAcctUiController(this);
 
-		 */
+		this.main = main;
 
+		//gui setup
 		editCustomerDetailsScreen = (EditCustomerDetailsScreen) Window.newGuiFromFxml(editCustomerFxml);
 		main.addScreen(editCustomerFxml, editCustomerDetailsScreen.getParent());
 		editCustomerDetailsScreen.setAcctUiController(this);
@@ -96,6 +95,9 @@ public class ACCT_UI_Controller {
 		customerAccountScreen = (CustomerAccountScreen) Window.newGuiFromFxml(customerFxml);
 		main.addScreen(customerFxml, customerAccountScreen.getParent());
 		customerAccountScreen.setAcctUiController(this);
+
+		//get implementation class from interface
+		customerAccountHandler = new Impl_CustomerAccount();
 	}
 
 }

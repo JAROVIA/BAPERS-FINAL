@@ -13,22 +13,59 @@ import java.sql.*;
 public class UserAccount {
 
 	Collection<Job> Job;
-	private String UserRole;
-	private int EmployeeID;
-	private String Username;
+
+	private String userRole;
+	private int employeeID;
+	private String username;
 	private String Password;
-	private String EmployeeName;
+	private String employeeName;
 	static String tablename = "UserAccounts";
 
+	public String getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
+	}
+
+	public int getEmployeeID() {
+		return employeeID;
+	}
+
+	public void setEmployeeID(int employeeID) {
+		this.employeeID = employeeID;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return Password;
+	}
+
+	public void setPassword(String password) {
+		Password = password;
+	}
+
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
+	}
+
 	static String url = "jdbc:mysql://localhost:3306/Bapers";
-	static String username = "jaroviadb";
-	static String password = "Jarovia123#@!";
+	static String dbUsername = "jaroviadb";
+	static String dbPassword = "Jarovia123#@!";
 	static Connection connection;
 
 	static {
 		try {
 			connection = DriverManager.getConnection(
-					url, username, password);
+					url, dbUsername, dbPassword);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -54,8 +91,7 @@ public class UserAccount {
 	}
 
 	public String getEmployeeName() {
-		// TODO - implement UserAccount.getEmployeeName
-		throw new UnsupportedOperationException();
+		return employeeName;
 	}
 
 	/**
@@ -145,12 +181,12 @@ public class UserAccount {
 //					" roleName: " + roleName +
 //					" staffName: " + staffName;
 
-			tuple = employeeID + " "
-					+ username + " "
-					+ roleName + " "
+			tuple = employeeID + ","
+					+ username + ","
+					+ roleName + ","
 					+ staffName;
 
-			arrayList.add(tuple.split(" "));
+			arrayList.add(tuple.split(","));
 
 		}
 		return arrayList;
@@ -160,13 +196,13 @@ public class UserAccount {
 	 * This constructor will write a new user account to the db with information from its parameters.
 	 * It needs a userrole, username, employeename, and password to do so.
 	 */
-	public UserAccount(String userRole, String username, String password, String employeeName) throws SQLException {
-		this.UserRole = userRole;
-		this.Username = username;
-		this.Password = password;
-		this.EmployeeName = employeeName;
+	public UserAccount(String userRole, String dbUsername, String dbPassword, String employeeName) throws SQLException {
+		this.userRole = userRole;
+		this.username = dbUsername;
+		this.Password = dbPassword;
+		this.employeeName = employeeName;
 
-		String sql = "INSERT INTO " + tablename + "(Username, RoleName, Password, StaffName) " + "VALUES(\"" + EmployeeName + "\", \"" + Username + "\", \"" + password + "\", \"" + UserRole + "\");" ;
+		String sql = "INSERT INTO " + tablename + "(Username, RoleName, Password, StaffName) " + "VALUES(\"" + this.employeeName + "\", \"" + username + "\", \"" + dbPassword + "\", \"" + this.userRole + "\");" ;
 		Statement statement = connection.createStatement();
 		statement.executeUpdate(sql);
 	}
@@ -186,8 +222,5 @@ public class UserAccount {
 
 			}
 		}
-
 	}
-
-
 }
