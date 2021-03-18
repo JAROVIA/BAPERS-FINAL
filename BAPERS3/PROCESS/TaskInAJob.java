@@ -19,6 +19,7 @@ public class TaskInAJob {
 	private int actualDuration;
 	private int isCompleted = 0;
 
+
 	static String url = "jdbc:mysql://localhost:3306/Bapers";
 	static String username = "jaroviadb";
 	static String password = "Jarovia123#@!";

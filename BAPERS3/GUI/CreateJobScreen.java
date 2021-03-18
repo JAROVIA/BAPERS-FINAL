@@ -78,15 +78,27 @@ public class CreateJobScreen extends Window {
 				taskDescription.setTaskID(i++);
 				list.add(taskDescription);
 			}
-		}catch(SQLException e){
+		} catch(SQLException e){
 			e.printStackTrace();
 		}
 		tasksComboBox.getItems().removeAll(tasksComboBox.getItems());
 		for(TaskDescription t : list){
+			System.out.println("TEST");
 			tasksComboBox.getItems().add(t.getTaskID() + ", " + t.getDescriptionOfTask() + ", " + t.getTaskLocation() + ", " + String.format("%.02f",t.getTaskPrice()));
 		}
 		data.clear();
 		taskTable.setItems(data);
+	}
+
+	public static void main(String[] args) throws SQLException {
+//		ArrayList<TaskDescription> list = new ArrayList<>();
+//
+//		int i = 0;
+//		for(String[] sa : TaskDescription.GetTaskList()){
+//			TaskDescription taskDescription = new TaskDescription(sa[1], Integer.parseInt(sa[2]), sa[3], Integer.parseInt(sa[4]));
+//			taskDescription.setTaskID(i++);
+//			list.add(taskDescription);
+//		}
 	}
 
 	public void addTaskToJob(){

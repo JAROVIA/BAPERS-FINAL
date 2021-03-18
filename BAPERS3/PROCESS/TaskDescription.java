@@ -1,7 +1,5 @@
 package PROCESS;
 
-import ADMIN.UserAccount;
-
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -13,6 +11,20 @@ public class TaskDescription {
 	private String DescriptionOfTask;
 	private int Duration;
 	static String tablename = "Tasks";
+
+
+
+	public float getTaskPrice() {
+		return TaskPrice;
+	}
+
+	public String getDescriptionOfTask() {
+		return DescriptionOfTask;
+	}
+
+	public int getDuration() {
+		return Duration;
+	}
 
 	static String url = "jdbc:mysql://localhost:3306/Bapers";
 	static String username = "jaroviadb";
@@ -36,7 +48,7 @@ public class TaskDescription {
 
 	public int getTaskID() {
 		// TODO - implement TaskDescription.getTaskID
-		throw new UnsupportedOperationException();
+		return TaskID;
 	}
 
 	/**
@@ -45,12 +57,12 @@ public class TaskDescription {
 	 */
 	public void setTaskID(int TaskID) {
 		// TODO - implement TaskDescription.setTaskID
-		throw new UnsupportedOperationException();
+		this.TaskID = TaskID;
 	}
 
 	public String getTaskLocation() {
 		// TODO - implement TaskDescription.getTaskLocation
-		throw new UnsupportedOperationException();
+		return TaskLocation;
 	}
 
 	/**
@@ -106,22 +118,17 @@ public class TaskDescription {
 	}
 
 	public TaskDescription(String TaskLocation, int TaskPrice, String TaskDescription, int Duration) throws SQLException {
-
-        this.TaskLocation = TaskLocation;
-        this.TaskPrice = TaskPrice;
-        this.Duration = Duration;
-        this.DescriptionOfTask = TaskDescription;
-
-
-
+		this.TaskLocation = TaskLocation;
+		this.TaskPrice = TaskPrice;
+		this.DescriptionOfTask = TaskDescription;
+		this.Duration = Duration;
+				
+	}
+	
+	public static void NewTask(String TaskLocation, int TaskPrice, String TaskDescription, int Duration) throws SQLException {
 		String sql =
 				"INSERT INTO " + tablename + " ( TaskLocation, TaskPrice, TaskDescription, PredictedDuration) "
 				+ "VALUES (" + "\"" + TaskLocation + "\", " + TaskPrice + ", \"" + TaskDescription + "\", " + Duration + ");";
-		System.out.println(sql.length());
-		System.out.println(sql);
-
-		//		sql = sql.trim();
-//		sql = sql.strip();
 		Statement statement = connection.createStatement();
 		statement.executeUpdate(sql);
 	}
@@ -141,12 +148,8 @@ public class TaskDescription {
 
 	public static void main(String[] args) throws SQLException {
 
-		TaskDescription task1 = new TaskDescription( "jjjjjjj", 23, "stuffhappensiguess", 30);
+		TaskDescription.NewTask( "dddddddddd", 3, "ssssssssss", 360);
 
-		// create a new user
-//		UserAccount root = new UserAccount("superuser", "root", "user", "n/a");
-
-		// adds users to a list
 		ArrayList<String[]> al = TaskDescription.GetTaskList();
 		System.out.println();
 		// test to ensure correct alist format
