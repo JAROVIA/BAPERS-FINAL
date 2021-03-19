@@ -7,8 +7,8 @@ import java.util.Calendar;
 public class Job implements I_PROCESS {
 
 	private int JobID;
-	private int AccountNumber;
-	private String Urgency = "Normal";
+	private static int AccountNumber;
+	private static String Urgency = "Normal";
 	//TODO set this type (was timestamp)
 	private String JobDeadline;
 	private String JobStatus = "Ordered";
@@ -69,9 +69,9 @@ public class Job implements I_PROCESS {
 		throw new UnsupportedOperationException();
 	}
 
-	public int getJobID() {
+	public static int getJobID() {
 		// TODO - implement Job.getJobID
-		throw new UnsupportedOperationException();
+		return JobID;
 	}
 
 	/**
@@ -185,6 +185,23 @@ public class Job implements I_PROCESS {
 	}
 
 
+	public static int getAccountNumber() {
+		return AccountNumber;
+	}
+
+	public static String getUrgency() {
+		return Urgency;
+	}
+
+	public void setAccountNumber(int accountNumber) {
+		AccountNumber = accountNumber;
+	}
+
+	public void setUrgency(String urgency) {
+		Urgency = urgency;
+	}
+
+	// 1 INSERT INTO Jobs 2 INSERT INTO TIJ 3 UPDATE TIJ
 	public Job(int AccountNumber, String Urgency) throws SQLException{
 		this.AccountNumber = AccountNumber;
 		this.Urgency = Urgency;
@@ -221,9 +238,8 @@ public class Job implements I_PROCESS {
 		}
 
 		String sql =
-		"INSERT INTO Jobs (AccountNumber, NumberOfTasks, DateOfJob, JobDeadline, JobUrgency, Price, TasksCompleted, IsCompleted) Values("
-		+ AccountNumber + ", " + NumberOfTasks + ", \"" + DateOfJob + "\", \"" + JobDeadline + "\", \"" + Urgency + "\", " + JobPrice + ", "
-		+ TasksCompleted + ", " + IsCompleted + ");";
+		"INSERT INTO Jobs (AccountNumber, NumberOfTasks, DateOfJob, JobDeadline, JobUrgency, Price) Values("
+		+ AccountNumber + ", " + NumberOfTasks + ", \"" + DateOfJob + "\", \"" + JobDeadline + "\", \"" + Urgency + "\", " + JobPrice + ");";
 		System.out.println(sql);
 		Statement statement = connection.createStatement();
 		statement.executeUpdate(sql);
@@ -267,17 +283,17 @@ public class Job implements I_PROCESS {
 
 	public static void main(String[] args) throws SQLException {
 
-//		Job job = new Job(1, "normal");
+		Job job = new Job(7, "normal");
+
 		// adds users to a list
 		ArrayList<String[]> al = PROCESS.Job.GetJobList();
-		System.out.println();
 		// test to ensure correct alist format
-		for(String[] col: al){
-			for (String a: col){
-				System.out.println(a);
-
-			}
-		}
+//		for(String[] col: al){
+//			for (String a: col){
+//				System.out.println(a);
+//
+//			}
+//		}
 	}
 
 	/**
@@ -293,5 +309,7 @@ public class Job implements I_PROCESS {
 		// TODO - implement Job.Job
 		throw new UnsupportedOperationException();
 	}
+
+
 
 }

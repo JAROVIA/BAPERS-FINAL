@@ -1,5 +1,7 @@
 package PROCESS;
 
+import javafx.collections.ObservableList;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,7 +36,26 @@ public class TaskInAJob {
 		}
 	}
 
-	public TaskInAJob(int jobID, int taskID, int accountNumber, String taskStartTime, String employeeCompletedBy, int shiftCompleted, String jobUrgency, String taskDeadline, int actualDuration, int isCompleted) throws SQLException {
+
+	// 1 INSERT INTO Jobs 2 INSERT INTO TIJ 3 UPDATE TIJ
+	public static void UpdateJob(String columnToEdit, String newValue, String identifierOfTableToEdit, String identifierCurrentValue) throws SQLException {
+		String sql = "UPDATE TaskInAJob SET " + columnToEdit + " = " + newValue + " WHERE " + identifierOfTableToEdit + " = " + identifierCurrentValue + ";" ;
+		System.out.println(sql);
+		Statement statement = connection.createStatement();
+		statement.executeUpdate(sql);
+	}
+
+	// 1 INSERT INTO Jobs 2 INSERT INTO TIJ 3 UPDATE TIJ
+	public static void UpdateJob(String columnToEdit, int newValue, String identifierOfTableToEdit, int identifierCurrentValue) throws SQLException {
+		String sql = "UPDATE TaskInAJob SET " + columnToEdit + " = " + newValue + " WHERE " + identifierOfTableToEdit + " = " + identifierCurrentValue + ";" ;
+		System.out.println(sql);
+		System.out.println(sql);
+		Statement statement = connection.createStatement();
+		statement.executeUpdate(sql);	}
+
+	// 1 INSERT INTO Jobs 2 INSERT INTO TIJ 3 UPDATE TIJ
+	// you must create the object
+	public TaskInAJob(int jobID, int taskID, int accountNumber, String jobUrgency) throws SQLException {
 
 		this.jobID = jobID;
 		this.taskID = taskID;
@@ -76,27 +97,73 @@ public class TaskInAJob {
 			taskDeadline = JobDeadlineDate.toString();
 		}
 
+		// public TaskInAJob(int jobID, int taskID, int accountNumber, String jobUrgency) throws SQLException {
 
 		String sql =
-		"INSERT INTO TaskInAJob (JobID, TaskID, AccountNumber, TaskStartTime, EmployeeCompletedBy, ShiftCompleted, JobUrgency, TaskDeadline, ActualDuration, isCompleted ) VALUES (" + jobID + ", " + taskID + ", " + accountNumber + ", \"" + taskStartTime + "\", \"" + employeeCompletedBy	+ "\", " + shiftCompleted + ", \"" + jobUrgency + "\", \"" + taskDeadline + "\", " + actualDuration + ", " + isCompleted + ");";
+				"INSERT INTO TaskInAJob (JobID, TaskID, AccountNumber, JobUrgency) VALUES ("
+						+ Job.getAccountNumber()+ ", " + taskID + ", " + accountNumber + ", \"" + jobUrgency + "\"" + ");";
+
+
 		System.out.println(sql);
 		Statement statement = connection.createStatement();
 		statement.executeUpdate(sql);
 	}
 
-	public static void main(String[] args) throws SQLException {
-//		TaskInAJob tij = new TaskInAJob(1,1,1,"asd","af", 2,"urgent","saf", 2,0);
+	// 1 INSERT INTO Jobs 2 INSERT INTO TIJ 3 UPDATE TIJ
+	// you must create the object
+	public static String TaskInAJobString(int JobID, int taskID, int accountNumber, String jobUrgency) throws SQLException {
 
-		ArrayList<String[]> al = TaskInAJob.GetTIJList();
-		System.out.println();
-		// test to ensure correct alist format
-		for(String[] col: al){
-			for (String a: col){
-				System.out.println(a);
+		String sql =
+		"INSERT INTO TaskInAJob (JobID, TaskID, AccountNumber, JobUrgency) VALUES ("
+		+ Job.getAccountNumber() + ", " + TaskDescription.getTaskIDStatic() + ", " + Job.getAccountNumber() + ", \"" + Job.getUrgency() + "\"" + ");";
 
-			}
-		}
+		return sql;
 	}
+
+	// 1 INSERT INTO Jobs 2 INSERT INTO TIJ 3 UPDATE TIJ
+	public static void EnterTasksIntoJob(ObservableList<TaskDescription> data){
+		ArrayList<String> taskInsertsToJob = new ArrayList<>();
+//		taskInsertsToJob.add(TaskInAJobString(job.getJobID(), TaskDescription.getTaskIDStatic(), Job.getAccountNumber(), Job.getUrgency()));
+//	data.add()
+
+
+// todo EnterTasksIntoJob
+//		data.add(TaskDescription)
+//		data.add()
+	}
+
+	public static void main(String[] args) throws SQLException {
+
+//		TaskInAJob tij = new TaskInAJob(5,6,7,"URRRGEEENT");
+//		String pls = TaskInAJob(1, 1,Job.getAccountNumber(),"urgent");
+//		System.out.println(pls);
+
+		// create the job
+		Job job = new Job(9, "normal");
+
+		// create a list of taskInserts for the job
+		ArrayList<String> taskInsertsToJob = new ArrayList<>();
+		taskInsertsToJob.add(TaskInAJobString(job.getJobID(), TaskDescription.getTaskIDStatic(), Job.getAccountNumber(), Job.getUrgency()));
+		for(String t : taskInsertsToJob){
+			System.out.println(t);
+
+		}
+
+		//execute the list of job inserts
+//		TaskInAJob.TaskInAJobString(job.getJobID(), TaskDescription.getTaskIDStatic(), Job.getUrgency())
+
+//		TaskInAJob.UpdateJob("TaskPrice", 76, "TaskID", 1);
+//		ArrayList<String[]> al = TaskInAJob.GetTIJList();
+//		System.out.println();
+//		// test to ensure correct alist format
+//		for(String[] col: al){
+//			for (String a: col){
+//				System.out.println(a);
+//
+//			}
+//		}
+	}
+
 
 	public static ArrayList<String[]> GetTIJList() throws SQLException {
 		Statement statement = connection.createStatement();

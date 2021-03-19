@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class TaskDescription {
 
-	private int TaskID;
+	private static int TaskID;
 	private String TaskLocation;
 	private float TaskPrice;
 	private String DescriptionOfTask;
@@ -26,6 +26,11 @@ public class TaskDescription {
 		return Duration;
 	}
 
+	public static int getTaskIDStatic() {
+		return TaskID;
+	}
+
+
 	static String url = "jdbc:mysql://localhost:3306/Bapers";
 	static String username = "jaroviadb";
 	static String password = "Jarovia123#@!";
@@ -42,7 +47,7 @@ public class TaskDescription {
 
 
 	public float RetrievePrice() {
-		// TODO - implement TaskDescription.RetrievePrice
+		// TODO this needs to be a method on the page that autocalcs the price using Java
 		throw new UnsupportedOperationException();
 	}
 
