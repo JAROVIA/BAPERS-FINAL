@@ -23,7 +23,7 @@
             <Image url="@../images/BAPERS Logo Final.png" />
          </image>
       </ImageView>
-      <Label layoutX="925.0" layoutY="14.0" prefHeight="36.0" prefWidth="239.0" style="-fx-border-color: Black;" text="Welcome [logged in user]" textAlignment="RIGHT">
+      <Label fx:id="welcomeLabel" layoutX="925.0" layoutY="14.0" prefHeight="36.0" prefWidth="239.0" style="-fx-border-color: Black;" text="Welcome [logged in user]" textAlignment="RIGHT">
          <font>
             <Font size="15.0" />
          </font>
@@ -33,34 +33,38 @@
             <Font size="27.0" />
          </font>
       </Text>
-      <TableView layoutX="14.0" layoutY="240.0" prefHeight="353.0" prefWidth="945.0" style="-fx-border-color: -black;">
+      <TableView fx:id="tasksInJobTable" layoutX="14.0" layoutY="240.0" prefHeight="353.0" prefWidth="945.0" style="-fx-border-color: -black;">
          <columns>
             <TableColumn prefWidth="81.3333158493042" text="Job ID" />
             <TableColumn prefWidth="91.99999237060547" text="Task ID" />
-            <TableColumn prefWidth="246.00001525878906" text="Department" />
-            <TableColumn prefWidth="124.66665649414062" text="Start Time" />
-            <TableColumn prefWidth="118.0" text="Time Taken" />
-            <TableColumn prefWidth="127.333251953125" text="Price" />
-            <TableColumn prefWidth="154.6666259765625" text="Completed By" />
+            <TableColumn prefWidth="112.50187683105469" text="Account number" />
+            <TableColumn prefWidth="85.48944091796875" text="Start Time" />
+            <TableColumn prefWidth="177.822509765625" text="Completed By" />
+            <TableColumn prefWidth="85.6820068359375" text="Shift completed" />
+            <TableColumn prefWidth="75.0" text="urgency" />
+            <TableColumn prefWidth="89.8876953125" text="Actual duration" />
+            <TableColumn prefWidth="126.92535400390625" text="is completed" />
+            <TableColumn prefWidth="91.00006103515625" text="Deadline" />
          </columns>
       </TableView>
       <Button layoutX="1098.0" layoutY="241.0" mnemonicParsing="false" style="-fx-background-color: -white;" />
       <Button layoutX="1180.0" layoutY="240.0" mnemonicParsing="false" style="-fx-background-color: -white;" />
-      <Button layoutX="976.0" layoutY="266.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="145.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Start Task">
+      <Button fx:id="startButton" layoutX="976.0" layoutY="266.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="145.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Start Task">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Button layoutX="1131.0" layoutY="266.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="137.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Complete Task">
+      <Button fx:id="completeButton" layoutX="1131.0" layoutY="266.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="137.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Complete Task">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <ProgressBar layoutX="499.0" layoutY="677.0" prefHeight="25.0" prefWidth="281.0" progress="0.38" />
+      <ProgressBar fx:id="progressBar" layoutX="499.0" layoutY="677.0" prefHeight="25.0" prefWidth="281.0" progress="0.38" />
       <Text layoutX="542.0" layoutY="650.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Segmented Progress View">
          <font>
             <Font size="17.0" />
          </font>
       </Text>
+      <Button fx:id="cancelButton" layoutX="996.0" layoutY="343.0" mnemonicParsing="false" text="cancel" />
    </children>
 </AnchorPane>

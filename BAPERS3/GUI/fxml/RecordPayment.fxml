@@ -46,7 +46,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:controller="GUI.RecordPaymentScreen" prefHeight="439.0" prefWidth="733.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="439.0" prefWidth="733.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.RecordPaymentScreen">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -89,17 +89,17 @@
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="446.0" prefWidth="744.0" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
       <children>
-            <Label layoutX="495.0" layoutY="4.0" prefHeight="21.0" prefWidth="167.0" style="-fx-border-color: Black;" text="Welcome [logged in user]" textAlignment="RIGHT">
+            <Label fx:id="welcomeLabel" layoutX="495.0" layoutY="4.0" prefHeight="21.0" prefWidth="167.0" style="-fx-border-color: Black;" text="Welcome [logged in user]" textAlignment="RIGHT">
                <font>
                   <Font size="9.0" />
                </font>
             </Label>
-            <Button layoutX="668.0" layoutY="4.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="59.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Logout">
+            <Button fx:id="logoutButton" layoutX="668.0" layoutY="4.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="59.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Logout">
                <font>
                   <Font name="System Bold" size="9.0" />
                </font>
             </Button>
-            <ImageView fitHeight="54.0" fitWidth="194.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="homeButton" fitHeight="54.0" fitWidth="194.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/BapersLogo.jpg" />
                </image>

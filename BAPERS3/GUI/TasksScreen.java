@@ -1,5 +1,6 @@
 package GUI;
 
+import PROCESS.TaskDescription;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -11,6 +12,7 @@ import javafx.scene.control.TableView;
 import javafx.util.Callback;
 
 import java.lang.reflect.Array;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class TasksScreen extends Window {
@@ -46,12 +48,15 @@ public class TasksScreen extends Window {
 
 	public void onShow(){
 		super.onShow();
-		ArrayList<String[]> test = new ArrayList<>();
-		test.add(new String[]{"a", "b", "c", "d", "e"});
-		test.add(new String[]{"e", "f", "g", "h", "f"});
+		ArrayList<String[]> list = new ArrayList<>();
+		try {
+			list = TaskDescription.GetTaskList();
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
 		ObservableList<String[]> data = FXCollections.observableArrayList();
 
-		data.addAll(test);
+		data.addAll(list);
 		tasksTable.setItems(data);
 	}
 	/**

@@ -1,8 +1,11 @@
 package GUI;
 
+import PROCESS.TaskDescription;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+
+import java.sql.SQLException;
 
 public class AddNewTaskScreen extends Window {
 
@@ -19,8 +22,15 @@ public class AddNewTaskScreen extends Window {
 	@FXML
 	private Button confirmButton;
 
-	public void onConfirm() {
+	public void onConfirm() throws SQLException {
 		//save task
+		String description = descriptionField.getText();
+		String location = locationField.getText();
+		String duration = durationField.getText();
+		String price = priceField.getText();
+
+		TaskDescription.NewTask(location,Integer.parseInt(price),description,Integer.parseInt(duration));
+
 		procUiController.showScreen("Tasks");
 	}
 
@@ -45,6 +55,12 @@ public class AddNewTaskScreen extends Window {
 		userAllowed = new String[]{ROLE_OFFICE_MANAGER};
 
 		cancelButton.setOnAction(actionEvent -> onCancel());
-		confirmButton.setOnAction(actionEvent -> onConfirm());
+		confirmButton.setOnAction(actionEvent -> {
+			try {
+				onConfirm();
+			} catch (SQLException throwables) {
+				throwables.printStackTrace();
+			}
+		});
 	}
 }
