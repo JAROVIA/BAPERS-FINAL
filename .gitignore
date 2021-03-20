@@ -118,3 +118,4 @@ out/production/BAPERS-FINAL/GUI/images/ReportsIcon.png
 out/production/BAPERS-FINAL/GUI/images/RestoreIcon.jpg
 *.iml
 out/*
+libs/
