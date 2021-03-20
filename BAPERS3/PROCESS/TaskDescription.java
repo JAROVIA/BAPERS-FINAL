@@ -88,6 +88,9 @@ public class TaskDescription {
 		throw new UnsupportedOperationException();
 	}
 
+	/**
+	 * returns an arraylist of all tasks BIPL offers
+	 * */
 	public static ArrayList<String[]> GetTaskList() throws SQLException {
 		Statement statement = connection.createStatement();
 		String sql = "SELECT * FROM " + tablename;
@@ -122,6 +125,9 @@ public class TaskDescription {
 		return arrayList;
 	}
 
+	/**
+	 * Creates a TaskDescription object. Allows get/setMethods to work
+	 */
 	public TaskDescription(String TaskLocation, int TaskPrice, String TaskDescription, int Duration) throws SQLException {
 		this.TaskLocation = TaskLocation;
 		this.TaskPrice = TaskPrice;
@@ -129,7 +135,13 @@ public class TaskDescription {
 		this.Duration = Duration;
 				
 	}
-	
+
+	/**
+	 * Creates a new BIPL task and adds it to the db
+	 *
+	 *
+	 *
+	 * */
 	public static void NewTask(String TaskLocation, int TaskPrice, String TaskDescription, int Duration) throws SQLException {
 		String sql =
 				"INSERT INTO " + tablename + " ( TaskLocation, TaskPrice, TaskDescription, PredictedDuration) "
@@ -138,14 +150,6 @@ public class TaskDescription {
 		statement.executeUpdate(sql);
 	}
 
-	/**
-	 * 
-	 * @param TaskID
-	 * @param TaskLocation
-	 * @param TaskPrice
-	 * @param DecriptionOfTask
-	 * @param Duration
-	 */
 	public static TaskDescription TaskDescription(int TaskID, String TaskLocation, float TaskPrice, String DecriptionOfTask, float Duration) {
 		// TODO - implement TaskDescription.TaskDescription
 		throw new UnsupportedOperationException();

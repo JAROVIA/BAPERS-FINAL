@@ -33,37 +33,21 @@ public class Job implements I_PROCESS {
 		}
 	}
 
-	/**
-	 * 
-	 * @param TaskData
-	 */
 	public boolean AddTaskToJob(String TaskData) {
 		// TODO - implement Job.AddTaskToJob
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param TaskID
-	 */
 	public TaskInAJob RetrieveTasks(int TaskID) {
 		// TODO - implement Job.RetreiveTasks
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param TaskID
-	 */
 	public boolean RemoveTask(int TaskID) {
 		// TODO - implement Job.RemoveTask
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param TaskData
-	 */
 	public boolean UpdateTask(String TaskData) {
 		// TODO - implement Job.UpdateTask
 		throw new UnsupportedOperationException();
@@ -73,10 +57,6 @@ public class Job implements I_PROCESS {
 		return JobID;
 	}
 
-	/**
-	 * 
-	 * @param NewJobID
-	 */
 	public int setJobID(int NewJobID) {
 		// TODO - implement Job.setJobID
 		throw new UnsupportedOperationException();
@@ -87,10 +67,7 @@ public class Job implements I_PROCESS {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param NewJobStatus
-	 */
+
 	public void setJobStatus(String NewJobStatus) {
 		// TODO - implement Job.setJobStatus
 		throw new UnsupportedOperationException();
@@ -107,19 +84,11 @@ public class Job implements I_PROCESS {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param NewUrgency
-	 */
 	public boolean SetUrgency(String NewUrgency) {
 		// TODO - implement Job.SetUrgency
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param JobData
-	 */
 	public boolean StoreJob(String JobData) {
 		// TODO - implement Job.StoreJob
 		throw new UnsupportedOperationException();
@@ -174,10 +143,6 @@ public class Job implements I_PROCESS {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param NumberOfTasks
-	 */
 	public void setNumberOfTasks(int NumberOfTasks) {
 		// TODO - implement Job.setNumberOfTasks
 		throw new UnsupportedOperationException();
@@ -200,7 +165,13 @@ public class Job implements I_PROCESS {
 		Urgency = urgency;
 	}
 
-	// 1 INSERT INTO Jobs 2 INSERT INTO TIJ 3 UPDATE TIJ
+	/**
+	 * Creates a Job object and adds it to the db.
+	 *
+	 * Should run when the confirm button on the page after create job order page is pressed.
+	 *
+	 * Needs the account number and urgency from the page after the create job button is pressed.
+	 * */
 	public Job(int AccountNumber, String Urgency) throws SQLException{
 		this.AccountNumber = AccountNumber;
 		this.Urgency = Urgency;
@@ -244,9 +215,12 @@ public class Job implements I_PROCESS {
 		statement.executeUpdate(sql);
 	}
 
+	/**
+	 * Pulls a list of Jobs from the db
+	 * */
 	public static ArrayList<String[]> GetJobList() throws SQLException {
 		Statement statement = connection.createStatement();
-		String sql = "SELECT * FROM Jobs;";
+		String sql = "SELECT * FROM Jobs;"; /* SELECT * FROM Jobs WHERE IsArchived = 0; */
 		ResultSet resultSet = statement.executeQuery(sql);
 
 		ArrayList<String[]> arrayList = new ArrayList<String[]>();
@@ -295,15 +269,7 @@ public class Job implements I_PROCESS {
 //		}
 	}
 
-	/**
-	 * 
-	 * @param JobData
-	 * @param Normal
-	 * @param Deadline
-	 * @param JobStatus
-	 * @param NumberOfTasks
-	 * @param JobPrice
-	 */
+
 	public static Job Job(int JobData, String Normal, Date Deadline, String JobStatus, int NumberOfTasks, float JobPrice) {
 		// TODO - implement Job.Job
 		throw new UnsupportedOperationException();

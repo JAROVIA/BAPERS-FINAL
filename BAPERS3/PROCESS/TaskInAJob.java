@@ -22,6 +22,9 @@ public class TaskInAJob {
 	private int isCompleted = 0;
 	private static ArrayList<String> sqlStatements = new ArrayList<>();
 
+	/**
+	 * adds to the list of sql insert statements. This runs when you press th insert task button
+	 */
 	public static void addToSqlStatements(String sql) {
 		sqlStatements.add(sql);
 	}
@@ -41,6 +44,13 @@ public class TaskInAJob {
 	}
 
 
+	/**
+	 * When we first add a task to a job the task (within TaskInAJob table) will have default values for some
+	 * columns (EmployeeCompletedBy obviously wont be known) This is to update a job (int).
+	 *
+	 *
+	 *
+	 * */
 	public static void UpdateJob(String columnToEdit, String newValue, String identifierOfTableToEdit, String identifierCurrentValue) throws SQLException {
 		String sql = "UPDATE TaskInAJob SET " + columnToEdit + " = " + newValue + " WHERE " + identifierOfTableToEdit + " = " + identifierCurrentValue + ";" ;
 		System.out.println(sql);
@@ -48,6 +58,12 @@ public class TaskInAJob {
 		statement.executeUpdate(sql);
 	}
 
+	/**
+	 * When we first add a task to a job the task (within TaskInAJob table) will have default values for some
+	 * columns (EmployeeCompletedBy obviously wont be known) This is to update a job (String).
+	 *
+	 *
+	 * */
 	public static void UpdateJob(String columnToEdit, int newValue, String identifierOfTableToEdit, int identifierCurrentValue) throws SQLException {
 
 		// TaskInAJob.UpdateJob("TaskPrice", 76, "TaskID", 1);
@@ -59,7 +75,9 @@ public class TaskInAJob {
 
 	}
 
-	// you must create the object
+	/**
+	 * Creates a TIJ object, adds it to the db. Not really used
+	 * */
 	public TaskInAJob(int jobID, int taskID, int accountNumber, String jobUrgency) throws SQLException {
 
 		this.jobID = jobID;
@@ -77,7 +95,7 @@ public class TaskInAJob {
 		String DateOfJob = date.toString();
 
 		/**
-		 * calendar code built up from https://stackoverflow.com/questions/18733582/calculating-a-future-date#18733637
+		 * calendar code built partially referenced from https://stackoverflow.com/questions/18733582/calculating-a-future-date#18733637
 		 * */
 		// TODO TaskDeadline is not needed
 		if (jobUrgency == "normal"){
@@ -102,28 +120,29 @@ public class TaskInAJob {
 			taskDeadline = JobDeadlineDate.toString();
 		}
 
-		// public TaskInAJob(int jobID, int taskID, int accountNumber, String jobUrgency) throws SQLException {
-
 		String sql =
-				"INSERT INTO TaskInAJob (JobID, TaskID, AccountNumber, JobUrgency) VALUES ("
-						+ Job.getAccountNumber()+ ", " + taskID + ", " + accountNumber + ", \"" + jobUrgency + "\"" + ");";
-
+		"INSERT INTO TaskInAJob (JobID, TaskID, AccountNumber, JobUrgency) VALUES (" + Job.getAccountNumber()
+		+ ", " + taskID + ", " + accountNumber + ", \"" + jobUrgency + "\"" + ");";
 
 		System.out.println(sql);
 		Statement statement = connection.createStatement();
 		statement.executeUpdate(sql);
 	}
 
-	// "insert into tasks", runs when someone presses "insert task"
-	public static void TaskInAJobString(int JobID, int taskID, int accountNumber, String jobUrgency) throws SQLException {
+	/**
+	 * There is an ArrayList with all of the TIJ table inserts. Everytime you rpess the "insert task"
+	 * button, it should call this method, which creates the SQL insert statement and adds it to the
+	 * ArrayList.
+	 *
+	 * */
+	public static void CreateTIJInsertList(int JobID, int taskID, int accountNumber, String jobUrgency) throws SQLException {
+
 		/*possible bug is the taskID not changing when the user switches in the dropdown menu.
 		* solution will be to have each different dropdown call TaskDescription.setTaskID()
 		* and change it to the updated
+		*
+		* Clicking on a task from the dropdown should create a TaskDescription object. This would avoid the bug.
 		* */
-
-		/*Clicking on a task from the dropdown should create a TaskDescription object. This would avoid the bug. */
-
-
 
 		String sql =
 		"INSERT INTO TaskInAJob (JobID, TaskID, AccountNumber, JobUrgency) VALUES ("
@@ -131,10 +150,16 @@ public class TaskInAJob {
 
 		TaskInAJob.addToSqlStatements(sql);
 
-
 	}
 
 	//	This method should be called everytime the user selects insert job
+	/**
+	 * The TIJ class has an ArrayList of INSERT INTO SQL statements. This class
+	 * Loops through the insert statements and will run them all when the
+	 * "save details" button is pressed
+	 *
+	 *
+	 * */
 	public static void EnterTasksIntoJob() throws SQLException {
 
 
@@ -148,12 +173,14 @@ public class TaskInAJob {
 	public static void main(String[] args) throws SQLException {
 
 		Job job = new Job(9, "normal");
-		TaskInAJobString(Job.getJobID(), TaskDescription.getTaskIDStatic(), Job.getAccountNumber(), Job.getUrgency());
+		CreateTIJInsertList(Job.getJobID(), TaskDescription.getTaskIDStatic(), Job.getAccountNumber(), Job.getUrgency());
 		EnterTasksIntoJob();
 
 	}
 
-
+	/**
+	 * returns a list of everything in the TIJ table in the db
+	 * */
 	public static ArrayList<String[]> GetTIJList() throws SQLException {
 		Statement statement = connection.createStatement();
 		String sql = "SELECT * FROM TaskInAJob;";
