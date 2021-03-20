@@ -38,5 +38,6 @@ public class ReportsScreen extends Window {
 	public void initialize(){
 		super.initialize();
 		userAllowed = new String[]{ROLE_OFFICE_MANAGER, ROLE_SHIFT_MANAGER};
+
 	}
 }

@@ -36,6 +36,8 @@ public class CreateJobScreen extends Window {
 	@FXML
 	private Button deleteButton;
 	@FXML
+	private Button cancelButton;
+	@FXML
 	private Label jobPriceLabel;
 	@FXML
 	private TableView<TaskDescription> taskTable;
@@ -59,9 +61,8 @@ public class CreateJobScreen extends Window {
 		throw new UnsupportedOperationException();
 	}
 
-	public void cancel() {
-		// TODO - implement CreateJobScreen.Cancel
-		throw new UnsupportedOperationException();
+	public void onCancel() {
+		procUiController.showScreen("Jobs");
 	}
 
 	public void confirmJob() {
@@ -70,35 +71,22 @@ public class CreateJobScreen extends Window {
 	}
 
 	public void onShow(){
-		list.clear();
+		super.onShow();
 		//get all tasks operable by BIPL
 		try {
-			int i = 0;
 			for(String[] sa : TaskDescription.GetTaskList()){
 				TaskDescription taskDescription = new TaskDescription(sa[1], Integer.parseInt(sa[2]), sa[3], Integer.parseInt(sa[4]));
-				taskDescription.setTaskID(i++);
 				list.add(taskDescription);
 			}
 		} catch(SQLException e){
 			e.printStackTrace();
 		}
 		tasksComboBox.getItems().removeAll(tasksComboBox.getItems());
-			for(TaskDescription t : list){
-				tasksComboBox.getItems().add(t.getTaskID() + ", " + t.getDescriptionOfTask() + ", " + t.getTaskLocation() + ", " + String.format("%.02f",t.getTaskPrice()));
+		for(TaskDescription t : list){
+			tasksComboBox.getItems().add(t.getTaskID() + ", " + t.getDescriptionOfTask() + ", " + t.getTaskLocation() + ", " + String.format("%.02f",t.getTaskPrice()));
 		}
 		data.clear();
 		taskTable.setItems(data);
-	}
-
-	public static void main(String[] args) throws SQLException {
-//		ArrayList<TaskDescription> list = new ArrayList<>();
-//
-//		int i = 0;
-//		for(String[] sa : TaskDescription.GetTaskList()){
-//			TaskDescription taskDescription = new TaskDescription(sa[1], Integer.parseInt(sa[2]), sa[3], Integer.parseInt(sa[4]));
-//			taskDescription.setTaskID(i++);
-//			list.add(taskDescription);
-//		}
 	}
 
 	public void addTaskToJob(){
@@ -141,10 +129,12 @@ public class CreateJobScreen extends Window {
 		super.initialize();
 		data = FXCollections.observableArrayList(new ArrayList<>());
 
+		userAllowed = new String[]{ROLE_OFFICE_MANAGER, ROLE_SHIFT_MANAGER, ROLE_RECEPTIONIST};
 		urgencyComboBox.getItems().removeAll();
 		urgencyComboBox.getItems().addAll("3 hours", "6 hours", "24 hours");
 		deleteButton.setOnAction(actionEvent -> deleteTask());
 		insertTaskButton.setOnAction(actionEvent -> addTaskToJob());
+		cancelButton.setOnAction(actionEvent -> onCancel());
 
 		taskIdColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TaskDescription, Number>, ObservableValue<Number>>() {
 			@Override

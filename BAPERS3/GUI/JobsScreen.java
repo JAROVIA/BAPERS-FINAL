@@ -1,6 +1,8 @@
 package GUI;
 
 import PROCESS.*;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,7 +10,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.util.Callback;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class JobsScreen extends Window {
@@ -20,9 +24,9 @@ public class JobsScreen extends Window {
 	@FXML
 	private Button recordPaymentButton;
 	@FXML
-	private TextField SearchJob;
+	private TextField searchField;
 	@FXML
-	private TableView<Job> jobsTable;
+	private TableView<String[]> jobsTable;
 	@FXML
 	private TableColumn<Job, Number> jobIdColumn;
 	@FXML
@@ -52,23 +56,36 @@ public class JobsScreen extends Window {
 		throw new UnsupportedOperationException();
 	}
 
-	private void toPayment(){acctUiController.showScreen("RecordPayment");}
+	private void toPayment() {
+		String[] jobData = jobsTable.getSelectionModel().getSelectedItem();
+		if (jobData != null) {
+			procUiController.showScreen("RecordPayment");
+		}
+	}
 
 	protected void toCreateJobSetup(){
 		procUiController.showScreen("CreateJobSetup");
 	}
 
 	protected void toProcessTasks(){
-		procUiController.showScreen("ProgressTasks");
+		String[] jobData = jobsTable.getSelectionModel().getSelectedItem();
+		if(jobData != null && jobData[7].equals("0")) {
+			procUiController.showScreen("ProgressTasks");
+		}
 	}
 
 	@Override
 	public void onShow(){
 		super.onShow();
-		ArrayList<Job> list = new ArrayList<>();
+		ArrayList<String[]> list = new ArrayList<>();
 		//get list of jobs here
+		try {
+			list = Job.GetJobList();
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
 
-		ObservableList<Job> data = FXCollections.observableArrayList();
+		ObservableList<String[]> data = FXCollections.observableArrayList();
 		data.addAll(list);
 		jobsTable.setItems(data);
 	}
@@ -83,6 +100,16 @@ public class JobsScreen extends Window {
 		processTasksButton.setOnAction(actionEvent -> toProcessTasks());
 		userAllowed = new String[]{ROLE_OFFICE_MANAGER, ROLE_SHIFT_MANAGER, ROLE_RECEPTIONIST, ROLE_TECHNICIAN_COPY, ROLE_TECHNICIAN_DEV, ROLE_TECHNICIAN_PACK, ROLE_TECHNICIAN_FIN};
 
+		for (int i = 0; i < jobsTable.getColumns().size(); i++) {
+			TableColumn tc = jobsTable.getColumns().get(i);
+			int j = i;
+			tc.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<String[], String>, ObservableValue<String>>() {
+				@Override
+				public ObservableValue<String> call(TableColumn.CellDataFeatures<String[], String> property) {
+					return new SimpleStringProperty((property.getValue()[j]));
+				}
+			});
+		}
 		/*
 		accountNumberColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Job, Number>, ObservableValue<Number>>() {
 			@Override
