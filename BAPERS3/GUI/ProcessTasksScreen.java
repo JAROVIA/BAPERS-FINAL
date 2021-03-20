@@ -1,45 +1,30 @@
 package GUI;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableView;
 
 public class ProcessTasksScreen extends Window {
 
-	/*
-	private Button LogOutButton;
-	private Button StartTaskButton;
-	private Button CompleteTaskButton;
+	@FXML
+	private Button startButton;
+	@FXML
+	private Button completeButton;
+	@FXML
+	private TableView<String[]> JobProgressTable;
+	@FXML
+	private ProgressBar progressBar;
 
-	 */
-	private TableView JobProgressTable;
-	private ProgressBar ProgressBar;
-
-	public void OnClick() {
-		// TODO - implement JobProgressScreen.OnClick
-		throw new UnsupportedOperationException();
+	public void onShow(){
+		super.onShow();
 	}
-
-	public void LogOut() {
-		// TODO - implement JobProgressScreen.LogOut
-		throw new UnsupportedOperationException();
-	}
-
 	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param xSize
-	 * @param ySize
-	 * @param icon
-	 * @param Text
-	 * @param Button
+	 *
 	 */
-	/*
-	public static JobProgressScreen JobProgressScreen(int x, int y, int xSize, int ySize, string icon, string Text, Button Button) {
-		// TODO - implement JobProgressScreen.JobProgressScreen
-		throw new UnsupportedOperationException();
+	@FXML
+	public void initialize(){
+		super.initialize();
+		userAllowed = new String[]{ROLE_OFFICE_MANAGER, ROLE_SHIFT_MANAGER, ROLE_TECHNICIAN_COPY, ROLE_TECHNICIAN_DEV, ROLE_TECHNICIAN_PACK, ROLE_TECHNICIAN_FIN};
 	}
-
-	 */
-
 }

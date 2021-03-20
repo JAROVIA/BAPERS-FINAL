@@ -21,7 +21,7 @@ public class CustomerAccountScreen extends Window {
 	@FXML
 	private TextField SearchCustomerTextArea;
 	@FXML
-	private TableView customerAccountTable;
+	private TableView<CustomerAccountDetails> customerAccountTable;
 	@FXML
 	private TableColumn<CustomerAccountDetails, Number> accountNumberColumn;
 	@FXML
@@ -50,7 +50,7 @@ public class CustomerAccountScreen extends Window {
 		throw new UnsupportedOperationException();
 	}
 
-	public void DeleteCustomer() {
+	public void deleteCustomer() {
 		// TODO - implement CustomerAccountScreen.DeleteCustomer
 		throw new UnsupportedOperationException();
 	}
@@ -59,30 +59,31 @@ public class CustomerAccountScreen extends Window {
 	 * 
 	 * @param CustomerAccDetails
 	 */
-	public CustomerAccountDetails SearchCustomerAcc(String CustomerAccDetails) {
+	public CustomerAccountDetails searchCustomerAcc(String CustomerAccDetails) {
 		// TODO - implement CustomerAccountScreen.SearchCustomerAcc
 		throw new UnsupportedOperationException();
 	}
 
-	public CustomerAccountDetails RetrieveCustomer() {
+	public CustomerAccountDetails retrieveCustomer() {
 		// TODO - implement CustomerAccountScreen.RetrieveCustomer
 		throw new UnsupportedOperationException();
 	}
 
-	public void toEditCustomer(){
-		acctUiController.getMain().showScreen("EditCustomerDetails");
+	private void toEditCustomer(){
+		acctUiController.showScreen("EditCustomerDetails");
 	}
 
-	public void toRegisterNewCustomer(){
-		acctUiController.getMain().showScreen("RegisterNewCustomer");
+	private void toRegisterNewCustomer(){
+		acctUiController.showScreen("RegisterNewCustomer");
 	}
 
-	public void toProcessTasks(){
-		acctUiController.getMain().showScreen("ProgressTasks");
+	private void toProcessTasks(){
+		acctUiController.showScreen("ProgressTasks");
 	}
 
 	@Override
 	public void onShow(){
+		super.onShow();
 		ArrayList<CustomerAccountDetails> list = new ArrayList<>();
 		//TODO assign the customer account details list here
 
@@ -97,6 +98,7 @@ public class CustomerAccountScreen extends Window {
 	@FXML
 	public void initialize(){
 		super.initialize();
+		userAllowed = new String[]{ROLE_OFFICE_MANAGER, ROLE_SHIFT_MANAGER, ROLE_RECEPTIONIST};
 		editCustomerButton.setOnAction(actionEvent -> toEditCustomer());
 		processTasksButton.setOnAction(actionEvent -> toProcessTasks());
 		registerNewCustomerButton.setOnAction(actionEvent -> toRegisterNewCustomer());

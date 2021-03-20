@@ -152,7 +152,7 @@
             <Button layoutX="754.0" layoutY="359.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="35.0" style="-fx-background-color: White;" />
             <Button fx:id="editCustomerButton" layoutX="662.0" layoutY="200.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="50.0" style="-fx-background-color: -white;">
                <graphic>
-                  <ImageView fitHeight="55.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView  fitHeight="55.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/Edit-Icon.png" />
                      </image>

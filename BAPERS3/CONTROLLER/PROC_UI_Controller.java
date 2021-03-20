@@ -1,10 +1,13 @@
 package CONTROLLER;
 
 import ACCOUNT.*;
+import ADMIN.UserAccount;
 import GUI.*;
 import PROCESS.*;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PROC_UI_Controller {
 
@@ -23,14 +26,20 @@ public class PROC_UI_Controller {
 	private CreateJobScreen createJobScreen;
 	private String createJobFxml = "CreateJobOrder";
 
+	private CreateJobSetupScreen createJobSetupScreen;
+	private String createJobSetupFxml = "CreateJobSetup";
+
 	private EditExistingTaskScreen editExistingTaskScreen;
-	private String editExistingTasks = "EditExistingTasks";
+	private String editExistingTasksFxml = "EditExistingTasks";
 
 	private ProcessTasksScreen processTasksScreen;
 	private String processTasksFxml = "ProgressTasks";
 
+	private Map<String, Window> screens;
+
 	private I_PROCESS job;
-	private TaskDescription taskDescription;
+
+	private TaskDescription editingTaskDescription;
 
 	/**
 	 * 
@@ -138,64 +147,57 @@ public class PROC_UI_Controller {
 		throw new UnsupportedOperationException();
 	}
 
-	public JobsScreen getJobsScreen() {
-		return jobsScreen;
+	public TaskDescription getEditingTaskDescription() {
+		return editingTaskDescription;
 	}
 
-	public TasksScreen getTasksScreen() {
-		return tasksScreen;
+	public void setEditingTaskDescription(TaskDescription editingTaskDescription) {
+		this.editingTaskDescription = editingTaskDescription;
 	}
 
-	public CreateJobScreen getCreateJobScreen() {
-		return createJobScreen;
+	public UserAccount getLoggedInUser(){
+		return main.getAdminUiController().getLoggedInUser();
 	}
 
-	public ProcessTasksScreen getJobProgressScreen() {
-		return processTasksScreen;
+	public void showScreen(String name){
+		main.showScreen(name);
 	}
 
-	public AddNewTaskScreen getAddNewTaskScreen() {
-		return addNewTaskScreen;
-	}
-
-	public EditExistingTaskScreen getUpdateExistingTaskScreen() {
-		return editExistingTaskScreen;
-	}
-
-	public Main getMain() {
-		return main;
+	public Window getScreen(String name){
+		return screens.get(name);
 	}
 
 	public PROC_UI_Controller(Main main) throws IOException {
-		// TODO - implement PROC_UI_Controller.PROC_UI_Controller
-		// TODO instantiate the gui
 
 		this.main = main;
+		//map to match string names to respective gui class for easier lookup
+		screens = new HashMap<>();
 
 		jobsScreen = (JobsScreen) Window.newGuiFromFxml(jobFxml);
-		main.addScreen(jobFxml, jobsScreen.getParent());
-		jobsScreen.setProcUiController(this);
+		screens.put(jobFxml, jobsScreen);
 
 		tasksScreen = (TasksScreen) Window.newGuiFromFxml(taskFxml);
-		main.addScreen(taskFxml, tasksScreen.getParent());
-		tasksScreen.setProcUiController(this);
+		screens.put(taskFxml, tasksScreen);
 
 		addNewTaskScreen = (AddNewTaskScreen) Window.newGuiFromFxml(newTaskFxml);
-		main.addScreen(newTaskFxml, addNewTaskScreen.getParent());
-		addNewTaskScreen.setProcUiController(this);
+		screens.put(newTaskFxml, addNewTaskScreen);
 
 		createJobScreen = (CreateJobScreen) Window.newGuiFromFxml(createJobFxml);
-		main.addScreen(createJobFxml, createJobScreen.getParent());
-		createJobScreen.setProcUiController(this);
+		screens.put(createJobFxml, createJobScreen);
 
-		editExistingTaskScreen = (EditExistingTaskScreen) Window.newGuiFromFxml(editExistingTasks);
-		main.addScreen(editExistingTasks, editExistingTaskScreen.getParent());
-		editExistingTaskScreen.setProcUiController(this);
+		createJobSetupScreen = (CreateJobSetupScreen) Window.newGuiFromFxml(createJobSetupFxml);
+		screens.put(createJobSetupFxml, createJobSetupScreen);
+
+		editExistingTaskScreen = (EditExistingTaskScreen) Window.newGuiFromFxml(editExistingTasksFxml);
+		screens.put(editExistingTasksFxml, editExistingTaskScreen);
 
 		processTasksScreen = (ProcessTasksScreen) Window.newGuiFromFxml(processTasksFxml);
-		main.addScreen(processTasksFxml, processTasksScreen.getParent());
-		processTasksScreen.setProcUiController(this);
+		screens.put(processTasksFxml, processTasksScreen);
 
+		for(Map.Entry<String, Window> entry : screens.entrySet()){
+			main.addScreen(entry.getKey(), entry.getValue().getParent(), "PROC");
+			entry.getValue().setProcUiController(this);
+		}
 	}
 
 }

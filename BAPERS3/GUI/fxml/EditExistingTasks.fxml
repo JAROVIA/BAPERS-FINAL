@@ -17,8 +17,8 @@
             <Font size="15.0" />
          </font>
       </Button>
-      <TextField layoutX="473.0" layoutY="307.0" prefHeight="36.0" prefWidth="337.0" promptText="Enter Task Description" style="-fx-border-color: black;" />
-      <TextField layoutX="471.0" layoutY="364.0" prefHeight="36.0" prefWidth="337.0" promptText="Edit Tasl Location" style="-fx-border-color: black;" />
+      <TextField fx:id="descriptionField" layoutX="473.0" layoutY="307.0" prefHeight="36.0" prefWidth="337.0" promptText="Enter Task Description" style="-fx-border-color: black;" />
+      <TextField fx:id="locationField" layoutX="471.0" layoutY="364.0" prefHeight="36.0" prefWidth="337.0" promptText="Edit Tasl Location" style="-fx-border-color: black;" />
       <ImageView fx:id="homeButton" fitHeight="219.0" fitWidth="463.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/BAPERS Logo Final.png" />
@@ -29,13 +29,13 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <PasswordField layoutX="471.0" layoutY="420.0" prefHeight="36.0" prefWidth="337.0" promptText="Edit Task Price" style="-fx-border-color: black;" />
+      <PasswordField fx:id="priceField" layoutX="471.0" layoutY="420.0" prefHeight="36.0" prefWidth="337.0" promptText="Edit Task Price" style="-fx-border-color: black;" />
       <Text layoutX="476.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UPDATE EXISTING TASK" textAlignment="CENTER" wrappingWidth="326.66658528645826">
          <font>
             <Font size="27.0" />
          </font>
       </Text>
-      <PasswordField layoutX="471.0" layoutY="475.0" prefHeight="36.0" prefWidth="337.0" promptText="Edit Task Duration" style="-fx-border-color: black;" />
+      <PasswordField fx:id="durationField" layoutX="471.0" layoutY="475.0" prefHeight="36.0" prefWidth="337.0" promptText="Edit Task Duration" style="-fx-border-color: black;" />
       <Button fx:id="confirmButton" layoutX="656.0" layoutY="561.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="138.0" style="-fx-background-color: #95ed82; -fx-border-color: Black;" text="Confirm Changes">
          <font>
             <Font name="System Bold" size="13.0" />

@@ -5,11 +5,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 public class ActiveJobScreen extends Window {
-	/*
-	private Button ViewJobProgressButton;
-	private Button CreateJobButton;
-	private Button LogOutButton;
-	*/
+
+	//TODO - delete this class, same as jobs screen
+
 	@FXML
 	private TableView JobsTable;
 	private TextField SearchAccountTextArea;

@@ -25,7 +25,7 @@
             <Image url="@../images/BAPERS Logo Final.png" />
          </image>
       </ImageView>
-      <Button layoutX="597.0" onAction="#SaveUser" layoutY="646.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Submit">
+      <Button fx:id="submitButton" layoutX="683.0" layoutY="645.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Submit">
          <font>
             <Font size="15.0" />
          </font>
@@ -47,5 +47,10 @@
             <Image url="@../images/Register-New-Customer-User-Icon.png" />
          </image>
       </ImageView>
+      <Button fx:id="cancelButton" layoutX="498.0" layoutY="643.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="cancel">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

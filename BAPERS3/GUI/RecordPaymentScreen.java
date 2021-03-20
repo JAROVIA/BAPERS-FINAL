@@ -1,57 +1,45 @@
 package GUI;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 public class RecordPaymentScreen extends Window {
 
-	//private Button LogOutButton;
-	private TextField FinalPriceTextArea;
-	private TextField CardNumberTextArea;
-	private TextField NameOnCardTextArea;
-	private ComboBox PaymentMethodDropDown;
-	/*
-	private Button CancelRecordButton;
-	private Button ConfirmRecordButton;
+	@FXML
+	private TextField priceField;
+	@FXML
+	private TextField cardNumberField;
+	@FXML
+	private TextField cardNameField;
+	@FXML
+	private ComboBox<String> paymentBox;
+	@FXML
+	private Button cancelButton;
+	@FXML
+	private Button confirmButton;
 
-	 */
-
-	public void OnClick() {
-		// TODO - implement RecordPaymentScreen.OnClick
-		throw new UnsupportedOperationException();
-	}
-
-	public void SavePayment() {
+	public void savePayment() {
 		// TODO - implement RecordPaymentScreen.SavePayment
 		throw new UnsupportedOperationException();
 	}
 
-	public void CancelRecord() {
+	public void cancelRecord() {
 		// TODO - implement RecordPaymentScreen.CancelRecord
 		throw new UnsupportedOperationException();
 	}
 
-	public String RetrieveTextArea() {
-		// TODO - implement RecordPaymentScreen.RetrieveTextArea
-		throw new UnsupportedOperationException();
+	public void onShow(){
+		super.onShow();
 	}
 
 	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param xSize
-	 * @param ySize
-	 * @param icon
-	 * @param Text
-	 * @param Button
+	 *
 	 */
-	/*
-	public static RecordPaymentScreen RecordPaymentScreen(int x, int y, int xSize, int ySize, string icon, string Text, Button Button) {
-		// TODO - implement RecordPaymentScreen.RecordPaymentScreen
-		throw new UnsupportedOperationException();
+	@FXML
+	public void initialize(){
+		super.initialize();
+		userAllowed = new String[]{ROLE_OFFICE_MANAGER, ROLE_SHIFT_MANAGER, ROLE_RECEPTIONIST};
 	}
-
-	 */
-
 }

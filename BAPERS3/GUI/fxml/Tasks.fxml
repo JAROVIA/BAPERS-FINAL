@@ -22,7 +22,7 @@
             <Image url="@../images/BAPERS Logo Final.png" />
          </image>
       </ImageView>
-      <Label layoutX="925.0" layoutY="14.0" prefHeight="36.0" prefWidth="239.0" style="-fx-border-color: Black;" text="Welcome [logged in user]" textAlignment="RIGHT">
+      <Label fx:id="welcomeLabel" layoutX="925.0" layoutY="14.0" prefHeight="36.0" prefWidth="239.0" style="-fx-border-color: Black;" text="Welcome [logged in user]" textAlignment="RIGHT">
          <font>
             <Font size="15.0" />
          </font>
@@ -32,7 +32,7 @@
             <Font size="27.0" />
          </font>
       </Text>
-      <TableView layoutX="14.0" layoutY="240.0" prefHeight="496.0" prefWidth="1065.0" style="-fx-border-color: -black;">
+      <TableView fx:id="tasksTable" layoutX="14.0" layoutY="240.0" prefHeight="496.0" prefWidth="1065.0" style="-fx-border-color: -black;">
          <columns>
             <TableColumn prefWidth="82.00000286102295" text="Task ID" />
             <TableColumn prefWidth="567.3332595825195" text="Task Description" />

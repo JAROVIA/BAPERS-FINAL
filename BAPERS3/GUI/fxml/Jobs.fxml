@@ -134,7 +134,7 @@
                   <Font size="9.0" />
                </font>
             </Button>
-            <Button layoutX="744.0" layoutY="158.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="35.0" style="-fx-background-color: White;">
+            <Button fx:id="recordPaymentButton" layoutX="744.0" layoutY="158.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="35.0" style="-fx-background-color: White;">
                <graphic>
                   <ImageView fitHeight="55.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>

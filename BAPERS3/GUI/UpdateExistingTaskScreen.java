@@ -1,50 +1,47 @@
 package GUI;
 
 import PROCESS.*;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 public class UpdateExistingTaskScreen extends Window {
 
-	private TextField TaskDescription;
-	private TextField TaskLocation;
-	private TextField TaskPrice;
-	private TextField TaskDuration;
-	/*
-	private Button ConfirmChanges;
-	private Button CancelChanges;
-	private Button LogOut;
+	//TODO - delete this class, same as edit existing task
 
-	 */
+	@FXML
+	private TextField descriptionField;
+	@FXML
+	private TextField locationField;
+	@FXML
+	private TextField priceField;
+	@FXML
+	private TextField durationField;
+	@FXML
+	private Button confirmButton;
+	@FXML
+	private Button cancelButton;
 
-	public void OnClick() {
-		// TODO - implement UpdateExistingTaskScreen.OnClick
-		throw new UnsupportedOperationException();
-	}
-
-	public TaskInAJob RetrieveTask() {
+	public TaskInAJob retrieveTask() {
 		// TODO - implement UpdateExistingTaskScreen.RetrieveTask
 		throw new UnsupportedOperationException();
 	}
 
-	public void ConfirmChanges() {
+	private void onConfirm() {
 		// TODO - implement UpdateExistingTaskScreen.ConfirmChanges
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param xSize
-	 * @param ySize
-	 * @param icon
-	 */
-	/*
-	public static UpdateExistingTaskScreen UpdateExistingTaskScreen(int x, int y, int xSize, int ySize, string icon) {
-		// TODO - implement UpdateExistingTaskScreen.UpdateExistingTaskScreen
-		throw new UnsupportedOperationException();
+	public void onShow(){
+		super.onShow();
 	}
 
+	/**
+	 *
 	 */
-
+	@FXML
+	public void initialize(){
+		super.initialize();
+		userAllowed = new String[]{ROLE_OFFICE_MANAGER};
+	}
 }

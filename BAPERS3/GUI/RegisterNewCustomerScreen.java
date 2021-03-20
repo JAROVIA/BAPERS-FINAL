@@ -1,52 +1,45 @@
 package GUI;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 public class RegisterNewCustomerScreen extends Window {
 
-	//private Menu AccountStatusMenu;
-	private TextField Username;
-	private TextField MemorableWord;
-	//private Button LogoutButton;
-	//private Button SubmitButton;
-	private TextField PhoneNumber;
-	private TextField Address;
-
-	public void OnClick() {
-		// TODO - implement RegisterNewCustomerScreen.OnClick
-		throw new UnsupportedOperationException();
-	}
-
-	public String RetrieveTextArea() {
-		// TODO - implement RegisterNewCustomerScreen.RetrieveTextArea
-		throw new UnsupportedOperationException();
-	}
+	@FXML
+	private TextField usernameField;
+	@FXML
+	private TextField memorableWordField;
+	@FXML
+	private Button submitButton;
+	@FXML
+	private TextField phoneField;
+	@FXML
+	private TextField address1Field;
+	@FXML
+	private TextField address2Field;
+	@FXML
+	private TextField postcodeField;
 
 	/**
 	 * 
 	 * @param CustomerData
 	 */
-	public boolean Submit(String[] CustomerData) {
+	public boolean submit(String[] CustomerData) {
 		// TODO - implement RegisterNewCustomerScreen.Submit
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param xSize
-	 * @param ySize
-	 * @param icon
-	 * @param Text
-	 * @param Button
-	 */
-	/*
-	public RegisterNewCustomerScreen(int x, int y, int xSize, int ySize, string icon, string Text, Button Button) {
-		// TODO - implement RegisterNewCustomerScreen.RegisterNewCustomerScreen
-		throw new UnsupportedOperationException();
+	public void onShow(){
+		super.onShow();
 	}
 
+	/**
+	 *
 	 */
-
+	@FXML
+	public void initialize(){
+		super.initialize();
+		userAllowed = new String[]{ROLE_OFFICE_MANAGER, ROLE_SHIFT_MANAGER, ROLE_RECEPTIONIST};
+	}
 }

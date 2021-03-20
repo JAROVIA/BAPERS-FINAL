@@ -1,33 +1,28 @@
 package GUI;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 public class EditCustomerDetailsScreen extends Window {
 
-	private TextField EditUsername;
-	private TextField EditAddressTextArea;
-	private ComboBox AmmendAccountStatusMenu;
-	/*
-	private Button SaveDetailsButton;
-	private Button DeleteCustomerButton;
-	private Button LogoutButton;
+	@FXML
+	private TextField usernameField;
+	@FXML
+	private TextField addressField;
+	@FXML
+	private ComboBox<String> accountStatusBox;
+	@FXML
+	private Button saveButton;
+	@FXML
+	private Button deleteButton;
+	@FXML
+	private TextField phoneField;
+	@FXML
+	private TextField memorableWordField;
 
-	 */
-	private TextField EditPhoneTextArea;
-	private TextField EditMemorableWordTextArea;
-
-	public void OnClickButton() {
-		// TODO - implement EditCustomerDetailsScreen.OnClickButton
-		throw new UnsupportedOperationException();
-	}
-
-	public String RetrieveTextArea() {
-		// TODO - implement EditCustomerDetailsScreen.RetrieveTextArea
-		throw new UnsupportedOperationException();
-	}
-
-	public void DeleteCustomer() {
+	public void deleteCustomer() {
 		// TODO - implement EditCustomerDetailsScreen.DeleteCustomer
 		throw new UnsupportedOperationException();
 	}
@@ -42,21 +37,10 @@ public class EditCustomerDetailsScreen extends Window {
 	}
 
 	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param xSize
-	 * @param ySize
-	 * @param icon
-	 * @param Text
-	 * @param Button
 	 */
-	/*
-	public EditCustomerDetailsScreen(int x, int y, int xSize, int ySize, string icon, string Text, Button Button) {
-		// TODO - implement EditCustomerDetailsScreen.EditCustomerDetailsScreen
-		throw new UnsupportedOperationException();
+	@FXML
+	public void initialize(){
+		super.initialize();
+		userAllowed = new String[]{ROLE_OFFICE_MANAGER};
 	}
-
-	 */
-
 }

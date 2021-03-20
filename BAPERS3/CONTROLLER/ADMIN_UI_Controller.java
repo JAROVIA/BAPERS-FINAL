@@ -6,6 +6,8 @@ import GUI.*;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ADMIN_UI_Controller {
 
@@ -27,6 +29,8 @@ public class ADMIN_UI_Controller {
 	private DatabaseScreen databaseScreen;
 	private String databaseFxml = "Database";
 
+	private Map<String, Window> screens;
+
 	private UserAccount loggedInUser = null;
 	private UserAccount editingUser = null;
 
@@ -39,30 +43,44 @@ public class ADMIN_UI_Controller {
 		throw new UnsupportedOperationException();
 	}
 
+	public boolean login(String username, String password) throws SQLException {
+		boolean loggedin = false;
+		for(String[] userData : UserAccount.getUserList()){
+			if(username.equals(userData[1]) && password.equals(userData[3])){
+				loggedInUser = new UserAccount(Integer.parseInt(userData[0]), userData[1], userData[2], userData[3], userData[4]);
+				loggedin = true;
+				break;
+			}
+		}
+		return loggedin;
+	}
+
+	public void logout() {
+		this.loggedInUser = null;
+	}
+
 	/**
 	 * 
-	 * @param role
-	 * @param name
-	 * @param password
-	 * @param username
+	 * @param userRole role of user
+	 * @param employeeName name of user
+	 * @param password password of user
+	 * @param username username of user
 	 *
 	 */
-	public boolean saveUser(String role, String name, String password, String username) throws SQLException {
-		new UserAccount(role, username, password, name);
-		// TODO - return appropriate boolean
-		return true;
+	public void saveUser(String userRole, String employeeName, String password, String username) throws SQLException {
+		UserAccount.saveUser(username, userRole, password, employeeName);
 	}
 
 	/**
 	 * 
 	 * @param Username
 	 */
-	public UserAccount RetrieveUser(String Username) {
+	public UserAccount retrieveUser(String Username) {
 		// TODO - implement ADMIN_UI_Controller.RetrieveUser
 		throw new UnsupportedOperationException();
 	}
 
-	public boolean DeleteUser() {
+	public boolean deleteUser() {
 		// TODO - implement ADMIN_UI_Controller.DeleteUser
 		throw new UnsupportedOperationException();
 	}
@@ -71,7 +89,7 @@ public class ADMIN_UI_Controller {
 	 * 
 	 * @param AutoTime
 	 */
-	public boolean SetDBAutoBackupTime(Date AutoTime) {
+	public boolean setDBAutoBackupTime(Date AutoTime) {
 		// TODO - implement ADMIN_UI_Controller.SetDBAutoBackupTime
 		throw new UnsupportedOperationException();
 	}
@@ -80,38 +98,13 @@ public class ADMIN_UI_Controller {
 	 * 
 	 * @param AutoTime
 	 */
-	public boolean SetDBAutoRestoreTime(Date AutoTime) {
+	public boolean setDBAutoRestoreTime(Date AutoTime) {
 		// TODO - implement ADMIN_UI_Controller.SetDBAutoRestoreTime
 		throw new UnsupportedOperationException();
 	}
 
-	public static ADMIN_UI_Controller ADMIN_UI_Controller() {
-		// TODO - implement ADMIN_UI_Controller.ADMIN_UI_Controller
-		throw new UnsupportedOperationException();
-	}
-
-	public Login getLoginScreen() {
-		return loginScreen;
-	}
-
-	public DatabaseScreen getDatabaseScreen() {
-		return databaseScreen;
-	}
-
-	public UserAccountScreen getUserAccountScreen() {
-		return userAccountScreen;
-	}
-
-	public EditUserScreen editUserScreen() {
-		return editUserScreen;
-	}
-
-	public RegisterNewUserScreen getRegisterNewUserScreen() {
-		return registerNewUserScreen;
-	}
-
-	public Main getMain() {
-		return main;
+	public void showScreen(String name){
+		main.showScreen(name);
 	}
 
 	public UserAccount getLoggedInUser() {
@@ -130,29 +123,36 @@ public class ADMIN_UI_Controller {
 		this.editingUser = editingUser;
 	}
 
+	public Window getScreen(String name){
+		return screens.get(name);
+	}
+
 	public ADMIN_UI_Controller(Main main) throws IOException {
 		//get main class
 		this.main = main;
 
+		//map to match name to window to gain easier access
+		screens = new HashMap<>();
+
 		//the method in main initialises gui classes with fxml, the returned screen is assigned to the class variables
 		loginScreen = (Login) Window.newGuiFromFxml(loginFxml);
-		main.addScreen(loginFxml, loginScreen.getParent());
-		loginScreen.setAdminUiController(this);
+		screens.put(loginFxml, loginScreen);
 
 		userAccountScreen = (UserAccountScreen) Window.newGuiFromFxml(userAccFxml);
-		main.addScreen(userAccFxml, userAccountScreen.getParent());
-		userAccountScreen.setAdminUiController(this);
+		screens.put(userAccFxml, userAccountScreen);
 
 		registerNewUserScreen = (RegisterNewUserScreen) Window.newGuiFromFxml(registerUserFxml);
-		main.addScreen(registerUserFxml, registerNewUserScreen.getParent());
-		registerNewUserScreen.setAdminUiController(this);
+		screens.put(registerUserFxml, registerNewUserScreen);
 
 		editUserScreen = (EditUserScreen) Window.newGuiFromFxml(editUserFxml);
-		main.addScreen(editUserFxml, editUserScreen.getParent());
-		editUserScreen.setAdminUiController(this);
+		screens.put(editUserFxml, editUserScreen);
 
 		databaseScreen = (DatabaseScreen) Window.newGuiFromFxml(databaseFxml);
-		main.addScreen(databaseFxml, databaseScreen.getParent());
-		databaseScreen.setAdminUiController(this);
+		screens.put(databaseFxml, databaseScreen);
+
+		for(Map.Entry<String, Window> entry : screens.entrySet()){
+			main.addScreen(entry.getKey(), entry.getValue().getParent(), "ADMIN");
+			entry.getValue().setAdminUiController(this);
+		}
 	}
 }

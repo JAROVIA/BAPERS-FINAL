@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import java.io.IOException;
 
@@ -15,17 +16,38 @@ public abstract class Window{
 	protected ADMIN_UI_Controller adminUiController = null;
 	protected PROC_UI_Controller procUiController = null;
 	protected UI_Controller uiController = null;
-
 	protected Parent parent;
 
+	protected String[] userAllowed;
+	protected final String ROLE_OFFICE_MANAGER = "Office Manager";
+	protected final String ROLE_SHIFT_MANAGER = "Shift Manager";
+	protected final String ROLE_RECEPTIONIST = "Receptionist";
+	protected final String ROLE_TECHNICIAN_DEV = "Technician - Development";
+	protected final String ROLE_TECHNICIAN_COPY = "Technician - Copy room";
+	protected final String ROLE_TECHNICIAN_PACK = "Technician - Packing room";
+	protected final String ROLE_TECHNICIAN_FIN = "Technician - Finishing room";
+
+	/**
+	 * Button / image which returns user to home screen
+	 */
 	@FXML
 	private ImageView homeButton;
 
+	/**
+	 * Button for logout
+	 */
 	@FXML
 	private Button logoutButton;
 
-	//access each controller so each gui knows which controller to report back to
-	//getter setter for account ui
+	/**
+	 * Label to welcome user with their username
+	 */
+	@FXML
+	private Label welcomeLabel;
+
+	/**
+	 * access each controller so each gui knows which controller to report back to
+	 */
 	public ACCT_UI_Controller getAcctUiController() {
 		return acctUiController;
 	}
@@ -69,10 +91,15 @@ public abstract class Window{
 		return parent;
 	}
 
+	/**
+	 *
+	 * @param fxml the name of the fxml file to get the gui class from (path is adjusted in the method)
+	 * @return The window object set to controller in the fxml file
+	 * @throws IOException
+	 */
 	public static Window newGuiFromFxml(String fxml) throws IOException {
 		//load fxml
 		String url = "fxml/" + fxml + ".fxml";
-		System.out.println(url);
 		FXMLLoader loader = new FXMLLoader(Window.class.getResource(url));
 		//get the parent element in fxml
 		//parent is used to construct the scene, which is assigned to the stage(window) to show
@@ -85,39 +112,69 @@ public abstract class Window{
 	}
 
 	public void logout(){
-		System.out.println("out");
 		if(getProcUiController() != null){
-			getProcUiController().getMain().showScreen("Login");
+			getProcUiController().showScreen("Login");
 		}
 		if(getAcctUiController() != null){
-			getAcctUiController().getMain().showScreen("Login");
+			getAcctUiController().showScreen("Login");
 		}
 		if(getUiController() != null){
-			getUiController().getMain().showScreen("Login");
+			getUiController().showScreen("Login");
 		}
 		if(getAdminUiController() != null){
-			getAdminUiController().getMain().showScreen("Login");
+			getAdminUiController().showScreen("Login");
 		}
 	}
 
 	public void toMain(){
-		System.out.println("main");
 		if(getProcUiController() != null){
-			getProcUiController().getMain().showScreen("HomeScreen");
+			getProcUiController().showScreen("HomeScreen");
 		}
 		if(getAcctUiController() != null){
-			getAcctUiController().getMain().showScreen("HomeScreen");
+			getAcctUiController().showScreen("HomeScreen");
 		}
 		if(getUiController() != null){
-			getUiController().getMain().showScreen("HomeScreen");
+			getUiController().showScreen("HomeScreen");
 		}
 		if(getAdminUiController() != null){
-			getAdminUiController().getMain().showScreen("HomeScreen");
+			getAdminUiController().showScreen("HomeScreen");
 		}
 	}
 
-	protected void onShow(){
+	public boolean checkAccess(String userRole){
+		boolean isAllowed = false;
+		for(String user : userAllowed){
+			System.out.println("role: " + userRole + " = " + user + ", access: " + isAllowed);
+			if(user.equals(userRole)){
+				isAllowed = true;
+				break;
+			}
+		}
+		return  isAllowed;
+	}
+
+	public void onShow(){
 		//do what the screen needs to do on show
+		if(welcomeLabel != null){
+			String userText ="Welcome! user: ";
+			if(adminUiController != null){
+				userText += adminUiController.getLoggedInUser().getUsername();
+				System.out.println("username: " + adminUiController.getLoggedInUser().getUsername());
+			}
+			if(uiController != null){
+				userText += uiController.getLoggedInUser().getUsername();
+				System.out.println("username: " + uiController.getLoggedInUser().getUsername());
+			}
+			if(acctUiController != null){
+				userText += acctUiController.getLoggedInUser().getUsername();
+				System.out.println("username: " + acctUiController.getLoggedInUser().getUsername());
+			}
+			if(procUiController != null){
+				userText += procUiController.getLoggedInUser().getUsername();
+				System.out.println("username: " + procUiController.getLoggedInUser().getUsername());
+			}
+			welcomeLabel.setText(userText);
+		}
 	}
 
 	@FXML
@@ -131,5 +188,4 @@ public abstract class Window{
 			homeButton.setOnMouseClicked(mouseEvent -> toMain());
 		}
 	}
-
 }
