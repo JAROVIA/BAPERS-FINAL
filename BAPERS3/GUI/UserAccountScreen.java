@@ -6,6 +6,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -18,9 +19,6 @@ import java.util.ArrayList;
 public class UserAccountScreen extends Window {
 
 	/*
-	private Button RegisterNewUserButton;
-	private Button LogoutButton;
-	private Button EditUserButton;
 	private Button DeleteUserButton;
 
 	 */
@@ -35,43 +33,43 @@ public class UserAccountScreen extends Window {
 	private TableColumn<String[], String> usernameColumn;
 	@FXML
 	private TableColumn<String[], String> roleColumn;
+	@FXML
+	private Button registerNewUserButton;
+	@FXML
+	private Button editUserButton;
 
 	/**
 	 * 
 	 * @param UserAccountDetails
 	 */
-	public UserAccount[] SearchUser(String UserAccountDetails) {
+	public UserAccount[] searchUser(String UserAccountDetails) {
 		// TODO - implement UserAccountScreen.SearchUser
 		throw new UnsupportedOperationException();
 	}
 
-	public void OnClickButton() {
-		// TODO - implement UserAccountScreen.OnClickButton
-		throw new UnsupportedOperationException();
-	}
-
-	public void DeleteUserAcc() {
+	public void deleteUserAcc() {
 		// TODO - implement UserAccountScreen.DeleteUserAcc
 		throw new UnsupportedOperationException();
 	}
 
-	public String RetrieveTextArea() {
-		// TODO - implement UserAccountScreen.RetrieveTextArea
-		throw new UnsupportedOperationException();
-	}
 
-	public void showContent() throws SQLException {
+	public void onShow() {
 		//TODO get data here
-
 		ArrayList<String[]> list = new ArrayList<>();
-//		list.add(new String[]{"a", "b", "c", "d"});
-//		list.add(new String[]{"e", "f", "g", "h"});
-		list = UserAccount.GetUserList();
+		try {
+			 list = UserAccount.getUserList();
+		}
+		catch (SQLException e){
+			e.printStackTrace();
+		}
 
 		ObservableList<String[]> data = FXCollections.observableArrayList();
-		data.addAll(list);
+		for(int i = 0; i < list.size(); i++){
+			String[] newData = new String[]{list.get(i)[0], list.get(i)[1], list.get(i)[2], list.get(i)[4]};
+			data.add(newData);
+		}
 
-		for (int i = 0; i < list.get(0).length; i++) {
+		for (int i = 0; i < data.get(0).length; i++) {
 			TableColumn tc = userAccountTable.getColumns().get(i);
 			int j = i;
 			tc.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<String[], String>, ObservableValue<String>>() {
@@ -81,51 +79,40 @@ public class UserAccountScreen extends Window {
 				}
 			});
 		}
-
-		/*
-		TableColumn<String[], String> userIdColumn = new TableColumn<>();
-		userIdColumn.setText("userID");
-		TableColumn<String[], String> staffNameColumn = new TableColumn<>();
-		staffNameColumn.setText("staffName");
-		TableColumn<String[], String> usernameColumn = new TableColumn<>();
-		usernameColumn.setText("username");
-		TableColumn<String[], String> roleColumn = new TableColumn<>();
-		roleColumn.setText("Role");
-		 */
-
 		userAccountTable.setItems(data);
 	}
 
-	public static void main(String[] args) {
-		ArrayList<String[]> list = new ArrayList<>();
-		list.add(new String[]{"a", "b", "c", "d"});
-		list.add(new String[]{"e", "f", "g", "h"});
-
-		// test to ensure correct alist format
-		for(String[] col: list){
-			for (String a: col){
-				System.out.println(a);
-
-			}
-		}
-
+	private void toRegisterUser(){
+		adminUiController.showScreen("RegisterNewUser");
 	}
 
-	public void toRegisterUser(){
-		adminUiController.getMain().showScreen("RegisterNewUser");
+	private void toEditUser() throws SQLException {
+		String userId = userAccountTable.getSelectionModel().getSelectedItem()[0];
+		if(userId != null) {
+			for(String[] userData : UserAccount.getUserList()){
+				if(userId.equals(userData[0])){
+					adminUiController.setEditingUser(new UserAccount(Integer.parseInt(userData[0]),userData[1],userData[2],userData[3],userData[4]));
+					adminUiController.showScreen("EditUserDetails");
+					break;
+				}
+			}
+		}
 	}
 
 	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param xSize
-	 * @param ySize
-	 * @param icon
+	 *
 	 */
-	public static UserAccountScreen LogOut(int x, int y, int xSize, int ySize, String icon) {
-		// TODO - implement UserAccountScreen.LogOut
-		throw new UnsupportedOperationException();
+	@FXML
+	public void initialize(){
+		super.initialize();
+		userAllowed = new String[]{ROLE_OFFICE_MANAGER};
+		registerNewUserButton.setOnAction(actionEvent -> toRegisterUser());
+		editUserButton.setOnAction(actionEvent -> {
+			try {
+				toEditUser();
+			} catch (SQLException throwables) {
+				throwables.printStackTrace();
+			}
+		});
 	}
-
 }

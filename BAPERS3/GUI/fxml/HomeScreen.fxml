@@ -196,6 +196,7 @@
                   </ImageView>
                </graphic>
             </Button>
+            <Label fx:id="welcomeLabel" layoutX="443.0" layoutY="12.0" prefHeight="17.0" prefWidth="154.0" style="-fx-border-color: black;" text="Label" />
       </children>
     </AnchorPane>
   </children>

@@ -21,57 +21,39 @@ public class HomeScreen extends Window {
 	@FXML
 	private Button reportsButton;
 
-	public void OnClickButton() {
-		// TODO - implement HomeScreen.OnClickButton
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param MenuOption
-	 */
-	public void OnSelectMenuOption(int MenuOption) {
-		// TODO - implement HomeScreen.OnSelectMenuOption
-		throw new UnsupportedOperationException();
-	}
-
 	private void toUserAccounts() throws SQLException {
-		/*
-		System.out.println("user's role is " + uiController.getMain().getAdminUiController().getLoggedInUser().getUserRole());
-		 if(uiController.getMain().getAdminUiController().getLoggedInUser().getUserRole().equals("Office Manager")){
-		 	//goes to user account page
-			uiController.getMain().showScreen("UserAccounts");
-			 uiController.getMain().getAdminUiController().getUserAccountScreen().showContent();
-		}
-
-		 */
+		//goes to account page, only for office manage
+		uiController.showScreen("UserAccounts");
 	}
 
 	private void toCustomerAccounts(){
-		//goes to customer account page
-		uiController.getMain().showScreen("CustomerAccounts");
-		uiController.getMain().getAcctUiController().getCustomerAccountScreen().onShow();
+		//goes to customer account page if anyone but technician
+		uiController.showScreen("CustomerAccounts");
 	}
 
 	private void toJob(){
 		//goes to jobs page
-		uiController.getMain().showScreen("Jobs");
-		uiController.getMain().getProcUiController().getJobsScreen().onShow();
+		uiController.showScreen("Jobs");
 	}
 
 	private void toDatabase(){
 		//goes to database page
-		uiController.getMain().showScreen("Database");
+		uiController.showScreen("Database");
 	}
 
 	private void toReport(){
 		//goes to reports page
-		uiController.getMain().showScreen("Reports");
+		uiController.showScreen("Reports");
 	}
 
 	private void toTask(){
 		//goes to task page
-		uiController.getMain().showScreen("Tasks");
+		uiController.showScreen("Tasks");
+	}
+
+	public void onShow(){
+		super.onShow();
+		System.out.println("username " + uiController.getLoggedInUser().getUsername() +"'s role is " + uiController.getLoggedInUser().getUserRole());
 	}
 
 	/**
@@ -80,6 +62,7 @@ public class HomeScreen extends Window {
 	public void initialize(){
 		//set buttons their on action
 		super.initialize();
+		userAllowed = new String[]{ROLE_OFFICE_MANAGER, ROLE_SHIFT_MANAGER, ROLE_RECEPTIONIST, ROLE_TECHNICIAN_COPY, ROLE_TECHNICIAN_DEV, ROLE_TECHNICIAN_FIN, ROLE_TECHNICIAN_PACK};
 		userAccountButton.setOnAction(actionEvent -> {
 			try {
 				toUserAccounts();

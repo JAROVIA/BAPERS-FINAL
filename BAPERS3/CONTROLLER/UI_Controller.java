@@ -1,11 +1,14 @@
 package CONTROLLER;
 
+import ADMIN.UserAccount;
 import GUI.HomeScreen;
 import GUI.RecordPaymentScreen;
 import GUI.ReportsScreen;
 import GUI.Window;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UI_Controller {
 
@@ -20,6 +23,8 @@ public class UI_Controller {
 
 	private HomeScreen homeScreen;
 	private String homeFxml = "HomeScreen";
+
+	private Map<String, Window> screens;
 
 	/**
 	 * 
@@ -40,36 +45,36 @@ public class UI_Controller {
 		throw new UnsupportedOperationException();
 	}
 
-	public HomeScreen getHomeScreen() {
-		return homeScreen;
+	public UserAccount getLoggedInUser(){
+		return main.getAdminUiController().getLoggedInUser();
 	}
 
-	public ReportsScreen getReportsScreen() {
-		return reportsScreen;
+	public void showScreen(String name){
+		main.showScreen(name);
 	}
 
-	public RecordPaymentScreen getRecordPaymentScreen() {
-		return recordPaymentScreen;
-	}
-
-	public Main getMain() {
-		return main;
+	public Window getScreen(String name){
+		return screens.get(name);
 	}
 
 	public UI_Controller(Main main) throws IOException {
 		// TODO - implement UI_Controller.UI_Controller
 		this.main = main;
+		//map to match string name to respective gui class for easier lookup
+		screens = new HashMap<>();
 
 		homeScreen = (HomeScreen) Window.newGuiFromFxml(homeFxml);
-		main.addScreen(homeFxml, homeScreen.getParent());
-		homeScreen.setUiController(this);
+		screens.put(homeFxml, homeScreen);
 
 		recordPaymentScreen = (RecordPaymentScreen) Window.newGuiFromFxml(recordPaymentFxml);
-		main.addScreen(recordPaymentFxml, recordPaymentScreen.getParent());
-		recordPaymentScreen.setUiController(this);
+		screens.put(recordPaymentFxml, recordPaymentScreen);
 
 		reportsScreen = (ReportsScreen) Window.newGuiFromFxml(reportsFxml);
-		main.addScreen(reportsFxml, reportsScreen.getParent());
-		reportsScreen.setUiController(this);
+		screens.put(reportsFxml, reportsScreen);
+
+		for(Map.Entry<String, Window> entry : screens.entrySet()){
+			main.addScreen(entry.getKey(), entry.getValue().getParent(), "UI");
+			entry.getValue().setUiController(this);
+		}
 	}
 }

@@ -1,9 +1,12 @@
 package CONTROLLER;
 
 import ACCOUNT.*;
+import ADMIN.UserAccount;
 import GUI.*;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ACCT_UI_Controller {
 	private Main main;
@@ -24,11 +27,13 @@ public class ACCT_UI_Controller {
 
 	private I_CustomerAccount customerAccountHandler;
 
+	private Map<String, Window> screens;
+
 	/**
 	 * 
 	 * @param AccountNum
 	 */
-	public String SearchCustomer(int AccountNum) {
+	public String searchCustomer(int AccountNum) {
 		// TODO - implement ACCT_UI_Controller.SearchCustomer
 		throw new UnsupportedOperationException();
 	}
@@ -37,44 +42,36 @@ public class ACCT_UI_Controller {
 	 * 
 	 * @param CustomerData
 	 */
-	public boolean Submit(String[] CustomerData) {
+	public boolean submit(String[] CustomerData) {
 		// TODO - implement ACCT_UI_Controller.Submit
 		throw new UnsupportedOperationException();
 	}
 
-	public void DeleteCustomer() {
+	public void deleteCustomer() {
 		// TODO - implement ACCT_UI_Controller.DeleteCustomer
 		throw new UnsupportedOperationException();
 	}
 
-	public CustomerAccountDetails[] RetrieveCustomer() {
+	public CustomerAccountDetails[] retrieveCustomer() {
 		// TODO - implement ACCT_UI_Controller.RetrieveCustomer
 		throw new UnsupportedOperationException();
 	}
 
-	public CustomerAccountDetails SelectCustomer() {
+	public CustomerAccountDetails selectCustomer() {
 		// TODO - implement ACCT_UI_Controller.SelectCustomer
 		throw new UnsupportedOperationException();
 	}
 
-	public RegisterNewCustomerScreen getRegisterNewCustomerScreen() {
-		return registerNewCustomerScreen;
+	public void showScreen(String name){
+		main.showScreen(name);
 	}
 
-	public ActiveJobScreen getActiveJobScreen() {
-		return activeJobScreen;
+	public Window getScreen(String name){
+		return screens.get(name);
 	}
 
-	public CustomerAccountScreen getCustomerAccountScreen() {
-		return customerAccountScreen;
-	}
-
-	public EditCustomerDetailsScreen getEditCustomerDetailsScreen() {
-		return editCustomerDetailsScreen;
-	}
-
-	public Main getMain() {
-		return main;
+	public UserAccount getLoggedInUser(){
+		return main.getAdminUiController().getLoggedInUser();
 	}
 
 	//constructor
@@ -82,19 +79,32 @@ public class ACCT_UI_Controller {
 		// TODO - implement ACCT_UI_Controller.ACCT_UI_Controller
 
 		this.main = main;
+		screens = new HashMap<>();
 
 		//gui setup
 		editCustomerDetailsScreen = (EditCustomerDetailsScreen) Window.newGuiFromFxml(editCustomerFxml);
+		screens.put(editCustomerFxml, editCustomerDetailsScreen);
+		registerNewCustomerScreen = (RegisterNewCustomerScreen) Window.newGuiFromFxml(registerCustomerFxml);
+		screens.put(registerCustomerFxml, registerNewCustomerScreen);
+		customerAccountScreen = (CustomerAccountScreen) Window.newGuiFromFxml(customerFxml);
+		screens.put(customerFxml, customerAccountScreen);
+
+		for(Map.Entry<String, Window> entry : screens.entrySet()){
+			main.addScreen(entry.getKey(), entry.getValue().getParent(), "ACCT");
+			entry.getValue().setAcctUiController(this);
+		}
+
+		/*
 		main.addScreen(editCustomerFxml, editCustomerDetailsScreen.getParent());
 		editCustomerDetailsScreen.setAcctUiController(this);
 
-		registerNewCustomerScreen = (RegisterNewCustomerScreen) Window.newGuiFromFxml(registerCustomerFxml);
 		main.addScreen(registerCustomerFxml, registerNewCustomerScreen.getParent());
 		registerNewCustomerScreen.setAcctUiController(this);
 
-		customerAccountScreen = (CustomerAccountScreen) Window.newGuiFromFxml(customerFxml);
 		main.addScreen(customerFxml, customerAccountScreen.getParent());
 		customerAccountScreen.setAcctUiController(this);
+
+		 */
 
 		//get implementation class from interface
 		customerAccountHandler = new Impl_CustomerAccount();

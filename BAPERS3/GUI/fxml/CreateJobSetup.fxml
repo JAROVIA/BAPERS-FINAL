@@ -40,13 +40,11 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="434.0" prefWidth="668.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.RegisterNewCustomerScreen">
+<VBox prefHeight="434.0" prefWidth="668.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.CreateJobSetupScreen">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -93,32 +91,24 @@
                <font>
                   <Font size="9.0" />
                </font></Button>
-            <TextField fx:id="usernameField" layoutX="127.0" layoutY="142.0" prefHeight="25.0" prefWidth="167.0" promptText="Username" style="-fx-border-color: Black;" />
-            <TextField fx:id="phoneField" layoutX="344.0" layoutY="142.0" prefHeight="25.0" prefWidth="167.0" promptText="Phone Number" style="-fx-border-color: black;" />
-            <TextField fx:id="address1Field" layoutX="344.0" layoutY="193.0" prefHeight="25.0" prefWidth="167.0" promptText="Address Line 1" style="-fx-border-color: black;" />
-            <TextField fx:id="memorableWordField" layoutX="127.0" layoutY="299.0" prefHeight="25.0" prefWidth="167.0" promptText="Memorable Word" style="-fx-border-color: black;" />
-            <TextField fx:id="address2Field" layoutX="344.0" layoutY="248.0" prefHeight="25.0" prefWidth="167.0" promptText="Address Line 2" style="-fx-border-color: black;" />
-            <TextField fx:id="postcodeField" layoutX="344.0" layoutY="299.0" prefHeight="25.0" prefWidth="167.0" promptText="Post Code" style="-fx-border-color: black;" />
-            <ImageView fx:id="homeButton" fitHeight="55.0" fitWidth="205.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/BapersLogo.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="39.0" fitWidth="258.0" layoutX="189.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/Register-New-Customer-Page.jpg" />
-               </image>
-            </ImageView>
-            <Button fx:id="submitButton" layoutX="292.0" layoutY="356.0" mnemonicParsing="false" prefHeight="14.0" prefWidth="53.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Submit">
+            <Button fx:id="nextButton" layoutX="374.0" layoutY="296.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="70.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Next">
                <font>
                   <Font size="9.0" />
                </font></Button>
-            <Label layoutX="427.0" layoutY="4.0" prefHeight="21.0" prefWidth="167.0" style="-fx-border-color: Black;" text="Welcome [logged in user]" textAlignment="RIGHT">
+            <Label fx:id="welcomeLabel" layoutX="427.0" layoutY="4.0" prefHeight="21.0" prefWidth="167.0" style="-fx-border-color: Black;" text="Welcome [logged in user]" textAlignment="RIGHT">
                <font>
                   <Font size="9.0" />
                </font>
             </Label>
-            <ComboBox layoutX="127.0" layoutY="221.0" prefHeight="27.0" prefWidth="167.0" />
+            <TextField fx:id="accountNumberField" layoutX="220.0" layoutY="105.0" promptText="Account number" />
+            <ComboBox fx:id="urgencyBox" layoutX="259.0" layoutY="189.0" prefWidth="150.0" promptText="Select urgency" />
+            <Button fx:id="searchButton" layoutX="393.0" layoutY="105.0" mnemonicParsing="false" text="search" />
+            <Label fx:id="accountLabel" layoutX="218.0" layoutY="147.0" prefHeight="19.0" prefWidth="226.0" style="-fx-border-color: black;" />
+            <Button fx:id="cancelButton" layoutX="218.0" layoutY="296.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="70.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Cancel">
+               <font>
+                  <Font size="9.0" />
+               </font>
+            </Button>
       </children>
     </AnchorPane>
   </children>

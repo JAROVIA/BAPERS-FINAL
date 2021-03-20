@@ -12,76 +12,104 @@ import java.sql.*;
 
 public class UserAccount {
 
-	Collection<Job> Job;
-	private String UserRole;
-	private int EmployeeID;
-	private String Username;
-	private String Password;
-	private String EmployeeName;
-	static String tablename = "UserAccounts";
+	Collection<Job> job;
 
+	private String userRole;
+	private int employeeID;
+	private String username;
+	private String password;
+	private String employeeName;
+
+	static String tablename = "UserAccounts";
 	static String url = "jdbc:mysql://localhost:3306/Bapers";
-	static String username = "jaroviadb";
-	static String password = "Jarovia123#@!";
+	static String dbusername = "jaroviadb";
+	static String dbpassword = "Jarovia123#@!";
 	static Connection connection;
 
 	static {
 		try {
 			connection = DriverManager.getConnection(
-					url, username, password);
+					url, dbusername, dbpassword);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void Login() {
-		// TODO - implement UserAccount.Login
-		throw new UnsupportedOperationException();
+	public String getUserRole() {
+		return userRole;
 	}
 
-	public void Logout() {
-		// TODO - implement UserAccount.Logout
-		throw new UnsupportedOperationException();
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
+	}
+
+	public int getEmployeeID() {
+		return employeeID;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
 	}
 
 	/**
 	 * 
 	 * @param UserData
 	 */
-	public void DestroyAccount(String UserData) {
+	public void destroyAccount(String UserData) {
 		// TODO - implement UserAccount.DestroyAccount
 		throw new UnsupportedOperationException();
 	}
 
 	public String getEmployeeName() {
 		// TODO - implement UserAccount.getEmployeeName
-		throw new UnsupportedOperationException();
+		return employeeName;
 	}
 
 	/**
 	 * 
 	 * @param NewJobData
 	 */
-	public boolean CreateJob(String NewJobData) {
+	public boolean createJob(String NewJobData) {
 		// TODO - implement UserAccount.CreateJob
-		throw new UnsupportedOperationException();
-	}
-
-	public String SetCustomerAccountStatus() {
-		// TODO - implement UserAccount.SetCustomerAccountStatus
 		throw new UnsupportedOperationException();
 	}
 
 	/**
 	 * 
-	 * @param User
+	 * @param username
+	 * @param userRole
+	 * @param password
+	 * @param employeeName
 	 */
-	public void SaveUser(UserAccount User) {
-		// TODO - implement UserAccount.SaveUser
-		throw new UnsupportedOperationException();
+	public static void saveUser(String username, String userRole, String password, String employeeName) throws SQLException {
+		String sql = "INSERT INTO " + tablename + "(Username, RoleName, Password, StaffName) " + "VALUES(\"" + username + "\", \"" + userRole + "\", \"" + password + "\", \"" + employeeName + "\");" ;
+		Statement statement = connection.createStatement();
+		statement.executeUpdate(sql);
 	}
 
-	public UserAccount RetrieveUser() {
+	public static void editUser(int employeeID, String username, String userRole, String password, String employeeName) throws SQLException {
+		String sql = "UPDATE " + tablename + " SET Username = '"+ username +"', RoleName = '"+ userRole +"', Password = '"+ password +"', StaffName = '"+ employeeName +"' WHERE EmployeeID = "+ employeeID +";";
+		Statement statement = connection.createStatement();
+		statement.executeUpdate(sql);
+	}
+
+	public UserAccount retrieveUser() {
 		// TODO - implement UserAccount.RetrieveUser
 		throw new UnsupportedOperationException();
 	}
@@ -90,7 +118,7 @@ public class UserAccount {
 	 * 
 	 * @param AutoTime
 	 */
-	public void SetDBAutoBackupTime(int AutoTime) {
+	public void setDBAutoBackupTime(int AutoTime) {
 		// TODO - implement UserAccount.SetDBAutoBackupTime
 		throw new UnsupportedOperationException();
 	}
@@ -99,7 +127,7 @@ public class UserAccount {
 	 * 
 	 * @param AutoTime
 	 */
-	public void SetDBAutoRestoreTime(Date AutoTime) {
+	public void setDBAutoRestoreTime(Date AutoTime) {
 		// TODO - implement UserAccount.SetDBAutoRestoreTime
 		throw new UnsupportedOperationException();
 	}
@@ -108,23 +136,17 @@ public class UserAccount {
 	 * 
 	 * @param ReportData
 	 */
-	public void GenerateReport(String ReportData) {
+	public void generateReport(String ReportData) {
 		// TODO - implement UserAccount.GenerateReport
 		throw new UnsupportedOperationException();
 	}
 
-
-//	public static void UserAccount(String tablename, String EmployeeName, String Username, String password, String UserRole) throws SQLException {
-//
-//	}
-
 	/**
-	 * Adds all user accoutns to a list
+	 * Adds all user accounts to a list
 	 * @return A list of all UserAccounts in the database
 	 * */
 
-	public static ArrayList<String[]> GetUserList() throws SQLException {
-//		String tablename = this.tablename;
+	public static ArrayList<String[]> getUserList() throws SQLException {
 		Statement statement = connection.createStatement();
 		String sql = "SELECT * FROM " + tablename;
 		ResultSet resultSet = statement.executeQuery(sql);
@@ -140,14 +162,10 @@ public class UserAccount {
 			String password = resultSet.getString("Password");
 			String staffName = resultSet.getString("StaffName");
 
-//			tuple = "employeeID: " + employeeID +
-//					" username: " + username +
-//					" roleName: " + roleName +
-//					" staffName: " + staffName;
-
 			tuple = employeeID + "`"
 					+ username + "`"
 					+ roleName + "`"
+					+ password + "`"
 					+ staffName;
 
 			arrayList.add(tuple.split("`"));
@@ -160,34 +178,11 @@ public class UserAccount {
 	 * This constructor will write a new user account to the db with information from its parameters.
 	 * It needs a userrole, username, employeename, and password to do so.
 	 */
-	public UserAccount(String userRole, String username, String password, String employeeName) throws SQLException {
-		this.UserRole = userRole;
-		this.Username = username;
-		this.Password = password;
-		this.EmployeeName = employeeName;
-
-		String sql = "INSERT INTO " + tablename + "(Username, RoleName, Password, StaffName) " + "VALUES(\"" + EmployeeName + "\", \"" + Username + "\", \"" + password + "\", \"" + UserRole + "\");" ;
-		Statement statement = connection.createStatement();
-		statement.executeUpdate(sql);
+	public UserAccount(int employeeID,  String username, String userRole, String password, String employeeName) {
+		this.employeeID = employeeID;
+		this.userRole = userRole;
+		this.username = username;
+		this.password = password;
+		this.employeeName = employeeName;
 	}
-
-	public static void main(String[] args) throws SQLException {
-
-		// create a new user
-//		UserAccount root = new UserAccount("superuser", "root", "user", "n/a");
-
-		// adds users to a list
-		ArrayList<String[]> al = UserAccount.GetUserList();
-
-		// test to ensure correct alist format
-		for(String[] col: al){
-			for (String a: col){
-				System.out.println(a);
-
-			}
-		}
-
-	}
-
-
 }

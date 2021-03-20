@@ -1,45 +1,50 @@
 package GUI;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 public class AddNewTaskScreen extends Window {
 
-	private TextField NewTaskDescription;
-	private TextField NewTaskLocation;
-	private TextField NewTaskDuration;
-	private TextField NewTaskPrice;
-	/*
-	private Button CancelTask;
-	private Button ConfirmNewTask;
-	private Button Logout;
-	 */
+	@FXML
+	private TextField descriptionField;
+	@FXML
+	private TextField locationField;
+	@FXML
+	private TextField durationField;
+	@FXML
+	private TextField priceField;
+	@FXML
+	private Button cancelButton;
+	@FXML
+	private Button confirmButton;
 
-	public void ConfirmNewTask() {
-		// TODO - implement AddNewTaskScreen.ConfirmNewTask
-		throw new UnsupportedOperationException();
+	public void onConfirm() {
+		//save task
+		procUiController.showScreen("Tasks");
 	}
 
-	public void CancelNewTask() {
-		// TODO - implement AddNewTaskScreen.CancelNewTask
-		throw new UnsupportedOperationException();
+	public void onCancel() {
+		procUiController.showScreen("Tasks");
 	}
 
-	public void LogOut() {
-		// TODO - implement AddNewTaskScreen.LogOut
-		throw new UnsupportedOperationException();
+	public void onShow(){
+		super.onShow();
+		descriptionField.setText("");
+		durationField.setText("");
+		priceField.setText("");
+		locationField.setText("");
 	}
 
 	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param xSize
-	 * @param ySize
-	 * @param icon
+	 *
 	 */
-	public static AddNewTaskScreen AddNewTaskScreen(int x, int y, int xSize, int ySize, String icon) {
-		// TODO - implement AddNewTaskScreen.AddNewTaskScreen
-		throw new UnsupportedOperationException();
-	}
+	@FXML
+	public void initialize(){
+		super.initialize();
+		userAllowed = new String[]{ROLE_OFFICE_MANAGER};
 
+		cancelButton.setOnAction(actionEvent -> onCancel());
+		confirmButton.setOnAction(actionEvent -> onConfirm());
+	}
 }

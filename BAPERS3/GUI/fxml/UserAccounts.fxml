@@ -37,8 +37,8 @@
         <columns>
           <TableColumn fx:id="userIdColumn" prefWidth="147.33330726623535" text="User ID" />
           <TableColumn fx:id="staffNameColumn" prefWidth="325.3334503173828" text="Staff Name" />
-            <TableColumn fx:id="usernameColumn" prefWidth="330.6665954589844" text="Username" />
             <TableColumn fx:id="roleColumn" prefWidth="270.000020345052" text="Role Name" />
+            <TableColumn fx:id="usernameColumn" prefWidth="330.6665954589844" text="Username" />
         </columns>
       </TableView>
       <TextField layoutX="1094.0" layoutY="157.0" prefHeight="36.0" prefWidth="172.0" promptText="Search" style="-fx-border-style: solid;">

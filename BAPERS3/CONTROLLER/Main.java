@@ -25,12 +25,14 @@ public class Main extends Application {
 
     //map to store all screens as 'parent' class
     private Map<String, Parent> screens;
+    private Map<String, String> screenToController;
 
     //main class extends Application and overrides start()
     @Override
     public void start(Stage stage) throws Exception{
         this.stage = stage;
         screens = new HashMap<>();
+        screenToController = new HashMap<>();
 
         //setup the window
         //setting the title
@@ -48,32 +50,58 @@ public class Main extends Application {
         procUiController = new PROC_UI_Controller(this);
         uiController = new UI_Controller(this);
 
-        scene = new Scene(adminUiController.getLoginScreen().getParent());
+        scene = new Scene(adminUiController.getScreen("Login").getParent());
         stage.setScene(scene);
         stage.show();
     }
 
     //add screen to the map
-    public void addScreen(String name, Parent parent){
-        System.out.println(name);
+    public void addScreen(String name, Parent parent, String controllerName){
         screens.put(name, parent);
+        screenToController.put(name, controllerName);
     }
 
     //remove screen from the map
     public void removeScreen(String name){
         screens.remove(name);
+        screenToController.remove(name);
     }
 
     //show the screen existing in the map.
     //Instantiates the scene from the parent selected and sets it to the stage.
     public void showScreen(String name){
-        scene.setRoot(screens.get(name));
-        stage.show();
-    }
+        String controller = screenToController.get(name);
+        String userRole = adminUiController.getLoggedInUser().getUserRole();
 
-    //show screen when parent object is passed
-    public void showScreen(Parent parent){
-        scene.setRoot(parent);
+        if(controller.equals("ACCT") && acctUiController.getScreen(name).checkAccess(userRole)) {
+            acctUiController.getScreen(name).onShow();
+            scene.setRoot(screens.get(name));
+        }
+        if(controller.equals("ADMIN")){
+            if(name.equals("Login")){
+                adminUiController.getScreen(name).onShow();
+                scene.setRoot(screens.get(name));
+            }
+            else if(adminUiController.getScreen(name).checkAccess(userRole)){
+                adminUiController.getScreen(name).onShow();
+                scene.setRoot(screens.get(name));
+            }
+        }
+        if(controller.equals("PROC") && procUiController.getScreen(name).checkAccess(userRole)){
+            procUiController.getScreen(name).onShow();
+            scene.setRoot(screens.get(name));
+        }
+        if(controller.equals("UI")){
+            if(name.equals("HomeScreen")){
+                uiController.getScreen(name).onShow();
+                scene.setRoot(screens.get(name));
+            }
+            else if(uiController.getScreen(name).checkAccess(userRole)) {
+                uiController.getScreen(name).onShow();
+                scene.setRoot(screens.get(name));
+            }
+        }
+        System.out.println(" screen " + name + " role " + userRole);
         stage.show();
     }
 

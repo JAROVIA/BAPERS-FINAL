@@ -1,51 +1,42 @@
 package GUI;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 public class ReportsScreen extends Window {
 
-	/*
-	private Button LogOutButton;
-	private Button GenerateCustomerReportButton;
-	private Menu GenerationReportDropDownMenu;
-	private Button GenerateStaffReport;
-	private Button GenerateSummaryReport;
-	 */
-	private TextField AccountNumber;
-	private TextField InputDate;
-	private TextField InputShift;
+	@FXML
+	private Button generateCustomerReportButton;
+	@FXML
+	private ComboBox<String> reportGenerationBox;
+	@FXML
+	private Button generateStaffReportButton;
+	@FXML
+	private Button generateSummaryReportButton;
+	@FXML
+	private TextField accountNumberField;
+	@FXML
+	private TextField dateField;
+	@FXML
+	private TextField shiftField;
 
-	public void OnClick() {
-		// TODO - implement ReportsScreen.OnClick
-		throw new UnsupportedOperationException();
-	}
-
-	public void LogOut() {
-		// TODO - implement ReportsScreen.LogOut
-		throw new UnsupportedOperationException();
-	}
-
-	public void GenerateReport() {
+	public void generateReport() {
 		// TODO - implement ReportsScreen.GenerateReport
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param xSize
-	 * @param ySize
-	 * @param icon
-	 * @param Text
-	 * @param Button
-	 */
-	/*
-	public static ReportsScreen ReportsScreen(int x, int y, int xSize, int ySize, string icon, string Text, Button Button) {
-		// TODO - implement ReportsScreen.ReportsScreen
-		throw new UnsupportedOperationException();
+	public void onShow(){
+		super.onShow();
 	}
 
+	/**
+	 *
 	 */
-
+	@FXML
+	public void initialize(){
+		super.initialize();
+		userAllowed = new String[]{ROLE_OFFICE_MANAGER, ROLE_SHIFT_MANAGER};
+	}
 }
