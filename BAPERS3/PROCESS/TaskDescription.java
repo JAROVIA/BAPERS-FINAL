@@ -114,10 +114,11 @@ public class TaskDescription {
 //					" staffName: " + staffName;
 
 			tuple = TaskID + "`"
+					+ DescriptionOfTask + "`"
 					+ TaskLocation + "`"
 					+ TaskPrice + "`"
-					+ DescriptionOfTask + "`"
-					+ Duration;
+					+ Duration + "`"
+			;
 
 			arrayList.add(tuple.split("`"));
 
