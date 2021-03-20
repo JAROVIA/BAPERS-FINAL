@@ -20,7 +20,11 @@ public class TaskInAJob {
 	private String taskDeadline;
 	private int actualDuration;
 	private int isCompleted = 0;
+	private static ArrayList<String> sqlStatements = new ArrayList<>();
 
+	public static void addToSqlStatements(String sql) {
+		sqlStatements.add(sql);
+	}
 
 	static String url = "jdbc:mysql://localhost:3306/Bapers";
 	static String username = "jaroviadb";
@@ -37,7 +41,6 @@ public class TaskInAJob {
 	}
 
 
-	// 1 INSERT INTO Jobs 2 INSERT INTO TIJ 3 UPDATE TIJ
 	public static void UpdateJob(String columnToEdit, String newValue, String identifierOfTableToEdit, String identifierCurrentValue) throws SQLException {
 		String sql = "UPDATE TaskInAJob SET " + columnToEdit + " = " + newValue + " WHERE " + identifierOfTableToEdit + " = " + identifierCurrentValue + ";" ;
 		System.out.println(sql);
@@ -45,15 +48,17 @@ public class TaskInAJob {
 		statement.executeUpdate(sql);
 	}
 
-	// 1 INSERT INTO Jobs 2 INSERT INTO TIJ 3 UPDATE TIJ
 	public static void UpdateJob(String columnToEdit, int newValue, String identifierOfTableToEdit, int identifierCurrentValue) throws SQLException {
+
+		// TaskInAJob.UpdateJob("TaskPrice", 76, "TaskID", 1);
 		String sql = "UPDATE TaskInAJob SET " + columnToEdit + " = " + newValue + " WHERE " + identifierOfTableToEdit + " = " + identifierCurrentValue + ";" ;
 		System.out.println(sql);
 		System.out.println(sql);
 		Statement statement = connection.createStatement();
-		statement.executeUpdate(sql);	}
+		statement.executeUpdate(sql);
 
-	// 1 INSERT INTO Jobs 2 INSERT INTO TIJ 3 UPDATE TIJ
+	}
+
 	// you must create the object
 	public TaskInAJob(int jobID, int taskID, int accountNumber, String jobUrgency) throws SQLException {
 
@@ -109,59 +114,43 @@ public class TaskInAJob {
 		statement.executeUpdate(sql);
 	}
 
-	// 1 INSERT INTO Jobs 2 INSERT INTO TIJ 3 UPDATE TIJ
-	// you must create the object
-	public static String TaskInAJobString(int JobID, int taskID, int accountNumber, String jobUrgency) throws SQLException {
+	// "insert into tasks", runs when someone presses "insert task"
+	public static void TaskInAJobString(int JobID, int taskID, int accountNumber, String jobUrgency) throws SQLException {
+		/*possible bug is the taskID not changing when the user switches in the dropdown menu.
+		* solution will be to have each different dropdown call TaskDescription.setTaskID()
+		* and change it to the updated
+		* */
+
+		/*Clicking on a task from the dropdown should create a TaskDescription object. This would avoid the bug. */
+
+
 
 		String sql =
 		"INSERT INTO TaskInAJob (JobID, TaskID, AccountNumber, JobUrgency) VALUES ("
 		+ Job.getAccountNumber() + ", " + TaskDescription.getTaskIDStatic() + ", " + Job.getAccountNumber() + ", \"" + Job.getUrgency() + "\"" + ");";
 
-		return sql;
+		TaskInAJob.addToSqlStatements(sql);
+
+
 	}
 
-	// 1 INSERT INTO Jobs 2 INSERT INTO TIJ 3 UPDATE TIJ
-	public static void EnterTasksIntoJob(ObservableList<TaskDescription> data){
-		ArrayList<String> taskInsertsToJob = new ArrayList<>();
-//		taskInsertsToJob.add(TaskInAJobString(job.getJobID(), TaskDescription.getTaskIDStatic(), Job.getAccountNumber(), Job.getUrgency()));
-//	data.add()
+	//	This method should be called everytime the user selects insert job
+	public static void EnterTasksIntoJob() throws SQLException {
 
 
-// todo EnterTasksIntoJob
-//		data.add(TaskDescription)
-//		data.add()
+		for(String sqlInsert : sqlStatements){
+			System.out.println(sqlInsert);
+//			Statement statement = connection.createStatement();
+//			statement.executeUpdate(sqlInsert);
+		}
 	}
 
 	public static void main(String[] args) throws SQLException {
 
-//		TaskInAJob tij = new TaskInAJob(5,6,7,"URRRGEEENT");
-//		String pls = TaskInAJob(1, 1,Job.getAccountNumber(),"urgent");
-//		System.out.println(pls);
-
-		// create the job
 		Job job = new Job(9, "normal");
+		TaskInAJobString(Job.getJobID(), TaskDescription.getTaskIDStatic(), Job.getAccountNumber(), Job.getUrgency());
+		EnterTasksIntoJob();
 
-		// create a list of taskInserts for the job
-		ArrayList<String> taskInsertsToJob = new ArrayList<>();
-		taskInsertsToJob.add(TaskInAJobString(job.getJobID(), TaskDescription.getTaskIDStatic(), Job.getAccountNumber(), Job.getUrgency()));
-		for(String t : taskInsertsToJob){
-			System.out.println(t);
-
-		}
-
-		//execute the list of job inserts
-//		TaskInAJob.TaskInAJobString(job.getJobID(), TaskDescription.getTaskIDStatic(), Job.getUrgency())
-
-//		TaskInAJob.UpdateJob("TaskPrice", 76, "TaskID", 1);
-//		ArrayList<String[]> al = TaskInAJob.GetTIJList();
-//		System.out.println();
-//		// test to ensure correct alist format
-//		for(String[] col: al){
-//			for (String a: col){
-//				System.out.println(a);
-//
-//			}
-//		}
 	}
 
 

@@ -6,7 +6,7 @@ import java.util.Calendar;
 
 public class Job implements I_PROCESS {
 
-	private int JobID;
+	private static int JobID;
 	private static int AccountNumber;
 	private static String Urgency = "Normal";
 	//TODO set this type (was timestamp)
@@ -70,7 +70,6 @@ public class Job implements I_PROCESS {
 	}
 
 	public static int getJobID() {
-		// TODO - implement Job.getJobID
 		return JobID;
 	}
 

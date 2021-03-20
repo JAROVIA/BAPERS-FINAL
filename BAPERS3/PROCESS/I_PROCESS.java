@@ -31,7 +31,9 @@ public interface I_PROCESS {
 	 */
 	abstract boolean UpdateTask(String TaskData);
 
-	abstract int getJobID();
+	static int getJobID() {
+		return 0;
+	}
 
 	/**
 	 * 
