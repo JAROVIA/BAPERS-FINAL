@@ -158,7 +158,7 @@ public class TaskDescription {
 
 	public static void main(String[] args) throws SQLException {
 
-		TaskDescription.NewTask( "dddddddddd", 3, "ssssssssss", 360);
+		TaskDescription.NewTask( "D", 3, "S", 360);
 
 		ArrayList<String[]> al = TaskDescription.GetTaskList();
 		System.out.println();

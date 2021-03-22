@@ -119,3 +119,5 @@ out/production/BAPERS-FINAL/GUI/images/RestoreIcon.jpg
 *.iml
 out/*
 libs/
+.idea/
+BAPERS3/PROCESS/Testing.java

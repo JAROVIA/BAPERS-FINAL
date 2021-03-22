@@ -144,12 +144,23 @@ public class TaskInAJob {
 		* Clicking on a task from the dropdown should create a TaskDescription object. This would avoid the bug.
 		* */
 
-		String sql =
+		String insert =
 		"INSERT INTO TaskInAJob (JobID, TaskID, AccountNumber, JobUrgency) VALUES ("
-		+ Job.getAccountNumber() + ", " + TaskDescription.getTaskIDStatic() + ", " + Job.getAccountNumber() + ", \"" + Job.getUrgency() + "\"" + ");";
+		+ Job.getJobID() + ", " + TaskDescription.getTaskIDStatic() + ", " + Job.getAccountNumber() + ", \"" + Job.getUrgency() + "\"" + ");";
 
-		TaskInAJob.addToSqlStatements(sql);
+		// create update stm
+		String updateTasks =
+		  "UPDATE Jobs SET NumberOfTasks = " + (Job.getNumberOfTasks()+1) + " WHERE JobID = " + Job.getJobID()  + ";";
+		//"UPDATE Jobs SET NumberOfTasks = 1 WHERE JobID = 1;";
+		//"UPDATE TABLE Job SET (NumberOfTasks = Job.#tasks+1, Price = AUTOPRICEFIELDFROMJAVAFX) WHERE JobID = Job.getJobID();;";
 
+//		String updatePrice =
+//		"UPDATE Jobs SET Price = " + (/*ryo has this somewhere*/) + " WHERE JobID = " + Job.getJobID()  + ";";
+
+
+		TaskInAJob.addToSqlStatements(insert);
+		TaskInAJob.addToSqlStatements(updateTasks);
+//		TaskInAJob.addToSqlStatements(updatePrice);
 	}
 
 	//	This method should be called everytime the user selects insert job
@@ -165,15 +176,16 @@ public class TaskInAJob {
 
 		for(String sqlInsert : sqlStatements){
 			System.out.println(sqlInsert);
-//			Statement statement = connection.createStatement();
-//			statement.executeUpdate(sqlInsert);
+			Statement statement = connection.createStatement();
+			statement.executeUpdate(sqlInsert);
 		}
 	}
 
 	public static void main(String[] args) throws SQLException {
 
 		Job job = new Job(9, "normal");
-		CreateTIJInsertList(Job.getJobID(), TaskDescription.getTaskIDStatic(), Job.getAccountNumber(), Job.getUrgency());
+//		CreateTIJInsertList(Job.getJobID(), TaskDescription.getTaskIDStatic(), Job.getAccountNumber(), Job.getUrgency());
+		CreateTIJInsertList(job.getJobID(), TaskDescription.getTaskIDStatic(), job.getAccountNumber(), job.getUrgency());
 		EnterTasksIntoJob();
 
 	}

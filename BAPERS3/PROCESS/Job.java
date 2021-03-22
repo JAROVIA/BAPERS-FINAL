@@ -8,11 +8,11 @@ public class Job implements I_PROCESS {
 
 	private static int JobID;
 	private static int AccountNumber;
-	private static String Urgency = "Normal";
+	private static String Urgency = "normal";
 	//TODO set this type (was timestamp)
 	private String JobDeadline;
 	private String JobStatus = "Ordered";
-	private int NumberOfTasks = 0;
+	private static int NumberOfTasks = 0;
 	private int TasksCompleted = 0;
 	private String DateOfJob;
 	private int TaskProgress = 0;
@@ -31,6 +31,124 @@ public class Job implements I_PROCESS {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+
+	/**
+	 * Creates a Job object and adds it to the db.
+	 *
+	 * Should run when the confirm button on the page after create job order page is pressed.
+	 *
+	 * Needs the account number and urgency from the page after the create job button is pressed.
+	 * */
+	public Job(int AccountNumber, String Urgency) throws SQLException{
+		this.AccountNumber = AccountNumber;
+		this.Urgency = Urgency;
+		this.JobDeadline = JobDeadline;
+		this.JobStatus = JobStatus;
+		this.DateOfJob = DateOfJob;
+
+		java.util.Date date = new java.util.Date();
+		DateOfJob = date.toString();
+
+
+
+
+
+		/**
+		 * calendar code built up from https://stackoverflow.com/questions/18733582/calculating-a-future-date#18733637
+		 * */
+		if (Urgency == "normal"){
+			Calendar c = Calendar.getInstance(); // create calendar object
+			c.setTime(new java.util.Date()); //
+			c.add(Calendar.DATE, 1);
+			java.util.Date JobDeadlineDate = c.getTime();
+			JobDeadline = JobDeadlineDate.toString();
+		}
+		else if (Urgency == "urgent"){
+			Calendar c = Calendar.getInstance();
+			c.setTime(new java.util.Date());
+			c.add(Calendar.HOUR, 6);
+			java.util.Date JobDeadlineDate = c.getTime();
+			JobDeadline = JobDeadlineDate.toString();
+		}
+		else if (Urgency == "24 hours"){
+			Calendar c = Calendar.getInstance();
+			c.setTime(new java.util.Date());
+			c.add(Calendar.HOUR, 3);
+			java.util.Date JobDeadlineDate = c.getTime();
+			JobDeadline = JobDeadlineDate.toString();
+		}
+
+
+
+		String sql =
+				"INSERT INTO Jobs (AccountNumber, NumberOfTasks, DateOfJob, JobDeadline, JobUrgency, Price) Values("
+						+ AccountNumber + ", " + NumberOfTasks + ", \"" + DateOfJob + "\", \"" + JobDeadline + "\", \"" + Urgency + "\", " + JobPrice + ");";
+		System.out.println(sql);
+		Statement statement = connection.createStatement();
+		statement.executeUpdate(sql);
+
+		//need to set job id equal to the actual job id
+		String sqlSelect = "SELECT * FROM Jobs;"; /* SELECT * FROM Jobs WHERE IsArchived = 0; */
+		ResultSet resultSetForJobID = statement.executeQuery(sqlSelect);
+		while (resultSetForJobID.next()){
+			setJobID(resultSetForJobID.getInt("JobID"));
+		}
+
+
+	}
+
+	/**
+	 * Pulls a list of Jobs from the db
+	 * */
+	public static ArrayList<String[]> GetJobList() throws SQLException {
+		Statement statement = connection.createStatement();
+		String sql = "SELECT * FROM Jobs;"; /* SELECT * FROM Jobs WHERE IsArchived = 0; */
+		ResultSet resultSet = statement.executeQuery(sql);
+
+		ArrayList<String[]> arrayList = new ArrayList<String[]>();
+		String tuple;
+		// adding changes to an array list
+		while (resultSet.next()){
+
+			int JobID = resultSet.getInt("JobID");
+			int AccountNumber = resultSet.getInt("AccountNumber");
+			int NumberOfTasks = resultSet.getInt("NumberOfTasks");
+			String DateOfJob = resultSet.getString("DateOfJob");
+			String JobDeadline = resultSet.getString("JobDeadline");
+			String JobUrgency = resultSet.getString("JobUrgency");
+			int TasksCompleted = resultSet.getInt("TasksCompleted");
+			int IsCompleted = resultSet.getInt("IsCompleted");
+
+			tuple = JobID + "`"
+					+ AccountNumber + "`"
+					+ NumberOfTasks + "`"
+					+ DateOfJob + "`"
+					+ JobDeadline + "`"
+					+ JobUrgency + "`"
+					+ TasksCompleted + "`"
+					+ IsCompleted;
+
+			arrayList.add(tuple.split("`"));
+
+		}
+		return arrayList;
+	}
+
+	public static void main(String[] args) throws SQLException {
+
+//		Job job = new Job(7, "normal");
+//		ArrayList<String[]> al = PROCESS.Job.GetJobList();
+
+		// test to ensure correct alist format
+//		for(String[] col: al){
+//			for (String a: col){
+//				System.out.println(a);
+//
+//			}
+//		}
+
 	}
 
 	public boolean AddTaskToJob(String TaskData) {
@@ -57,9 +175,8 @@ public class Job implements I_PROCESS {
 		return JobID;
 	}
 
-	public int setJobID(int NewJobID) {
-		// TODO - implement Job.setJobID
-		throw new UnsupportedOperationException();
+	public static void setJobID(int jobID) {
+		JobID = jobID;
 	}
 
 	public String getJobStatus() {
@@ -138,9 +255,8 @@ public class Job implements I_PROCESS {
 
 	}
 
-	public int getNumberOfTasks() {
-		// TODO - implement Job.getNumberOfTasks
-		throw new UnsupportedOperationException();
+	public static int getNumberOfTasks() {
+		return NumberOfTasks;
 	}
 
 	public void setNumberOfTasks(int NumberOfTasks) {
@@ -165,109 +281,6 @@ public class Job implements I_PROCESS {
 		Urgency = urgency;
 	}
 
-	/**
-	 * Creates a Job object and adds it to the db.
-	 *
-	 * Should run when the confirm button on the page after create job order page is pressed.
-	 *
-	 * Needs the account number and urgency from the page after the create job button is pressed.
-	 * */
-	public Job(int AccountNumber, String Urgency) throws SQLException{
-		this.AccountNumber = AccountNumber;
-		this.Urgency = Urgency;
-		this.JobDeadline = JobDeadline;
-		this.JobStatus = JobStatus;
-		this.DateOfJob = DateOfJob;
-
-		java.util.Date date = new java.util.Date();
-		DateOfJob = date.toString();
-
-		/**
-		 * calendar code built up from https://stackoverflow.com/questions/18733582/calculating-a-future-date#18733637
-		 * */
-		if (Urgency == "normal"){
-			Calendar c = Calendar.getInstance(); // create calendar object
-			c.setTime(new java.util.Date()); //
-			c.add(Calendar.DATE, 1);
-			java.util.Date JobDeadlineDate = c.getTime();
-			JobDeadline = JobDeadlineDate.toString();
-		}
-		else if (Urgency == "urgent"){
-			Calendar c = Calendar.getInstance();
-			c.setTime(new java.util.Date());
-			c.add(Calendar.HOUR, 6);
-			java.util.Date JobDeadlineDate = c.getTime();
-			JobDeadline = JobDeadlineDate.toString();
-		}
-		else if (Urgency == "vurgent"){
-			Calendar c = Calendar.getInstance();
-			c.setTime(new java.util.Date());
-			c.add(Calendar.HOUR, 3);
-			java.util.Date JobDeadlineDate = c.getTime();
-			JobDeadline = JobDeadlineDate.toString();
-		}
-
-		String sql =
-		"INSERT INTO Jobs (AccountNumber, NumberOfTasks, DateOfJob, JobDeadline, JobUrgency, Price) Values("
-		+ AccountNumber + ", " + NumberOfTasks + ", \"" + DateOfJob + "\", \"" + JobDeadline + "\", \"" + Urgency + "\", " + JobPrice + ");";
-		System.out.println(sql);
-		Statement statement = connection.createStatement();
-		statement.executeUpdate(sql);
-	}
-
-	/**
-	 * Pulls a list of Jobs from the db
-	 * */
-	public static ArrayList<String[]> GetJobList() throws SQLException {
-		Statement statement = connection.createStatement();
-		String sql = "SELECT * FROM Jobs;"; /* SELECT * FROM Jobs WHERE IsArchived = 0; */
-		ResultSet resultSet = statement.executeQuery(sql);
-
-		ArrayList<String[]> arrayList = new ArrayList<String[]>();
-		String tuple;
-		// adding changes to an array list
-		while (resultSet.next()){
-
-			int JobID = resultSet.getInt("JobID");
-			int AccountNumber = resultSet.getInt("AccountNumber");
-			int NumberOfTasks = resultSet.getInt("NumberOfTasks");
-			String DateOfJob = resultSet.getString("DateOfJob");
-			String JobDeadline = resultSet.getString("JobDeadline");
-			String JobUrgency = resultSet.getString("JobUrgency");
-			int TasksCompleted = resultSet.getInt("TasksCompleted");
-			int IsCompleted = resultSet.getInt("IsCompleted");
-
-
-
-			tuple = JobID + "`"
-					+ AccountNumber + "`"
-					+ NumberOfTasks + "`"
-					+ DateOfJob + "`"
-					+ JobDeadline + "`"
-					+ JobUrgency + "`"
-					+ TasksCompleted + "`"
-					+ IsCompleted;
-
-			arrayList.add(tuple.split("`"));
-
-		}
-		return arrayList;
-	}
-
-	public static void main(String[] args) throws SQLException {
-
-		Job job = new Job(7, "normal");
-
-		// adds users to a list
-		ArrayList<String[]> al = PROCESS.Job.GetJobList();
-		// test to ensure correct alist format
-//		for(String[] col: al){
-//			for (String a: col){
-//				System.out.println(a);
-//
-//			}
-//		}
-	}
 
 
 	public static Job Job(int JobData, String Normal, Date Deadline, String JobStatus, int NumberOfTasks, float JobPrice) {
