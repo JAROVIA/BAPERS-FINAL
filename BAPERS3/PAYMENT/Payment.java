@@ -37,7 +37,7 @@ public class Payment implements I_Payment {
 		}
 	}
 
-	//apply discount method is needed asap. It should inside of the payment constructor
+	//apply discount method is needed asap. It should be called inside (update) of the payment constructor
 
 	public Payment(
 			int jobID, int accountNumber, float price, float discountedPrice, String dateOfPayment,
@@ -80,6 +80,9 @@ public class Payment implements I_Payment {
 		this.cardHolderName = cardHolderName;
 		this.cardLast4Digits = cardLast4Digits;
 		this.cvvc = cvvc;
+
+		java.util.Date date = new java.util.Date();
+		dateOfPayment = date.toString();
 
 		String sql =
 		"INSERT INTO Payment VALUES (" + jobID + ", " + accountNumber + ", " + price + ", " +

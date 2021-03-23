@@ -183,7 +183,7 @@ public class TaskInAJob {
 
 	public static void main(String[] args) throws SQLException {
 
-		Job job = new Job(9, "normal");
+		Job job = new Job(1, "vurgent");
 //		CreateTIJInsertList(Job.getJobID(), TaskDescription.getTaskIDStatic(), Job.getAccountNumber(), Job.getUrgency());
 		CreateTIJInsertList(job.getJobID(), TaskDescription.getTaskIDStatic(), job.getAccountNumber(), job.getUrgency());
 		EnterTasksIntoJob();

@@ -2,6 +2,7 @@ package PROCESS;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 
 public class Job implements I_PROCESS {
@@ -58,6 +59,7 @@ public class Job implements I_PROCESS {
 		/**
 		 * calendar code built up from https://stackoverflow.com/questions/18733582/calculating-a-future-date#18733637
 		 * */
+		//24h
 		if (Urgency == "normal"){
 			Calendar c = Calendar.getInstance(); // create calendar object
 			c.setTime(new java.util.Date()); //
@@ -65,6 +67,7 @@ public class Job implements I_PROCESS {
 			java.util.Date JobDeadlineDate = c.getTime();
 			JobDeadline = JobDeadlineDate.toString();
 		}
+		//6h
 		else if (Urgency == "urgent"){
 			Calendar c = Calendar.getInstance();
 			c.setTime(new java.util.Date());
@@ -72,7 +75,8 @@ public class Job implements I_PROCESS {
 			java.util.Date JobDeadlineDate = c.getTime();
 			JobDeadline = JobDeadlineDate.toString();
 		}
-		else if (Urgency == "24 hours"){
+		//3h
+		else if (Urgency == "vurgent"){
 			Calendar c = Calendar.getInstance();
 			c.setTime(new java.util.Date());
 			c.add(Calendar.HOUR, 3);
@@ -136,7 +140,144 @@ public class Job implements I_PROCESS {
 		return arrayList;
 	}
 
+	// any jobs within 2 hours of deadline
+	public static ArrayList<String[]> GetLateJobList() throws SQLException {
+		Statement statement = connection.createStatement();
+		String sql = "SELECT * FROM Jobs;"; /* SELECT * FROM Jobs WHERE IsArchived = 0; */
+		ResultSet resultSet = statement.executeQuery(sql);
+
+		ArrayList<String[]> arrayList = new ArrayList<String[]>();
+		String tuple;
+		// adding changes to an array list
+		while (resultSet.next()){
+
+			int JobID = resultSet.getInt("JobID");
+			int AccountNumber = resultSet.getInt("AccountNumber");
+			int NumberOfTasks = resultSet.getInt("NumberOfTasks");
+			String DateOfJob = resultSet.getString("DateOfJob"); // date of job order
+			String JobDeadline = resultSet.getString("JobDeadline"); // dependant on urgency
+			String JobUrgency = resultSet.getString("JobUrgency");
+			int TasksCompleted = resultSet.getInt("TasksCompleted");
+			int IsCompleted = resultSet.getInt("IsCompleted");
+
+
+			// im trying to check the current hour a job is due. vs the current system hour.
+
+			String FullDateNow = Calendar.getInstance().getTime().toString().substring(0,11);
+			String FullDateDue = JobDeadline.substring(0,11);
+
+			String hourNow = Calendar.getInstance().getTime().toString().substring(11,13);
+			String hourDue = JobDeadline.substring(11,13);
+			int hourDueInt = Integer.parseInt(hourDue);
+			// 1h before due time
+			int hourAlmostDueInt;
+
+			if (hourDueInt == 00){
+				hourAlmostDueInt = 24;
+			}
+			else {
+				hourAlmostDueInt = hourDueInt - 1;
+			}
+
+			String hourAlmostDue = String.valueOf(hourAlmostDueInt);
+
+			// can add year to make sure no duplication same time next year
+			if (FullDateNow.equals(FullDateDue) && ( hourNow.equals(hourDue) || hourNow.equals(hourAlmostDue) )){
+
+			tuple =
+				JobID + "`"
+				+ AccountNumber + "`"
+				+ NumberOfTasks + "`"
+				+ DateOfJob + "`"
+				+ JobDeadline + "`"
+				+ JobUrgency + "`"
+				+ TasksCompleted + "`"
+				+ IsCompleted;
+
+				arrayList.add(tuple.split("`"));
+
+			}
+
+		}
+		return arrayList;
+	}
+
+	public static boolean AreLateJobs() throws SQLException {
+		Statement statement = connection.createStatement();
+		String sql = "SELECT * FROM Jobs;"; /* SELECT * FROM Jobs WHERE IsArchived = 0; */
+		ResultSet resultSet = statement.executeQuery(sql);
+
+		ArrayList<String[]> arrayList = new ArrayList<String[]>();
+		String tuple;
+		boolean bool;
+		// adding changes to an array list
+
+		while (resultSet.next()){
+
+			int JobID = resultSet.getInt("JobID");
+			int AccountNumber = resultSet.getInt("AccountNumber");
+			int NumberOfTasks = resultSet.getInt("NumberOfTasks");
+			String DateOfJob = resultSet.getString("DateOfJob"); // date of job order
+			String JobDeadline = resultSet.getString("JobDeadline"); // dependant on urgency
+			String JobUrgency = resultSet.getString("JobUrgency");
+			int TasksCompleted = resultSet.getInt("TasksCompleted");
+			int IsCompleted = resultSet.getInt("IsCompleted");
+
+
+			// im trying to check the current hour a job is due. vs the current system hour.
+
+			String FullDateNow = Calendar.getInstance().getTime().toString().substring(0,11);
+			String FullDateDue = JobDeadline.substring(0,11);
+
+			String hourNow = Calendar.getInstance().getTime().toString().substring(11,13);
+			String hourDue = JobDeadline.substring(11,13);
+			int hourDueInt = Integer.parseInt(hourDue);
+			// 1h before due time
+			int hourAlmostDueInt;
+
+			if (hourDueInt == 00){
+				hourAlmostDueInt = 24;
+			}
+			else {
+				hourAlmostDueInt = hourDueInt - 1;
+			}
+
+			String hourAlmostDue = String.valueOf(hourAlmostDueInt);
+
+			// can add year to make sure no duplication same time next year
+			if (FullDateNow.equals(FullDateDue) && ( hourNow.equals(hourDue) || hourNow.equals(hourAlmostDue) )){
+
+				tuple =
+						JobID + "`"
+								+ AccountNumber + "`"
+								+ NumberOfTasks + "`"
+								+ DateOfJob + "`"
+								+ JobDeadline + "`"
+								+ JobUrgency + "`"
+								+ TasksCompleted + "`"
+								+ IsCompleted;
+
+				arrayList.add(tuple.split("`"));
+
+			}
+
+		}
+
+
+		bool = !arrayList.isEmpty();
+//		boolean bool = tuple.isEmpty();
+		return bool;
+	}
+
 	public static void main(String[] args) throws SQLException {
+
+//		ArrayList<String[]> test = Job.GetLateJobList();
+//		for (String[] iter : test){
+//			System.out.println(Arrays.toString(iter));
+//
+//		}
+
+		System.out.println(Job.AreLateJobs());
 
 //		Job job = new Job(7, "normal");
 //		ArrayList<String[]> al = PROCESS.Job.GetJobList();
