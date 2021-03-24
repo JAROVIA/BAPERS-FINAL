@@ -75,7 +75,7 @@ public class CreateJobScreen extends Window {
 		//get all tasks operable by BIPL
 		try {
 			for(String[] sa : TaskDescription.GetTaskList()){
-				TaskDescription taskDescription = new TaskDescription(sa[1], Integer.parseInt(sa[2]), sa[3], Integer.parseInt(sa[4]));
+				TaskDescription taskDescription = new TaskDescription(sa[1], Integer.parseInt(sa[3]), sa[2], Integer.parseInt(sa[4]));
 				list.add(taskDescription);
 			}
 		} catch(SQLException e){

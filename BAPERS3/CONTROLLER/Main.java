@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -72,37 +74,44 @@ public class Main extends Application {
     public void showScreen(String name){
         String controller = screenToController.get(name);
         String userRole = adminUiController.getLoggedInUser().getUserRole();
+        Window gui = null;
+        boolean isAccessible = true;
 
-        if(controller.equals("ACCT") && acctUiController.getScreen(name).checkAccess(userRole)) {
-            acctUiController.getScreen(name).onShow();
+        if(name.equals("Login")){
+            gui = adminUiController.getScreen(name);
+        }
+        else if(name.equals("HomeScreen")){
+            gui = uiController.getScreen(name);
+        }
+        else {
+            if (controller.equals("ACCT")) {
+                isAccessible = acctUiController.getScreen(name).checkAccess(userRole);
+                gui = acctUiController.getScreen(name);
+            } else if (controller.equals("ADMIN")) {
+                isAccessible = adminUiController.getScreen(name).checkAccess(userRole);
+                gui = adminUiController.getScreen(name);
+            } else if (controller.equals("PROC")) {
+                isAccessible = procUiController.getScreen(name).checkAccess(userRole);
+                gui = procUiController.getScreen(name);
+            } else if (controller.equals("UI")) {
+                isAccessible = uiController.getScreen(name).checkAccess(userRole);
+                gui = uiController.getScreen(name);
+            }
+        }
+        if (isAccessible) {
             scene.setRoot(screens.get(name));
+            gui.onShow();
         }
-        if(controller.equals("ADMIN")){
-            if(name.equals("Login")){
-                adminUiController.getScreen(name).onShow();
-                scene.setRoot(screens.get(name));
+        else {
+            StringBuilder message = new StringBuilder("Your role is : ")
+                    .append(userRole)
+                    .append(", access denied.\nRequired role;");
+            for (String allowedRoles : gui.getUserAllowed()) {
+                message.append("\n").append(allowedRoles);
             }
-            else if(adminUiController.getScreen(name).checkAccess(userRole)){
-                adminUiController.getScreen(name).onShow();
-                scene.setRoot(screens.get(name));
-            }
+            Alert alert = new Alert(Alert.AlertType.NONE, message.toString(), ButtonType.CLOSE);
+            alert.show();
         }
-        if(controller.equals("PROC") && procUiController.getScreen(name).checkAccess(userRole)){
-            procUiController.getScreen(name).onShow();
-            scene.setRoot(screens.get(name));
-        }
-        if(controller.equals("UI")){
-            if(name.equals("HomeScreen")){
-                uiController.getScreen(name).onShow();
-                scene.setRoot(screens.get(name));
-            }
-            else if(uiController.getScreen(name).checkAccess(userRole)) {
-                uiController.getScreen(name).onShow();
-                scene.setRoot(screens.get(name));
-            }
-        }
-        System.out.println(" screen " + name + " role " + userRole);
-        stage.show();
     }
 
     public Scene getScene(){return scene;}

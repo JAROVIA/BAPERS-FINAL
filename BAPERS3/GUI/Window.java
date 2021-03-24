@@ -18,6 +18,10 @@ public abstract class Window{
 	protected UI_Controller uiController = null;
 	protected Parent parent;
 
+	public String[] getUserAllowed() {
+		return userAllowed;
+	}
+
 	protected String[] userAllowed;
 	protected final String ROLE_OFFICE_MANAGER = "Office Manager";
 	protected final String ROLE_SHIFT_MANAGER = "Shift Manager";
@@ -144,12 +148,12 @@ public abstract class Window{
 	public boolean checkAccess(String userRole){
 		boolean isAllowed = false;
 		for(String user : userAllowed){
-			System.out.println("role: " + userRole + " = " + user + ", access: " + isAllowed);
 			if(user.equals(userRole)){
 				isAllowed = true;
 				break;
 			}
 		}
+		System.out.println("role: " + userRole + ", access: " + isAllowed);
 		return  isAllowed;
 	}
 
