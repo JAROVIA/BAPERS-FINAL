@@ -19,6 +19,9 @@ public class Job implements I_PROCESS {
 	private int TaskProgress = 0;
 	private float JobPrice = 0;
 	private int IsCompleted = 0;
+	private static String jobInsert;
+	private static String sqlStatement;
+
 
 	static String url = "jdbc:mysql://localhost:3306/Bapers";
 	static String username = "jaroviadb";
@@ -34,6 +37,9 @@ public class Job implements I_PROCESS {
 		}
 	}
 
+	public static String getJobInsert() {
+		return jobInsert;
+	}
 
 	/**
 	 * Creates a Job object and adds it to the db.
@@ -45,9 +51,6 @@ public class Job implements I_PROCESS {
 	public Job(int AccountNumber, String Urgency) throws SQLException{
 		this.AccountNumber = AccountNumber;
 		this.Urgency = Urgency;
-		this.JobDeadline = JobDeadline;
-		this.JobStatus = JobStatus;
-		this.DateOfJob = DateOfJob;
 
 		java.util.Date date = new java.util.Date();
 		DateOfJob = date.toString();
@@ -91,16 +94,53 @@ public class Job implements I_PROCESS {
 						+ AccountNumber + ", " + NumberOfTasks + ", \"" + DateOfJob + "\", \"" + JobDeadline + "\", \"" + Urgency + "\", " + JobPrice + ");";
 		System.out.println(sql);
 		Statement statement = connection.createStatement();
-		statement.executeUpdate(sql);
+		jobInsert = sql;
+//		statement.executeUpdate(sql);
 
 		//need to set job id equal to the actual job id
+//		String sqlSelect = "SELECT * FROM Jobs;"; /* SELECT * FROM Jobs WHERE IsArchived = 0; */
+//		ResultSet resultSetForJobID = statement.executeQuery(sqlSelect);
+//		while (resultSetForJobID.next()){
+//			setJobID(resultSetForJobID.getInt("JobID"));
+//		}
+		// job id should be set after we call the insert
+	}
+
+	public static void DeleteLastJob() throws SQLException {
+		String sql = "DELETE FROM Jobs WHERE JobID = " + Job.getJobID() + ";";
+		Statement statement = connection.createStatement();
+		System.out.println(sql);
+		statement.executeUpdate(sql);
+
+	}
+
+	// call when pressinnext on setup page
+	public static void EnterJob() throws SQLException {
+		System.out.println("INSERTING JOB");
+
+
+		// should call the insert into Job
+		// execute the stm
+
+		Statement statement = connection.createStatement();
+		statement.executeUpdate(jobInsert);
+
+
+	}
+
+	// call after pressing save details. runs before the insert statements
+	public static void setJobIDFromDB() throws SQLException {
+		System.out.println("setting job id");
+
+		// should set the job id to the most recent job id
+		Statement statement1 = connection.createStatement();
 		String sqlSelect = "SELECT * FROM Jobs;"; /* SELECT * FROM Jobs WHERE IsArchived = 0; */
-		ResultSet resultSetForJobID = statement.executeQuery(sqlSelect);
+		ResultSet resultSetForJobID = statement1.executeQuery(sqlSelect);
 		while (resultSetForJobID.next()){
 			setJobID(resultSetForJobID.getInt("JobID"));
+			System.out.print("SETTING JOB ID:                ");
+			System.out.println(resultSetForJobID.getInt("JobID"));
 		}
-
-
 	}
 
 	/**

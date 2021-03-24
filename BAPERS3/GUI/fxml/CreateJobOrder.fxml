@@ -107,7 +107,7 @@
                </image>
             </ImageView>
             <Label fx:id="jobPriceLabel" layoutX="607.0" layoutY="330.0" prefHeight="27.0" prefWidth="101.0" style="-fx-background-color: white; -fx-border-color: black;" text="Display Job Price" />
-            <Button layoutX="359.0" layoutY="374.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" style="-fx-background-color: #95ed82; -fx-border-color: Black;" text="Save Details">
+            <Button layoutX="359.0" fx:id="saveDetailsButton" layoutY="374.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" style="-fx-background-color: #95ed82; -fx-border-color: Black;" text="Save Details">
                <font>
                   <Font name="System Bold" size="9.0" />
                </font>

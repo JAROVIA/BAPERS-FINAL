@@ -1,5 +1,6 @@
 package GUI;
 
+import PAYMENT.Payment;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -21,8 +22,9 @@ public class RecordPaymentScreen extends Window {
 	private Button confirmButton;
 
 	public void savePayment() {
-		// TODO - implement RecordPaymentScreen.SavePayment
-		throw new UnsupportedOperationException();
+
+//		Payment payment = new Payment()
+
 	}
 
 	public void cancelRecord() {

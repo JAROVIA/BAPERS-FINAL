@@ -1,5 +1,6 @@
 package GUI;
 
+import PROCESS.Job;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -31,6 +32,19 @@ public class CreateJobSetupScreen  extends Window{
 
     private void onNext(){
         procUiController.showScreen("CreateJobOrder");
+
+        try{
+            Job job = new Job(Integer.parseInt(accountNumberField.getText()), urgencyBox.getValue());
+            Job.EnterJob();
+            Job.setJobIDFromDB();
+        }catch (Exception e){
+            System.out.println(e.toString());
+        }
+
+
+
+
+
     }
 
     public void onShow(){
@@ -42,7 +56,7 @@ public class CreateJobSetupScreen  extends Window{
     public void initialize(){
         super.initialize();
         userAllowed = new String[]{ROLE_OFFICE_MANAGER, ROLE_SHIFT_MANAGER, ROLE_RECEPTIONIST};
-        urgencyBox.getItems().addAll("3 hours", "6 hours", "24 hours");
+        urgencyBox.getItems().addAll("vurgent", "urgent", "normal");
         searchButton.setOnAction(actionEvent -> onSearch());
         nextButton.setOnAction(actionEvent -> onNext());
         cancelButton.setOnAction(actionEvent -> onCancel());

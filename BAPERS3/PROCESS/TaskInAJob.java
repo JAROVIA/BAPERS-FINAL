@@ -6,6 +6,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import static PROCESS.Job.setJobID;
+
 public class TaskInAJob {
 
 
@@ -21,6 +23,7 @@ public class TaskInAJob {
 	private int actualDuration;
 	private int isCompleted = 0;
 	private static ArrayList<String> sqlStatements = new ArrayList<>();
+	private static int newSize;
 
 	/**
 	 * adds to the list of sql insert statements. This runs when you press th insert task button
@@ -43,6 +46,13 @@ public class TaskInAJob {
 		}
 	}
 
+	public static int getNewSize() {
+		return newSize;
+	}
+
+	public static void setNewSize(int newSize) {
+		TaskInAJob.newSize = newSize;
+	}
 
 	/**
 	 * When we first add a task to a job the task (within TaskInAJob table) will have default values for some
@@ -144,13 +154,22 @@ public class TaskInAJob {
 		* Clicking on a task from the dropdown should create a TaskDescription object. This would avoid the bug.
 		* */
 
+
+
 		String insert =
 		"INSERT INTO TaskInAJob (JobID, TaskID, AccountNumber, JobUrgency) VALUES ("
 		+ Job.getJobID() + ", " + TaskDescription.getTaskIDStatic() + ", " + Job.getAccountNumber() + ", \"" + Job.getUrgency() + "\"" + ");";
 
+		System.out.print("JOBID>:                          ");
+		System.out.println(Job.getJobID());
+
 		// create update stm
+//		String updateTasks =
+//	  	"UPDATE Jobs SET NumberOfTasks = " + (Job.getNumberOfTasks()+1) + " WHERE JobID = " + Job.getJobID()  + ";";
+
 		String updateTasks =
-		  "UPDATE Jobs SET NumberOfTasks = " + (Job.getNumberOfTasks()+1) + " WHERE JobID = " + Job.getJobID()  + ";";
+		"UPDATE Jobs SET NumberOfTasks = " + ( 1 + (sqlStatements.size()/2)) + " WHERE JobID = " + Job.getJobID()  + ";";
+
 		//"UPDATE Jobs SET NumberOfTasks = 1 WHERE JobID = 1;";
 		//"UPDATE TABLE Job SET (NumberOfTasks = Job.#tasks+1, Price = AUTOPRICEFIELDFROMJAVAFX) WHERE JobID = Job.getJobID();;";
 
@@ -158,7 +177,10 @@ public class TaskInAJob {
 //		"UPDATE Jobs SET Price = " + (/*ryo has this somewhere*/) + " WHERE JobID = " + Job.getJobID()  + ";";
 
 
+		System.out.println("adding insert");
+		System.out.println("> ");
 		TaskInAJob.addToSqlStatements(insert);
+		System.out.println("adding update");
 		TaskInAJob.addToSqlStatements(updateTasks);
 //		TaskInAJob.addToSqlStatements(updatePrice);
 	}
@@ -174,18 +196,20 @@ public class TaskInAJob {
 	public static void EnterTasksIntoJob() throws SQLException {
 
 
+		setNewSize(sqlStatements.size());
+		System.out.println("#statements = " + sqlStatements.size());
 		for(String sqlInsert : sqlStatements){
 			System.out.println(sqlInsert);
 			Statement statement = connection.createStatement();
 			statement.executeUpdate(sqlInsert);
+			System.out.println("ENTERING");
 		}
 	}
 
 	public static void main(String[] args) throws SQLException {
 
 		Job job = new Job(1, "vurgent");
-//		CreateTIJInsertList(Job.getJobID(), TaskDescription.getTaskIDStatic(), Job.getAccountNumber(), Job.getUrgency());
-		CreateTIJInsertList(job.getJobID(), TaskDescription.getTaskIDStatic(), job.getAccountNumber(), job.getUrgency());
+		CreateTIJInsertList(Job.getJobID(), TaskDescription.getTaskIDStatic(), Job.getAccountNumber(), Job.getUrgency());
 		EnterTasksIntoJob();
 
 	}

@@ -4,6 +4,7 @@ import PROCESS.Job;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 
 public class Payment implements I_Payment {
@@ -91,6 +92,14 @@ public class Payment implements I_Payment {
 		Statement statement = connection.createStatement();
 		statement.executeUpdate(sql);
 
+	}
+
+	public static void main(String[] args) throws SQLException {
+		ArrayList<String[]> list = Payment.GetLatePayments();
+		for(String[] l: list){
+			Arrays.toString(l);
+
+		}
 	}
 
 	public static ArrayList<String[]> GetPaymentList() throws SQLException {

@@ -16,6 +16,9 @@ import javafx.util.Callback;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import static PROCESS.TaskInAJob.CreateTIJInsertList;
+import static PROCESS.TaskInAJob.EnterTasksIntoJob;
+
 public class CreateJobScreen extends Window {
 
 	/*
@@ -35,6 +38,8 @@ public class CreateJobScreen extends Window {
 	private Button insertTaskButton;
 	@FXML
 	private Button deleteButton;
+	@FXML
+	private Button saveDetailsButton;
 	@FXML
 	private Button cancelButton;
 	@FXML
@@ -63,11 +68,22 @@ public class CreateJobScreen extends Window {
 
 	public void onCancel() {
 		procUiController.showScreen("Jobs");
+		try {
+			Job.DeleteLastJob();
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
 	}
 
 	public void confirmJob() {
-		// TODO - implement CreateJobScreen.ConfirmJob
-		throw new UnsupportedOperationException();
+
+		try {
+
+			EnterTasksIntoJob();
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+
 	}
 
 	public void onShow(){
@@ -106,8 +122,19 @@ public class CreateJobScreen extends Window {
 			}
 			jobPriceLabel.setText(String.format("%.2f", total));
 		}
+
+		try {
+			CreateTIJInsertList(Job.getJobID(), TaskDescription.getTaskIDStatic(), Job.getAccountNumber(), Job.getUrgency());
+		}
+		catch (Exception e){
+			System.out.println(e.toString());
+		}
+
+
+
 	}
 
+	// todo
 	public void deleteTask(){
 		int id = taskTable.getSelectionModel().getSelectedIndex();
 		System.out.println(id);
@@ -135,7 +162,7 @@ public class CreateJobScreen extends Window {
 		deleteButton.setOnAction(actionEvent -> deleteTask());
 		insertTaskButton.setOnAction(actionEvent -> addTaskToJob());
 		cancelButton.setOnAction(actionEvent -> onCancel());
-
+		saveDetailsButton.setOnAction(actionEvent -> confirmJob());
 		taskIdColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TaskDescription, Number>, ObservableValue<Number>>() {
 			@Override
 			public ObservableValue<Number> call(TableColumn.CellDataFeatures<TaskDescription, Number> property) {
