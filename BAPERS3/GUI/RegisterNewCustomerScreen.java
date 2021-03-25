@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.util.Callback;
 
 import java.sql.SQLException;
@@ -28,6 +29,10 @@ public class RegisterNewCustomerScreen extends Window {
 	private TextField address2Field;
 	@FXML
 	private TextField postcodeField;
+	@FXML
+	private TextField emailField;
+	@FXML
+	private TextField contactNameField;
 	@FXML
 	private ComboBox<String> discountBox;
 	@FXML
@@ -63,9 +68,58 @@ public class RegisterNewCustomerScreen extends Window {
 	 * method invoked on submit button click
 	 * compiles all inputs and saves it in the database
 	 */
-	private boolean onSubmit() {
-		// TODO - implement RegisterNewCustomerScreen.Submit
-		throw new UnsupportedOperationException();
+	private void onSubmit() {
+		//make sure inputs are correct
+		//listing boolean so easier to see
+		boolean isNameEmpty = nameField.getText().trim().isEmpty();
+		boolean isPostcodeEmpty = postcodeField.getText().trim().isEmpty();
+		boolean isAddress1Empty = address1Field.getText().trim().isEmpty();
+		boolean isAddress2Empty = address2Field.getText().trim().isEmpty();
+		boolean isContactNameEmpty = contactNameField.getText().trim().isEmpty();
+		boolean isEmailEmpty = emailField.getText().trim().isEmpty();
+		boolean isPhoneInt = isStringInt(phoneField.getText());
+		boolean isValued = discountBox.getValue().equals("none");
+
+		//check inputs are correct
+		if(isPhoneInt && !isNameEmpty && !isContactNameEmpty && !isEmailEmpty && !isAddress1Empty && !isAddress2Empty && !isPostcodeEmpty){
+			//TODO submit
+		}
+		else {
+			String message = "The following fields have incorrect format;";
+			if (!isPhoneInt) {
+				message += "\nphone number";
+			}
+			if (isNameEmpty) {
+				message += "\nName";
+			}
+			if (isPostcodeEmpty) {
+				message += "\npost code";
+			}
+			if (isAddress1Empty) {
+				message += "\naddress 1";
+			}
+			if (isAddress2Empty) {
+				message += "\naddress 2";
+			}
+			if(isContactNameEmpty){
+				message += "\ncontact name";
+			}
+			if(isEmailEmpty){
+				message += "\nemail";
+			}
+		}
+
+		//if discount was selected
+		//also check inputs are correct
+		if(isValued) {
+			if (discountBox.getValue().equals(DISCOUNT_FLEX)) {
+			}
+			if (discountBox.getValue().equals(DISCOUNT_FIXED)) {
+			}
+			if (discountBox.getValue().equals(DISCOUNT_VAR)) {
+			}
+		}
+
 	}
 
 	/**
@@ -305,6 +359,10 @@ public class RegisterNewCustomerScreen extends Window {
 		bandField.setStyle("visibility : hidden;");
 		discountRateField.setStyle("visibility : hidden;");
 		discountRateLabel.setStyle("visibility : hidden;");
+
+		addIntegerNumberListener(discountRateField);
+		addIntegerNumberListener(bandField);
+		addIntegerNumberListener(phoneField);
 
 		discountBox.getItems().addAll("none", DISCOUNT_FIXED, DISCOUNT_FLEX, DISCOUNT_VAR);
 		discountBox.setOnAction(actionEvent -> onDiscountSelect());

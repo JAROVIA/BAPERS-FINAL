@@ -1,13 +1,21 @@
 package GUI;
 
 import CONTROLLER.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
+
+import javax.xml.stream.EventFilter;
+import javax.xml.stream.events.XMLEvent;
 import java.io.IOException;
 
 public abstract class Window{
@@ -93,6 +101,66 @@ public abstract class Window{
 
 	public Parent getParent(){
 		return parent;
+	}
+
+	/**
+	 * used for text fields with numeric input, only allows integer numeric characters
+	 */
+	protected void addIntegerNumberListener(TextField tf){
+		tf.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observableValue, String oldText, String newText) {
+				if(!newText.matches("[0-9]*") || newText.length() > 10 ){
+					tf.setText(oldText);
+				}
+			}
+		});
+	}
+
+	/**
+	 * Tests if a string input can be parsed as an integer
+	 * Uses exception therefore should not be abused
+	 * @param stringToParse string to be converted to an integer
+	 * @return returns if string can be parsed as an integer
+	 */
+	protected boolean isStringInt(String stringToParse){
+		try{
+			Integer.parseInt(stringToParse);
+			return true;
+		}
+		catch (NumberFormatException e){
+			return false;
+		}
+	}
+
+	/**
+	 * used for text fields with numeric input, only allows numeric characters
+	 */
+	protected void addFloatNumberListener(TextField tf){
+		tf.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observableValue, String oldText, String newText) {
+				if(!newText.matches("[0-9]*\\.?([0-9]*)") || newText.length() > 10){
+					tf.setText(oldText);
+				}
+			}
+		});
+	}
+
+	/**
+	 * Tests if a string input can be parsed as a float
+	 * Uses exception therefore should not be abused
+	 * @param stringToParse string to be converted to a float
+	 * @return returns if string can be parsed as a float
+	 */
+	protected boolean isStringFloat(String stringToParse){
+		try{
+			Float.parseFloat(stringToParse);
+			return true;
+		}
+		catch (NumberFormatException e){
+			return false;
+		}
 	}
 
 	/**

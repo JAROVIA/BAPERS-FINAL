@@ -1,6 +1,9 @@
 package GUI;
 
+import ADMIN.AlertUser;
+import PROCESS.Job;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 
 import java.sql.SQLException;
@@ -53,7 +56,13 @@ public class HomeScreen extends Window {
 
 	public void onShow(){
 		super.onShow();
-		System.out.println("username " + uiController.getLoggedInUser().getUsername() +"'s role is " + uiController.getLoggedInUser().getUserRole());
+
+		if(uiController.getLoggedInUser().getAlert() != null && uiController.getLoggedInUser().getAlert().size() > 0){
+			for(AlertUser alert : uiController.getLoggedInUser().getAlert()){
+				System.out.println("showing alert");
+				alert.showAlert();
+			}
+		}
 	}
 
 	/**

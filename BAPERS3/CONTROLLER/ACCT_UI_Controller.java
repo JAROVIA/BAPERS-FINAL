@@ -76,7 +76,6 @@ public class ACCT_UI_Controller {
 
 	//constructor
 	public ACCT_UI_Controller(Main main) throws IOException {
-		// TODO - implement ACCT_UI_Controller.ACCT_UI_Controller
 
 		this.main = main;
 		screens = new HashMap<>();
@@ -93,18 +92,6 @@ public class ACCT_UI_Controller {
 			main.addScreen(entry.getKey(), entry.getValue().getParent(), "ACCT");
 			entry.getValue().setAcctUiController(this);
 		}
-
-		/*
-		main.addScreen(editCustomerFxml, editCustomerDetailsScreen.getParent());
-		editCustomerDetailsScreen.setAcctUiController(this);
-
-		main.addScreen(registerCustomerFxml, registerNewCustomerScreen.getParent());
-		registerNewCustomerScreen.setAcctUiController(this);
-
-		main.addScreen(customerFxml, customerAccountScreen.getParent());
-		customerAccountScreen.setAcctUiController(this);
-
-		 */
 
 		//get implementation class from interface
 		customerAccountHandler = new Impl_CustomerAccount();

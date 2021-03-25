@@ -59,7 +59,15 @@ public class CustomerAccountScreen extends Window {
 	 * 
 	 * @param CustomerAccDetails
 	 */
+	/*
+	cant use this
 	public CustomerAccountDetails searchCustomerAcc(String CustomerAccDetails) {
+		// TODO - implement CustomerAccountScreen.SearchCustomerAcc
+		throw new UnsupportedOperationException();
+	}
+	 */
+
+	public String[] searchCustomerAcc(String customerData) {
 		// TODO - implement CustomerAccountScreen.SearchCustomerAcc
 		throw new UnsupportedOperationException();
 	}
@@ -102,58 +110,6 @@ public class CustomerAccountScreen extends Window {
 		editCustomerButton.setOnAction(actionEvent -> toEditCustomer());
 		processTasksButton.setOnAction(actionEvent -> toProcessTasks());
 		registerNewCustomerButton.setOnAction(actionEvent -> toRegisterNewCustomer());
-
-		/*
-		accountNumberColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<CustomerAccountDetails, Number>, ObservableValue<Number>>() {
-			@Override
-			public ObservableValue<Number> call(TableColumn.CellDataFeatures<CustomerAccountDetails, Number> property) {
-				return new SimpleIntegerProperty((property.getValue().getAccountNumber()));
-			}
-		});
-
-		discountPercentColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<CustomerAccountDetails, Integer>, ObservableValue<Integer>>() {
-			@Override
-			public ObservableValue<Integer> call(TableColumn.CellDataFeatures<CustomerAccountDetails, Integer> property) {
-				return new SimpleIntegerProperty((property.getValue().getAccountNumber())).asObject();
-			}
-		});
-
-		phoneColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<CustomerAccountDetails, Number>, ObservableValue<Number>>() {
-			@Override
-			public ObservableValue<Number> call(TableColumn.CellDataFeatures<CustomerAccountDetails, Number> property) {
-				return new SimpleLongProperty((property.getValue()));
-			}
-		});
-
-		userNameColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<CustomerAccountDetails, String>, ObservableValue<String>>() {
-			@Override
-			public ObservableValue<String> call(TableColumn.CellDataFeatures<CustomerAccountDetails, String> property) {
-				return new SimpleStringProperty((property.getValue().getUserName()));
-			}
-		});
-
-		accountStatusColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<CustomerAccountDetails, String>, ObservableValue<String>>() {
-			@Override
-			public ObservableValue<String> call(TableColumn.CellDataFeatures<CustomerAccountDetails, String> property) {
-				return new SimpleStringProperty((property.getValue().getAccountStatus()));
-			}
-		});
-
-		addressColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<CustomerAccountDetails, String>, ObservableValue<String>>() {
-			@Override
-			public ObservableValue<String> call(TableColumn.CellDataFeatures<CustomerAccountDetails, String> property) {
-				return new SimpleStringProperty((property.getValue().getUserName()));
-			}
-		});
-
-		agreedDiscountColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<CustomerAccountDetails, String>, ObservableValue<String>>() {
-			@Override
-			public ObservableValue<String> call(TableColumn.CellDataFeatures<CustomerAccountDetails, String> property) {
-				return new SimpleStringProperty((property.getValue().getUserName()));
-			}
-		});
-
-		 */
 	}
 
 }

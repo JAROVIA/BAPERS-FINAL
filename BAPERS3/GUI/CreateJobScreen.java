@@ -21,19 +21,10 @@ import static PROCESS.TaskInAJob.EnterTasksIntoJob;
 
 public class CreateJobScreen extends Window {
 
-	/*
-	private Button LogOutButton;
-	private Button CreateCustomerAccButton;
-	private Button CancelJobButton;
-	private Button ConfirmJobButton;
-
-	 */
 	private TextField SearchAccountTextArea;
-	//Comboboox = drop down in javaFx
+	//Combobox = drop down in javaFx
 	@FXML
 	private ComboBox<String> tasksComboBox;
-	@FXML
-	private ComboBox<String> urgencyComboBox;
 	@FXML
 	private Button insertTaskButton;
 	@FXML
@@ -78,7 +69,6 @@ public class CreateJobScreen extends Window {
 	public void confirmJob() {
 
 		try {
-
 			EnterTasksIntoJob();
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
@@ -105,7 +95,7 @@ public class CreateJobScreen extends Window {
 		taskTable.setItems(data);
 	}
 
-	public void addTaskToJob(){
+	private void addTaskToJob(){
 		String selected = tasksComboBox.getSelectionModel().getSelectedItem();
 		if(selected != null) {
 			int id = Integer.parseInt(selected.split(",")[0]);
@@ -129,9 +119,6 @@ public class CreateJobScreen extends Window {
 		catch (Exception e){
 			System.out.println(e.toString());
 		}
-
-
-
 	}
 
 	// todo
@@ -157,8 +144,7 @@ public class CreateJobScreen extends Window {
 		data = FXCollections.observableArrayList(new ArrayList<>());
 
 		userAllowed = new String[]{ROLE_OFFICE_MANAGER, ROLE_SHIFT_MANAGER, ROLE_RECEPTIONIST};
-		urgencyComboBox.getItems().removeAll();
-		urgencyComboBox.getItems().addAll("3 hours", "6 hours", "24 hours");
+
 		deleteButton.setOnAction(actionEvent -> deleteTask());
 		insertTaskButton.setOnAction(actionEvent -> addTaskToJob());
 		cancelButton.setOnAction(actionEvent -> onCancel());
