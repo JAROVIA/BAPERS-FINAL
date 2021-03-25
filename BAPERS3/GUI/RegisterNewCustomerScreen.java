@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 
 import java.sql.SQLException;
@@ -53,6 +54,8 @@ public class RegisterNewCustomerScreen extends Window {
 	private Label bandLabel2;
 	@FXML
 	private Label discountRateLabel;
+	@FXML
+	private GridPane gridPane;
 
 	private final String DISCOUNT_FIXED = "Fixed";
 	private final String DISCOUNT_FLEX = "Flexible";
@@ -71,55 +74,34 @@ public class RegisterNewCustomerScreen extends Window {
 	private void onSubmit() {
 		//make sure inputs are correct
 		//listing boolean so easier to see
-		boolean isNameEmpty = nameField.getText().trim().isEmpty();
-		boolean isPostcodeEmpty = postcodeField.getText().trim().isEmpty();
-		boolean isAddress1Empty = address1Field.getText().trim().isEmpty();
-		boolean isAddress2Empty = address2Field.getText().trim().isEmpty();
-		boolean isContactNameEmpty = contactNameField.getText().trim().isEmpty();
-		boolean isEmailEmpty = emailField.getText().trim().isEmpty();
-		boolean isPhoneInt = isStringInt(phoneField.getText());
-		boolean isValued = discountBox.getValue().equals("none");
-
+		boolean isValuedCustomer = discountBox.getValue() == null;
 		//check inputs are correct
-		if(isPhoneInt && !isNameEmpty && !isContactNameEmpty && !isEmailEmpty && !isAddress1Empty && !isAddress2Empty && !isPostcodeEmpty){
-			//TODO submit
-		}
-		else {
-			String message = "The following fields have incorrect format;";
-			if (!isPhoneInt) {
-				message += "\nphone number";
-			}
-			if (isNameEmpty) {
-				message += "\nName";
-			}
-			if (isPostcodeEmpty) {
-				message += "\npost code";
-			}
-			if (isAddress1Empty) {
-				message += "\naddress 1";
-			}
-			if (isAddress2Empty) {
-				message += "\naddress 2";
-			}
-			if(isContactNameEmpty){
-				message += "\ncontact name";
-			}
-			if(isEmailEmpty){
-				message += "\nemail";
-			}
-		}
+		if(isValuedCustomer) {
+			if (isValueNotEmpty(
+					nameField,
+					contactNameField,
+					emailField,
+					memorableWordField,
+					address1Field,
+					address2Field,
+					phoneField,
+					postcodeField
+			) && discountTable.getItems().size() > 0) {
 
-		//if discount was selected
-		//also check inputs are correct
-		if(isValued) {
-			if (discountBox.getValue().equals(DISCOUNT_FLEX)) {
-			}
-			if (discountBox.getValue().equals(DISCOUNT_FIXED)) {
-			}
-			if (discountBox.getValue().equals(DISCOUNT_VAR)) {
+				//TODO submit as valued customer
 			}
 		}
-
+		else if (isValueNotEmpty(nameField,
+				contactNameField,
+				emailField,
+				memorableWordField,
+				address1Field,
+				address2Field,
+				phoneField,
+				postcodeField
+		)){
+			//TODO submit non valued customer
+		}
 	}
 
 	/**
@@ -127,7 +109,7 @@ public class RegisterNewCustomerScreen extends Window {
 	 * makes field necessary for each discount type to show and populates table with appropriate columns
 	 */
 	private void onDiscountSelect(){
-		if(discountBox.getValue() != null) {
+		if(discountBox.getValue() != null && !discountBox.getValue().equals("none")) {
 			discountTable.getColumns().clear();
 			data.clear();
 			hideVar();
@@ -136,6 +118,14 @@ public class RegisterNewCustomerScreen extends Window {
 			discountRateField.setStyle("visibility : visible;");
 			discountRateLabel.setStyle("visibility : visible;");
 			discountRateField.setText("");
+			discountTable.setStyle("visibility : visible;");
+			addButton.setStyle("visibility : visible;");
+			removeButton.setStyle("visibility : visible;");
+
+			for(int i = GridPane.getRowIndex(discountBox); i < GridPane.getRowIndex(discountTable); i++){
+				gridPane.getRowConstraints().get(i).setPercentHeight(-1);
+			}
+			gridPane.getRowConstraints().get(GridPane.getRowIndex(discountTable)).setPercentHeight(20);
 
 			String discountType = discountBox.getValue();
 			String[] columns = new String[]{};
@@ -191,6 +181,17 @@ public class RegisterNewCustomerScreen extends Window {
 				});
 				tc.setMinWidth(discountTable.getWidth() / columns.length);
 				discountTable.getColumns().add(tc);
+			}
+		}
+		else{
+			discountRateField.setStyle("visibility : hidden;");
+			discountRateLabel.setStyle("visibility : hidden;");
+			discountTable.setStyle("visibility : hidden;");
+			addButton.setStyle("visibility : hidden;");
+			removeButton.setStyle("visibility : hidden;");
+
+			for(int i = GridPane.getRowIndex(discountBox); i < GridPane.getRowIndex(discountTable)+1; i++){
+				gridPane.getRowConstraints().get(i).setPercentHeight(0);
 			}
 		}
 	}
@@ -323,6 +324,10 @@ public class RegisterNewCustomerScreen extends Window {
 		address1Field.setText("");
 		address2Field.setText("");
 
+		for(int i = GridPane.getRowIndex(discountBox); i < GridPane.getRowIndex(discountTable)+1; i++){
+			gridPane.getRowConstraints().get(i).setPercentHeight(0);
+		}
+
 		//discount fields
 		hideFlex();
 		hideVar();
@@ -332,17 +337,7 @@ public class RegisterNewCustomerScreen extends Window {
 		data.clear();
 		discountBox.getSelectionModel().clearSelection();
 		//overridden method to show prompt text again because javafx is great at this
-		discountBox.setButtonCell(new ListCell<String>() {
-			@Override
-			protected void updateItem(String item, boolean empty) {
-				super.updateItem(item, empty) ;
-				if (empty || item == null) {
-					setText("Select Subject");
-				} else {
-					setText(item);
-				}
-			}
-		});
+		setComboBoxPromptText(discountBox, "Select discount type");
 		discountRateField.setText("");
 	}
 
@@ -359,10 +354,15 @@ public class RegisterNewCustomerScreen extends Window {
 		bandField.setStyle("visibility : hidden;");
 		discountRateField.setStyle("visibility : hidden;");
 		discountRateLabel.setStyle("visibility : hidden;");
+		discountTable.setStyle("visibility : hidden;");
+		addButton.setStyle("visibility : hidden;");
+		removeButton.setStyle("visibility : hidden;");
 
 		addIntegerNumberListener(discountRateField);
 		addIntegerNumberListener(bandField);
-		addIntegerNumberListener(phoneField);
+		addIntegerNumberListener(phoneField, 15);
+		addNameListener(nameField);
+		addNameListener(contactNameField);
 
 		discountBox.getItems().addAll("none", DISCOUNT_FIXED, DISCOUNT_FLEX, DISCOUNT_VAR);
 		discountBox.setOnAction(actionEvent -> onDiscountSelect());

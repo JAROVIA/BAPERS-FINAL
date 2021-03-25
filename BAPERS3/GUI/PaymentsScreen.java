@@ -55,6 +55,8 @@ public class PaymentsScreen extends Window{
     private void onBack(){
         jobData.clear();
         paymentData.clear();
+
+        procUiController.showScreen("Jobs");
     }
 
     public void onShow(){

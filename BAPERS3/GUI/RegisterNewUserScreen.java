@@ -1,10 +1,8 @@
 package GUI;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+
 import java.sql.SQLException;
 
 public class RegisterNewUserScreen extends Window{
@@ -32,18 +30,19 @@ public class RegisterNewUserScreen extends Window{
 	 * @param
 	 */
 	private void saveUser() throws SQLException {
-		// TODO - implement RegisterNewUserScreen.SaveUser
 		String employeeName = staffNameField.getText();
 		String userName = userNameField.getText();
 		String password = pwField.getText();
 		String userRole = roleBox.getValue();
 
-		adminUiController.saveUser(userRole, employeeName, password, userName);
+		if(isValueNotEmpty(new TextField[]{staffNameField, userNameField, pwField}, new ComboBox[]{roleBox})){
+			adminUiController.saveUser(userRole, employeeName, password, userName);
+			adminUiController.showScreen("UserAccounts");
+		}
 	}
 
 	private void onSubmit() throws SQLException {
 		saveUser();
-		adminUiController.showScreen("UserAccounts");
 	}
 
 	private void onCancel(){
@@ -57,6 +56,8 @@ public class RegisterNewUserScreen extends Window{
 		roleBox.getItems().removeAll(roleBox.getItems());
 		roleBox.getItems().addAll(ROLE_OFFICE_MANAGER, ROLE_SHIFT_MANAGER, ROLE_RECEPTIONIST, ROLE_TECHNICIAN_COPY, ROLE_TECHNICIAN_DEV, ROLE_TECHNICIAN_PACK ,ROLE_TECHNICIAN_FIN);
 		roleBox.setPromptText("Select role");
+		setComboBoxPromptText(roleBox, "Select roles");
+		addNameListener(staffNameField);
 		cancelButton.setOnAction(actionEvent -> onCancel());
 		submitButton.setOnAction(actionEvent -> {
 			try {

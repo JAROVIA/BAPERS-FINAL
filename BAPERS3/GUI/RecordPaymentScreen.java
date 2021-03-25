@@ -1,10 +1,7 @@
 package GUI;
 
-import PAYMENT.Payment;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 public class RecordPaymentScreen extends Window {
 
@@ -13,23 +10,37 @@ public class RecordPaymentScreen extends Window {
 	@FXML
 	private TextField cardNumberField;
 	@FXML
-	private TextField cardNameField;
+	private TextField cardHolderNameField;
 	@FXML
-	private ComboBox<String> paymentBox;
+	private TextField monthField;
+	@FXML
+	private TextField yearField;
+	@FXML
+	private ComboBox<String> paymentMethodBox;
 	@FXML
 	private Button cancelButton;
 	@FXML
-	private Button confirmButton;
+	private Button saveButton;
 
 	public void savePayment() {
 
-//		Payment payment = new Payment()
-
+		if(isValueNotEmpty(new TextField[]{cardHolderNameField, cardNumberField, priceField, monthField, yearField}, new ComboBox[]{paymentMethodBox})){
+			if(isStringFloat(priceField.getText())){
+				//TODO save
+			}
+			else{
+				Alert alert = new Alert(Alert.AlertType.ERROR, "Price format is incorrect, check if value is appropriate", ButtonType.CLOSE);
+				alert.show();
+			}
+		}
 	}
 
-	public void cancelRecord() {
-		// TODO - implement RecordPaymentScreen.CancelRecord
-		throw new UnsupportedOperationException();
+	public void onCancel() {
+		uiController.showScreen("Jobs");
+
+		priceField.setText("");
+		cardNumberField.setText("");
+		cardHolderNameField.setText("");
 	}
 
 	public void onShow(){
@@ -43,5 +54,14 @@ public class RecordPaymentScreen extends Window {
 	public void initialize(){
 		super.initialize();
 		userAllowed = new String[]{ROLE_OFFICE_MANAGER, ROLE_SHIFT_MANAGER, ROLE_RECEPTIONIST};
+		cancelButton.setOnAction(actionEvent -> onCancel());
+		saveButton.setOnAction(actionEvent -> savePayment());
+		addFloatNumberListener(priceField);
+		addIntegerNumberListener(monthField, 2);
+		addIntegerNumberListener(yearField, 2);
+
+		paymentMethodBox.setPromptText("Select payment method");
+		setComboBoxPromptText(paymentMethodBox, "Select payment method");
+		paymentMethodBox.getItems().addAll("Card", "Cash");
 	}
 }

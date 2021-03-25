@@ -8,15 +8,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.util.Pair;
 
 import javax.xml.stream.EventFilter;
 import javax.xml.stream.events.XMLEvent;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class Window{
 
@@ -104,13 +105,40 @@ public abstract class Window{
 	}
 
 	/**
+	 * used for text fields for names, removes special characters
+	 * @param tf text field to assign this listener
+	 */
+	protected void addNameListener(TextField tf){
+		tf.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observableValue, String oldText, String newText) {
+				if(newText.matches(".*[0-9!@£$%^&*():=+,;/{}<>\"?`~\\\\\\-\\[\\]].*")){
+					tf.setText(oldText);
+				}
+			}
+		});
+	}
+
+	/**
 	 * used for text fields with numeric input, only allows integer numeric characters
+	 * @param tf text field to assign this listener
 	 */
 	protected void addIntegerNumberListener(TextField tf){
 		tf.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observableValue, String oldText, String newText) {
 				if(!newText.matches("[0-9]*") || newText.length() > 10 ){
+					tf.setText(oldText);
+				}
+			}
+		});
+	}
+
+	protected void addIntegerNumberListener(TextField tf, int lengthConstraint){
+		tf.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observableValue, String oldText, String newText) {
+				if(!newText.matches("[0-9]*") || newText.length() > lengthConstraint ){
 					tf.setText(oldText);
 				}
 			}
@@ -135,6 +163,7 @@ public abstract class Window{
 
 	/**
 	 * used for text fields with numeric input, only allows numeric characters
+	 * text field to assign this listener
 	 */
 	protected void addFloatNumberListener(TextField tf){
 		tf.textProperty().addListener(new ChangeListener<String>() {
@@ -253,7 +282,7 @@ public abstract class Window{
 	 * for search to match positive numerics (system never records negatives)
 	 * @return
 	 */
-	protected boolean searchMatchNumber(String toCheck){
+	protected boolean matchNumber(String toCheck){
 		return toCheck.matches("\\d+");
 	}
 
@@ -261,7 +290,7 @@ public abstract class Window{
 	 * for search to match only string
 	 * @return
 	 */
-	protected boolean searchMatchName(String toCheck){
+	protected boolean matchName(String toCheck){
 		return toCheck.matches("[^0-9!@£$%^&*():=+,-]+");
 	}
 
@@ -270,14 +299,73 @@ public abstract class Window{
 	 * @param toCheck
 	 * @return
 	 */
-	protected boolean searchMatchEmail(String toCheck){
-		return toCheck.matches("[@]]");
+	protected boolean matchEmail(String toCheck){
+		return toCheck.matches(".*@.*");
+	}
+
+	/**
+	 * used if any of the fields are missing / empty.
+	 * takes multiple fields, boxes to test if they are empty
+	 * @param textFields to be tested
+	 * @param boxes to be tested
+	 * @return boolean if the inputs were correct or not, while displaying a warning if there were errors
+	 */
+	protected boolean isValueNotEmpty(TextField[] textFields, ComboBox<String>[] boxes){
+		boolean pass = true;
+		StringBuilder message = new StringBuilder("Empty field at : ");
+		for(TextField textField : textFields){
+			if(textField.getText().trim().isEmpty() || textField.getText() == null){
+				pass = false;
+				message.append("\n").append(textField.getPromptText());
+			}
+		}
+		for(ComboBox<String> box : boxes){
+			if(box.getValue() == null){
+				pass = false;
+				message.append("\n").append(box.getPromptText());
+			}
+		}
+		if(!pass){
+			Alert alert = new Alert(Alert.AlertType.ERROR, message.toString(), ButtonType.CLOSE);
+			alert.show();
+		}
+		return pass;
+	}
+
+	protected boolean isValueNotEmpty(TextField... textFields){
+		boolean pass = true;
+		StringBuilder message = new StringBuilder("Empty field at : ");
+		for(TextField textField : textFields){
+			if(textField.getText().trim().isEmpty() || textField.getText() == null){
+				pass = false;
+				message.append("\n").append(textField.getPromptText());
+			}
+		}
+		if(!pass){
+			Alert alert = new Alert(Alert.AlertType.ERROR, message.toString(), ButtonType.CLOSE);
+			alert.show();
+		}
+		return pass;
+	}
+
+	protected void setComboBoxPromptText(ComboBox<String> box, String promptText){
+		box.setButtonCell(new ListCell<String>() {
+			@Override
+			protected void updateItem(String item, boolean empty) {
+				super.updateItem(item, empty) ;
+				if (empty || item == null) {
+					setText(promptText);
+				} else {
+					setText(item);
+				}
+			}
+		});
 	}
 
 	@FXML
 	public void initialize() {
 		// TODO - implement Window.Window
-		
+
 		if(logoutButton != null) {
 			logoutButton.setOnAction(actionEvent -> logout());
 		}
