@@ -40,11 +40,6 @@ public class CreateJobSetupScreen  extends Window{
         }catch (Exception e){
             System.out.println(e.toString());
         }
-
-
-
-
-
     }
 
     public void onShow(){
