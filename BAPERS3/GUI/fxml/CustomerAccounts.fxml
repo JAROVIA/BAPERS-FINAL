@@ -32,66 +32,54 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="500.0" prefWidth="803.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.CustomerAccountScreen">
+<VBox prefHeight="500.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.CustomerAccountScreen">
   <children>
-    <MenuBar prefHeight="0.0" prefWidth="545.0" VBox.vgrow="NEVER">
-      <menus>
-        <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="475.0" prefWidth="811.0" style="-fx-background-color: White;" VBox.vgrow="ALWAYS">
-      <children>
-            <Button fx:id="logoutButton" layoutX="737.0" layoutY="4.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="59.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Logout">
+      <GridPane VBox.vgrow="ALWAYS">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="logoutButton" mnemonicParsing="false" prefHeight="21.0" prefWidth="59.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Logout" GridPane.columnIndex="12" GridPane.halignment="RIGHT">
                <font>
                   <Font name="System Bold" size="9.0" />
                </font></Button>
@@ -100,66 +88,107 @@
                   <Image url="@../images/BapersLogo.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="32.0" fitWidth="241.0" layoutX="6.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="32.0" fitWidth="241.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                <image>
                   <Image url="@../images/Customer-Accounts-icon.jpg" />
                </image>
             </ImageView>
-            <Label layoutX="566.0" layoutY="4.0" prefHeight="21.0" prefWidth="167.0" style="-fx-border-color: Black;" text="Welcome [logged in user]" textAlignment="RIGHT">
+            <Label fx:id="welcomeLabel" prefHeight="21.0" prefWidth="167.0" style="-fx-border-color: Black;" text="Welcome [logged in user]" textAlignment="RIGHT" GridPane.columnIndex="10" GridPane.columnSpan="2" GridPane.halignment="RIGHT">
                <font>
                   <Font size="9.0" />
                </font>
             </Label>
-            <TextField layoutX="653.0" layoutY="79.0" prefHeight="25.0" prefWidth="143.0" promptText="Search" style="-fx-border-style: solid; -fx-border-radius: 10;">
+            <TextField prefHeight="25.0" prefWidth="143.0" promptText="Search" style="-fx-border-style: solid; -fx-border-radius: 10;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="2">
                <font>
                   <Font size="10.0" />
                </font>
             </TextField>
-            <TableView fx:id="customerAccountTable" editable="true" layoutX="6.0" layoutY="119.0" prefHeight="312.0" prefWidth="657.0" style="-fx-border-style: solid;">
-              <columns>
-                <TableColumn fx:id="accountNumberColumn" prefWidth="78.0" text="Account No" />
-                <TableColumn fx:id="userNameColumn" minWidth="1.0" prefWidth="74.0" text="Username" />
-                  <TableColumn fx:id="accountStatusColumn" minWidth="0.0" prefWidth="103.0" text="Account Status" />
-                  <TableColumn fx:id="addressColumn" prefWidth="118.0" text="Address" />
-                  <TableColumn fx:id="phoneColumn" prefWidth="98.0" text="Phone Number" />
-                  <TableColumn fx:id="agreedDiscountColumn" prefWidth="100.0" text="Agreed Discount" />
-                  <TableColumn fx:id="discountPercentColumn" prefWidth="84.0" text="Discount (%)" />
-              </columns>
-               <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
-            </TableView>
-            <Button fx:id="processTasksButton" layoutX="667.0" layoutY="162.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" style="-fx-background-color: #DDF8FF; -fx-border-style: solid;" text="Process Tasks">
+            <Button fx:id="registerNewCustomerButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" style="-fx-background-color: #DDF8FF; -fx-border-style: Solid;" text="Register New Customer" GridPane.columnIndex="9" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                <font>
                   <Font size="9.0" />
                </font>
             </Button>
-            <Button fx:id="deleteCustomerButton" layoutX="710.0" layoutY="203.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="42.0" style="-fx-background-color: White;">
-               <graphic>
-                  <ImageView fitHeight="55.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/DeleteIcon.jpg" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="registerNewCustomerButton" layoutX="540.0" layoutY="79.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" style="-fx-background-color: #DDF8FF; -fx-border-style: Solid;" text="Register New Customer">
-               <font>
-                  <Font size="9.0" />
-               </font>
-            </Button>
-            <Button layoutX="754.0" layoutY="310.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="35.0" style="-fx-background-color: White;" />
-            <Button layoutX="754.0" layoutY="359.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="35.0" style="-fx-background-color: White;" />
-            <Button fx:id="editCustomerButton" layoutX="662.0" layoutY="200.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="50.0" style="-fx-background-color: -white;">
-               <graphic>
-                  <ImageView  fitHeight="55.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/Edit-Icon.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-      </children>
-    </AnchorPane>
+            <SplitPane fx:id="splitPane" dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="3" GridPane.rowSpan="2147483647">
+               <items>
+                  <TableView fx:id="customerAccountTable" editable="true" style="-fx-border-style: solid;">
+                    <columns>
+                      <TableColumn fx:id="accountNumberColumn" prefWidth="78.0" text="Account No" />
+                      <TableColumn fx:id="userNameColumn" minWidth="1.0" prefWidth="72.67445373535156" text="customer name" />
+                        <TableColumn prefWidth="76.32554626464844" text="contact name" />
+                        <TableColumn fx:id="accountStatusColumn" minWidth="0.0" prefWidth="103.0" text="Account Status" />
+                        <TableColumn fx:id="phoneColumn" prefWidth="98.0" text="Phone Number" />
+                        <TableColumn fx:id="addressColumn" prefWidth="118.0" text="Address" />
+                        <TableColumn prefWidth="75.0" text="email" />
+                    </columns>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </TableView>
+                  <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0">
+                     <content>
+                        <GridPane fx:id="customerDetailGridPane" alignment="CENTER">
+                          <columnConstraints>
+                              <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" percentWidth="5.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label fx:id="accountNumberLabel" text="accnum" GridPane.rowIndex="2" />
+                              <Label fx:id="nameLabel" text="name" GridPane.rowIndex="3" />
+                              <Label fx:id="contactNameLabel" text="contactname" GridPane.rowIndex="4" />
+                              <Label fx:id="phoneLabel" text="phone" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                              <Button fx:id="editCustomerButton" mnemonicParsing="false" prefHeight="43.0" prefWidth="50.0" style="-fx-background-color: -white;" GridPane.columnIndex="1">
+                                 <graphic>
+                                    <ImageView fitHeight="55.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/Edit-Icon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="processTasksButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" style="-fx-background-color: #DDF8FF; -fx-border-style: solid;" text="Process Tasks">
+                                 <font>
+                                    <Font size="9.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="deleteCustomerButton" mnemonicParsing="false" prefHeight="32.0" prefWidth="42.0" style="-fx-background-color: White;" GridPane.columnIndex="2">
+                                 <graphic>
+                                    <ImageView fitHeight="55.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/DeleteIcon.jpg" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Label fx:id="addressLabel" text="address" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                              <Label fx:id="emailLabel" text="email" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                              <TableView fx:id="discountTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="6" GridPane.rowSpan="2147483647" />
+                              <Label fx:id="valuedLabel" text="valuedornot" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Button fx:id="closeButton" mnemonicParsing="false" text="x" GridPane.columnIndex="3" />
+                           </children>
+                        </GridPane>
+                     </content>
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                  </ScrollPane>
+               </items>
+            </SplitPane>
+         </children>
+      </GridPane>
   </children>
+   <padding>
+      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+   </padding>
 </VBox>
