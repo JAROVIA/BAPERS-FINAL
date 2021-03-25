@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -24,18 +23,16 @@
             <Image url="@../images/BAPERS Logo Final.png" />
          </image>
       </ImageView>
-      <Label layoutX="925.0" layoutY="14.0" prefHeight="36.0" prefWidth="239.0" style="-fx-border-color: Black;" text="Welcome [logged in user]" textAlignment="RIGHT">
+      <Label fx:id="welcomeLabel" layoutX="925.0" layoutY="14.0" prefHeight="36.0" prefWidth="239.0" style="-fx-border-color: Black;" text="Welcome [logged in user]" textAlignment="RIGHT">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <PasswordField fx:id="priceField" layoutX="471.0" layoutY="420.0" prefHeight="36.0" prefWidth="337.0" promptText="Edit Task Price" style="-fx-border-color: black;" />
       <Text layoutX="476.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UPDATE EXISTING TASK" textAlignment="CENTER" wrappingWidth="326.66658528645826">
          <font>
             <Font size="27.0" />
          </font>
       </Text>
-      <PasswordField fx:id="durationField" layoutX="471.0" layoutY="475.0" prefHeight="36.0" prefWidth="337.0" promptText="Edit Task Duration" style="-fx-border-color: black;" />
       <Button fx:id="confirmButton" layoutX="656.0" layoutY="561.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="138.0" style="-fx-background-color: #95ed82; -fx-border-color: Black;" text="Confirm Changes">
          <font>
             <Font name="System Bold" size="13.0" />
@@ -46,5 +43,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
+      <TextField fx:id="durationField" layoutX="472.0" layoutY="494.0" prefHeight="36.0" prefWidth="337.0" promptText="Task duration" style="-fx-border-color: black;" />
+      <TextField fx:id="priceField" layoutX="473.0" layoutY="433.0" prefHeight="36.0" prefWidth="337.0" promptText="Task price" style="-fx-border-color: black;" />
    </children>
 </AnchorPane>

@@ -7,11 +7,11 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 
 import java.util.ArrayList;
@@ -21,21 +21,7 @@ public class CustomerAccountScreen extends Window {
 	@FXML
 	private TextField SearchCustomerTextArea;
 	@FXML
-	private TableView<CustomerAccountDetails> customerAccountTable;
-	@FXML
-	private TableColumn<CustomerAccountDetails, Number> accountNumberColumn;
-	@FXML
-	private TableColumn<CustomerAccountDetails, String> userNameColumn;
-	@FXML
-	private TableColumn<CustomerAccountDetails, String> accountStatusColumn;
-	@FXML
-	private TableColumn<CustomerAccountDetails, String> addressColumn;
-	@FXML
-	private TableColumn<CustomerAccountDetails, Number> phoneColumn;
-	@FXML
-	private TableColumn<CustomerAccountDetails, String> agreedDiscountColumn;
-	@FXML
-	private TableColumn<CustomerAccountDetails, Integer> discountPercentColumn;
+	private TableView<String[]> customerAccountTable;
 	@FXML
 	private Button deleteCustomerButton;
 	@FXML
@@ -44,10 +30,39 @@ public class CustomerAccountScreen extends Window {
 	private Button editCustomerButton;
 	@FXML
 	private Button processTasksButton;
+	@FXML
+	private GridPane customerDetailGridPane;
+	@FXML
+	private Label accountNumberLabel;
+	@FXML
+	private Label phoneLabel;
+	@FXML
+	private Label nameLabel;
+	@FXML
+	private Label contactNameLabel;
+	@FXML
+	private Label addressLabel;
+	@FXML
+	private Label emailLabel;
+	@FXML
+	private Label valuedLabel;
+	@FXML
+	private TableView<String[]> discountTable;
 
-	public CustomerAccountDetails selectCustomer() {
-		// TODO - implement CustomerAccountScreen.selectCustomer
-		throw new UnsupportedOperationException();
+	private int selectedCustomerId = -1;
+
+	public void onSelectCustomer() {
+		customerDetailGridPane.setStyle("visibility : visible");
+		String[] customerData = customerAccountTable.getSelectionModel().getSelectedItem();
+		selectedCustomerId = Integer.parseInt(customerData[0]);
+
+		accountNumberLabel.setText(customerData[0]);
+		nameLabel.setText(customerData[1]);
+		contactNameLabel.setText(customerData[2]);
+		valuedLabel.setText(customerData[3]);
+		phoneLabel.setText(customerData[4]);
+		addressLabel.setText(customerData[5]);
+		emailLabel.setText(customerData[6]);
 	}
 
 	public void deleteCustomer() {
@@ -56,8 +71,7 @@ public class CustomerAccountScreen extends Window {
 	}
 
 	/**
-	 * 
-	 * @param CustomerAccDetails
+	 *
 	 */
 	/*
 	cant use this
@@ -78,27 +92,41 @@ public class CustomerAccountScreen extends Window {
 	}
 
 	private void toEditCustomer(){
-		acctUiController.showScreen("EditCustomerDetails");
+		if(selectedCustomerId >= 0) {
+			//assign id somewhere
+			acctUiController.showScreen("EditCustomerDetails");
+			customerAccountTable.getItems().clear();
+			discountTable.getItems().clear();
+		}
 	}
 
 	private void toRegisterNewCustomer(){
 		acctUiController.showScreen("RegisterNewCustomer");
+		customerAccountTable.getItems().clear();
+		discountTable.getItems().clear();
 	}
 
 	private void toProcessTasks(){
-		acctUiController.showScreen("ProgressTasks");
+		if(selectedCustomerId >= 0) {
+			//assign id somewhere
+			acctUiController.showScreen("ProgressTasks");
+			customerAccountTable.getItems().clear();
+			discountTable.getItems().clear();
+		}
 	}
 
 	@Override
 	public void onShow(){
 		super.onShow();
-		ArrayList<CustomerAccountDetails> list = new ArrayList<>();
 		//TODO assign the customer account details list here
-
-		ObservableList<CustomerAccountDetails> data = FXCollections.observableArrayList();
-		data.addAll(list);
+		selectedCustomerId = -1;
+		ObservableList<String[]> data = FXCollections.observableArrayList();
+		//add cusomter info here
+		data.addAll(new String[]{"1","bob","bobby","yes","02345678","city, london, uk","bob@city.ac.uk"});
 
 		customerAccountTable.setItems(data);
+
+		customerDetailGridPane.setStyle("visibility : hidden");
 	}
 	/**
 	 *
@@ -110,6 +138,26 @@ public class CustomerAccountScreen extends Window {
 		editCustomerButton.setOnAction(actionEvent -> toEditCustomer());
 		processTasksButton.setOnAction(actionEvent -> toProcessTasks());
 		registerNewCustomerButton.setOnAction(actionEvent -> toRegisterNewCustomer());
+		customerAccountTable.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				if (customerAccountTable.getSelectionModel().getSelectedItem() != null){
+					onSelectCustomer();
+				}
+			}
+		});
+
+		for (int i = 0; i < customerAccountTable.getColumns().size(); i++) {
+			TableColumn tc = customerAccountTable.getColumns().get(i);
+			int j = i;
+			tc.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<String[], String>, ObservableValue<String>>() {
+				@Override
+				public ObservableValue<String> call(TableColumn.CellDataFeatures<String[], String> property) {
+					return new SimpleStringProperty((property.getValue()[j]));
+				}
+			});
+		}
+
 	}
 
 }
