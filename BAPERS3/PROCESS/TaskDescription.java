@@ -93,7 +93,7 @@ public class TaskDescription {
 	 * */
 	public static ArrayList<String[]> GetTaskList() throws SQLException {
 		Statement statement = connection.createStatement();
-		String sql = "SELECT * FROM " + tablename;
+		String sql = "SELECT * FROM " + tablename + " where IsArchived = 0";
 		ResultSet resultSet = statement.executeQuery(sql);
 
 		ArrayList<String[]> arrayList = new ArrayList<String[]>();
@@ -148,6 +148,7 @@ public class TaskDescription {
 				"INSERT INTO " + tablename + " ( TaskLocation, TaskPrice, TaskDescription, PredictedDuration) "
 				+ "VALUES (" + "\"" + TaskLocation + "\", " + TaskPrice + ", \"" + TaskDescription + "\", " + Duration + ");";
 		Statement statement = connection.createStatement();
+		System.out.println(sql);
 		statement.executeUpdate(sql);
 	}
 
@@ -158,8 +159,9 @@ public class TaskDescription {
 
 	// todo
 	public static void ArchiveTask(int TaskID) throws SQLException {
-		String sql = "UPDATE TASK SET IsArchived = 1 WHERE TaskID" + TaskID + ";";
+		String sql = "UPDATE Tasks SET IsArchived = 1 WHERE TaskID = " + TaskID + ";";
 		Statement statement = connection.createStatement();
+		System.out.println(sql);
 		statement.executeUpdate(sql);
 	}
 
