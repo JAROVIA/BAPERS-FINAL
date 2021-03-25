@@ -162,6 +162,7 @@ public class Job implements I_PROCESS {
 			String DateOfJob = resultSet.getString("DateOfJob");
 			String JobDeadline = resultSet.getString("JobDeadline");
 			String JobUrgency = resultSet.getString("JobUrgency");
+			int Price = resultSet.getInt("price");
 			int TasksCompleted = resultSet.getInt("TasksCompleted");
 			int IsCompleted = resultSet.getInt("IsCompleted");
 
@@ -171,6 +172,7 @@ public class Job implements I_PROCESS {
 					+ DateOfJob + "`"
 					+ JobDeadline + "`"
 					+ JobUrgency + "`"
+					+ Price + "`"
 					+ TasksCompleted + "`"
 					+ IsCompleted;
 
@@ -179,6 +181,7 @@ public class Job implements I_PROCESS {
 		}
 		return arrayList;
 	}
+
 
 	// any jobs within 2 hours of deadline
 	public static ArrayList<String[]> GetLateJobList() throws SQLException {
@@ -197,6 +200,7 @@ public class Job implements I_PROCESS {
 			String DateOfJob = resultSet.getString("DateOfJob"); // date of job order
 			String JobDeadline = resultSet.getString("JobDeadline"); // dependant on urgency
 			String JobUrgency = resultSet.getString("JobUrgency");
+			int Price = resultSet.getInt("Price");
 			int TasksCompleted = resultSet.getInt("TasksCompleted");
 			int IsCompleted = resultSet.getInt("IsCompleted");
 
@@ -231,6 +235,7 @@ public class Job implements I_PROCESS {
 				+ DateOfJob + "`"
 				+ JobDeadline + "`"
 				+ JobUrgency + "`"
+				+ Price + "`"
 				+ TasksCompleted + "`"
 				+ IsCompleted;
 
@@ -260,6 +265,7 @@ public class Job implements I_PROCESS {
 			String DateOfJob = resultSet.getString("DateOfJob"); // date of job order
 			String JobDeadline = resultSet.getString("JobDeadline"); // dependant on urgency
 			String JobUrgency = resultSet.getString("JobUrgency");
+			int Price = resultSet.getInt("Price");
 			int TasksCompleted = resultSet.getInt("TasksCompleted");
 			int IsCompleted = resultSet.getInt("IsCompleted");
 
@@ -294,6 +300,7 @@ public class Job implements I_PROCESS {
 								+ DateOfJob + "`"
 								+ JobDeadline + "`"
 								+ JobUrgency + "`"
+								+ Price + "`"
 								+ TasksCompleted + "`"
 								+ IsCompleted;
 

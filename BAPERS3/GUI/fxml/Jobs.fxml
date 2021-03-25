@@ -148,10 +148,11 @@
                                     <TableColumn fx:id="accountNumberColumn11" minWidth="100.0" prefWidth="-1.0" text="Account No" />
                                     <TableColumn fx:id="numberOfTasksColumn1" minWidth="100.0" prefWidth="-1.0" text="No. of Tasks" />
                                     <TableColumn fx:id="dateOfJobColumn1" minWidth="100.0" prefWidth="-1.0" text="Date of Job" />
+                                    <TableColumn minWidth="100.0" prefWidth="-1.0" text="Job deadline" />
                                     <TableColumn fx:id="urgencyColumn1" minWidth="100.0" prefWidth="-1.0" text="Job Urgency" />
+                                    <TableColumn fx:id="priceColumn" minWidth="100.0" prefWidth="-1.0" text="Price" />
                                     <TableColumn fx:id="completedByColumn1" minWidth="100.0" prefWidth="-1.0" text="Tasks Completed" />
                                     <TableColumn minWidth="100.0" prefWidth="-1.0" text="is Completed" />
-                                    <TableColumn minWidth="100.0" prefWidth="-1.0" text="Job deadline" />
                                  </columns>
                                  <cursor>
                                     <Cursor fx:constant="DEFAULT" />
@@ -225,6 +226,7 @@
                                     <TableColumn fx:id="numberOfTasksColumn11" minWidth="100.0" prefWidth="-1.0" text="No. of Tasks" />
                                     <TableColumn fx:id="dateOfJobColumn11" minWidth="100.0" prefWidth="-1.0" text="Date of Job" />
                                     <TableColumn fx:id="urgencyColumn11" minWidth="100.0" prefWidth="-1.0" text="Job Urgency" />
+                                    <TableColumn fx:id="priceColumn1" minWidth="100.0" prefWidth="-1.0" text="Price" />
                                     <TableColumn fx:id="completedByColumn11" minWidth="100.0" prefWidth="-1.0" text="Tasks Completed" />
                                     <TableColumn minWidth="100.0" prefWidth="-1.0" text="is Completed" />
                                     <TableColumn minWidth="100.0" prefWidth="-1.0" text="Job deadline" />

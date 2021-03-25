@@ -16,6 +16,7 @@ import javafx.util.Callback;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ProcessTasksScreen extends Window {
 
@@ -34,7 +35,17 @@ public class ProcessTasksScreen extends Window {
 		super.onShow();
 		ArrayList<String[]> list = new ArrayList<>();
 		try {
+
+			String[] string = tasksInJobTable.getSelectionModel().getSelectedItem();
+			String target = string[0];
+//			Integer.parseInt(target)
 			list = TaskInAJob.GetTIJList();
+
+			for(String[] iter : list){
+				System.out.println(Arrays.toString(iter));
+
+			}
+
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
 		}
