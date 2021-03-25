@@ -33,6 +33,8 @@ public class CustomerAccountScreen extends Window {
 	@FXML
 	private GridPane customerDetailGridPane;
 	@FXML
+	private SplitPane splitPane;
+	@FXML
 	private Label accountNumberLabel;
 	@FXML
 	private Label phoneLabel;
@@ -48,10 +50,14 @@ public class CustomerAccountScreen extends Window {
 	private Label valuedLabel;
 	@FXML
 	private TableView<String[]> discountTable;
+	@FXML
+	private Button closeButton;
 
 	private int selectedCustomerId = -1;
 
 	public void onSelectCustomer() {
+
+		splitPane.setDividerPositions(.6);
 		customerDetailGridPane.setStyle("visibility : visible");
 		String[] customerData = customerAccountTable.getSelectionModel().getSelectedItem();
 		selectedCustomerId = Integer.parseInt(customerData[0]);
@@ -115,6 +121,22 @@ public class CustomerAccountScreen extends Window {
 		}
 	}
 
+	private void resetCustomerDetail(){
+		emailLabel.setText("");
+		addressLabel.setText("");
+		phoneLabel.setText("");
+		valuedLabel.setText("");
+		contactNameLabel.setText("");
+		accountNumberLabel.setText("");
+		nameLabel.setText("");
+	}
+
+	private void onClose(){
+		splitPane.setDividerPositions(1);
+		resetCustomerDetail();
+		customerDetailGridPane.setStyle("visibility : hidden");
+	}
+
 	@Override
 	public void onShow(){
 		super.onShow();
@@ -126,7 +148,11 @@ public class CustomerAccountScreen extends Window {
 
 		customerAccountTable.setItems(data);
 
+		splitPane.setDividerPositions(1);
 		customerDetailGridPane.setStyle("visibility : hidden");
+
+		resetCustomerDetail();
+
 	}
 	/**
 	 *
@@ -138,6 +164,8 @@ public class CustomerAccountScreen extends Window {
 		editCustomerButton.setOnAction(actionEvent -> toEditCustomer());
 		processTasksButton.setOnAction(actionEvent -> toProcessTasks());
 		registerNewCustomerButton.setOnAction(actionEvent -> toRegisterNewCustomer());
+		closeButton.setOnAction(actionEvent -> onClose());
+
 		customerAccountTable.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {

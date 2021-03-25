@@ -108,7 +108,7 @@
                   <Font size="9.0" />
                </font>
             </Button>
-            <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="3" GridPane.rowSpan="2147483647">
+            <SplitPane fx:id="splitPane" dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="3" GridPane.rowSpan="2147483647">
                <items>
                   <TableView fx:id="customerAccountTable" editable="true" style="-fx-border-style: solid;">
                     <columns>
@@ -131,6 +131,7 @@
                               <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
                             <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" percentWidth="5.0" prefWidth="100.0" />
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -174,6 +175,7 @@
                               <Label fx:id="emailLabel" text="email" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                               <TableView fx:id="discountTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="6" GridPane.rowSpan="2147483647" />
                               <Label fx:id="valuedLabel" text="valuedornot" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Button fx:id="closeButton" mnemonicParsing="false" text="x" GridPane.columnIndex="3" />
                            </children>
                         </GridPane>
                      </content>
