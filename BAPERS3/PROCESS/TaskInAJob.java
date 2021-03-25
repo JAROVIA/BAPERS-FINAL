@@ -214,6 +214,48 @@ public class TaskInAJob {
 
 	}
 
+
+	//  todo !!!!!!!!!!! ProcessTasksScreen
+	public static ArrayList<String[]> GetTIJList(int JobID) throws SQLException {
+		Statement statement = connection.createStatement();
+		String sql = "SELECT * FROM TaskInAJob;";
+		ResultSet resultSet = statement.executeQuery(sql);
+
+		ArrayList<String[]> arrayList = new ArrayList<String[]>();
+		String tuple;
+		// adding changes to an array list
+		while (resultSet.next()){
+
+			int jobID = resultSet.getInt("JobID");
+			int taskID = resultSet.getInt("TaskID");
+			int accountNumber = resultSet.getInt("AccountNumber");
+			String taskStartTime = resultSet.getString("TaskStartTime");
+			String employeeCompletedBy = resultSet.getString("EmployeeCompletedBy");
+			int shiftCompleted = resultSet.getInt("ShiftCompleted");
+			String jobUrgency = resultSet.getString("JobUrgency");
+			int actualDuration = resultSet.getInt("ActualDuration");
+			int isCompleted = resultSet.getInt("IsCompleted");
+			String taskDeadline = resultSet.getString("TaskDeadline");
+
+			if (jobID == JobID){
+				tuple = jobID + "`"
+						+ taskID + "`"
+						+ accountNumber + "`"
+						+ taskStartTime + "`"
+						+ employeeCompletedBy + "`"
+						+ shiftCompleted + "`"
+						+ jobUrgency + "`"
+						+ actualDuration + "`"
+						+ isCompleted + "`"
+						+ taskDeadline;
+
+				arrayList.add(tuple.split("`"));
+			}
+		}
+		return arrayList;
+	}
+
+
 	/**
 	 * returns a list of everything in the TIJ table in the db
 	 * */
@@ -275,13 +317,29 @@ public class TaskInAJob {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param TaskID
-	 */
-	public boolean RemoveTask(int TaskID) {
-		// TODO - implement Task.RemoveTask
-		throw new UnsupportedOperationException();
+
+
+
+	// TODO createjob screen !!!!!!!!!!
+	public static void DeleteLastTIJ() throws SQLException {
+
+		int jobTaskID = -1;
+
+		//find last tij id
+		Statement statement1 = connection.createStatement();
+		String sqlSelect = "SELECT * FROM TaskInAJob;"; /* SELECT * FROM Jobs WHERE IsArchived = 0; */
+		ResultSet resultSetForTIJID = statement1.executeQuery(sqlSelect);
+		while (resultSetForTIJID.next()){
+			jobTaskID = resultSetForTIJID.getInt("JobTaskID");
+		}
+
+
+		// delete that id
+		String sql = "DELETE FROM TaskInAJob WHERE  = " + jobTaskID + ";";
+		Statement statement = connection.createStatement();
+		System.out.println(sql);
+		statement.executeUpdate(sql);
+
 	}
 
 	/**

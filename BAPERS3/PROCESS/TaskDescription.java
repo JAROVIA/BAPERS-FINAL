@@ -157,7 +157,25 @@ public class TaskDescription {
 	}
 
 	// todo
-	public static void ArchiveJob(){}
+	public static void ArchiveTask(int TaskID) throws SQLException {
+		String sql = "UPDATE TASK SET IsArchived = 1 WHERE TaskID" + TaskID + ";";
+		Statement statement = connection.createStatement();
+		statement.executeUpdate(sql);
+	}
+
+	// todoTask edit
+	public static void UpdateTask(String columnToEdit, int newValue, String identifierOfTableToEdit, int identifierCurrentValue) throws SQLException {
+
+		// TaskInAJob.UpdateJob("TaskPrice", 76, "TaskID", 1);
+		String sql = "UPDATE Tasks SET " + columnToEdit + " = " + newValue + " WHERE " + identifierOfTableToEdit + " = " + identifierCurrentValue + ";" ;
+		System.out.println(sql);
+		Statement statement = connection.createStatement();
+		statement.executeUpdate(sql);
+
+	}
+
+
+
 
 	public static void main(String[] args) throws SQLException {
 

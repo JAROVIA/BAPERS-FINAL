@@ -118,6 +118,6 @@ out/production/BAPERS-FINAL/GUI/images/ReportsIcon.png
 out/production/BAPERS-FINAL/GUI/images/RestoreIcon.jpg
 *.iml
 out/*
-libs/
-.idea/
+libs/*
+.idea/*
 BAPERS3/PROCESS/Testing.java
