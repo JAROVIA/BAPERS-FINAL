@@ -19,6 +19,7 @@ public class UserAccount {
 	private String username;
 	private String password;
 	private String employeeName;
+	private ArrayList<AlertUser> alert;
 
 	static String tablename = "UserAccounts";
 	static String url = "jdbc:mysql://localhost:3306/Bapers";
@@ -65,6 +66,18 @@ public class UserAccount {
 
 	public void setEmployeeName(String employeeName) {
 		this.employeeName = employeeName;
+	}
+
+	public void setEmployeeID(int employeeID) {
+		this.employeeID = employeeID;
+	}
+
+	public ArrayList<AlertUser> getAlert() {
+		return alert;
+	}
+
+	public void setAlert(AlertUser alert) {
+		this.alert.add(alert);
 	}
 
 	/**
@@ -184,5 +197,9 @@ public class UserAccount {
 		this.username = username;
 		this.password = password;
 		this.employeeName = employeeName;
+
+		if(userRole.equals("Office Manager") || userRole.equals("Shift Manager")){
+			alert = new ArrayList<>();
+		}
 	}
 }
