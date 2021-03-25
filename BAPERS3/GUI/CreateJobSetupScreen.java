@@ -24,10 +24,17 @@ public class CreateJobSetupScreen  extends Window{
     private void onSearch(){
         String accNumber = accountNumberField.getText();
         //search by account number
+        if(isStringInt(accountNumberField.getText())){
+            //search by account number
+
+            //set label to customer
+        }
     }
 
     private void onCancel(){
         procUiController.showScreen("Jobs");
+
+        accountNumberField.setText("");
     }
 
     private void onNext(){
@@ -55,5 +62,7 @@ public class CreateJobSetupScreen  extends Window{
         searchButton.setOnAction(actionEvent -> onSearch());
         nextButton.setOnAction(actionEvent -> onNext());
         cancelButton.setOnAction(actionEvent -> onCancel());
+
+        addIntegerNumberListener(accountNumberField);
     }
 }
