@@ -35,6 +35,9 @@ public class PROC_UI_Controller {
 	private ProcessTasksScreen processTasksScreen;
 	private String processTasksFxml = "ProgressTasks";
 
+	private PaymentsScreen paymentsScreen;
+	private String paymentFxml = "Payments";
+
 	private Map<String, Window> screens;
 
 	private I_PROCESS job;
@@ -193,6 +196,9 @@ public class PROC_UI_Controller {
 
 		processTasksScreen = (ProcessTasksScreen) Window.newGuiFromFxml(processTasksFxml);
 		screens.put(processTasksFxml, processTasksScreen);
+
+		paymentsScreen = (PaymentsScreen) Window.newGuiFromFxml(paymentFxml);
+		screens.put(paymentFxml,paymentsScreen);
 
 		for(Map.Entry<String, Window> entry : screens.entrySet()){
 			main.addScreen(entry.getKey(), entry.getValue().getParent(), "PROC");

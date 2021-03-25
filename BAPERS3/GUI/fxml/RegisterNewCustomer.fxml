@@ -92,16 +92,22 @@
         </Menu>
       </menus>
     </MenuBar>
-      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" vvalue="0.77" VBox.vgrow="ALWAYS">
+      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <content>
             <GridPane minHeight="700.0" vgap="10.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
@@ -124,18 +130,18 @@
                         <Image url="@../images/Register-New-Customer-Page.jpg" />
                      </image>
                   </ImageView>
-                  <TextField fx:id="nameField" prefHeight="25.0" prefWidth="167.0" promptText="Customer name" style="-fx-border-color: Black;" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-                  <TextField fx:id="phoneField" prefHeight="25.0" prefWidth="167.0" promptText="Phone Number" style="-fx-border-color: black;" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-                  <TextField fx:id="address1Field" prefHeight="25.0" prefWidth="167.0" promptText="Address Line 1" style="-fx-border-color: black;" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-                  <TextField fx:id="address2Field" prefHeight="25.0" prefWidth="167.0" promptText="Address Line 2" style="-fx-border-color: black;" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="4" />
-                  <TextField fx:id="postcodeField" prefHeight="25.0" prefWidth="167.0" promptText="Post Code" style="-fx-border-color: black;" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="5" />
-                  <TextField fx:id="memorableWordField" prefHeight="25.0" prefWidth="167.0" promptText="Memorable Word" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="5" />
-                  <Button fx:id="logoutButton" mnemonicParsing="false" prefHeight="21.0" prefWidth="59.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Logout" GridPane.columnIndex="6">
+                  <TextField fx:id="nameField" prefHeight="25.0" prefWidth="167.0" promptText="Customer name" style="-fx-border-color: Black;" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+                  <TextField fx:id="phoneField" prefHeight="25.0" prefWidth="167.0" promptText="Phone Number" style="-fx-border-color: black;" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+                  <TextField fx:id="address1Field" prefHeight="25.0" prefWidth="167.0" promptText="Address Line 1" style="-fx-border-color: black;" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="3" />
+                  <TextField fx:id="address2Field" prefHeight="25.0" prefWidth="167.0" promptText="Address Line 2" style="-fx-border-color: black;" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="4" />
+                  <TextField fx:id="postcodeField" prefHeight="25.0" prefWidth="167.0" promptText="Post Code" style="-fx-border-color: black;" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="5" />
+                  <TextField fx:id="memorableWordField" prefHeight="25.0" prefWidth="167.0" promptText="Memorable Word" style="-fx-border-color: black;" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="5" />
+                  <Button fx:id="logoutButton" mnemonicParsing="false" prefHeight="21.0" prefWidth="59.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Logout" GridPane.columnIndex="11">
                      <font>
                         <Font size="9.0" />
                      </font>
                   </Button>
-                  <Label fx:id="welcomeLabel" prefHeight="21.0" prefWidth="167.0" style="-fx-border-color: Black;" text="Welcome [logged in user]" textAlignment="RIGHT" GridPane.columnIndex="4" GridPane.columnSpan="2">
+                  <Label fx:id="welcomeLabel" prefHeight="21.0" prefWidth="167.0" style="-fx-border-color: Black;" text="Welcome [logged in user]" textAlignment="RIGHT" GridPane.columnIndex="9" GridPane.columnSpan="2">
                      <font>
                         <Font size="9.0" />
                      </font>
@@ -148,26 +154,26 @@
                         <Insets left="20.0" />
                      </GridPane.margin>
                   </ImageView>
-                  <Button fx:id="submitButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Submit" GridPane.columnIndex="3" GridPane.rowIndex="10">
+                  <Button fx:id="submitButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Submit" GridPane.columnIndex="6" GridPane.rowIndex="10">
                      <font>
                         <Font size="9.0" />
                      </font>
                   </Button>
-                  <ComboBox fx:id="discountBox" prefHeight="27.0" prefWidth="167.0" promptText="Select discount plan" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="6" />
-                  <TextField fx:id="contactNameField" promptText="Contact name" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-                  <TextField fx:id="emailField" promptText="email" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="4" />
-                  <TableView fx:id="discountTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="9">
+                  <ComboBox fx:id="discountBox" prefHeight="27.0" prefWidth="167.0" promptText="Select discount plan" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="6" />
+                  <TextField fx:id="contactNameField" promptText="Contact name" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="3" />
+                  <TextField fx:id="emailField" promptText="email" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="4" />
+                  <TableView fx:id="discountTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="9" GridPane.rowIndex="9">
                      <GridPane.margin>
                         <Insets bottom="10.0" />
                      </GridPane.margin>
                   </TableView>
-                  <TextField fx:id="bandField" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-                  <Button fx:id="addButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="+" GridPane.columnIndex="4" GridPane.rowIndex="8" />
-                  <Button fx:id="removeButton" mnemonicParsing="false" text="-" GridPane.columnIndex="5" GridPane.rowIndex="8" />
-                  <TextField fx:id="discountRateField" GridPane.columnIndex="3" GridPane.rowIndex="8" />
-                  <Label fx:id="discountRateLabel" text="Discount rate" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-                  <ComboBox fx:id="taskBox" prefWidth="150.0" promptText="Select task" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="7" />
-                  <GridPane GridPane.columnIndex="2" GridPane.rowIndex="7">
+                  <TextField fx:id="bandField" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="7" />
+                  <Button fx:id="addButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="+" GridPane.columnIndex="8" GridPane.rowIndex="8" />
+                  <Button fx:id="removeButton" mnemonicParsing="false" text="-" GridPane.columnIndex="9" GridPane.rowIndex="8" />
+                  <TextField fx:id="discountRateField" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="8" />
+                  <Label fx:id="discountRateLabel" text="Discount rate" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="8" />
+                  <ComboBox fx:id="taskBox" prefWidth="150.0" promptText="Select task" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="7" />
+                  <GridPane GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="7">
                     <columnConstraints>
                       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

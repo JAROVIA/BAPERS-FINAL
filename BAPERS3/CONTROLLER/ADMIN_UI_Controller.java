@@ -2,6 +2,7 @@ package CONTROLLER;
 
 import ADMIN.*;
 import GUI.*;
+import PROCESS.Job;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -34,6 +35,7 @@ public class ADMIN_UI_Controller {
 	private UserAccount loggedInUser = null;
 	private UserAccount editingUser = null;
 
+
 	/**
 	 * 
 	 * @param Username
@@ -49,6 +51,31 @@ public class ADMIN_UI_Controller {
 			if(username.equals(userData[1]) && password.equals(userData[3])){
 				loggedInUser = new UserAccount(Integer.parseInt(userData[0]), userData[1], userData[2], userData[3], userData[4]);
 				loggedin = true;
+
+				if(loggedInUser.getUserRole().equals("Office Manager")){
+					AlertUser jobAlert = new AlertUser(this);
+					if(Job.AreLateJobs()) {
+						String message = "Alert\n" + "There are " + Job.GetLateJobList().size() + " late jobs.";
+
+						jobAlert.setAlertMessage(message);
+						jobAlert.setDestination("Jobs");
+
+						loggedInUser.setAlert(jobAlert);
+						loggedInUser.setAlert(jobAlert);
+					}
+					// if payment is late
+				}
+				if(loggedInUser.getUserRole().equals("Shift Manager")){
+					AlertUser jobAlert = new AlertUser(this);
+					if(Job.AreLateJobs()) {
+						String message = "Alert\n" + "There are " + Job.GetLateJobList().size() + " late jobs.";
+
+						jobAlert.setAlertMessage(message);
+						jobAlert.setDestination("Jobs");
+
+						loggedInUser.setAlert(jobAlert);
+					}
+				}
 				break;
 			}
 		}
