@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -15,6 +16,8 @@ import javafx.util.Callback;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.function.Predicate;
 
 public class JobsScreen extends Window {
 
@@ -50,6 +53,53 @@ public class JobsScreen extends Window {
 		throw new UnsupportedOperationException();
 	}
 
+	/**
+	 * boolean to check if input is contained in the table. uses regex to match pattern first to check
+	 * search is non case sensitive, probably easier for user
+	 * @param data user account data to be checked
+	 */
+	private boolean matchJob(String[] data, String input) {
+
+		if(matchNumber(input)){
+			return data[0].contains(input)
+					|| data[1].contains(input)
+					|| data[2].contains(input)
+					|| data[7].contains(input)
+					|| data[8].contains(input);
+		}
+		if(matchAnyNumberType(input)){
+			return data[6].contains(input);
+		}
+		else{
+			return data[3].toLowerCase().contains(input.toLowerCase())
+					|| data[4].toLowerCase().contains(input.toLowerCase())
+					|| data[5].toLowerCase().contains(input.toLowerCase());
+		}
+	}
+
+	/**
+	 * used for filtered lists which can dynamically filter data depending on predicate such as this
+	 * @param input input in the search field
+	 * @return predicate to inform filter list if input matches some data in the list
+	 */
+	private Predicate<String[]> jobDataPredicate(String input){
+		return (String[] data) -> {
+			if(input == null || input.trim().isEmpty()){
+				return true;
+			}
+			else{
+				return matchJob(data, input);
+			}
+		};
+	}
+
+	protected void onLeave(){
+		searchField1.clear();
+		searchField2.clear();
+		jobsTable.setItems(null);
+		lateJobsTable.setItems(null);
+	}
+
 	private void toPayment(){
 		procUiController.showScreen("Payments");
 	}
@@ -71,16 +121,6 @@ public class JobsScreen extends Window {
 			procUiController.showScreen("ProgressTasks");
 		}
 	}
-	@Override
-	public void toMain(){
-		super.toMain();
-		onBack();
-	}
-
-	private void onBack(){
-		lateJobsTable.getItems().clear();
-		jobsTable.getItems().clear();
-	}
 
 	@Override
 	public void onShow(){
@@ -95,8 +135,20 @@ public class JobsScreen extends Window {
 			throwables.printStackTrace();
 		}
 
-		jobsTable.setItems(jobData);
-		lateJobsTable.setItems(lateJobData);
+		FilteredList<String[]> jobFilteredList = new FilteredList<>(jobData);
+		FilteredList<String[]> lateJobFilteredList = new FilteredList<>(lateJobData);
+
+		searchField1.textProperty().addListener(((observableValue, old, newValue) -> {
+			jobsTable.getSelectionModel().clearSelection();
+			jobFilteredList.setPredicate(jobDataPredicate(newValue));
+		}));
+		searchField2.textProperty().addListener(((observableValue, old, newValue) -> {
+			lateJobsTable.getSelectionModel().clearSelection();
+			lateJobFilteredList.setPredicate(jobDataPredicate(newValue));
+		}));
+
+		jobsTable.setItems(jobFilteredList);
+		lateJobsTable.setItems(lateJobFilteredList);
 	}
 	/**
 	 *

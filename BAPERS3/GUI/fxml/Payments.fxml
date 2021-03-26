@@ -76,17 +76,17 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label fx:id="welcomeLabel" prefHeight="21.0" prefWidth="167.0" style="-fx-border-color: Black;" text="Welcome [logged in user]" textAlignment="RIGHT" GridPane.columnIndex="9" GridPane.columnSpan="2">
+            <Label fx:id="welcomeLabel" prefHeight="36.0" prefWidth="239.0" style="-fx-border-color: Black;" text="Welcome [logged in user]" textAlignment="RIGHT" GridPane.columnIndex="10" GridPane.columnSpan="2">
                <font>
                   <Font size="9.0" />
                </font>
             </Label>
-            <Button fx:id="logoutButton" mnemonicParsing="false" prefHeight="21.0" prefWidth="59.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Logout" GridPane.columnIndex="12">
+            <Button fx:id="logoutButton" mnemonicParsing="false" prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Logout" GridPane.columnIndex="12">
                <font>
                   <Font name="System Bold" size="9.0" />
                </font>
             </Button>
-            <ImageView fx:id="homeButton" fitHeight="54.0" fitWidth="194.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="homeButton" fitHeight="101.0" fitWidth="453.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/BapersLogo.jpg" />
                </image>

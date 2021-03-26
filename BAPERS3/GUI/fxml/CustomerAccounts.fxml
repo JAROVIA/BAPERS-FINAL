@@ -98,7 +98,7 @@
                   <Font size="9.0" />
                </font>
             </Label>
-            <TextField prefHeight="25.0" prefWidth="143.0" promptText="Search" style="-fx-border-style: solid; -fx-border-radius: 10;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="2">
+            <TextField fx:id="searchField" prefHeight="25.0" prefWidth="143.0" promptText="Search" style="-fx-border-style: solid; -fx-border-radius: 10;" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="2">
                <font>
                   <Font size="10.0" />
                </font>
