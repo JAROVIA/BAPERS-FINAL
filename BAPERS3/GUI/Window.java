@@ -249,10 +249,35 @@ public abstract class Window{
 		}
 	}
 
+	/**
+	 * for search to match positive numerics (system never records negatives)
+	 * @return
+	 */
+	protected boolean searchMatchNumber(String toCheck){
+		return toCheck.matches("\\d+");
+	}
+
+	/**
+	 * for search to match only string
+	 * @return
+	 */
+	protected boolean searchMatchName(String toCheck){
+		return toCheck.matches("[^0-9!@£$%^&*():=+,-]+");
+	}
+
+	/**
+	 * for search to match '@'
+	 * @param toCheck
+	 * @return
+	 */
+	protected boolean searchMatchEmail(String toCheck){
+		return toCheck.matches("[@]]");
+	}
+
 	@FXML
 	public void initialize() {
 		// TODO - implement Window.Window
-
+		
 		if(logoutButton != null) {
 			logoutButton.setOnAction(actionEvent -> logout());
 		}
