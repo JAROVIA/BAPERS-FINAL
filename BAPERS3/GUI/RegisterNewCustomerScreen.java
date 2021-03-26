@@ -93,10 +93,12 @@ public class RegisterNewCustomerScreen extends Window {
 					} else {
 						//TODO submit as valued customer
 						submitCustomerData();
+						onLeave();
 					}
 				} else {
 					//TODO submit as non valued customer
 					submitCustomerData();
+					onLeave();
 				}
 
 			}
@@ -318,34 +320,38 @@ public class RegisterNewCustomerScreen extends Window {
 		return isAppropriate;
 	}
 
+	protected void onLeave(){
+		//customer detail fields
+		memorableWordField.clear();
+		nameField.clear();
+		phoneField.clear();
+		emailField.clear();
+		contactNameField.clear();
+		postcodeField.clear();
+		address1Field.clear();
+		address2Field.clear();
+		discountRateField.clear();
+
+		//clear the table
+		data.clear();
+		discountBox.getSelectionModel().clearSelection();
+	}
+
 	public void onShow(){
 		super.onShow();
 
 		//everything is set to empty state
-
-		//customer detail fields
-		memorableWordField.setText("");
-		nameField.setText("");
-		phoneField.setText("");
-		postcodeField.setText("");
-		address1Field.setText("");
-		address2Field.setText("");
-
-		for(int i = GridPane.getRowIndex(discountBox); i < GridPane.getRowIndex(discountTable)+1; i++){
-			gridPane.getRowConstraints().get(i).setPercentHeight(0);
-		}
-
 		//discount fields
 		hideFlex();
 		hideVar();
 		discountRateField.setStyle("visibility : hidden;");
 		discountRateLabel.setStyle("visibility : hidden;");
-		//clear the table
-		data.clear();
-		discountBox.getSelectionModel().clearSelection();
 		//overridden method to show prompt text again because javafx is great at this
 		setComboBoxPromptText(discountBox, "Select discount type");
-		discountRateField.setText("");
+
+		for(int i = GridPane.getRowIndex(discountBox); i < GridPane.getRowIndex(discountTable)+1; i++){
+			gridPane.getRowConstraints().get(i).setPercentHeight(0);
+		}
 	}
 
 	/**

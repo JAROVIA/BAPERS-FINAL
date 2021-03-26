@@ -32,8 +32,17 @@ public class UpdateExistingTaskScreen extends Window {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void onShow(){
 		super.onShow();
+	}
+
+	@Override
+	protected void onLeave(){
+		descriptionField.clear();
+		durationField.clear();
+		locationField.clear();
+		priceField.clear();
 	}
 
 	/**

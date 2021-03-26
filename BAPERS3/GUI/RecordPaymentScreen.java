@@ -35,12 +35,15 @@ public class RecordPaymentScreen extends Window {
 		}
 	}
 
+	protected void onLeave(){
+		priceField.clear();
+		cardNumberField.clear();
+		cardHolderNameField.clear();
+	}
+
 	public void onCancel() {
 		uiController.showScreen("Jobs");
-
-		priceField.setText("");
-		cardNumberField.setText("");
-		cardHolderNameField.setText("");
+		onLeave();
 	}
 
 	public void onShow(){

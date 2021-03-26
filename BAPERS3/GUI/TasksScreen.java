@@ -5,15 +5,18 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.util.Callback;
 
 import java.lang.reflect.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
 public class TasksScreen extends Window {
 
@@ -25,8 +28,43 @@ public class TasksScreen extends Window {
 	private Button addNewTaskButton;
 	@FXML
 	private TableView<String[]> tasksTable;
+	@FXML
+	private TextField searchField;
 
-	//only for OM
+	/**
+	 * boolean to check if input is contained in the table. uses regex to match pattern first to check
+	 * search is non case sensitive, probably easier for user
+	 * @param data user account data to be checked
+	 */
+	private boolean matchTask(String[] data, String input) {
+		if(matchName(input)){
+			return data[1].toLowerCase().contains(input.toLowerCase())
+					|| data[2].toLowerCase().contains(input.toLowerCase());
+		}
+
+		if(matchNumber(input)){
+			return data[0].contains(input)
+					|| data[3].contains(input)
+					|| data[4].contains(input);
+		}
+		return false;
+	}
+
+	/**
+	 * used for filtered lists which can dynamically filter data depending on predicate such as this
+	 * @param input input in the search field
+	 * @return predicate to inform filter list if input matches some data in the list
+	 */
+	private Predicate<String[]> taskDataPredicate(String input){
+		return (String[] data) -> {
+			if(input == null || input.trim().isEmpty()){
+				return true;
+			}
+			else{
+				return matchTask(data, input);
+			}
+		};
+	}
 
 	public void removeTask() {
 		// TODO - implement TasksScreen.RemoveTask
@@ -35,6 +73,7 @@ public class TasksScreen extends Window {
 
 	public void toAddTask() {
 		procUiController.showScreen("AddNewTask");
+		onLeave();
 	}
 
 	public void toEditTask() {
@@ -43,7 +82,13 @@ public class TasksScreen extends Window {
 			//TODO match id
 			//assign to pro_ui
 			procUiController.showScreen("EditExistingTasks");
+			onLeave();
 		}
+	}
+
+	protected void onLeave(){
+		searchField.clear();
+		tasksTable.setItems(null);
 	}
 
 	public void onShow(){
@@ -54,10 +99,15 @@ public class TasksScreen extends Window {
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
 		}
-		ObservableList<String[]> data = FXCollections.observableArrayList();
+		ObservableList<String[]> data = FXCollections.observableArrayList(list);
 
-		data.addAll(list);
-		tasksTable.setItems(data);
+		FilteredList<String[]> filteredData = new FilteredList<>(data);
+		tasksTable.setItems(filteredData);
+
+		searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+			tasksTable.getSelectionModel().clearSelection();
+			filteredData.setPredicate(taskDataPredicate(newValue));
+		});
 	}
 	/**
 	 */

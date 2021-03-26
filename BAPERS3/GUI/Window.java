@@ -225,6 +225,7 @@ public abstract class Window{
 		if(getAdminUiController() != null){
 			getAdminUiController().showScreen("Login");
 		}
+		onLeave();
 	}
 
 	public void toMain(){
@@ -240,18 +241,16 @@ public abstract class Window{
 		if(getAdminUiController() != null){
 			getAdminUiController().showScreen("HomeScreen");
 		}
+		onLeave();
 	}
 
 	public boolean checkAccess(String userRole){
-		boolean isAllowed = false;
 		for(String user : userAllowed){
 			if(user.equals(userRole)){
-				isAllowed = true;
-				break;
+				return true;
 			}
 		}
-		System.out.println("role: " + userRole + ", access: " + isAllowed);
-		return  isAllowed;
+		return false;
 	}
 
 	public void onShow(){
@@ -284,6 +283,14 @@ public abstract class Window{
 	 */
 	protected boolean matchNumber(String toCheck){
 		return toCheck.matches("\\d+");
+	}
+
+	/**
+	 * for search to match positive numerics (system never records negatives)
+	 * @return
+	 */
+	protected boolean matchAnyNumberType(String toCheck){
+		return toCheck.matches("\\d+[.]?\\d*");
 	}
 
 	/**
@@ -360,6 +367,13 @@ public abstract class Window{
 				}
 			}
 		});
+	}
+
+	/**
+	 * for child classes to use when leaving page
+	 */
+	protected void onLeave(){
+
 	}
 
 	@FXML

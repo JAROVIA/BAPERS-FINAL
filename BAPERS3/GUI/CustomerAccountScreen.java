@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -15,11 +16,12 @@ import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
 public class CustomerAccountScreen extends Window {
 
 	@FXML
-	private TextField SearchCustomerTextArea;
+	private TextField searchField;
 	@FXML
 	private TableView<String[]> customerAccountTable;
 	@FXML
@@ -101,8 +103,7 @@ public class CustomerAccountScreen extends Window {
 		if(selectedCustomerId >= 0) {
 			//assign id somewhere
 			acctUiController.showScreen("EditCustomerDetails");
-			customerAccountTable.getItems().clear();
-			discountTable.getItems().clear();
+			onLeave();
 		}
 	}
 
@@ -131,10 +132,57 @@ public class CustomerAccountScreen extends Window {
 		nameLabel.setText("");
 	}
 
+	/**
+	 * boolean to check if input is contained in the table. uses regex to match pattern first to check
+	 * search is non case sensitive, probably easier for user
+	 * @param data user account data to be checked
+	 */
+	private boolean matchCustomer(String[] data, String input) {
+		if(matchName(input)){
+			return data[1].toLowerCase().contains(input.toLowerCase())
+					|| data[2].toLowerCase().contains(input.toLowerCase());
+		}
+		if(matchNumber(input)){
+			return data[0].contains(input)
+					|| data[4].contains(input);
+		}
+		if(matchEmail(input)){
+			return data[6].toLowerCase().contains(input.toLowerCase());
+		}
+		else{
+			return data[3].toLowerCase().contains(input.toLowerCase())
+					|| data[5].toLowerCase().contains(input.toLowerCase());
+		}
+	}
+
+	/**
+	 * used for filtered lists which can dynamically filter data depending on predicate such as this
+	 * @param input input in the search field
+	 * @return predicate to inform filter list if input matches some data in the list
+	 */
+	private Predicate<String[]> customerDataPredicate(String input){
+		return (String[] data) -> {
+			//if the input is empty, show all data
+			if(input == null || input.trim().isEmpty()){
+				System.out.println("empty input");
+				return true;
+			}
+			else{
+				System.out.println("attempt match" + matchCustomer(data, input));
+				return matchCustomer(data, input);
+			}
+		};
+	}
+
 	private void onClose(){
 		splitPane.setDividerPositions(1);
 		resetCustomerDetail();
 		customerDetailGridPane.setStyle("visibility : hidden");
+	}
+
+	protected void onLeave(){
+		customerAccountTable.setItems(null);
+		discountTable.getItems().clear();
 	}
 
 	@Override
@@ -143,10 +191,16 @@ public class CustomerAccountScreen extends Window {
 		//TODO assign the customer account details list here
 		selectedCustomerId = -1;
 		ObservableList<String[]> data = FXCollections.observableArrayList();
-		//add cusomter info here
+		//add customer info here
 		data.addAll(new String[]{"1","bob","bobby","yes","02345678","city, london, uk","bob@city.ac.uk"});
 
-		customerAccountTable.setItems(data);
+		FilteredList<String[]> filteredData = new FilteredList<>(data);
+		customerAccountTable.setItems(filteredData);
+		searchField.textProperty().addListener((observable, oldText, newText)->{
+			customerAccountTable.getSelectionModel().clearSelection();
+			onClose();
+			filteredData.setPredicate(customerDataPredicate(newText));
+		});
 
 		splitPane.setDividerPositions(1);
 		customerDetailGridPane.setStyle("visibility : hidden");
