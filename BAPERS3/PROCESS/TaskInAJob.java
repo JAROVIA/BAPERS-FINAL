@@ -226,6 +226,7 @@ public class TaskInAJob {
 		// adding changes to an array list
 		while (resultSet.next()){
 
+			int JobTaskID = resultSet.getInt("JobTaskID");
 			int jobID = resultSet.getInt("JobID");
 			int taskID = resultSet.getInt("TaskID");
 			int accountNumber = resultSet.getInt("AccountNumber");
@@ -238,7 +239,8 @@ public class TaskInAJob {
 			String taskDeadline = resultSet.getString("TaskDeadline");
 
 			if (jobID == JobID){
-				tuple = jobID + "`"
+				tuple = JobTaskID + "`"
+						+ jobID + "`"
 						+ taskID + "`"
 						+ accountNumber + "`"
 						+ taskStartTime + "`"
@@ -269,6 +271,7 @@ public class TaskInAJob {
 		// adding changes to an array list
 		while (resultSet.next()){
 
+			int JobTaskID = resultSet.getInt("JobTaskID");
 			int jobID = resultSet.getInt("JobID");
 			int taskID = resultSet.getInt("TaskID");
 			int accountNumber = resultSet.getInt("AccountNumber");
@@ -280,9 +283,8 @@ public class TaskInAJob {
 			int isCompleted = resultSet.getInt("IsCompleted");
 			String taskDeadline = resultSet.getString("TaskDeadline");
 
-
-
-			tuple = jobID + "`"
+			tuple = JobTaskID + "`"
+					+ jobID + "`"
 					+ taskID + "`"
 					+ accountNumber + "`"
 					+ taskStartTime + "`"
@@ -312,12 +314,23 @@ public class TaskInAJob {
 		throw new UnsupportedOperationException();
 	}
 
-	public void StartTask() {
-		// TODO - implement Task.StartTask
-		throw new UnsupportedOperationException();
+	public static void StartTask(int id) throws SQLException {
+
+		String time = Calendar.getInstance().getTime().toString();
+		String sql = "UPDATE TaskInAJob SET TaskStartTime = \"" + time + "\"" +
+				" WHERE JobTaskID = " + id + ";";
+		System.out.println(sql);
+		Statement statement = connection.createStatement();
+		statement.executeUpdate(sql);
 	}
 
+	public static void CompleteTask(int id) throws SQLException {
+		String sql = "UPDATE TaskInAJob SET IsCompleted = 1 WHERE JobTaskID = " + id + ";";
+		System.out.println(sql);
+		Statement statement = connection.createStatement();
+		statement.executeUpdate(sql);
 
+	}
 
 
 	// TODO createjob screen !!!!!!!!!!
@@ -351,10 +364,7 @@ public class TaskInAJob {
 		throw new UnsupportedOperationException();
 	}
 
-	public void CompleteTask() {
-		// TODO - implement Task.CompleteTask
-		throw new UnsupportedOperationException();
-	}
+
 
 	public void DestroyTask() {
 		// TODO - implement Task.DestroyTask

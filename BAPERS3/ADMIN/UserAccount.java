@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.sql.*;
@@ -185,6 +186,16 @@ public class UserAccount {
 
 		}
 		return arrayList;
+	}
+
+	public static void main(String[] args) throws SQLException {
+		ArrayList<String[]> test = new ArrayList<>();
+		test = UserAccount.getUserList();
+
+		for (String[] t : test){
+			System.out.println(Arrays.toString(t));
+
+		}
 	}
 
 	/**

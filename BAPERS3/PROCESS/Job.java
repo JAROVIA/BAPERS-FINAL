@@ -448,8 +448,7 @@ public class Job implements I_PROCESS {
 	}
 
 	public void setNumberOfTasks(int NumberOfTasks) {
-		// TODO - implement Job.setNumberOfTasks
-		throw new UnsupportedOperationException();
+		this.NumberOfTasks = NumberOfTasks;
 	}
 
 

@@ -31,20 +31,26 @@ public class ProcessTasksScreen extends Window {
 	@FXML
 	private ProgressBar progressBar;
 
+	private static int jobID;
+
+	public static void setJobID(int JobID) {
+		jobID = JobID;
+	}
+
 	public void onShow(){
 		super.onShow();
 		ArrayList<String[]> list = new ArrayList<>();
 		try {
 
-			String[] string = tasksInJobTable.getSelectionModel().getSelectedItem();
-			String target = string[0];
-//			Integer.parseInt(target)
-			list = TaskInAJob.GetTIJList();
 
-			for(String[] iter : list){
-				System.out.println(Arrays.toString(iter));
 
-			}
+//			list = TaskInAJob.GetTIJList();
+			list = TaskInAJob.GetTIJList(jobID);
+			System.out.println(jobID);
+
+//			for(String[] iter : list){
+//				System.out.println(Arrays.toString(iter));
+//			}
 
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
@@ -64,9 +70,19 @@ public class ProcessTasksScreen extends Window {
 	private void onStart(){
 		//TODO do stuff on start button click
 		String[] taskData = tasksInJobTable.getSelectionModel().getSelectedItem();
+		String tijid = taskData[0];
+
 		if(taskData != null && taskData[8].equals("0")){
+
 			// start
+			try {
+				TaskInAJob.StartTask(Integer.parseInt(tijid));
+			} catch (SQLException throwables) {
+				throwables.printStackTrace();
+			}
+
 		}
+		// change tasklist
 	}
 
 	private void showProgress(int completed, int total){
@@ -77,9 +93,18 @@ public class ProcessTasksScreen extends Window {
 	private void onComplete(){
 		//TODO do stuff on complete click
 		String[] taskData = tasksInJobTable.getSelectionModel().getSelectedItem();
+		String tijid = taskData[0];
 		if(taskData != null && (taskData[3].equals(null)||taskData[3].equals(""))&&taskData[8].equals("0")){
 			//complete
+
 		}
+		try {
+			TaskInAJob.CompleteTask(Integer.parseInt(tijid));
+			System.out.println("onComplete()");
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+
 	}
 
 	private void onCancel(){

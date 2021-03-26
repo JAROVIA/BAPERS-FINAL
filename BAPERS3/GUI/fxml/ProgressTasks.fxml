@@ -35,6 +35,7 @@
       </Text>
       <TableView fx:id="tasksInJobTable" layoutX="14.0" layoutY="240.0" prefHeight="353.0" prefWidth="945.0" style="-fx-border-color: -black;">
          <columns>
+            <TableColumn prefWidth="81.3333158493042" text="TIJ ID" />
             <TableColumn prefWidth="81.3333158493042" text="Job ID" />
             <TableColumn prefWidth="91.99999237060547" text="Task ID" />
             <TableColumn prefWidth="112.50187683105469" text="Account number" />
