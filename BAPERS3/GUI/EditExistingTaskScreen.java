@@ -47,5 +47,8 @@ public class EditExistingTaskScreen extends Window {
 
 		cancelButton.setOnAction(actionEvent -> onCancel());
 		confirmButton.setOnAction(actionEvent -> onConfirm());
+
+		addIntegerNumberListener(durationField);
+		addIntegerNumberListener(priceField);
 	}
 }

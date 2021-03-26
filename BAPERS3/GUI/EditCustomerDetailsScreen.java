@@ -1,46 +1,24 @@
 package GUI;
 
+import PROCESS.TaskDescription;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
+import javafx.util.Callback;
 
-public class EditCustomerDetailsScreen extends Window {
+import java.sql.SQLException;
+import java.util.ArrayList;
 
-	@FXML
-	private TextField usernameField;
-	@FXML
-	private TextField addressField;
-	@FXML
-	private ComboBox<String> accountStatusBox;
-	@FXML
-	private Button saveButton;
-	@FXML
-	private Button deleteButton;
-	@FXML
-	private TextField phoneField;
-	@FXML
-	private TextField memorableWordField;
+public class EditCustomerDetailsScreen extends RegisterNewCustomerScreen{
 
-	public void deleteCustomer() {
-		// TODO - implement EditCustomerDetailsScreen.DeleteCustomer
-		throw new UnsupportedOperationException();
+
+	@Override
+	protected void submitCustomerData(){
+		System.out.println("edit customer");
 	}
 
-	/**
-	 * 
-	 * @param CustomerDetails
-	 */
-	public void SaveCustomer(String[] CustomerDetails) {
-		// TODO - implement EditCustomerDetailsScreen.SaveCustomer
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 */
-	@FXML
-	public void initialize(){
-		super.initialize();
-		userAllowed = new String[]{ROLE_OFFICE_MANAGER};
-	}
 }

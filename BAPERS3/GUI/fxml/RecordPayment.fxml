@@ -46,6 +46,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.ComboBox?>
 <VBox prefHeight="439.0" prefWidth="733.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.RecordPaymentScreen">
   <children>
     <MenuBar VBox.vgrow="NEVER">
@@ -105,12 +106,12 @@
                </image>
             </ImageView>
             <ChoiceBox layoutX="141.0" layoutY="179.0" prefHeight="27.0" prefWidth="179.0" style="-fx-background-color: white; -fx-border-color: black;" />
-            <Button layoutX="358.0" layoutY="381.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" style="-fx-background-color: #95ed82; -fx-border-color: Black;" text="Save Details">
+            <Button fx:id="saveButton" layoutX="358.0" layoutY="381.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" style="-fx-background-color: #95ed82; -fx-border-color: Black;" text="Save Details">
                <font>
                   <Font name="System Bold" size="9.0" />
                </font>
             </Button>
-            <Button layoutX="255.0" layoutY="381.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" style="-fx-background-color: #f26d6d; -fx-border-color: Black;" text="Delete Customer">
+            <Button fx:id="cancelButton" layoutX="255.0" layoutY="381.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" style="-fx-background-color: #f26d6d; -fx-border-color: Black;" text="cancel">
                <font>
                   <Font name="System Bold" size="9.0" />
                </font>
@@ -120,7 +121,7 @@
                   <Image url="@../images/Record-Payments-icon.jpg" />
                </image>
             </ImageView>
-            <TextField layoutX="141.0" layoutY="116.0" prefHeight="25.0" prefWidth="179.0" promptText="Enter Final Price" style="-fx-border-color: BLACK;" />
+            <TextField fx:id="priceField" layoutX="141.0" layoutY="116.0" prefHeight="25.0" prefWidth="179.0" promptText="Enter Final Price" style="-fx-border-color: BLACK;" />
             <Label layoutX="141.0" layoutY="99.0" prefHeight="17.0" prefWidth="98.0" text="Final Price">
                <font>
                   <Font size="10.0" />
@@ -142,21 +143,21 @@
                </font>
             </Label>
             <ChoiceBox layoutX="141.0" layoutY="246.0" prefHeight="27.0" prefWidth="179.0" style="-fx-background-color: white; -fx-border-color: black;" />
-            <TextField layoutX="367.0" layoutY="308.0" prefHeight="27.0" prefWidth="121.0" promptText="Enter CVC" style="-fx-border-color: BLACK;" />
-            <TextField layoutX="367.0" layoutY="179.0" prefHeight="27.0" prefWidth="45.0" promptText="Enter" style="-fx-border-color: BLACK;" />
-            <TextField layoutX="367.0" layoutY="116.0" prefHeight="25.0" prefWidth="179.0" promptText="Enter Card Number" style="-fx-border-color: BLACK;" />
+            <TextField fx:id="cvcField" layoutX="367.0" layoutY="308.0" prefHeight="27.0" prefWidth="121.0" promptText="Enter CVC" style="-fx-border-color: BLACK;" />
+            <TextField fx:id="monthField" layoutX="367.0" layoutY="179.0" prefHeight="27.0" prefWidth="45.0" promptText="Enter" style="-fx-border-color: BLACK;" />
+            <TextField fx:id="cardNumberField" layoutX="367.0" layoutY="116.0" prefHeight="25.0" prefWidth="179.0" promptText="Enter Card Number" style="-fx-border-color: BLACK;" />
             <Label layoutX="367.0" layoutY="99.0" prefHeight="17.0" prefWidth="185.0" text="Card Number(Last 4 Digits)">
                <font>
                   <Font size="10.0" />
                </font>
             </Label>
-            <ChoiceBox layoutX="141.0" layoutY="308.0" prefHeight="27.0" prefWidth="179.0" style="-fx-background-color: white; -fx-border-color: black;" />
+            <ComboBox fx:id="paymentMethodBox" layoutX="141.0" layoutY="308.0" prefHeight="27.0" prefWidth="179.0" style="-fx-background-color: white; -fx-border-color: black;" />
             <Label layoutX="142.0" layoutY="251.0" prefHeight="17.0" prefWidth="136.0" text="Select Front Staff Member" textFill="#a49898">
                <font>
                   <Font size="10.0" />
                </font>
             </Label>
-            <TextField layoutX="415.0" layoutY="179.0" prefHeight="27.0" prefWidth="45.0" promptText="Enter" style="-fx-border-color: BLACK;" />
+            <TextField fx:id="yearField" layoutX="415.0" layoutY="179.0" prefHeight="27.0" prefWidth="45.0" promptText="Enter" style="-fx-border-color: BLACK;" />
             <Label layoutX="367.0" layoutY="162.0" prefHeight="17.0" prefWidth="90.0" text="Expiry Date (mm/yy)">
                <font>
                   <Font size="10.0" />
@@ -167,7 +168,7 @@
                   <Font size="10.0" />
                </font>
             </Label>
-            <TextField layoutX="367.0" layoutY="246.0" prefHeight="25.0" prefWidth="179.0" promptText="Enter Name on Card" style="-fx-border-color: BLACK;" />
+            <TextField fx:id="cardHolderNameField" layoutX="367.0" layoutY="246.0" prefHeight="25.0" prefWidth="179.0" promptText="Enter Name on Card" style="-fx-border-color: BLACK;" />
             <Label layoutX="367.0" layoutY="229.0" prefHeight="15.0" prefWidth="90.0" text="Name on Card">
                <font>
                   <Font size="10.0" />

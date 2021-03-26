@@ -42,21 +42,26 @@ public class EditUserScreen extends Window {
 			editingUser.setEmployeeName(staffNameField.getText());
 		}
 		saveUser(editingUser);
+		onLeave();
 		adminUiController.showScreen("UserAccounts");
 	}
 
 	private void onCancel(){
-		adminUiController.setEditingUser(null);
 		adminUiController.showScreen("UserAccounts");
+		onLeave();
+	}
+
+	@Override
+	protected void onLeave(){
+		adminUiController.setEditingUser(null);
+		usernameField.clear();
+		passwordField.clear();
+		staffNameField.clear();
+		roleBox.getSelectionModel().clearSelection();
 	}
 
 	public void onShow(){
 		super.onShow();
-		staffNameField.setText("");
-		passwordField.setText("");
-		usernameField.setText("");
-		roleBox.getSelectionModel().clearSelection();
-		roleBox.setPromptText("Select role");
 	}
 
 	/**
@@ -75,6 +80,7 @@ public class EditUserScreen extends Window {
 		});
 		cancelButton.setOnAction(actionEvent -> onCancel());
 		roleBox.getItems().setAll(ROLE_OFFICE_MANAGER, ROLE_SHIFT_MANAGER, ROLE_RECEPTIONIST, ROLE_TECHNICIAN_COPY, ROLE_TECHNICIAN_DEV, ROLE_TECHNICIAN_PACK, ROLE_TECHNICIAN_FIN);
+		setComboBoxPromptText(roleBox, "Select role");
 	}
 
 }
