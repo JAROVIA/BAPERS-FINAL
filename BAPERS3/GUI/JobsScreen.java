@@ -116,6 +116,10 @@ public class JobsScreen extends Window {
 	}
 
 	protected void toProcessTasks(){
+
+		String[] string = jobsTable.getSelectionModel().getSelectedItem();
+		String target = string[0];
+		ProcessTasksScreen.setJobID(Integer.parseInt(target));
 		String[] jobData = jobsTable.getSelectionModel().getSelectedItem();
 		if(jobData != null && jobData[7].equals("0")) {
 			procUiController.showScreen("ProgressTasks");

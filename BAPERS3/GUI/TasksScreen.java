@@ -67,8 +67,15 @@ public class TasksScreen extends Window {
 	}
 
 	public void removeTask() {
-		// TODO - implement TasksScreen.RemoveTask
-		throw new UnsupportedOperationException();
+
+		try {
+			String[] arr = tasksTable.getSelectionModel().getSelectedItem();
+			String str = arr[0];
+			System.out.println(str);
+			TaskDescription.ArchiveTask(Integer.parseInt(str));
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
 	}
 
 	public void toAddTask() {
@@ -117,6 +124,7 @@ public class TasksScreen extends Window {
 		userAllowed = new String[]{ROLE_OFFICE_MANAGER};
 		editTaskButton.setOnAction(actionEvent -> toEditTask());
 		addNewTaskButton.setOnAction(actionEvent -> toAddTask());
+		deleteTaskButton.setOnAction(actionEvent -> removeTask());
 
 		for (int i = 0; i < tasksTable.getColumns().size(); i++) {
 			TableColumn tc = tasksTable.getColumns().get(i);

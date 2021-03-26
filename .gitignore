@@ -121,3 +121,5 @@ out/*
 libs/*
 .idea/*
 BAPERS3/PROCESS/Testing.java
+.idea/BAPERS-FINAL.iml
+.idea/dbnavigator.xml

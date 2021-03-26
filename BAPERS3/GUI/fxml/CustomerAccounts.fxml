@@ -113,12 +113,12 @@
                   <TableView fx:id="customerAccountTable" editable="true" style="-fx-border-style: solid;">
                     <columns>
                       <TableColumn fx:id="accountNumberColumn" prefWidth="78.0" text="Account No" />
-                      <TableColumn fx:id="userNameColumn" minWidth="1.0" prefWidth="72.67445373535156" text="customer name" />
-                        <TableColumn prefWidth="76.32554626464844" text="contact name" />
                         <TableColumn fx:id="accountStatusColumn" minWidth="0.0" prefWidth="103.0" text="Account Status" />
                         <TableColumn fx:id="phoneColumn" prefWidth="98.0" text="Phone Number" />
                         <TableColumn fx:id="addressColumn" prefWidth="118.0" text="Address" />
                         <TableColumn prefWidth="75.0" text="email" />
+                        <TableColumn fx:id="userNameColumn" minWidth="1.0" prefWidth="72.67445373535156" text="customer name" />
+                        <TableColumn prefWidth="76.32554626464844" text="contact name" />
                     </columns>
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />

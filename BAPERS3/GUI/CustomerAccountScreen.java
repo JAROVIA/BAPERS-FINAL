@@ -15,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
@@ -192,7 +193,14 @@ public class CustomerAccountScreen extends Window {
 		selectedCustomerId = -1;
 		ObservableList<String[]> data = FXCollections.observableArrayList();
 		//add customer info here
-		data.addAll(new String[]{"1","bob","bobby","yes","02345678","city, london, uk","bob@city.ac.uk"});
+//		data.addAll(new String[]{"1","bob","bobby","yes","02345678","city, london, uk","bob@city.ac.uk"});
+
+		try {
+			data.addAll(CustomerAccountDetails.getCustomerList());
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+		customerAccountTable.setItems(data);
 
 		FilteredList<String[]> filteredData = new FilteredList<>(data);
 		customerAccountTable.setItems(filteredData);
