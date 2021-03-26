@@ -91,8 +91,15 @@ public class CreateJobScreen extends Window {
 		for(TaskDescription t : list){
 			tasksComboBox.getItems().add(t.getTaskID() + ", " + t.getDescriptionOfTask() + ", " + t.getTaskLocation() + ", " + String.format("%.02f",t.getTaskPrice()));
 		}
-		data.clear();
 		taskTable.setItems(data);
+	}
+
+	protected void onLeave(){
+		tasksComboBox.getItems().clear();
+		data.clear();
+		list.clear();
+		taskTable.getItems().clear();
+		jobPriceLabel.setText("");
 	}
 
 	private void addTaskToJob(){

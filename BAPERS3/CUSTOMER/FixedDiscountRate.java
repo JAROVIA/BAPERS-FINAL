@@ -2,9 +2,40 @@ package CUSTOMER;
 
 import PROCESS.*;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 public class FixedDiscountRate extends Discount {
 
-	private int FixedDiscountRate;
+	private int accountNumebr;
+	private int fixedDiscountRate;
+
+	static String url = "jdbc:mysql://localhost:3306/Bapers";
+	static String username = "jaroviadb";
+	static String password = "Jarovia123#@!";
+	static Connection connection;
+
+	static {
+		try {
+			connection = DriverManager.getConnection(
+					url, username, password);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public FixedDiscountRate(int accountNumebr, int fixedDiscountRate) throws SQLException {
+
+		this.accountNumebr = accountNumebr;
+		this.fixedDiscountRate = fixedDiscountRate;
+
+		String sql = "";
+		System.out.println(sql);
+		Statement statement = connection.createStatement();
+
+	}
 
 	/**
 	 * 

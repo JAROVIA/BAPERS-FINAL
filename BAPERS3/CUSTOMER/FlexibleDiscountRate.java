@@ -2,9 +2,46 @@ package CUSTOMER;
 
 import PROCESS.*;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 public class FlexibleDiscountRate extends Discount {
 
-	private int FlexibleDiscountRate;
+	private int bandNumber;
+	private int accountNumber;
+	private int volumeLowerBound;
+	private int volumeUpperBound;
+	private int flexibleDiscountRate;
+
+	static String url = "jdbc:mysql://localhost:3306/Bapers";
+	static String username = "jaroviadb";
+	static String password = "Jarovia123#@!";
+	static Connection connection;
+
+	static {
+		try {
+			connection = DriverManager.getConnection(
+					url, username, password);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public FlexibleDiscountRate(int bandNumber, int accountNumber, int volumeLowerBound,
+								int volumeUpperBound, int flexibleDiscountRate) throws SQLException {
+
+		this.bandNumber = bandNumber;
+		this.accountNumber = accountNumber;
+		this.volumeLowerBound = volumeLowerBound;
+		this.volumeUpperBound = volumeUpperBound;
+		this.flexibleDiscountRate = flexibleDiscountRate;
+
+		String sql = "";
+		System.out.println(sql);
+		Statement statement = connection.createStatement();
+	}
 
 	/**
 	 * 

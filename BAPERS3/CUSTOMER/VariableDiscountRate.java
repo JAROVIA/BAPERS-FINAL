@@ -1,10 +1,41 @@
 package CUSTOMER;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 public class VariableDiscountRate extends Discount {
 
-	private int VariableDiscountRate;
-	private int[] TaskDiscountRate;
-	private int TaskID;
+	private int taskID;
+	private int accountNumebr;
+	private int taskDiscountRate;
+
+	static String url = "jdbc:mysql://localhost:3306/Bapers";
+	static String username = "jaroviadb";
+	static String password = "Jarovia123#@!";
+	static Connection connection;
+
+	static {
+		try {
+			connection = DriverManager.getConnection(
+					url, username, password);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public VariableDiscountRate(int taskID, int accountNumebr, int taskDiscountRate) throws SQLException {
+
+		this.taskID = taskID;
+		this.accountNumebr = accountNumebr;
+		this.taskDiscountRate = taskDiscountRate;
+
+		String sql = "";
+		System.out.println(sql);
+		Statement statement = connection.createStatement();
+
+	}
 
 	@Override
 	public int setDiscountRate(int DiscountRate) {
