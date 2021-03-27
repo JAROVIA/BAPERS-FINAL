@@ -212,6 +212,7 @@ public class Job implements I_PROCESS {
 
 			String hourNow = Calendar.getInstance().getTime().toString().substring(11,13);
 			String hourDue = JobDeadline.substring(11,13);
+
 			int hourDueInt = Integer.parseInt(hourDue);
 			// 1h before due time
 			int hourAlmostDueInt;
@@ -226,7 +227,11 @@ public class Job implements I_PROCESS {
 			String hourAlmostDue = String.valueOf(hourAlmostDueInt);
 
 			// can add year to make sure no duplication same time next year
-			if (FullDateNow.equals(FullDateDue) && ( hourNow.equals(hourDue) || hourNow.equals(hourAlmostDue) )){
+			if (
+					(FullDateNow.equals(FullDateDue) && ( hourNow.equals(hourDue) || hourNow.equals(hourAlmostDue)))
+//					|| ()
+
+			){
 
 			tuple =
 				JobID + "`"

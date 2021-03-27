@@ -2,6 +2,7 @@ package PROCESS;
 
 import javafx.collections.ObservableList;
 
+import java.math.BigInteger;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -78,7 +79,6 @@ public class TaskInAJob {
 
 		// TaskInAJob.UpdateJob("TaskPrice", 76, "TaskID", 1);
 		String sql = "UPDATE TaskInAJob SET " + columnToEdit + " = " + newValue + " WHERE " + identifierOfTableToEdit + " = " + identifierCurrentValue + ";" ;
-		System.out.println(sql);
 		System.out.println(sql);
 		Statement statement = connection.createStatement();
 		statement.executeUpdate(sql);
@@ -157,11 +157,9 @@ public class TaskInAJob {
 
 
 		String insert =
-		"INSERT INTO TaskInAJob (JobID, TaskID, AccountNumber, JobUrgency) VALUES ("
-		+ Job.getJobID() + ", " + TaskDescription.getTaskIDStatic() + ", " + Job.getAccountNumber() + ", \"" + Job.getUrgency() + "\"" + ");";
-
-		System.out.print("JOBID>:                          ");
-		System.out.println(Job.getJobID());
+		"INSERT INTO TaskInAJob (JobID, TaskID, AccountNumber, JobUrgency, StartTimeMillis) VALUES ("
+		+ Job.getJobID() + ", " + TaskDescription.getTaskIDStatic() + ", " + Job.getAccountNumber()
+		+ ", \"" + Job.getUrgency() + "\"" + ", \"" + Calendar.getInstance().getTimeInMillis() + "\");";
 
 		// create update stm
 //		String updateTasks =
@@ -317,21 +315,94 @@ public class TaskInAJob {
 	public static void StartTask(int id) throws SQLException {
 
 		String time = Calendar.getInstance().getTime().toString();
-		String sql = "UPDATE TaskInAJob SET TaskStartTime = \"" + time + "\"" +
-				" WHERE JobTaskID = " + id + ";";
+		long millis = Calendar.getInstance().getTimeInMillis();
+		String sql = "UPDATE TaskInAJob SET TaskStartTime = \"" + time + "\"" +	" WHERE JobTaskID = " + id + ";";
+		String sqlMillis = "UPDATE TaskInAJob SET StartTimeMillis = \"" + millis + "\"" +	" WHERE JobTaskID = " + id + ";";
+
 		System.out.println(sql);
 		Statement statement = connection.createStatement();
 		statement.executeUpdate(sql);
 	}
 
 	public static void CompleteTask(int id) throws SQLException {
+		// Set the endtime
 		String sql = "UPDATE TaskInAJob SET IsCompleted = 1 WHERE JobTaskID = " + id + ";";
 		System.out.println(sql);
 		Statement statement = connection.createStatement();
 		statement.executeUpdate(sql);
 
+		// Collect the end time in milliseconds
+		BigInteger EndTimeMillis = new BigInteger(String.valueOf(Calendar.getInstance().getTimeInMillis()));
+
+		// Collect the start time in milliseconds
+		String startTimeMillisQuery = "select * from TaskInAJob where JobTaskID = " + id + ";";
+		ResultSet resultSet = statement.executeQuery(startTimeMillisQuery);
+		resultSet.next();
+		BigInteger StartTimeMillis = new BigInteger(resultSet.getString("StartTimeMillis"));
+
+		// you find the duration via subtraction
+		BigInteger duration = EndTimeMillis.subtract(StartTimeMillis);
+		BigInteger divideby = new BigInteger( "60000");
+		duration = duration.divide(divideby);
+
+		//you convert the duration to minutes and update the duration with this value
+		String DurationQuery = "UPDATE TaskInAJob SET ActualDuration = \"" + duration + "\"" + " WHERE JobTaskID = " + id + ";";
+		statement.executeUpdate(DurationQuery);
+
 	}
 
+	public static void CompleteTask(int id, String completedby) throws SQLException {
+		// Set the endtime
+		String sql = "UPDATE TaskInAJob SET IsCompleted = 1 WHERE JobTaskID = " + id + ";";
+		System.out.println(sql);
+		Statement statement = connection.createStatement();
+		statement.executeUpdate(sql);
+
+		// Collect the end time in milliseconds
+		BigInteger EndTimeMillis = new BigInteger(String.valueOf(Calendar.getInstance().getTimeInMillis()));
+
+		// Collect the start time in milliseconds
+		String startTimeMillisQuery = "select * from TaskInAJob where JobTaskID = " + id + ";";
+		ResultSet resultSet = statement.executeQuery(startTimeMillisQuery);
+		resultSet.next();
+		BigInteger StartTimeMillis = new BigInteger(resultSet.getString("StartTimeMillis"));
+
+		// you find the duration via subtraction
+		BigInteger duration = EndTimeMillis.subtract(StartTimeMillis);
+		BigInteger divideby = new BigInteger( "60000");
+		duration = duration.divide(divideby);
+
+		//you convert the duration to minutes and update the duration with this value
+		String DurationQuery = "UPDATE TaskInAJob SET ActualDuration = \"" + duration + "\", "
+		+ "EmployeeCompletedBy = \"" + completedby +  "\" WHERE JobTaskID = " + id + ";";
+		statement.executeUpdate(DurationQuery);
+
+		// ---------------------------------------------------------------------------------------------------
+		// setting shift completed
+		// ---------------------------------------------------------------------------------------------------
+
+		Calendar now = Calendar.getInstance();
+		System.out.println(now.get(Calendar.HOUR_OF_DAY));
+		System.out.println(now.get(Calendar.MINUTE));
+
+		if (now.get(Calendar.HOUR_OF_DAY) > 5 &&
+			(now.get(Calendar.HOUR_OF_DAY) <= 14 && now.get(Calendar.MINUTE) <= 30)){
+			String shiftQuery = "UPDATE TaskInAJob SET ShiftCompleted = " + 1 + " WHERE JobTaskID = " + id + ";";
+			statement.executeUpdate(shiftQuery);
+		}
+
+		else if ((now.get(Calendar.HOUR_OF_DAY) > 14 && now.get(Calendar.MINUTE) > 30)
+				&& (now.get(Calendar.HOUR_OF_DAY) >= 20)){
+			String shiftQuery = "UPDATE TaskInAJob SET ShiftCompleted = " + 2 + " WHERE JobTaskID = " + id + ";";
+			statement.executeUpdate(shiftQuery);
+		}
+
+		else if ((now.get(Calendar.HOUR_OF_DAY) > 20) && (now.get(Calendar.HOUR_OF_DAY) <= 5)){
+			String shiftQuery = "UPDATE TaskInAJob SET ShiftCompleted = " + 3 + " WHERE JobTaskID = " + id + ";";
+			statement.executeUpdate(shiftQuery);
+		}
+		
+	}
 
 	// TODO createjob screen !!!!!!!!!!
 	public static void DeleteLastTIJ() throws SQLException {
@@ -363,8 +434,6 @@ public class TaskInAJob {
 		// TODO - implement Task.RetrieveTask
 		throw new UnsupportedOperationException();
 	}
-
-
 
 	public void DestroyTask() {
 		// TODO - implement Task.DestroyTask

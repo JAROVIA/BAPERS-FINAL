@@ -10,8 +10,6 @@ public class CustomerAccountDetails {
 
 	SQL_CustomerAccountHelper sql_helper;
 
-	private int accountNumber;
-	private int discountID;
 	private String accountStatus = "normal";
 	private String phoneNumber;
 	private String address;
@@ -39,8 +37,6 @@ public class CustomerAccountDetails {
 			String accountStatus, String phoneNumber,
 		  	String address, String email, String customerName, String contactName) throws SQLException {
 
-		this.accountNumber = accountNumber;
-		this.discountID = discountID;
 		this.accountStatus = accountStatus;
 		this.phoneNumber = phoneNumber;
 		this.address = address;
@@ -89,15 +85,32 @@ public class CustomerAccountDetails {
 		return arrayList;
 	}
 
+	public static ArrayList<String[]> getSmallCustomerList() throws SQLException {
+		Statement statement = connection.createStatement();
+		String sql = "SELECT * FROM CustomerAccounts;";
+		ResultSet resultSet = statement.executeQuery(sql);
+
+		ArrayList<String[]> arrayList = new ArrayList<String[]>();
+		String tuple;
+		// adding changes to an array list
+		while (resultSet.next()){
+
+			int AccountNumber = resultSet.getInt("AccountNumber");
+			String CustomerName = resultSet.getString("CustomerName");
+			String ContactName = resultSet.getString("ContactName");
+
+			tuple = AccountNumber + "`"
+					+ CustomerName + "`"
+					+ ContactName;
+
+			arrayList.add(tuple.split("`"));
+
+		}
+		return arrayList;
+	}
+
 	public static void main(String[] args) throws SQLException {
-//		ArrayList<String[]> test = new ArrayList<>();
-//		test = ACCOUNT.CustomerAccountDetails.getCustomerList();
-//
-//		for (String[] t : test){
-//			System.out.println(Arrays.toString(t));
-//
-//		}
-		CustomerAccountDetails customerAccountDetails = new CustomerAccountDetails("as","425","sad","2141","asf","dsg");
+
 	}
 
 	public int getAccountNumber() {

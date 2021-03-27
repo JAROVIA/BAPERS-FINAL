@@ -41,25 +41,25 @@ public class Payment implements I_Payment {
 	//apply discount method is needed asap. It should be called inside (update) of the payment constructor
 
 	public Payment(
-			int jobID, int accountNumber, float price, float discountedPrice, String dateOfPayment,
-			int discountID, String paymentType) throws SQLException {
+			int jobID, int accountNumber, float price, String dateOfPayment,
+			String paymentType) throws SQLException {
 
 		this.jobID = jobID;
 		this.accountNumber = accountNumber;
 		this.price = price;
 		this.discountedPrice = discountedPrice;
 		this.dateOfPayment = dateOfPayment;
-		this.discountID = discountID;
 		this.paymentType = paymentType;
 
 		java.util.Date date = new java.util.Date();
 		dateOfPayment = date.toString();
 
+		float discountedPrice = 0;
 		// need to figure out how to make these insert statements work.
 		// look at GUI first
 		String sql =
 		"INSERT INTO Payment VALUES (" + jobID + ", " + accountNumber + ", " + price + ", " +
-		price + ", " + dateOfPayment + ", " + discountID + ", \"" + paymentType + "\");";
+		discountedPrice + ", " + dateOfPayment + ", \"" + paymentType + "\");";
 		Statement statement = connection.createStatement();
 		statement.executeUpdate(sql);
 
@@ -67,7 +67,7 @@ public class Payment implements I_Payment {
 	}
 
 	public Payment(
-			int jobID, int accountNumber, float price, float discountedPrice, String dateOfPayment, int discountID, 
+			int jobID, int accountNumber, float price, String dateOfPayment,
 			String paymentType, String expiryDate, String cardHolderName, int cardLast4Digits, int cvvc) throws SQLException {
 
 		this.jobID = jobID;
@@ -75,7 +75,6 @@ public class Payment implements I_Payment {
 		this.price = price;
 		this.discountedPrice = discountedPrice;
 		this.dateOfPayment = dateOfPayment;
-		this.discountID = discountID;
 		this.paymentType = paymentType;
 		this.expiryDate = expiryDate;
 		this.cardHolderName = cardHolderName;
@@ -85,10 +84,12 @@ public class Payment implements I_Payment {
 		java.util.Date date = new java.util.Date();
 		dateOfPayment = date.toString();
 
+		float discountedPrice = 0;
+
 		String sql =
 		"INSERT INTO Payment VALUES (" + jobID + ", " + accountNumber + ", " + price + ", " +
-		price + ", " + dateOfPayment + ", " + discountID + ", \"" + paymentType + "\", \"" +
-		expiryDate + "\", \"" + cardHolderName + "\", \"" + cardLast4Digits + "\", \"" + cvvc + ");";
+		discountedPrice + ", \"" + dateOfPayment + "\", \"" + paymentType + "\", \"" +
+		expiryDate + "\", \"" + cardHolderName + "\", \"" + cardLast4Digits + "\", " + cvvc + ");";
 		Statement statement = connection.createStatement();
 		statement.executeUpdate(sql);
 
@@ -117,7 +118,7 @@ public class Payment implements I_Payment {
 			float price = resultSet.getFloat("Price");
 			float discountedPrice = resultSet.getFloat("DiscountedPrice");
 			String dateOfPayment = resultSet.getString("DateOfPayment");
-			int discountID = resultSet.getInt("DiscountID");
+			String dueDate = resultSet.getString("DueDatePayment");
 			String paymentType = resultSet.getString("PaymentType");
 			int expiryDate = resultSet.getInt("ExpiryDate");
 			String cardHolderName = resultSet.getString("CardholderName");
@@ -127,21 +128,20 @@ public class Payment implements I_Payment {
 
 
 			tuple =
-					jobID + "`"
-					+ accountNumber + "`"
-					+ price + "`"
-					+ discountedPrice + "`"
-					+ dateOfPayment + "`"
-					+ discountID + "`"
-					+ paymentType + "`"
-					+ expiryDate + "`"
-					+ cardHolderName + "`"
-					+ cardType + "`"
-					+ cardLast4Digits + "`"
-					+ cvvc;
+				jobID + "`"
+				+ accountNumber + "`"
+				+ price + "`"
+				+ discountedPrice + "`"
+				+ dateOfPayment + "`"
+				+ dueDate + "`"
+				+ paymentType + "`"
+				+ expiryDate + "`"
+				+ cardHolderName + "`"
+				+ cardType + "`"
+				+ cardLast4Digits + "`"
+				+ cvvc;
 
 			arrayList.add(tuple.split("`"));
-
 		}
 		return arrayList;
 	}
@@ -157,15 +157,18 @@ public class Payment implements I_Payment {
 		// adding changes to an array list
 		while (resultSet.next()){
 // change this
-			String paymentType = resultSet.getString("JobUrgency");
+			int jobID = resultSet.getInt("JobID");
+			int accountNumber = resultSet.getInt("JobID");
+			float price = resultSet.getFloat("Price");
+			float discountedPrice = resultSet.getFloat("DiscountedPrice");
 			String dateOfPayment = resultSet.getString("JobUrgency");
-			float discountedPrice = resultSet.getFloat("JobID");
-			float price = resultSet.getFloat("JobID");
 			String dueDate = resultSet.getString("JobUrgency");
+
+			String paymentType = resultSet.getString("JobUrgency");
+			int expiryDate = resultSet.getInt("JobID");
+			String cardHolderName = resultSet.getString("JobUrgency");
 			String cardType = resultSet.getString("JobUrgency");
 			int cardLast4Digits = resultSet.getInt("JobID");
-			String cardHolderName = resultSet.getString("JobUrgency");
-			int expiryDate = resultSet.getInt("JobID");
 			int cvvc = resultSet.getInt("JobID");
 
 			// find current date
@@ -182,19 +185,22 @@ public class Payment implements I_Payment {
 //			String dueDate = fullDueDateArray[2];
 			System.out.println(dueDate);
 
-
-			//
 			if (currentDate == dueDate){
 
+				tuple =	jobID + "`"
+					+ accountNumber + "`"
+					+ price + "`"
+					+ discountedPrice + "`"
+					+ dateOfPayment + "`"
+					+ dueDate + "`"
+					+ paymentType + "`"
+					+ expiryDate + "`"
+					+ cardHolderName + "`"
+					+ cardType + "`"
+					+ cardLast4Digits + "`"
+					+ cvvc;
 
-// change this
-//
-//			tuple = JobID + "`"
-//					+ TasksCompleted + "`"
-//					+ IsCompleted;
-//
-//			arrayList.add(tuple.split("`"));
-
+					arrayList.add(tuple.split("`"));
 			}
 		}
 		return arrayList;
