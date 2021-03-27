@@ -38,7 +38,7 @@ public class UpdateExistingTaskScreen extends Window {
 	}
 
 	@Override
-	protected void onLeave(){
+	public void onLeave(){
 		descriptionField.clear();
 		durationField.clear();
 		locationField.clear();

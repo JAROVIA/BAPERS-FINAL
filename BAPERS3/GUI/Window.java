@@ -41,19 +41,19 @@ public abstract class Window{
 	protected final String ROLE_TECHNICIAN_FIN = "Technician - Finishing room";
 
 	/**
-	 * Button / image which returns user to home screen
+	 * Button / image which returns user to home screen, on all pages except log in
 	 */
 	@FXML
 	private ImageView homeButton;
 
 	/**
-	 * Button for logout
+	 * Button for logout, on all pages except log in
 	 */
 	@FXML
 	private Button logoutButton;
 
 	/**
-	 * Label to welcome user with their username
+	 * Label to welcome user with their username, on all pages except log in
 	 */
 	@FXML
 	private Label welcomeLabel;
@@ -134,6 +134,11 @@ public abstract class Window{
 		});
 	}
 
+	/**
+	 * method for child classes to judge if the input from text fields are an integer
+	 * @param tf
+	 * @param lengthConstraint
+	 */
 	protected void addIntegerNumberListener(TextField tf, int lengthConstraint){
 		tf.textProperty().addListener(new ChangeListener<String>() {
 			@Override
@@ -212,38 +217,27 @@ public abstract class Window{
 		return gui;
 	}
 
+	/**
+	 * called on all pages except login
+	 * the method called when user has logged out
+	 */
 	public void logout(){
-		if(getProcUiController() != null){
-			getProcUiController().showScreen("Login");
-		}
-		if(getAcctUiController() != null){
-			getAcctUiController().showScreen("Login");
-		}
-		if(getUiController() != null){
-			getUiController().showScreen("Login");
-		}
-		if(getAdminUiController() != null){
-			getAdminUiController().showScreen("Login");
-		}
-		onLeave();
+		showScreen(this, "Login");
 	}
 
+	/**
+	 * called on all pages but home and login
+	 * the method called when user should return to the home screen
+	 */
 	public void toMain(){
-		if(getProcUiController() != null){
-			getProcUiController().showScreen("HomeScreen");
-		}
-		if(getAcctUiController() != null){
-			getAcctUiController().showScreen("HomeScreen");
-		}
-		if(getUiController() != null){
-			getUiController().showScreen("HomeScreen");
-		}
-		if(getAdminUiController() != null){
-			getAdminUiController().showScreen("HomeScreen");
-		}
-		onLeave();
+		showScreen(this, "HomeScreen");
 	}
 
+	/**
+	 *
+	 * @param userRole the role of the user
+	 * @return if the user is allowed on this particular page
+	 */
 	public boolean checkAccess(String userRole){
 		for(String user : userAllowed){
 			if(user.equals(userRole)){
@@ -253,6 +247,13 @@ public abstract class Window{
 		return false;
 	}
 
+	/**
+	 * method for screen to invoke upon being shown
+	 * All pages have the following and by default have the function of
+	 * -label to welcome the user with their username
+	 * -logout button
+	 * Additionally the method can be overridden to make extra actions when page is shown
+	 */
 	public void onShow(){
 		//do what the screen needs to do on show
 		if(welcomeLabel != null){
@@ -307,7 +308,7 @@ public abstract class Window{
 	 * @return
 	 */
 	protected boolean matchEmail(String toCheck){
-		return toCheck.matches(".*@.*");
+		return toCheck.matches(".*@.*\\..*");
 	}
 
 	/**
@@ -372,8 +373,22 @@ public abstract class Window{
 	/**
 	 * for child classes to use when leaving page
 	 */
-	protected void onLeave(){
+	public void onLeave(){
+	}
 
+	protected void showScreen(Window currentGui, String destinationFileName){
+		if(getProcUiController() != null){
+			getProcUiController().showScreen(currentGui, destinationFileName);
+		}
+		if(getAcctUiController() != null){
+			getAcctUiController().showScreen(currentGui, destinationFileName);
+		}
+		if(getUiController() != null){
+			getUiController().showScreen(currentGui, destinationFileName);
+		}
+		if(getAdminUiController() != null){
+			getAdminUiController().showScreen(currentGui, destinationFileName);
+		}
 	}
 
 	@FXML

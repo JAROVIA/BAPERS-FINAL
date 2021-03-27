@@ -32,13 +32,17 @@ public class CreateJobSetupScreen  extends Window{
     }
 
     private void onCancel(){
-        procUiController.showScreen("Jobs");
+        super.showScreen(this, "Jobs");
+    }
 
-        accountNumberField.setText("");
+    @Override
+    public void onLeave(){
+        accountLabel.setText("");
+        accountNumberField.clear();
     }
 
     private void onNext(){
-        procUiController.showScreen("CreateJobOrder");
+        procUiController.showScreen(this, "CreateJobOrder");
 
         try{
             Job job = new Job(Integer.parseInt(accountNumberField.getText()), urgencyBox.getValue());
@@ -50,8 +54,7 @@ public class CreateJobSetupScreen  extends Window{
     }
 
     public void onShow(){
-        accountLabel.setText("");
-        urgencyBox.setPromptText("Select urgency");
+        super.onShow();
     }
 
     @FXML
@@ -59,6 +62,7 @@ public class CreateJobSetupScreen  extends Window{
         super.initialize();
         userAllowed = new String[]{ROLE_OFFICE_MANAGER, ROLE_SHIFT_MANAGER, ROLE_RECEPTIONIST};
         urgencyBox.getItems().addAll("vurgent", "urgent", "normal");
+        setComboBoxPromptText(urgencyBox, "Select job urgency");
         searchButton.setOnAction(actionEvent -> onSearch());
         nextButton.setOnAction(actionEvent -> onNext());
         cancelButton.setOnAction(actionEvent -> onCancel());

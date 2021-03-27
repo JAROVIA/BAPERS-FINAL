@@ -68,36 +68,37 @@ public class Main extends Application {
 
     //show the screen existing in the map.
     //Instantiates the scene from the parent selected and sets it to the stage.
-    public void showScreen(String name){
-        String controller = screenToController.get(name);
+    public void showScreen(Window currentGui, String destinationName){
+        String controller = screenToController.get(destinationName);
         String userRole = adminUiController.getLoggedInUser().getUserRole();
         Window gui = null;
         boolean isAccessible = true;
 
-        if(name.equals("Login")){
-            gui = adminUiController.getScreen(name);
+        if(destinationName.equals("Login")){
+            gui = adminUiController.getScreen(destinationName);
         }
-        else if(name.equals("HomeScreen")){
-            gui = uiController.getScreen(name);
+        else if(destinationName.equals("HomeScreen")){
+            gui = uiController.getScreen(destinationName);
         }
         else {
             if (controller.equals("ACCT")) {
-                isAccessible = acctUiController.getScreen(name).checkAccess(userRole);
-                gui = acctUiController.getScreen(name);
+                isAccessible = acctUiController.getScreen(destinationName).checkAccess(userRole);
+                gui = acctUiController.getScreen(destinationName);
             } else if (controller.equals("ADMIN")) {
-                isAccessible = adminUiController.getScreen(name).checkAccess(userRole);
-                gui = adminUiController.getScreen(name);
+                isAccessible = adminUiController.getScreen(destinationName).checkAccess(userRole);
+                gui = adminUiController.getScreen(destinationName);
             } else if (controller.equals("PROC")) {
-                isAccessible = procUiController.getScreen(name).checkAccess(userRole);
-                gui = procUiController.getScreen(name);
+                isAccessible = procUiController.getScreen(destinationName).checkAccess(userRole);
+                gui = procUiController.getScreen(destinationName);
             } else if (controller.equals("UI")) {
-                isAccessible = uiController.getScreen(name).checkAccess(userRole);
-                gui = uiController.getScreen(name);
+                isAccessible = uiController.getScreen(destinationName).checkAccess(userRole);
+                gui = uiController.getScreen(destinationName);
             }
         }
         if (isAccessible) {
-            scene.setRoot(screens.get(name));
+            scene.setRoot(screens.get(destinationName));
             gui.onShow();
+            currentGui.onLeave();
         }
         else {
             StringBuilder message = new StringBuilder("Your role is : ")

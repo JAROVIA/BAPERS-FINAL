@@ -66,12 +66,12 @@ public class CustomerAccountScreen extends Window {
 		selectedCustomerId = Integer.parseInt(customerData[0]);
 
 		accountNumberLabel.setText(customerData[0]);
-		nameLabel.setText(customerData[1]);
-		contactNameLabel.setText(customerData[2]);
-		valuedLabel.setText(customerData[3]);
-		phoneLabel.setText(customerData[4]);
-		addressLabel.setText(customerData[5]);
-		emailLabel.setText(customerData[6]);
+		nameLabel.setText(customerData[5]);
+		contactNameLabel.setText(customerData[6]);
+		valuedLabel.setText(customerData[1]);
+		phoneLabel.setText(customerData[2]);
+		addressLabel.setText(customerData[3]);
+		emailLabel.setText(customerData[4]);
 	}
 
 	public void deleteCustomer() {
@@ -102,24 +102,19 @@ public class CustomerAccountScreen extends Window {
 
 	private void toEditCustomer(){
 		if(selectedCustomerId >= 0) {
-			//assign id somewhere
-			acctUiController.showScreen("EditCustomerDetails");
-			onLeave();
+			//TODO assign id somewhere
+			showScreen(this, "EditCustomerDetails");
 		}
 	}
 
 	private void toRegisterNewCustomer(){
-		acctUiController.showScreen("RegisterNewCustomer");
-		customerAccountTable.getItems().clear();
-		discountTable.getItems().clear();
+		showScreen(this, "RegisterNewCustomer");
 	}
 
 	private void toProcessTasks(){
 		if(selectedCustomerId >= 0) {
-			//assign id somewhere
-			acctUiController.showScreen("ProgressTasks");
-			customerAccountTable.getItems().clear();
-			discountTable.getItems().clear();
+			//TODO assign id somewhere
+			showScreen(this, "ProgressTasks");
 		}
 	}
 
@@ -140,19 +135,19 @@ public class CustomerAccountScreen extends Window {
 	 */
 	private boolean matchCustomer(String[] data, String input) {
 		if(matchName(input)){
-			return data[1].toLowerCase().contains(input.toLowerCase())
-					|| data[2].toLowerCase().contains(input.toLowerCase());
+			return data[5].toLowerCase().contains(input.toLowerCase())
+					|| data[4].toLowerCase().contains(input.toLowerCase())
+					|| data[6].toLowerCase().contains(input.toLowerCase());
 		}
 		if(matchNumber(input)){
 			return data[0].contains(input)
-					|| data[4].contains(input);
-		}
-		if(matchEmail(input)){
-			return data[6].toLowerCase().contains(input.toLowerCase());
+					|| data[2].contains(input)
+					|| data[3].toLowerCase().contains(input.toLowerCase());
 		}
 		else{
 			return data[3].toLowerCase().contains(input.toLowerCase())
-					|| data[5].toLowerCase().contains(input.toLowerCase());
+					|| data[4].toLowerCase().contains(input.toLowerCase())
+					|| data[1].toLowerCase().contains(input.toLowerCase());
 		}
 	}
 
@@ -181,7 +176,7 @@ public class CustomerAccountScreen extends Window {
 		customerDetailGridPane.setStyle("visibility : hidden");
 	}
 
-	protected void onLeave(){
+	public void onLeave(){
 		customerAccountTable.setItems(null);
 		discountTable.getItems().clear();
 	}
@@ -193,14 +188,11 @@ public class CustomerAccountScreen extends Window {
 		selectedCustomerId = -1;
 		ObservableList<String[]> data = FXCollections.observableArrayList();
 		//add customer info here
-//		data.addAll(new String[]{"1","bob","bobby","yes","02345678","city, london, uk","bob@city.ac.uk"});
-
 		try {
 			data.addAll(CustomerAccountDetails.getCustomerList());
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
 		}
-		customerAccountTable.setItems(data);
 
 		FilteredList<String[]> filteredData = new FilteredList<>(data);
 		customerAccountTable.setItems(filteredData);
@@ -214,7 +206,6 @@ public class CustomerAccountScreen extends Window {
 		customerDetailGridPane.setStyle("visibility : hidden");
 
 		resetCustomerDetail();
-
 	}
 	/**
 	 *

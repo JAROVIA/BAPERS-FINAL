@@ -37,7 +37,7 @@ public class RegisterNewUserScreen extends Window{
 
 		if(isValueNotEmpty(new TextField[]{staffNameField, userNameField, pwField}, new ComboBox[]{roleBox})){
 			adminUiController.saveUser(userRole, employeeName, password, userName);
-			adminUiController.showScreen("UserAccounts");
+			showScreen(this, "UserAccounts");
 		}
 	}
 
@@ -45,8 +45,15 @@ public class RegisterNewUserScreen extends Window{
 		saveUser();
 	}
 
+	public void onLeave(){
+		staffNameField.clear();
+		userNameField.clear();
+		pwField.clear();
+		roleBox.getSelectionModel().clearSelection();
+	}
+
 	private void onCancel(){
-		adminUiController.showScreen("UserAccounts");
+		showScreen(this, "UserAccounts");
 	}
 
 	@FXML
@@ -56,7 +63,7 @@ public class RegisterNewUserScreen extends Window{
 		roleBox.getItems().removeAll(roleBox.getItems());
 		roleBox.getItems().addAll(ROLE_OFFICE_MANAGER, ROLE_SHIFT_MANAGER, ROLE_RECEPTIONIST, ROLE_TECHNICIAN_COPY, ROLE_TECHNICIAN_DEV, ROLE_TECHNICIAN_PACK ,ROLE_TECHNICIAN_FIN);
 		roleBox.setPromptText("Select role");
-		setComboBoxPromptText(roleBox, "Select roles");
+		setComboBoxPromptText(roleBox, "Select role");
 		addNameListener(staffNameField);
 		cancelButton.setOnAction(actionEvent -> onCancel());
 		submitButton.setOnAction(actionEvent -> {
@@ -71,10 +78,5 @@ public class RegisterNewUserScreen extends Window{
 	@Override
 	public void onShow(){
 		super.onShow();
-		staffNameField.setText("");
-		userNameField.setText("");
-		pwField.setText("");
-		roleBox.getSelectionModel().clearSelection();
-		roleBox.setPromptText("Select role");
 	}
 }

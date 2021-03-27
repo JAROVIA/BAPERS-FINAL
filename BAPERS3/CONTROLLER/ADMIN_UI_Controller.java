@@ -45,6 +45,13 @@ public class ADMIN_UI_Controller {
 		throw new UnsupportedOperationException();
 	}
 
+	/**
+	 * method called upon user log in
+	 * @param username
+	 * @param password
+	 * @return if the user can log in or not
+	 * @throws SQLException sql query / connection fails
+	 */
 	public boolean login(String username, String password) throws SQLException {
 		boolean loggedin = false;
 		for(String[] userData : UserAccount.getUserList()){
@@ -60,7 +67,6 @@ public class ADMIN_UI_Controller {
 						jobAlert.setAlertMessage(message);
 						jobAlert.setDestination("Jobs");
 
-						loggedInUser.setAlert(jobAlert);
 						loggedInUser.setAlert(jobAlert);
 					}
 					// if payment is late
@@ -82,12 +88,15 @@ public class ADMIN_UI_Controller {
 		return loggedin;
 	}
 
+	/**
+	 * called upon logout, sets user on focus to null to avoid unnecessary changes after logout
+	 */
 	public void logout() {
 		this.loggedInUser = null;
 	}
 
 	/**
-	 * 
+	 * saves user into the system database
 	 * @param userRole role of user
 	 * @param employeeName name of user
 	 * @param password password of user
@@ -130,8 +139,8 @@ public class ADMIN_UI_Controller {
 		throw new UnsupportedOperationException();
 	}
 
-	public void showScreen(String name){
-		main.showScreen(name);
+	public void showScreen(Window gui, String name){
+		main.showScreen(gui, name);
 	}
 
 	public UserAccount getLoggedInUser() {

@@ -7,10 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 
@@ -64,6 +61,8 @@ public class JobsScreen extends Window {
 			return data[0].contains(input)
 					|| data[1].contains(input)
 					|| data[2].contains(input)
+					|| data[3].contains(input)
+					|| data[4].contains(input)
 					|| data[7].contains(input)
 					|| data[8].contains(input);
 		}
@@ -93,7 +92,7 @@ public class JobsScreen extends Window {
 		};
 	}
 
-	protected void onLeave(){
+	public void onLeave(){
 		searchField1.clear();
 		searchField2.clear();
 		jobsTable.setItems(null);
@@ -101,28 +100,37 @@ public class JobsScreen extends Window {
 	}
 
 	private void toPayment(){
-		procUiController.showScreen("Payments");
+		showScreen(this, "Payments");
 	}
 
 	private void toMakePayment() {
-		String[] jobData = jobsTable.getSelectionModel().getSelectedItem();
-		if (jobData != null) {
-			procUiController.showScreen("RecordPayment");
+
+		if (jobsTable.getSelectionModel().getSelectedItem() != null) {
+			String[] jobData = jobsTable.getSelectionModel().getSelectedItem();
+			//TODO assign job id
+			showScreen(this, "RecordPayment");
+		}
+		else{
+			Alert alert = new Alert(Alert.AlertType.ERROR, "Select job to process payment", ButtonType.CLOSE);
+			alert.show();
 		}
 	}
 
 	protected void toCreateJobSetup(){
-		procUiController.showScreen("CreateJobSetup");
+		showScreen(this, "CreateJobSetup");
 	}
 
 	protected void toProcessTasks(){
-
-		String[] string = jobsTable.getSelectionModel().getSelectedItem();
-		String target = string[0];
-		ProcessTasksScreen.setJobID(Integer.parseInt(target));
-		String[] jobData = jobsTable.getSelectionModel().getSelectedItem();
-		if(jobData != null && jobData[7].equals("0")) {
-			procUiController.showScreen("ProgressTasks");
+		if(jobsTable.getSelectionModel().getSelectedItem() != null) {
+			String[] jobData = jobsTable.getSelectionModel().getSelectedItem();
+			if (jobData[7].equals("0")) {
+				ProcessTasksScreen.setJobID(Integer.parseInt(jobData[0]));
+				showScreen(this, "ProgressTasks");
+			}
+		}
+		else{
+			Alert alert = new Alert(Alert.AlertType.ERROR, "Select job to process", ButtonType.CLOSE);
+			alert.show();
 		}
 	}
 

@@ -62,8 +62,13 @@ public class ACCT_UI_Controller {
 		throw new UnsupportedOperationException();
 	}
 
-	public void showScreen(String name){
-		main.showScreen(name);
+	/**
+	 * takes user to a page.
+	 * use window.showScreen() to call coupled method, onLeave()
+	 * @param name fxml file name of destination
+	 */
+	public void showScreen(Window gui, String name){
+		main.showScreen(gui, name);
 	}
 
 	public Window getScreen(String name){

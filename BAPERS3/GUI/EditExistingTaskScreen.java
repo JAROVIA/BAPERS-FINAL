@@ -26,12 +26,16 @@ public class EditExistingTaskScreen extends Window {
 	}
 
 	private void onConfirm() {
-		//save task
-		procUiController.showScreen("Tasks");
+		//TODO save task
+		showScreen(this, "Tasks");
 	}
 
 	private void onCancel(){
-		procUiController.showScreen("Tasks");
+		showScreen(this, "Tasks");
+	}
+
+	public void onLeave(){
+
 	}
 
 	public void onShow(){

@@ -49,8 +49,7 @@ public class CreateJobScreen extends Window {
 	private TableColumn<TaskDescription, Number> taskDurationColumn;
 
 	private ObservableList<TaskDescription> data;
-	//for testing
-	ArrayList<TaskDescription> list = new ArrayList<>();
+	private ArrayList<TaskDescription> list = new ArrayList<>();
 
 	public CustomerAccountDetails searchAccount() {
 		// TODO - implement CreateJobScreen.SearchAccount
@@ -58,24 +57,24 @@ public class CreateJobScreen extends Window {
 	}
 
 	public void onCancel() {
-		procUiController.showScreen("Jobs");
 		try {
 			Job.DeleteLastJob();
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
 		}
+		super.showScreen(this, "Jobs");
 	}
 
 	public void confirmJob() {
-
 		try {
 			EnterTasksIntoJob();
+			super.showScreen(this, "Jobs");
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
 		}
-
 	}
 
+	@Override
 	public void onShow(){
 		super.onShow();
 		//get all tasks operable by BIPL
@@ -87,12 +86,20 @@ public class CreateJobScreen extends Window {
 		} catch(SQLException e){
 			e.printStackTrace();
 		}
-		tasksComboBox.getItems().removeAll(tasksComboBox.getItems());
+
 		for(TaskDescription t : list){
 			tasksComboBox.getItems().add(t.getTaskID() + ", " + t.getDescriptionOfTask() + ", " + t.getTaskLocation() + ", " + String.format("%.02f",t.getTaskPrice()));
 		}
+
+	}
+
+	@Override
+	public void onLeave(){
+		tasksComboBox.getItems().clear();
 		data.clear();
-		taskTable.setItems(data);
+		list.clear();
+		taskTable.getItems().clear();
+		jobPriceLabel.setText("");
 	}
 
 	private void addTaskToJob(){
