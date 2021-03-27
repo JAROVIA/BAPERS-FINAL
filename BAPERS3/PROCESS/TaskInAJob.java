@@ -155,7 +155,7 @@ public class TaskInAJob {
 		* */
 
 
-
+		// set start time millis later on, when startTask is pressed, not insert
 		String insert =
 		"INSERT INTO TaskInAJob (JobID, TaskID, AccountNumber, JobUrgency, StartTimeMillis) VALUES ("
 		+ Job.getJobID() + ", " + TaskDescription.getTaskIDStatic() + ", " + Job.getAccountNumber()

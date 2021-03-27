@@ -60,7 +60,7 @@ public class ProcessTasksScreen extends Window {
 				Alert alert = new Alert(Alert.AlertType.ERROR, "Task already complete", ButtonType.CLOSE);
 				alert.show();
 			}
-			else if(!taskInAJobData[4].equals("")){
+			else if(!taskInAJobData[4].equals("UNSPECIFIED")){
 				Alert alert = new Alert(Alert.AlertType.ERROR, "Task already started", ButtonType.CLOSE);
 				alert.show();
 			}
