@@ -7,10 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.util.Callback;
 
 import java.lang.reflect.Array;
@@ -68,32 +65,40 @@ public class TasksScreen extends Window {
 
 	public void removeTask() {
 
-		try {
-			String[] arr = tasksTable.getSelectionModel().getSelectedItem();
-			String str = arr[0];
-			System.out.println(str);
-			TaskDescription.ArchiveTask(Integer.parseInt(str));
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
+		if(tasksTable.getSelectionModel().getSelectedItem() != null) {
+			String[] taskData = tasksTable.getSelectionModel().getSelectedItem();
+			try {
+				System.out.println(taskData[0]);
+				TaskDescription.ArchiveTask(Integer.parseInt(taskData[0]));
+				onShow();
+			} catch (SQLException throwables) {
+				throwables.printStackTrace();
+			}
+		}
+		else{
+			Alert alert = new Alert(Alert.AlertType.ERROR, "Select task to edit", ButtonType.CLOSE);
+			alert.show();
 		}
 	}
 
 	public void toAddTask() {
-		procUiController.showScreen("AddNewTask");
-		onLeave();
+		showScreen(this, "AddNewTask");
 	}
 
 	public void toEditTask() {
-		String id = tasksTable.getSelectionModel().getSelectedItem()[0];
-		if(id != null) {
+		if(tasksTable.getSelectionModel().getSelectedItem() != null) {
 			//TODO match id
-			//assign to pro_ui
-			procUiController.showScreen("EditExistingTasks");
-			onLeave();
+			String id = tasksTable.getSelectionModel().getSelectedItem()[0];
+			//TODO assign to pro_ui
+			showScreen(this, "EditExistingTasks");
+		}
+		else{
+			Alert alert = new Alert(Alert.AlertType.ERROR, "Select task to edit", ButtonType.CLOSE);
+			alert.show();
 		}
 	}
 
-	protected void onLeave(){
+	public void onLeave(){
 		searchField.clear();
 		tasksTable.setItems(null);
 	}

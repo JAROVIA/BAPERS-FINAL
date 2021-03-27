@@ -162,8 +162,8 @@ public class PROC_UI_Controller {
 		return main.getAdminUiController().getLoggedInUser();
 	}
 
-	public void showScreen(String name){
-		main.showScreen(name);
+	public void showScreen(Window gui, String name){
+		main.showScreen(gui, name);
 	}
 
 	public Window getScreen(String name){

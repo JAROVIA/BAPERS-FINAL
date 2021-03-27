@@ -26,32 +26,32 @@ public class HomeScreen extends Window {
 
 	private void toUserAccounts() throws SQLException {
 		//goes to account page, only for office manage
-		uiController.showScreen("UserAccounts");
+		uiController.showScreen(this, "UserAccounts");
 	}
 
 	private void toCustomerAccounts(){
 		//goes to customer account page if anyone but technician
-		uiController.showScreen("CustomerAccounts");
+		uiController.showScreen(this, "CustomerAccounts");
 	}
 
 	private void toJob(){
 		//goes to jobs page
-		uiController.showScreen("Jobs");
+		uiController.showScreen(this, "Jobs");
 	}
 
 	private void toDatabase(){
 		//goes to database page
-		uiController.showScreen("Database");
+		uiController.showScreen(this, "Database");
 	}
 
 	private void toReport(){
 		//goes to reports page
-		uiController.showScreen("Reports");
+		uiController.showScreen(this, "Reports");
 	}
 
 	private void toTask(){
 		//goes to task page
-		uiController.showScreen("Tasks");
+		uiController.showScreen(this, "Tasks");
 	}
 
 	public void onShow(){
@@ -60,7 +60,7 @@ public class HomeScreen extends Window {
 		if(uiController.getLoggedInUser().getAlert() != null && uiController.getLoggedInUser().getAlert().size() > 0){
 			for(AlertUser alert : uiController.getLoggedInUser().getAlert()){
 				System.out.println("showing alert");
-				alert.showAlert();
+				alert.showAlert(this);
 			}
 		}
 	}

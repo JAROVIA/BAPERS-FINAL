@@ -7,10 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.util.Callback;
 
@@ -39,14 +36,15 @@ public class UserAccountScreen extends Window {
 	private boolean matchUser(String[] data, String input) {
 		if(matchName(input)){
 			return data[1].toLowerCase().contains(input.toLowerCase())
-					|| data[2].toLowerCase().contains(input.toLowerCase());
+					|| data[2].toLowerCase().contains(input.toLowerCase())
+					|| data[3].toLowerCase().contains(input.toLowerCase());
 		}
 
 		if(matchNumber(input)){
 			return data[0].toLowerCase().contains(input.toLowerCase());
 		}
 		else{
-			return data[3].toLowerCase().contains(input.toLowerCase());
+			return data[2].toLowerCase().contains(input.toLowerCase());
 		}
 	}
 
@@ -100,14 +98,13 @@ public class UserAccountScreen extends Window {
 	}
 
 	@Override
-	protected void onLeave(){
+	public void onLeave(){
 		searchField.clear();
 		userAccountTable.setItems(null);
 	}
 
 	private void toRegisterUser(){
-		adminUiController.showScreen("RegisterNewUser");
-		onLeave();
+		showScreen(this, "RegisterNewUser");
 	}
 
 	private void toEditUser() throws SQLException {
@@ -116,11 +113,14 @@ public class UserAccountScreen extends Window {
 			for (String[] user : UserAccount.getUserList()) {
 				if (userId.equals(user[0])) {
 					adminUiController.setEditingUser(new UserAccount(Integer.parseInt(user[0]), user[1], user[2], user[3], user[4]));
-					adminUiController.showScreen("EditUserDetails");
-					onLeave();
+					showScreen(this, "EditUserDetails");
 					break;
 				}
 			}
+		}
+		else {
+			Alert alert = new Alert(Alert.AlertType.ERROR, "Select user t edit", ButtonType.CLOSE);
+			alert.show();
 		}
 	}
 

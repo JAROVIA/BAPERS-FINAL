@@ -92,13 +92,21 @@ public class RegisterNewCustomerScreen extends Window {
 						alert.show();
 					} else {
 						//TODO submit as valued customer
-						submitCustomerData();
-						onLeave();
+						if(discountBox.getValue().equals(DISCOUNT_FIXED)){
+							submitCustomerData();
+						}
+						if(discountBox.getValue().equals(DISCOUNT_FLEX)){
+							submitCustomerData();
+						}
+						if(discountBox.getValue().equals(DISCOUNT_VAR)){
+							submitCustomerData();
+						}
+						showScreen(this, "CustomerAccounts");
 					}
 				} else {
 					//TODO submit as non valued customer
 					submitCustomerData();
-					onLeave();
+					showScreen(this, "CustomerAccounts");
 				}
 
 			}
@@ -320,7 +328,7 @@ public class RegisterNewCustomerScreen extends Window {
 		return isAppropriate;
 	}
 
-	protected void onLeave(){
+	public void onLeave(){
 		//customer detail fields
 		memorableWordField.clear();
 		nameField.clear();

@@ -42,17 +42,15 @@ public class EditUserScreen extends Window {
 			editingUser.setEmployeeName(staffNameField.getText());
 		}
 		saveUser(editingUser);
-		onLeave();
-		adminUiController.showScreen("UserAccounts");
+		showScreen(this, "UserAccounts");
 	}
 
 	private void onCancel(){
-		adminUiController.showScreen("UserAccounts");
-		onLeave();
+		showScreen(this, "UserAccounts");
 	}
 
 	@Override
-	protected void onLeave(){
+	public void onLeave(){
 		adminUiController.setEditingUser(null);
 		usernameField.clear();
 		passwordField.clear();
