@@ -90,9 +90,7 @@ public class CreateJobScreen extends Window {
 		for(TaskDescription t : list){
 			tasksComboBox.getItems().add(t.getTaskID() + ", " + t.getDescriptionOfTask() + ", " + t.getTaskLocation() + ", " + String.format("%.02f",t.getTaskPrice()));
 		}
-<<<<<<< HEAD
 		taskTable.setItems(data);
-=======
 
 	}
 
@@ -103,16 +101,15 @@ public class CreateJobScreen extends Window {
 		list.clear();
 		taskTable.getItems().clear();
 		jobPriceLabel.setText("");
->>>>>>> c42988d93aadd30bb3793a0e8c1aa2812758aeef
 	}
 
-	protected void onLeave(){
-		tasksComboBox.getItems().clear();
-		data.clear();
-		list.clear();
-		taskTable.getItems().clear();
-		jobPriceLabel.setText("");
-	}
+//	protected void onLeave(){
+//		tasksComboBox.getItems().clear();
+//		data.clear();
+//		list.clear();
+//		taskTable.getItems().clear();
+//		jobPriceLabel.setText("");
+//	}
 
 	private void addTaskToJob(){
 		String selected = tasksComboBox.getSelectionModel().getSelectedItem();

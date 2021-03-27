@@ -388,18 +388,25 @@ public class TaskInAJob {
 		if (now.get(Calendar.HOUR_OF_DAY) > 5 &&
 			(now.get(Calendar.HOUR_OF_DAY) <= 14 && now.get(Calendar.MINUTE) <= 30)){
 			String shiftQuery = "UPDATE TaskInAJob SET ShiftCompleted = " + 1 + " WHERE JobTaskID = " + id + ";";
+			System.out.println(shiftQuery);
 			statement.executeUpdate(shiftQuery);
 		}
 
 		else if ((now.get(Calendar.HOUR_OF_DAY) > 14 && now.get(Calendar.MINUTE) > 30)
 				&& (now.get(Calendar.HOUR_OF_DAY) >= 20)){
 			String shiftQuery = "UPDATE TaskInAJob SET ShiftCompleted = " + 2 + " WHERE JobTaskID = " + id + ";";
+			System.out.println(shiftQuery);
 			statement.executeUpdate(shiftQuery);
 		}
 
 		else if ((now.get(Calendar.HOUR_OF_DAY) > 20) && (now.get(Calendar.HOUR_OF_DAY) <= 5)){
 			String shiftQuery = "UPDATE TaskInAJob SET ShiftCompleted = " + 3 + " WHERE JobTaskID = " + id + ";";
+			System.out.println(shiftQuery);
 			statement.executeUpdate(shiftQuery);
+		}
+		else {
+			System.out.println("Not completed during a shift.");
+
 		}
 		
 	}
