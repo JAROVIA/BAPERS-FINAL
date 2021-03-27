@@ -1,6 +1,7 @@
 package ADMIN;
 
 import CONTROLLER.ADMIN_UI_Controller;
+import GUI.Window;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
@@ -35,7 +36,7 @@ public class AlertUser {
 		this.alertMessage = alertMessage;
 	}
 
-	public void showAlert(){
+	public void showAlert(Window currentGui){
 		if(!messageSeen) {
 			if (destination != null) {
 				ButtonType goToDest = new ButtonType("Go to " + destination, ButtonBar.ButtonData.OK_DONE);
@@ -44,7 +45,7 @@ public class AlertUser {
 				Optional<ButtonType> result = alert.showAndWait();
 
 				if (result.isPresent() && result.get() == goToDest) {
-					adminUiController.showScreen(destination);
+					adminUiController.showScreen(currentGui, destination);
 				}
 			} else {
 				Alert alert = new Alert(Alert.AlertType.WARNING, alertMessage, ButtonType.CLOSE);

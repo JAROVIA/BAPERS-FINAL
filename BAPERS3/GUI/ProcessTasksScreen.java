@@ -1,22 +1,16 @@
 package GUI;
 
-import PROCESS.TaskDescription;
 import PROCESS.TaskInAJob;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.util.Callback;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class ProcessTasksScreen extends Window {
 
@@ -41,17 +35,7 @@ public class ProcessTasksScreen extends Window {
 		super.onShow();
 		ArrayList<String[]> list = new ArrayList<>();
 		try {
-
-
-
-//			list = TaskInAJob.GetTIJList();
 			list = TaskInAJob.GetTIJList(jobID);
-			System.out.println(jobID);
-
-//			for(String[] iter : list){
-//				System.out.println(Arrays.toString(iter));
-//			}
-
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
 		}
@@ -60,29 +44,39 @@ public class ProcessTasksScreen extends Window {
 
 		int completed = 0;
 		for(String[] taskData : data){
-			if(taskData[8].equals("1")){
+			if(taskData[9].equals("1")){
 				completed += 1;
 			}
 		}
 		showProgress(completed, data.size());
 	}
 
-	private void onStart(){
+	private void onTaskStart(){
 		//TODO do stuff on start button click
-		String[] taskData = tasksInJobTable.getSelectionModel().getSelectedItem();
-		String tijid = taskData[0];
 
-		if(taskData != null && taskData[8].equals("0")){
-
-			// start
-			try {
-				TaskInAJob.StartTask(Integer.parseInt(tijid));
-			} catch (SQLException throwables) {
-				throwables.printStackTrace();
+		if(tasksInJobTable.getSelectionModel().getSelectedItem() != null) {
+			String[] taskInAJobData = tasksInJobTable.getSelectionModel().getSelectedItem();
+			if (taskInAJobData[9].equals("1")) {
+				Alert alert = new Alert(Alert.AlertType.ERROR, "Task already complete", ButtonType.CLOSE);
+				alert.show();
 			}
-
+			else if(!taskInAJobData[4].equals("")){
+				Alert alert = new Alert(Alert.AlertType.ERROR, "Task already started", ButtonType.CLOSE);
+				alert.show();
+			}
+			else{
+				try {
+					TaskInAJob.StartTask(Integer.parseInt(taskInAJobData[0]));
+					onShow();
+				} catch (SQLException throwables) {
+					throwables.printStackTrace();
+				}
+			}
 		}
-		// change tasklist
+		else{
+			Alert alert = new Alert(Alert.AlertType.ERROR, "Select task to process", ButtonType.CLOSE);
+			alert.show();
+		}
 	}
 
 	private void showProgress(int completed, int total){
@@ -90,25 +84,35 @@ public class ProcessTasksScreen extends Window {
 		System.out.println("progress = " + (double)completed / (double)total);
 	}
 
-	private void onComplete(){
+	private void onTaskComplete(){
 		//TODO do stuff on complete click
-		String[] taskData = tasksInJobTable.getSelectionModel().getSelectedItem();
-		String tijid = taskData[0];
-		if(taskData != null && (taskData[3].equals(null)||taskData[3].equals(""))&&taskData[8].equals("0")){
-			//complete
-
+		if(tasksInJobTable.getSelectionModel().getSelectedItem() != null) {
+			String[] taskInAJobData = tasksInJobTable.getSelectionModel().getSelectedItem();
+			if (taskInAJobData[9].equals("1")) {
+				Alert alert = new Alert(Alert.AlertType.ERROR, "Task already complete", ButtonType.CLOSE);
+				alert.show();
+			}
+			else if(taskInAJobData[4].equals("")){
+				Alert alert = new Alert(Alert.AlertType.ERROR, "Task not yet started", ButtonType.CLOSE);
+				alert.show();
+			}
+			else{
+				try {
+					TaskInAJob.CompleteTask(Integer.parseInt(taskInAJobData[0]));
+					onShow();
+				} catch (SQLException throwables) {
+					throwables.printStackTrace();
+				}
+			}
 		}
-		try {
-			TaskInAJob.CompleteTask(Integer.parseInt(tijid));
-			System.out.println("onComplete()");
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
+		else{
+			Alert alert = new Alert(Alert.AlertType.ERROR, "Select task to process", ButtonType.CLOSE);
+			alert.show();
 		}
-
 	}
 
 	private void onCancel(){
-		procUiController.showScreen("Jobs");
+		procUiController.showScreen(this, "Jobs");
 	}
 
 	/**
@@ -119,8 +123,8 @@ public class ProcessTasksScreen extends Window {
 		super.initialize();
 		userAllowed = new String[]{ROLE_OFFICE_MANAGER, ROLE_SHIFT_MANAGER, ROLE_TECHNICIAN_COPY, ROLE_TECHNICIAN_DEV, ROLE_TECHNICIAN_PACK, ROLE_TECHNICIAN_FIN};
 		cancelButton.setOnAction(actionEvent -> onCancel());
-		completeButton.setOnAction(actionEvent -> onComplete());
-		startButton.setOnAction(actionEvent -> onStart());
+		completeButton.setOnAction(actionEvent -> onTaskComplete());
+		startButton.setOnAction(actionEvent -> onTaskStart());
 
 		for (int i = 0; i < tasksInJobTable.getColumns().size(); i++) {
 			TableColumn tc = tasksInJobTable.getColumns().get(i);

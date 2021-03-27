@@ -26,6 +26,7 @@ public class AddNewTaskScreen extends Window {
 
 	public void onConfirm() throws SQLException {
 		//save task
+		/*
 		String description = descriptionField.getText();
 		String location = locationField.getText();
 
@@ -40,7 +41,7 @@ public class AddNewTaskScreen extends Window {
 
 			TaskDescription.NewTask(location, price, description, duration);
 
-			procUiController.showScreen("Tasks");
+			showScreen(this, "Tasks");
 		}
 		else{
 			String message = "The following fields have incorrect format.";
@@ -60,18 +61,38 @@ public class AddNewTaskScreen extends Window {
 			alert.show();
 		}
 
+		 */
+
+		if(isValueNotEmpty(descriptionField, durationField, locationField, priceField)){
+			if(!matchAnyNumberType(durationField.getText()) || !matchAnyNumberType(priceField.getText())) {
+				String message = "Incorrect input in : \n";
+				if (!matchAnyNumberType(durationField.getText())) {
+					message += "duration\n";
+				}
+				if (!matchAnyNumberType(priceField.getText())) {
+					message += "price\n";
+				}
+				Alert alert = new Alert(Alert.AlertType.ERROR, message, ButtonType.CLOSE);
+			}
+			else {
+				TaskDescription.NewTask(locationField.getText(),
+						Integer.parseInt(priceField.getText()),
+						descriptionField.getText(),
+						Integer.parseInt(durationField.getText()));
+			}
+		}
 	}
 
 	public void onCancel() {
-		procUiController.showScreen("Tasks");
+		super.showScreen(this, "Tasks");
 	}
 
 	public void onShow(){
 		super.onShow();
-		descriptionField.setText("");
-		durationField.setText("");
-		priceField.setText("");
-		locationField.setText("");
+		descriptionField.clear();
+		durationField.clear();
+		priceField.clear();
+		locationField.clear();
 	}
 
 	/**

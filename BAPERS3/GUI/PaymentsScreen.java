@@ -5,9 +5,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.util.Callback;
 
 import java.lang.reflect.Array;
@@ -52,11 +50,23 @@ public class PaymentsScreen extends Window{
             "completed"
     };
 
+    private void onMakePayment(){
+        if(latePaymentJobTable.getSelectionModel().getSelectedItem() != null){
+            String[] latPayJobData = latePaymentJobTable.getSelectionModel().getSelectedItem();
+            //TODO - use data to process payment
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Select job to process payment", ButtonType.CLOSE);
+        }
+    }
+
     private void onBack(){
+        showScreen(this, "Jobs");
+    }
+
+    public void onLeave(){
         jobData.clear();
         paymentData.clear();
-
-        procUiController.showScreen("Jobs");
     }
 
     public void onShow(){
