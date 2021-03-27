@@ -156,6 +156,9 @@ public class CreateJobScreen extends Window {
 		insertTaskButton.setOnAction(actionEvent -> addTaskToJob());
 		cancelButton.setOnAction(actionEvent -> onCancel());
 		saveDetailsButton.setOnAction(actionEvent -> confirmJob());
+		setComboBoxPromptText(tasksComboBox, "Select task for job");
+		tasksComboBox.setPromptText("Select task for job");
+
 		taskIdColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TaskDescription, Number>, ObservableValue<Number>>() {
 			@Override
 			public ObservableValue<Number> call(TableColumn.CellDataFeatures<TaskDescription, Number> property) {
