@@ -108,6 +108,7 @@ public class JobsScreen extends Window {
 		if (jobsTable.getSelectionModel().getSelectedItem() != null) {
 			String[] jobData = jobsTable.getSelectionModel().getSelectedItem();
 			//TODO assign job id
+			procUiController.setJobBeingPaid(jobData);
 			showScreen(this, "RecordPayment");
 		}
 		else{

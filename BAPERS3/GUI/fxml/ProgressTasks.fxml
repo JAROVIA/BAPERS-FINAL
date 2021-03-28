@@ -1,29 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ProcessTasksScreen">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ProcessTasksScreen">
    <children>
-      <Button fx:id="logoutButton" layoutX="1180.0" layoutY="14.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Logout">
+      <Button fx:id="logoutButton" layoutX="1820.0" layoutY="14.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Logout">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
       <ImageView fx:id="homeButton" fitHeight="219.0" fitWidth="463.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/BAPERS Logo Final.png" />
+            <Image url="@../../../../../../../../../Downloads/New%20Scenebuilder%20-%20Armet/BAPERS%20Logo%20Final.png" />
          </image>
       </ImageView>
-      <Label fx:id="welcomeLabel" layoutX="925.0" layoutY="14.0" prefHeight="36.0" prefWidth="239.0" style="-fx-border-color: Black;" text="Welcome [logged in user]" textAlignment="RIGHT">
+      <Label fx:id="welcomeLabel" layoutX="1569.0" layoutY="14.0" prefHeight="36.0" prefWidth="239.0" style="-fx-border-color: Black;" text="Welcome [logged in user]" textAlignment="RIGHT">
          <font>
             <Font size="15.0" />
          </font>
@@ -33,39 +35,45 @@
             <Font size="27.0" />
          </font>
       </Text>
-      <TableView fx:id="tasksInJobTable" layoutX="14.0" layoutY="240.0" prefHeight="353.0" prefWidth="945.0" style="-fx-border-color: -black;">
+      <TableView fx:id="tasksInJobTable" layoutX="14.0" layoutY="240.0" prefHeight="703.0" prefWidth="1602.0" style="-fx-border-color: -black;">
          <columns>
-            <TableColumn prefWidth="81.3333158493042" text="TIJ ID" />
             <TableColumn prefWidth="81.3333158493042" text="Job ID" />
             <TableColumn prefWidth="91.99999237060547" text="Task ID" />
-            <TableColumn prefWidth="112.50187683105469" text="Account number" />
-            <TableColumn prefWidth="85.48944091796875" text="Start Time" />
-            <TableColumn prefWidth="177.822509765625" text="Completed By" />
-            <TableColumn prefWidth="85.6820068359375" text="Shift completed" />
-            <TableColumn prefWidth="75.0" text="urgency" />
-            <TableColumn prefWidth="89.8876953125" text="Actual duration" />
-            <TableColumn prefWidth="126.92535400390625" text="is completed" />
-            <TableColumn prefWidth="91.00006103515625" text="Deadline" />
+            <TableColumn prefWidth="145.3332977294922" text="Account number" />
+            <TableColumn prefWidth="140.00006103515625" text="Start Time" />
+            <TableColumn prefWidth="269.9999694824219" text="Completed By" />
+            <TableColumn prefWidth="205.33331298828125" text="Shift completed" />
+            <TableColumn prefWidth="167.33349609375" text="Urgency" />
+            <TableColumn prefWidth="151.3333740234375" text="Actual duration" />
+            <TableColumn prefWidth="147.333251953125" text="Is Completed" />
+            <TableColumn prefWidth="202.666748046875" text="Deadline" />
          </columns>
       </TableView>
       <Button layoutX="1098.0" layoutY="241.0" mnemonicParsing="false" style="-fx-background-color: -white;" />
       <Button layoutX="1180.0" layoutY="240.0" mnemonicParsing="false" style="-fx-background-color: -white;" />
-      <Button fx:id="startButton" layoutX="976.0" layoutY="266.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="145.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Start Task">
+      <Button fx:id="startButton" layoutX="1647.0" layoutY="280.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="127.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Start Task">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Button fx:id="completeButton" layoutX="1131.0" layoutY="266.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="137.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Complete Task">
+      <Button fx:id="completeButton" layoutX="1648.0" layoutY="468.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="137.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Complete Task">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <ProgressBar fx:id="progressBar" layoutX="499.0" layoutY="677.0" prefHeight="25.0" prefWidth="281.0" progress="0.38" />
-      <Text layoutX="542.0" layoutY="650.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Segmented Progress View">
+      <ProgressBar fx:id="progressBar" layoutX="906.0" layoutY="991.0" prefHeight="25.0" prefWidth="281.0" progress="0.38" />
+      <Text layoutX="949.0" layoutY="973.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Segmented Progress View">
          <font>
             <Font size="17.0" />
          </font>
       </Text>
-      <Button fx:id="cancelButton" layoutX="996.0" layoutY="343.0" mnemonicParsing="false" text="cancel" />
+      <Button fx:id="cancelButton" layoutX="1649.0" layoutY="521.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="127.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Cancel">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <TextField fx:id="completedByField" layoutX="1629.0" layoutY="408.0" prefHeight="27.0" prefWidth="267.0" promptText="Employee name" />
+      <CheckBox fx:id="completedByCheckBox" layoutX="1629.0" layoutY="349.0" mnemonicParsing="false" text="Complete on behalf of another" />
+      <Label layoutX="1634.0" layoutY="381.0" text="Completed by :" />
    </children>
 </AnchorPane>

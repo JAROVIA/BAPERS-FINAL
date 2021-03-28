@@ -135,8 +135,10 @@ public class CustomerAccountScreen extends Window {
 	 */
 	private boolean matchCustomer(String[] data, String input) {
 		if(matchName(input)){
-			return data[5].toLowerCase().contains(input.toLowerCase())
+			return data[1].toLowerCase().contains(input.toLowerCase())
+					|| data[3].toLowerCase().contains(input.toLowerCase())
 					|| data[4].toLowerCase().contains(input.toLowerCase())
+					|| data[5].toLowerCase().contains(input.toLowerCase())
 					|| data[6].toLowerCase().contains(input.toLowerCase());
 		}
 		if(matchNumber(input)){
@@ -145,9 +147,9 @@ public class CustomerAccountScreen extends Window {
 					|| data[3].toLowerCase().contains(input.toLowerCase());
 		}
 		else{
-			return data[3].toLowerCase().contains(input.toLowerCase())
-					|| data[4].toLowerCase().contains(input.toLowerCase())
-					|| data[1].toLowerCase().contains(input.toLowerCase());
+			return data[1].toLowerCase().contains(input.toLowerCase())
+					|| data[3].toLowerCase().contains(input.toLowerCase())
+					|| data[4].toLowerCase().contains(input.toLowerCase());
 		}
 	}
 
@@ -218,6 +220,8 @@ public class CustomerAccountScreen extends Window {
 		processTasksButton.setOnAction(actionEvent -> toProcessTasks());
 		registerNewCustomerButton.setOnAction(actionEvent -> toRegisterNewCustomer());
 		closeButton.setOnAction(actionEvent -> onClose());
+
+		discountTable.setPlaceholder(new Label("No discounts are applied"));
 
 		customerAccountTable.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override

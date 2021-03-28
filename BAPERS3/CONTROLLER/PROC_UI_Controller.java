@@ -158,6 +158,10 @@ public class PROC_UI_Controller {
 		this.editingTaskDescription = editingTaskDescription;
 	}
 
+	public void setJobBeingPaid(String[] jobData){
+		main.getUiController().setJobBeingPaid(jobData);
+	}
+
 	public UserAccount getLoggedInUser(){
 		return main.getAdminUiController().getLoggedInUser();
 	}

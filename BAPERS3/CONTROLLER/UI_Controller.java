@@ -1,12 +1,15 @@
 package CONTROLLER;
 
+import ADMIN.AlertUser;
 import ADMIN.UserAccount;
 import GUI.HomeScreen;
 import GUI.RecordPaymentScreen;
 import GUI.ReportsScreen;
 import GUI.Window;
+import PAYMENT.Payment;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,11 +31,43 @@ public class UI_Controller {
 
 	/**
 	 * 
-	 * @param PaymentDetails
+	 * @param paymentDetails
 	 */
-	public boolean SavePayment(String[] PaymentDetails) {
-		// TODO - implement UI_Controller.SavePayment
-		throw new UnsupportedOperationException();
+	public void saveCardPayment(String[] paymentDetails) {
+		try {
+			new Payment(
+					Integer.parseInt(paymentDetails[0]),
+					Integer.parseInt(paymentDetails[1]),
+					Float.parseFloat(paymentDetails[2]),
+					paymentDetails[3],
+					paymentDetails[4],
+					Integer.parseInt(paymentDetails[5]),
+					paymentDetails[6],
+					paymentDetails[7],
+					Integer.parseInt(paymentDetails[8]),
+					Integer.parseInt(paymentDetails[9])
+			);
+		} catch (SQLException throwables) {
+			AlertUser.showDBError();
+			throwables.printStackTrace();
+		}
+	}
+
+	public void saveCashPayment(String[] paymentDetails){
+//		int jobID, int accountNumber, float price, String dateOfPayment,
+//				String paymentType
+		try {
+			new Payment(
+					Integer.parseInt(paymentDetails[0]),
+					Integer.parseInt(paymentDetails[1]),
+					Float.parseFloat(paymentDetails[2]),
+					paymentDetails[3],
+					paymentDetails[4]
+			);
+		} catch (SQLException throwables) {
+			AlertUser.showDBError();
+			throwables.printStackTrace();
+		}
 	}
 
 	public boolean CancelPayment() {
@@ -43,6 +78,10 @@ public class UI_Controller {
 	public boolean GenerateReport() {
 		// TODO - implement UI_Controller.GenerateReport
 		throw new UnsupportedOperationException();
+	}
+
+	public void setJobBeingPaid(String[] jobData){
+		recordPaymentScreen.setJobData(jobData);
 	}
 
 	public UserAccount getLoggedInUser(){

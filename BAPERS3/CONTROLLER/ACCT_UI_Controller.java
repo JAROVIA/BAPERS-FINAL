@@ -5,6 +5,7 @@ import ADMIN.UserAccount;
 import GUI.*;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -102,4 +103,12 @@ public class ACCT_UI_Controller {
 		customerAccountHandler = new Impl_CustomerAccount();
 	}
 
+    public void addNewCustomer(String status,
+							   String phone,
+							   String address,
+							   String email,
+							   String name,
+							   String contactName) throws SQLException {
+		new CustomerAccountDetails(status, phone, address, email, name, contactName);
+    }
 }
