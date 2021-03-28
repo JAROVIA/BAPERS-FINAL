@@ -5,15 +5,19 @@ import java.sql.Date;
 // summary performance report
 public class SummaryReport extends Report {
 
-	private int ShiftID;
-	private String Department;
-	private float TimeInCopyRoom;
-	private float TimeInDevelopment;
-	private float TimeInFinishing;
-	private float TimeInPacking;
+//	private int ShiftID;
+//	private String Department;
+//	private float TimeInCopyRoom;
+//	private float TimeInDevelopment;
+//	private float TimeInFinishing;
+//	private float TimeInPacking;
+
+	public SummaryReport() {
+
+	}
 
 	/**
-	 * 
+	 *
 	 * @param ReportID
 	 * @param Date
 	 * @param ReportData

@@ -10,7 +10,6 @@ import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.UnitValue;
 
 import java.io.File;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,19 +18,19 @@ import java.util.List;
 
 public class PDFGeneration {
 
-    public static final String DEST = "/home/javonne/IdeaProjects/BAPERS-FINAL/BAPERS3/TESTING/PDFDemo/PDFDemo/src/TEST.pdf";
+    private static final String DEST = "/home/javonne/IdeaProjects/BAPERS-FINAL/BAPERS3/GENERATED/pls.pdf";
     public static void main(String[] args) throws Exception {
 
         // this is the code that runs on button press
-        File file = new File(DEST);
 //        file.getParentFile().mkdirs();
-        new PDFGeneration().manipulatePdf(DEST);
+        File file = new File(DEST);
+        new PDFGeneration().manipulatePdf();
 
     }
 
     // this should be the method in each report class
-    protected void manipulatePdf(String dest) throws Exception {
-        PdfDocument pdfDoc = new PdfDocument(new PdfWriter(dest));
+    protected void manipulatePdf() throws Exception {
+        PdfDocument pdfDoc = new PdfDocument(new PdfWriter(PDFGeneration.DEST));
         Document doc = new Document(pdfDoc);
         doc.add(new Paragraph("Customer Report!"));
 // By default column width is calculated automatically for the best fit.
@@ -55,14 +54,10 @@ public class PDFGeneration {
 
     // convert types
     private static List<List<String>> convertTypes(ArrayList<String[]> oldList){
-
         List<List<String>> list = new ArrayList<>();
-
-
         for (String[] strings : oldList){
             list.add(Arrays.asList(strings));
         }
-
         return list;
     }
 
