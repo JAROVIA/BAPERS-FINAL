@@ -134,6 +134,20 @@ public class JobsScreen extends Window {
 		}
 	}
 
+	protected void toProcessLateTasks(){
+		if(lateJobsTable.getSelectionModel().getSelectedItem() != null) {
+			String[] jobData = lateJobsTable.getSelectionModel().getSelectedItem();
+			if (jobData[7].equals("0")) {
+				ProcessTasksScreen.setJobID(Integer.parseInt(jobData[0]));
+				showScreen(this, "ProgressTasks");
+			}
+		}
+		else{
+			Alert alert = new Alert(Alert.AlertType.ERROR, "Select job to process", ButtonType.CLOSE);
+			alert.show();
+		}
+	}
+
 	@Override
 	public void onShow(){
 		super.onShow();
@@ -171,7 +185,7 @@ public class JobsScreen extends Window {
 
 		createJobOrderButton.setOnAction(actionEvent -> toCreateJobSetup());
 		processTasksButton1.setOnAction(actionEvent -> toProcessTasks());
-		processTasksButton2.setOnAction(actionEvent -> toProcessTasks());
+		processTasksButton2.setOnAction(actionEvent -> toProcessLateTasks());
 		paymentsButton1.setOnAction(actionEvent -> toPayment());
 		paymentsButton2.setOnAction(actionEvent -> toPayment());
 		recordPaymentButton1.setOnMouseClicked(mouseEvent -> toMakePayment());
