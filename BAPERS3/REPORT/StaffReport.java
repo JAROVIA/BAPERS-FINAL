@@ -2,6 +2,7 @@ package REPORT;
 
 import java.sql.Date;
 
+// individual performance report
 public class StaffReport extends Report {
 
 	private String EmployeeName;

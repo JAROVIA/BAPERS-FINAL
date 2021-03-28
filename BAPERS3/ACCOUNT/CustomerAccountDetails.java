@@ -110,7 +110,7 @@ public class CustomerAccountDetails {
 	}
 
 	public static void main(String[] args) throws SQLException {
-
+//		new CustomerAccountDetails("normal", "078999354", "address 13", "epr@dag.com", "Felix","fexil");
 	}
 
 	public int getAccountNumber() {

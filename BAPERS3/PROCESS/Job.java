@@ -148,7 +148,7 @@ public class Job implements I_PROCESS {
 	 * */
 	public static ArrayList<String[]> GetJobList() throws SQLException {
 		Statement statement = connection.createStatement();
-		String sql = "SELECT * FROM Jobs;"; /* SELECT * FROM Jobs WHERE IsArchived = 0; */
+		String sql = "SELECT * FROM Jobs;"; /* SELECT * FROM Jobs WHERE IsCompleted = 0; */
 		ResultSet resultSet = statement.executeQuery(sql);
 
 		ArrayList<String[]> arrayList = new ArrayList<String[]>();

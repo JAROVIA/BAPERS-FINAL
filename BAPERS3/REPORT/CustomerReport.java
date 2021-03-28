@@ -1,7 +1,7 @@
 package REPORT;
 
 import java.sql.Date;
-
+// Jobsheet
 public class CustomerReport extends Report {
 
 	private int InvoiceNumber;

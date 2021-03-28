@@ -2,6 +2,7 @@ package REPORT;
 
 import java.sql.Date;
 
+// summary performance report
 public class SummaryReport extends Report {
 
 	private int ShiftID;

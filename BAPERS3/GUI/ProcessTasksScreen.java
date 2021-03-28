@@ -82,6 +82,14 @@ public class ProcessTasksScreen extends Window {
 	private void showProgress(int completed, int total){
 		progressBar.setProgress((double)completed / (double)total);
 		System.out.println("progress = " + (double)completed / (double)total);
+		double unit = (double)completed / (double)total;
+		if ( ((double)completed / (double)total) == 1.0 ){
+			// mark corresponding job as completed
+
+			String[] taskInAJobData = tasksInJobTable.getSelectionModel().getSelectedItem();
+			String markJobCompleted = "UPDATE Jobs SET IsCompleted = 1 Where JobID = " + taskInAJobData[1] + ";";
+
+		}
 	}
 
 	private void onTaskComplete(){
