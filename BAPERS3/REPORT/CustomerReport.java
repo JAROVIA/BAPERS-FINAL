@@ -13,6 +13,7 @@ import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 // Jobsheet
@@ -38,7 +39,8 @@ public class CustomerReport extends Report {
     static String dbusername = "jaroviadb";
     static String dbpassword = "Jarovia123#@!";
     static Connection connection;
-	private static final String DEST = "/home/javonne/IdeaProjects/BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/CUSTOMERREPORT/CustomerReport.pdf";
+	private static final String DEST = "../PLEASE.pdf";
+//	private static final String DEST = "/home/javonne/IdeaProjects/BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/CUSTOMERREPORT/CustomerReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
 
     static {
         try {
@@ -51,7 +53,7 @@ public class CustomerReport extends Report {
 
 	public static void main(String[] args) throws Exception {
 		File file = new File(DEST);
-        new CustomerReport().manipulatePdf();
+        new CustomerReport().printCustomerReport(1,"");
 	}
 
 	public ArrayList<String[]> CustomerReportList(int AccountNumber, String date) throws SQLException {
@@ -105,7 +107,7 @@ public class CustomerReport extends Report {
 		return arrayList;
 	}
 
-	public void manipulatePdf() throws Exception {
+	public void printCustomerReport(int accountNumber, String date) throws Exception {
 		PdfDocument pdfDoc = new PdfDocument(new PdfWriter(DEST));
 		Document doc = new Document(pdfDoc);
 		doc.add(new Paragraph("Customer Report!"));
@@ -115,7 +117,7 @@ public class CustomerReport extends Report {
 		List<List<String>> dataset = null;
 
 		// change toLoad to decide what you load
-		ArrayList<String[]> toLoad = CustomerReportList(1,"");
+		ArrayList<String[]> toLoad = CustomerReportList(accountNumber,date);
 		dataset = convertTypes(toLoad);
 
 		for (List<String> record : dataset) {

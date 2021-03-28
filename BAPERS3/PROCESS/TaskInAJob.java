@@ -155,15 +155,19 @@ public class TaskInAJob {
 		* */
 
 
+//		String insert =
+//		"INSERT INTO TaskInAJob (JobID, TaskID, AccountNumber, JobUrgency, StartTimeMillis) VALUES ("
+//		+ Job.getJobID() + ", " + TaskDescription.getTaskIDStatic() + ", " + Job.getAccountNumber()
+//		+ ", \"" + Job.getUrgency() + "\"" + ", \"" + Calendar.getInstance().getTimeInMillis() + "\");";
+
+
 		// set start time millis later on, when startTask is pressed, not insert
 		String insert =
-		"INSERT INTO TaskInAJob (JobID, TaskID, AccountNumber, JobUrgency, StartTimeMillis) VALUES ("
+		"INSERT INTO TaskInAJob (JobID, TaskID, AccountNumber, JobUrgency) VALUES ("
 		+ Job.getJobID() + ", " + TaskDescription.getTaskIDStatic() + ", " + Job.getAccountNumber()
-		+ ", \"" + Job.getUrgency() + "\"" + ", \"" + Calendar.getInstance().getTimeInMillis() + "\");";
+		+ ", \"" + Job.getUrgency() + "\"" + ");";
 
-		// create update stm
-//		String updateTasks =
-//	  	"UPDATE Jobs SET NumberOfTasks = " + (Job.getNumberOfTasks()+1) + " WHERE JobID = " + Job.getJobID()  + ";";
+
 
 		String updateTasks =
 		"UPDATE Jobs SET NumberOfTasks = " + ( 1 + (sqlStatements.size()/2)) + " WHERE JobID = " + Job.getJobID()  + ";";
@@ -315,13 +319,13 @@ public class TaskInAJob {
 	public static void StartTask(int id) throws SQLException {
 
 		String time = Calendar.getInstance().getTime().toString();
-		long millis = Calendar.getInstance().getTimeInMillis();
 		String sql = "UPDATE TaskInAJob SET TaskStartTime = \"" + time + "\"" +	" WHERE JobTaskID = " + id + ";";
-		String sqlMillis = "UPDATE TaskInAJob SET StartTimeMillis = \"" + millis + "\"" +	" WHERE JobTaskID = " + id + ";";
+		String sqlMillis = "UPDATE TaskInAJob SET StartTimeMillis = \"" + Calendar.getInstance().getTimeInMillis() + "\"" +	" WHERE JobTaskID = " + id + ";";
 
-		System.out.println(sql);
+		System.out.println(sqlMillis);
 		Statement statement = connection.createStatement();
 		statement.executeUpdate(sql);
+		statement.executeUpdate(sqlMillis);
 	}
 
 	public static void CompleteTask(int id) throws SQLException {
@@ -363,8 +367,8 @@ public class TaskInAJob {
 			statement.executeUpdate(shiftQuery);
 		}
 
-		else if ((now.get(Calendar.HOUR_OF_DAY) > 14 && now.get(Calendar.MINUTE) > 30)
-				&& (now.get(Calendar.HOUR_OF_DAY) >= 20)){
+		else if ((now.get(Calendar.HOUR_OF_DAY) > 14 && now.get(Calendar.MINUTE) > 30 || (now.get(Calendar.HOUR_OF_DAY) > 15))
+				&& (now.get(Calendar.HOUR_OF_DAY) <= 20)){
 			String shiftQuery = "UPDATE TaskInAJob SET ShiftCompleted = " + 2 + " WHERE JobTaskID = " + id + ";";
 			System.out.println(shiftQuery);
 			statement.executeUpdate(shiftQuery);
@@ -377,7 +381,6 @@ public class TaskInAJob {
 		}
 		else {
 			System.out.println("Not completed during a shift.");
-
 		}
 
 	}

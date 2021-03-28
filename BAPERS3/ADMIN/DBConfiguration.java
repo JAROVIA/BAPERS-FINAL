@@ -1,11 +1,96 @@
 package ADMIN;
 
-import java.sql.Date;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.*;
+import java.util.Calendar;
+
+
 
 public class DBConfiguration {
 
+	static String url = "jdbc:mysql://localhost:3306/Bapers";
+	static String username = "jaroviadb";
+	static String password = "Jarovia123#@!";
+	static Connection connection;
+
+	static {
+		try {
+			connection = DriverManager.getConnection(
+					url, username, password);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	private Date AutoTimeDBBackup;
 	private Date AutoTimeDBRestore;
+
+	public static void main(String[] args) throws IOException {
+		DBConfiguration.MakeBackup();
+	}
+
+
+	// should run when db backup button is clicked
+	public static void MakeBackup() throws IOException {
+		String string = "mysqldump -u jaroviadb -pJarovia123#@! Bapers -r BAPERS3/GENERATED/DATABASES/Backup" + Calendar.getInstance().getTimeInMillis() + ".sql";
+		Process process = Runtime.getRuntime().exec(string);
+
+	}
+	public static void RestoreListedBackup(String FileName) throws IOException, SQLException {
+
+		/**
+		 * This code was written following this guide
+		 * https://softorks.com/en/java/how-to-execute-shell-command-java-runtimeExec.php
+		 * */
+
+		String q = "";
+		File f = new File("/home/javonne/IdeaProjects/BAPERS-FINAL/BAPERS3/GENERATED/DATABASES/" + FileName + ".sql"); // source path is the absolute path of dumpfile.
+
+		BufferedReader bf = new BufferedReader(new FileReader(f));
+		String line = null;
+		line = bf.readLine();
+		while (line != null) {
+			q = q + line + "\n";
+			line = bf.readLine();
+		}
+
+		String[] commands = q.split(";");
+
+		Statement statement = connection.createStatement();
+		for (String s : commands) {
+			statement.execute(s);
+		}
+	}
+
+	public static void RestoreBackup() throws IOException, SQLException {
+
+		/**
+		 * This code was written following this guide
+		 * https://softorks.com/en/java/how-to-execute-shell-command-java-runtimeExec.php
+		 * */
+
+		String q = "";
+		File f = new File("/home/javonne/IdeaProjects/BAPERS-FINAL/BAPERS3/GENERATED/DATABASES/Backup1616954237524.sql");
+		BufferedReader bf = new BufferedReader(new FileReader(f));
+		String line = null;
+		line = bf.readLine();
+
+		while (line != null) {
+			q = q + line + "\n";
+			line = bf.readLine();
+		}
+
+		String[] commands = q.split(";");
+		Statement statement = connection.createStatement();
+
+		for (String s : commands) {
+			statement.execute(s);
+			}
+		}
+
 
 	public Date getAutoTimeDBBackup() {
 		// TODO - implement DBConfiguration.getAutoTimeDBBackup
