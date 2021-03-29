@@ -58,8 +58,9 @@ public class Payment implements I_Payment {
 		// need to figure out how to make these insert statements work.
 		// look at GUI first
 		String sql =
-		"INSERT INTO Payment VALUES (" + jobID + ", " + accountNumber + ", " + price + ", " +
+		"INSERT INTO Payments VALUES (" + jobID + ", " + accountNumber + ", " + price + ", " +
 		discountedPrice + ", " + dateOfPayment + ", \"" + paymentType + "\");";
+		System.out.println(sql);
 		Statement statement = connection.createStatement();
 		statement.executeUpdate(sql);
 
@@ -68,7 +69,7 @@ public class Payment implements I_Payment {
 
 	public Payment(
 			int jobID, int accountNumber, float price, String dateOfPayment,
-			String paymentType, String expiryDate, String cardHolderName, int cardLast4Digits, int cvvc) throws SQLException {
+			String paymentType, String expiryDate, String cardHolderName, String cardType, int cardLast4Digits, int cvvc) throws SQLException {
 
 		this.jobID = jobID;
 		this.accountNumber = accountNumber;
@@ -87,9 +88,10 @@ public class Payment implements I_Payment {
 		float discountedPrice = 0;
 
 		String sql =
-		"INSERT INTO Payment VALUES (" + jobID + ", " + accountNumber + ", " + price + ", " +
-		discountedPrice + ", \"" + dateOfPayment + "\", \"" + paymentType + "\", \"" +
-		expiryDate + "\", \"" + cardHolderName + "\", \"" + cardLast4Digits + "\", " + cvvc + ");";
+		"INSERT INTO Payments VALUES (" + jobID + ", " + accountNumber + ", " + price + ", " +
+		discountedPrice + ", \"'" + dateOfPayment + "'\", \"" + paymentType + "\", \"" +
+		expiryDate + "\", \"" + cardHolderName + "\", \"" + cardType +"\", \"" + cardLast4Digits + "\", " + cvvc + ");";
+		System.out.println(sql);
 		Statement statement = connection.createStatement();
 		statement.executeUpdate(sql);
 
@@ -105,7 +107,7 @@ public class Payment implements I_Payment {
 
 	public static ArrayList<String[]> GetPaymentList() throws SQLException {
 		Statement statement = connection.createStatement();
-		String sql = "SELECT * FROM Jobs;"; /* SELECT * FROM Jobs WHERE IsArchived = 0; */
+		String sql = "SELECT * FROM Payments;"; /* SELECT * FROM Jobs WHERE IsArchived = 0; */
 		ResultSet resultSet = statement.executeQuery(sql);
 
 		ArrayList<String[]> arrayList = new ArrayList<String[]>();
@@ -118,7 +120,7 @@ public class Payment implements I_Payment {
 			float price = resultSet.getFloat("Price");
 			float discountedPrice = resultSet.getFloat("DiscountedPrice");
 			String dateOfPayment = resultSet.getString("DateOfPayment");
-			String dueDate = resultSet.getString("DueDatePayment");
+			//String dueDate = resultSet.getString("DueDatePayment");
 			String paymentType = resultSet.getString("PaymentType");
 			int expiryDate = resultSet.getInt("ExpiryDate");
 			String cardHolderName = resultSet.getString("CardholderName");
@@ -133,7 +135,7 @@ public class Payment implements I_Payment {
 				+ price + "`"
 				+ discountedPrice + "`"
 				+ dateOfPayment + "`"
-				+ dueDate + "`"
+				//+ dueDate + "`"
 				+ paymentType + "`"
 				+ expiryDate + "`"
 				+ cardHolderName + "`"
