@@ -1,7 +1,9 @@
 package GUI;
 
+import CUSTOMER.Discount;
 import PROCESS.TaskDescription;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,15 +20,11 @@ public class RegisterNewCustomerScreen extends Window {
 	@FXML
 	protected TextField nameField;
 	@FXML
-	protected TextField memorableWordField;
-	@FXML
 	protected Button submitButton;
 	@FXML
 	protected TextField phoneField;
 	@FXML
-	protected TextField address1Field;
-	@FXML
-	protected TextField address2Field;
+	protected TextField addressField;
 	@FXML
 	protected TextField postcodeField;
 	@FXML
@@ -55,12 +53,16 @@ public class RegisterNewCustomerScreen extends Window {
 	protected Label discountRateLabel;
 	@FXML
 	protected GridPane gridPane;
+	@FXML
+	protected CheckBox valuedCheckBox;
 
 	protected final String DISCOUNT_FIXED = "Fixed";
 	protected final String DISCOUNT_FLEX = "Flexible";
 	protected final String DISCOUNT_VAR = "Variable";
 
 	protected ObservableList<String[]> data;
+
+	protected int accountNumber = -1;
 
 	/*
 	maybe some refactor can be done with repeated code but it works
@@ -73,15 +75,14 @@ public class RegisterNewCustomerScreen extends Window {
 	protected void onSubmit() {
 		//make sure inputs are correct
 		//listing boolean so easier to see
-		boolean isValuedCustomer = discountBox.getValue() != null && !discountBox.getValue().equals("none");
+		System.out.println("onsubmit = " + this.accountNumber);
+		boolean isValuedCustomer = discountBox.getValue() != null && valuedCheckBox.isSelected();
 		//check inputs are correct
 		if (isValueNotEmpty(
 					nameField,
 					contactNameField,
 					emailField,
-					memorableWordField,
-					address1Field,
-					address2Field,
+					addressField,
 					phoneField,
 					postcodeField
 			)) {
@@ -92,20 +93,28 @@ public class RegisterNewCustomerScreen extends Window {
 						alert.show();
 					} else {
 						//TODO submit as valued customer
-						if(discountBox.getValue().equals(DISCOUNT_FIXED)){
-							submitCustomerData();
-						}
-						if(discountBox.getValue().equals(DISCOUNT_FLEX)){
-							submitCustomerData();
-						}
-						if(discountBox.getValue().equals(DISCOUNT_VAR)){
-							submitCustomerData();
-						}
+						submitCustomerData(
+								"valued",
+								phoneField.getText(),
+								addressField.getText(),
+								emailField.getText(),
+								nameField.getText(),
+								contactNameField.getText()
+						);
+						System.out.println(discountBox.getValue());
+						submitDiscountData(discountBox.getValue(), new ArrayList<String[]>(discountTable.getItems()));
 						showScreen(this, "CustomerAccounts");
 					}
 				} else {
 					//TODO submit as non valued customer
-					submitCustomerData();
+					submitCustomerData(
+							"non-valued",
+							phoneField.getText(),
+							addressField.getText(),
+							emailField.getText(),
+							nameField.getText(),
+							contactNameField.getText()
+							);
 					showScreen(this, "CustomerAccounts");
 				}
 
@@ -117,8 +126,26 @@ public class RegisterNewCustomerScreen extends Window {
 		}
 	}
 
-	protected void submitCustomerData(){
-		System.out.println("register new customer");
+	public void setAccountNumber(int accountNumber){
+		this.accountNumber = accountNumber;
+		System.out.println("set num = " + this.accountNumber);
+	}
+
+	protected void submitDiscountData(String discountType, ArrayList<String[]> discountData) {
+		try {
+			System.out.println("set num = " + this.accountNumber);
+			acctUiController.submitDiscountData(discountType, accountNumber, discountData);
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+	}
+
+	protected void submitCustomerData(String status, String phone, String address, String email, String name, String contactName){
+		try {
+			acctUiController.addNewCustomer(status, phone, address, email, name, contactName);
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
 	}
 
 	/**
@@ -126,49 +153,40 @@ public class RegisterNewCustomerScreen extends Window {
 	 * makes field necessary for each discount type to show and populates table with appropriate columns
 	 */
 	protected void onDiscountSelect(){
-		if(discountBox.getValue() != null && !discountBox.getValue().equals("none")) {
+		if(discountBox.getValue() != null) {
+
 			discountTable.getColumns().clear();
 			data.clear();
-			hideVar();
-			hideFlex();
-
-			discountRateField.setStyle("visibility : visible;");
-			discountRateLabel.setStyle("visibility : visible;");
-			discountRateField.setText("");
-			discountTable.setStyle("visibility : visible;");
-			addButton.setStyle("visibility : visible;");
-			removeButton.setStyle("visibility : visible;");
 
 			for(int i = GridPane.getRowIndex(discountBox); i < GridPane.getRowIndex(discountTable); i++){
 				gridPane.getRowConstraints().get(i).setPercentHeight(-1);
+				gridPane.getRowConstraints().get(i).setMinHeight(20);
 			}
 			gridPane.getRowConstraints().get(GridPane.getRowIndex(discountTable)).setPercentHeight(20);
 
 			String discountType = discountBox.getValue();
 			String[] columns = new String[]{};
 
-			//hide input field if customer non valued
-			if(discountType.equals("none")){
-				discountRateField.setStyle("visibility : hidden");
-				discountRateLabel.setStyle("visibility : hidden;");
-			}
-
 			//display all values for flex
 			if (discountType.equals(DISCOUNT_FLEX)) {
-				bandLabel.setStyle("visibility : visible;");
-				bandLabel.setText("0");
-				bandLabel2.setStyle("visibility : visible;");
-				bandField.setStyle("visibility : visible");
+				showFixed(false);
+				showVar(false);
+				showFlex(true);
 				columns = new String[]{"Volume lower", "Volume upper", "Discount rate"};
 			}
 			//display all values for fixed (just one input field)
 			if (discountType.equals(DISCOUNT_FIXED)) {
+				showFlex(false);
+				showVar(false);
+				showFixed(true);
 				columns = new String[]{"Discount rate"};
 			}
 			//display all values for variable discount
 			//information is taken from tasks in database and added to the combo box (selection box)
 			if (discountType.equals(DISCOUNT_VAR)) {
-				taskBox.setStyle("visibility : visible;");
+				showFixed(false);
+				showFlex(false);
+				showVar(true);
 				try {
 					for (String[] tasks : TaskDescription.GetTaskList()) {
 						StringBuilder columnsConcat = new StringBuilder("");
@@ -218,51 +236,61 @@ public class RegisterNewCustomerScreen extends Window {
 	 * adds String[] to data table of discount type chosen
 	 */
 	protected void onAdd(){
-		String discountType = discountBox.getValue();
-		String discountRate = discountRateField.getText();
+		if(discountBox.getValue() != null) {
+			String discountType = discountBox.getValue();
+			String discountRate = discountRateField.getText();
 
-		if(isAppropriateRate(discountRate)) {
-			if (discountType.equals(DISCOUNT_FIXED) && data.size() == 0) {
-				data.add(new String[]{discountRate});
-			}
-			if (discountType.equals(DISCOUNT_FLEX)) {
-				boolean isInsertOkay = true;
-				if (data.size() > 0) {
-					int oldUpper = Integer.parseInt(data.get(data.size() - 1)[1]);
-					int newUpper = Integer.parseInt(bandField.getText());
-					if (oldUpper >= newUpper) {
-						isInsertOkay = false;
+			if (discountRateField.getText().trim().isEmpty()) {
+				Alert alert = new Alert(Alert.AlertType.ERROR, "Enter discount rate", ButtonType.CLOSE);
+				alert.show();
+			} else {
+				if (discountType.equals(DISCOUNT_FIXED) && data.size() == 0) {
+					data.add(new String[]{discountRate});
+				}
+				if (discountType.equals(DISCOUNT_FLEX)) {
+					boolean isInsertOkay = true;
+					if (data.size() > 0) {
+						int oldUpper = Integer.parseInt(data.get(data.size() - 1)[1]);
+						int newUpper = Integer.parseInt(bandField.getText());
+						if (oldUpper >= newUpper) {
+							isInsertOkay = false;
+						}
+					}
+					if(!bandField.getText().trim().isEmpty()) {
+						if (isInsertOkay) {
+							data.add(new String[]{bandLabel.getText(), bandField.getText(), discountRate});
+							bandLabel.setText(bandField.getText());
+						}
+					}
+					else {
+						Alert alert = new Alert(Alert.AlertType.ERROR, "Make sure to set bands correctly", ButtonType.CLOSE);
+						alert.show();
 					}
 				}
-				if(isInsertOkay) {
-					data.add(new String[]{bandLabel.getText(), bandField.getText(), discountRate});
-					bandLabel.setText(bandField.getText());
+				if (discountType.equals(DISCOUNT_VAR)) {
+					if (taskBox.getValue() != null) {
+						boolean isInsertOkay = true;
+						for(String[] currentData : discountTable.getItems()) {
+							if (currentData[0].equals(taskBox.getValue().split(",")[0])) {
+								isInsertOkay = false;
+								break;
+							}
+						}
+						if(isInsertOkay) {
+							data.add(new String[]{taskBox.getValue().split(",")[0], discountRate});
+						}
+						else {
+							Alert alert = new Alert(Alert.AlertType.ERROR, "Make sure there are no duplicates", ButtonType.CLOSE);
+							alert.show();
+						}
+					} else {
+						Alert alert = new Alert(Alert.AlertType.ERROR, "select task", ButtonType.CLOSE);
+						alert.show();
+					}
 				}
-			}
-			if (discountType.equals(DISCOUNT_VAR)) {
-				data.add(new String[]{taskBox.getValue().split(",")[0], discountRate});
 			}
 		}
 		discountTable.setItems(data);
-	}
-
-	/**
-	 * method to hide all fields related to variable discount
-	 */
-	protected void hideVar(){
-		taskBox.getSelectionModel().clearSelection();
-		taskBox.getItems().clear();
-		taskBox.setStyle("visibility : hidden;");
-	}
-
-	/**
-	 * method to hide all fields related to flexible discount
-	 */
-	protected void hideFlex(){
-		bandField.setStyle("visibility : hidden;");
-		bandField.setText("");
-		bandLabel.setStyle("visibility : hidden;");
-		bandLabel2.setStyle("visibility : hidden;");
 	}
 
 	/**
@@ -329,15 +357,14 @@ public class RegisterNewCustomerScreen extends Window {
 	}
 
 	public void onLeave(){
+		accountNumber = -1;
 		//customer detail fields
-		memorableWordField.clear();
 		nameField.clear();
 		phoneField.clear();
 		emailField.clear();
 		contactNameField.clear();
 		postcodeField.clear();
-		address1Field.clear();
-		address2Field.clear();
+		addressField.clear();
 		discountRateField.clear();
 
 		//clear the table
@@ -350,16 +377,76 @@ public class RegisterNewCustomerScreen extends Window {
 
 		//everything is set to empty state
 		//discount fields
-		hideFlex();
-		hideVar();
-		discountRateField.setStyle("visibility : hidden;");
-		discountRateLabel.setStyle("visibility : hidden;");
-		//overridden method to show prompt text again because javafx is great at this
-		setComboBoxPromptText(discountBox, "Select discount type");
+		showVar(false);
+		showFixed(false);
+		showFlex(false);
 
-		for(int i = GridPane.getRowIndex(discountBox); i < GridPane.getRowIndex(discountTable)+1; i++){
+		valuedCheckBox.setSelected(false);
+
+		for(int i = GridPane.getRowIndex(valuedCheckBox); i < GridPane.getRowIndex(discountTable)+1; i++){
 			gridPane.getRowConstraints().get(i).setPercentHeight(0);
+			gridPane.getRowConstraints().get(i).setMinHeight(0);
 		}
+	}
+
+	protected String visibilityByBoolean(boolean isVisible){
+		return isVisible ? "visibility : visible;" : "visibility : hidden;";
+	}
+
+	protected void showFlex(boolean isInUse){
+		bandField.setDisable(!isInUse);
+		addButton.setDisable(!isInUse);
+		removeButton.setDisable(!isInUse);
+		discountTable.setDisable(!isInUse);
+		discountRateField.setDisable(!isInUse);
+
+		bandLabel.setStyle(visibilityByBoolean(isInUse));
+		bandLabel2.setStyle(visibilityByBoolean(isInUse));
+		bandField.setStyle(visibilityByBoolean(isInUse));
+		addButton.setStyle(visibilityByBoolean(isInUse));
+		removeButton.setStyle(visibilityByBoolean(isInUse));
+		discountRateLabel.setStyle(visibilityByBoolean(isInUse));
+		discountTable.setStyle(visibilityByBoolean(isInUse));
+		discountRateField.setStyle(visibilityByBoolean(isInUse));
+
+		bandLabel.setText("0");
+		bandField.clear();
+		discountRateField.clear();
+	}
+
+	protected void showFixed(boolean isInUse){
+		addButton.setDisable(!isInUse);
+		removeButton.setDisable(!isInUse);
+		discountTable.setDisable(!isInUse);
+		discountRateField.setDisable(!isInUse);
+
+		addButton.setStyle(visibilityByBoolean(isInUse));
+		removeButton.setStyle(visibilityByBoolean(isInUse));
+		discountRateLabel.setStyle(visibilityByBoolean(isInUse));
+		discountTable.setStyle(visibilityByBoolean(isInUse));
+		discountRateField.setStyle(visibilityByBoolean(isInUse));
+
+		discountRateField.clear();
+	}
+
+	protected void showVar(boolean isInUse){
+		taskBox.getSelectionModel().clearSelection();
+		taskBox.getItems().clear();
+
+		addButton.setDisable(!isInUse);
+		removeButton.setDisable(!isInUse);
+		discountTable.setDisable(!isInUse);
+		discountRateField.setDisable(!isInUse);
+		taskBox.setDisable(!isInUse);
+
+		addButton.setStyle(visibilityByBoolean(isInUse));
+		removeButton.setStyle(visibilityByBoolean(isInUse));
+		discountRateLabel.setStyle(visibilityByBoolean(isInUse));
+		discountTable.setStyle(visibilityByBoolean(isInUse));
+		discountRateField.setStyle(visibilityByBoolean(isInUse));
+		taskBox.setStyle(visibilityByBoolean(isInUse));
+
+		discountRateField.clear();
 	}
 
 	/**
@@ -370,22 +457,54 @@ public class RegisterNewCustomerScreen extends Window {
 		super.initialize();
 		userAllowed = new String[]{ROLE_OFFICE_MANAGER, ROLE_SHIFT_MANAGER, ROLE_RECEPTIONIST};
 		data = FXCollections.observableArrayList(new ArrayList<>());
-		taskBox.setStyle("visibility : hidden;");
-		bandLabel.setStyle("visibility : hidden;");
-		bandField.setStyle("visibility : hidden;");
-		discountRateField.setStyle("visibility : hidden;");
-		discountRateLabel.setStyle("visibility : hidden;");
-		discountTable.setStyle("visibility : hidden;");
-		addButton.setStyle("visibility : hidden;");
-		removeButton.setStyle("visibility : hidden;");
 
-		addIntegerNumberListener(discountRateField);
+		//dont show extra stuff unless needed
+		showFixed(false);
+		showFlex(false);
+		showVar(false);
+
+		// no discounts on this page
+		valuedCheckBox.setStyle("visibility : hidden");
+		valuedCheckBox.setDisable(true);
+		discountBox.setStyle("visibility : hidden");
+		discountBox.setDisable(false);
+
+		valuedCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean newValue) {
+
+				discountBox.getSelectionModel().clearSelection();
+				discountTable.getColumns().clear();
+				data.clear();
+
+				if(newValue) {
+					gridPane.getRowConstraints().get(GridPane.getRowIndex(discountBox)).setPercentHeight(-1);
+				}
+				else{
+					showFixed(false);
+					showFlex(false);
+					showVar(false);
+					for (int i = GridPane.getRowIndex(discountBox); i < GridPane.getRowIndex(discountTable) + 1; i++) {
+						gridPane.getRowConstraints().get(i).setPercentHeight(0);
+						gridPane.getRowConstraints().get(i).setMinHeight(0);
+					}
+				}
+				discountBox.setStyle(visibilityByBoolean(newValue));
+				discountBox.setDisable(!newValue);
+			}
+		});
+
+		addIntegerNumberListener(discountRateField, 2);
 		addIntegerNumberListener(bandField);
 		addIntegerNumberListener(phoneField, 15);
 		addNameListener(nameField);
 		addNameListener(contactNameField);
 
-		discountBox.getItems().addAll("none", DISCOUNT_FIXED, DISCOUNT_FLEX, DISCOUNT_VAR);
+		//overridden method to show prompt text again because javafx is great at this
+		setComboBoxPromptText(discountBox, "Select discount type");
+		setComboBoxPromptText(taskBox, "Select task");
+
+		discountBox.getItems().addAll(DISCOUNT_FIXED, DISCOUNT_FLEX, DISCOUNT_VAR);
 		discountBox.setOnAction(actionEvent -> onDiscountSelect());
 		addButton.setOnAction(actionEvent -> onAdd());
 		removeButton.setOnAction(actionEvent -> onRemove());

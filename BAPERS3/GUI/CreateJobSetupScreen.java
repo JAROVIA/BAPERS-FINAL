@@ -79,6 +79,7 @@ public class CreateJobSetupScreen  extends Window{
     @Override
     public void onLeave(){
         searchField.setText("");
+        urgencyBox.getSelectionModel().clearSelection();
         customerAccountTable.setItems(null);
     }
 

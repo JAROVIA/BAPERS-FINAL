@@ -1,9 +1,16 @@
 package GUI;
 
 import ACCOUNT.*;
+import ADMIN.AlertUser;
+import CUSTOMER.Discount;
+import CUSTOMER.FixedDiscountRate;
+import CUSTOMER.FlexibleDiscountRate;
+import CUSTOMER.VariableDiscountRate;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -55,23 +62,101 @@ public class CustomerAccountScreen extends Window {
 	private TableView<String[]> discountTable;
 	@FXML
 	private Button closeButton;
+	@FXML
+	private ScrollPane scrollPane;
 
 	private int selectedCustomerId = -1;
 
-	public void onSelectCustomer() {
+	private void onSelectCustomer() {
 
 		splitPane.setDividerPositions(.6);
 		customerDetailGridPane.setStyle("visibility : visible");
-		String[] customerData = customerAccountTable.getSelectionModel().getSelectedItem();
-		selectedCustomerId = Integer.parseInt(customerData[0]);
+		if(customerAccountTable.getSelectionModel().getSelectedItem() != null) {
+			String[] customerData = customerAccountTable.getSelectionModel().getSelectedItem();
+			selectedCustomerId = Integer.parseInt(customerData[0]);
 
-		accountNumberLabel.setText(customerData[0]);
-		nameLabel.setText(customerData[5]);
-		contactNameLabel.setText(customerData[6]);
-		valuedLabel.setText(customerData[1]);
-		phoneLabel.setText(customerData[2]);
-		addressLabel.setText(customerData[3]);
-		emailLabel.setText(customerData[4]);
+			accountNumberLabel.setText(customerData[0]);
+			nameLabel.setText(customerData[5]);
+			contactNameLabel.setText(customerData[6]);
+			valuedLabel.setText(customerData[1]);
+			phoneLabel.setText(customerData[2]);
+			addressLabel.setText(customerData[3]);
+			emailLabel.setText(customerData[4]);
+
+			try {
+				setupDiscountTable(Integer.parseInt(customerData[0]));
+			} catch (SQLException throwables) {
+				throwables.printStackTrace();
+				AlertUser.showDBError();
+			}
+			setColumnsEven();
+		}
+	}
+
+	private void setupDiscountTable(int accountNumber) throws SQLException {
+		String discountType = "";
+
+		if(discountTable.getItems() != null){
+			discountTable.getItems().clear();
+		}
+		discountTable.getColumns().clear();
+		try {
+			discountType = acctUiController.getCustomerDiscountType(accountNumber);
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+			AlertUser.showDBError();
+		}
+		if(discountType != null){
+			String[] columns = new String[]{};
+			ArrayList<String[]> discountData = new ArrayList<>();
+
+			if(discountType.equals("FixedDiscount")){
+				columns = new String[]{"Discount rate"};
+
+				FixedDiscountRate fixed = new FixedDiscountRate();
+				fixed.retrieveDiscount(accountNumber);
+				discountData.add(new String[]{String.valueOf(fixed.getDiscountRate())});
+			}
+			if(discountType.equals("FlexibleDiscount")){
+				columns = new String[]{"Volume lower", "Volume upper", "Discount rate"};
+
+				FlexibleDiscountRate flex = new FlexibleDiscountRate();
+				flex.retrieveDiscount(accountNumber);
+				discountData = acctUiController.discountToStringArray(flex);
+			}
+			if(discountType.equals("VariableDiscount")){
+				columns = new String[]{"TaskID", "Discount rate"};
+
+				VariableDiscountRate variable = new VariableDiscountRate();
+				variable.retrieveVariableDiscount(accountNumber);
+				discountData = acctUiController.discountToStringArray(variable);
+			}
+			for (int i = 0; i < columns.length; i++) {
+
+				TableColumn<String[], String> tc = new TableColumn<>();
+				tc.setText(columns[i]);
+				int j = i;
+				tc.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<String[], String>, ObservableValue<String>>() {
+					@Override
+					public ObservableValue<String> call(TableColumn.CellDataFeatures<String[], String> property) {
+						return new SimpleStringProperty((property.getValue()[j]));
+					}
+				});
+
+				discountTable.getColumns().add(tc);
+			}
+			ObservableList<String[]> data = FXCollections.observableArrayList(discountData);
+			discountTable.setItems(data);
+		}
+	}
+
+	/**
+	 * listens to split pane and adjusts columns
+	 */
+	private void setColumnsEven(){
+		for(TableColumn<String[], ?> col : discountTable.getColumns()){
+			col.setMinWidth(discountTable.widthProperty().get() / discountTable.getColumns().size());
+		}
 	}
 
 	public void deleteCustomer() {
@@ -104,6 +189,7 @@ public class CustomerAccountScreen extends Window {
 		if(selectedCustomerId >= 0) {
 			//TODO assign id somewhere
 			showScreen(this, "EditCustomerDetails");
+			acctUiController.setEditingCustomerNumber(selectedCustomerId);
 		}
 	}
 
@@ -135,8 +221,10 @@ public class CustomerAccountScreen extends Window {
 	 */
 	private boolean matchCustomer(String[] data, String input) {
 		if(matchName(input)){
-			return data[5].toLowerCase().contains(input.toLowerCase())
+			return data[1].toLowerCase().contains(input.toLowerCase())
+					|| data[3].toLowerCase().contains(input.toLowerCase())
 					|| data[4].toLowerCase().contains(input.toLowerCase())
+					|| data[5].toLowerCase().contains(input.toLowerCase())
 					|| data[6].toLowerCase().contains(input.toLowerCase());
 		}
 		if(matchNumber(input)){
@@ -145,9 +233,9 @@ public class CustomerAccountScreen extends Window {
 					|| data[3].toLowerCase().contains(input.toLowerCase());
 		}
 		else{
-			return data[3].toLowerCase().contains(input.toLowerCase())
-					|| data[4].toLowerCase().contains(input.toLowerCase())
-					|| data[1].toLowerCase().contains(input.toLowerCase());
+			return data[1].toLowerCase().contains(input.toLowerCase())
+					|| data[3].toLowerCase().contains(input.toLowerCase())
+					|| data[4].toLowerCase().contains(input.toLowerCase());
 		}
 	}
 
@@ -173,12 +261,16 @@ public class CustomerAccountScreen extends Window {
 	private void onClose(){
 		splitPane.setDividerPositions(1);
 		resetCustomerDetail();
+		if(discountTable.getItems() != null) {
+			discountTable.getItems().clear();
+		}
 		customerDetailGridPane.setStyle("visibility : hidden");
 	}
 
 	public void onLeave(){
 		customerAccountTable.setItems(null);
 		discountTable.getItems().clear();
+		onClose();
 	}
 
 	@Override
@@ -218,6 +310,14 @@ public class CustomerAccountScreen extends Window {
 		processTasksButton.setOnAction(actionEvent -> toProcessTasks());
 		registerNewCustomerButton.setOnAction(actionEvent -> toRegisterNewCustomer());
 		closeButton.setOnAction(actionEvent -> onClose());
+
+		discountTable.setPlaceholder(new Label("No discounts are applied"));
+		discountTable.widthProperty().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observableValue, Number number, Number newSize) {
+				setColumnsEven();
+			}
+		});
 
 		customerAccountTable.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override

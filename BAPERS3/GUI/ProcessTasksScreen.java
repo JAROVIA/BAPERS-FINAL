@@ -2,6 +2,7 @@ package GUI;
 
 import PROCESS.TaskInAJob;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +22,10 @@ public class ProcessTasksScreen extends Window {
 	@FXML
 	private Button cancelButton;
 	@FXML
+	private TextField completedByField;
+	@FXML
+	private CheckBox completedByCheckBox;
+	@FXML
 	private TableView<String[]> tasksInJobTable;
 	@FXML
 	private ProgressBar progressBar;
@@ -31,6 +36,7 @@ public class ProcessTasksScreen extends Window {
 		jobID = JobID;
 	}
 
+	@Override
 	public void onShow(){
 		super.onShow();
 		ArrayList<String[]> list = new ArrayList<>();
@@ -49,6 +55,12 @@ public class ProcessTasksScreen extends Window {
 			}
 		}
 		showProgress(completed, data.size());
+	}
+
+	@Override
+	public void onLeave(){
+		completedByField.clear();
+		completedByCheckBox.setSelected(false);
 	}
 
 	private void onTaskStart(){
@@ -94,6 +106,7 @@ public class ProcessTasksScreen extends Window {
 
 	private void onTaskComplete(){
 		//TODO do stuff on complete click
+		//TODO completed by...
 		if(tasksInJobTable.getSelectionModel().getSelectedItem() != null) {
 			String[] taskInAJobData = tasksInJobTable.getSelectionModel().getSelectedItem();
 			if (taskInAJobData[9].equals("1")) {
@@ -105,7 +118,15 @@ public class ProcessTasksScreen extends Window {
 				alert.show();
 			}
 			else{
+				String completedByEmployeeName = "";
+				if(completedByCheckBox.isSelected()){
+					completedByEmployeeName = completedByField.getText();
+
+				}else {
+					completedByEmployeeName = procUiController.getLoggedInUser().getEmployeeName();
+				}
 				try {
+					//TODO use employee name
 					TaskInAJob.CompleteTask(Integer.parseInt(taskInAJobData[0]));
 					onShow();
 				} catch (SQLException throwables) {
@@ -133,6 +154,12 @@ public class ProcessTasksScreen extends Window {
 		cancelButton.setOnAction(actionEvent -> onCancel());
 		completeButton.setOnAction(actionEvent -> onTaskComplete());
 		startButton.setOnAction(actionEvent -> onTaskStart());
+		completedByCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean newValue) {
+				completedByField.setDisable(newValue);
+			}
+		});
 
 		for (int i = 0; i < tasksInJobTable.getColumns().size(); i++) {
 			TableColumn tc = tasksInJobTable.getColumns().get(i);

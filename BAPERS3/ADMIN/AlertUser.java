@@ -56,13 +56,16 @@ public class AlertUser {
 	}
 
 	public boolean getMessageSeen() {
-		// TODO - implement Alert.getMessageSeen
-		throw new UnsupportedOperationException();
+		return messageSeen;
+	}
+
+	public static void showDBError(){
+		Alert alert = new Alert(Alert.AlertType.ERROR, "Error accessing the database", ButtonType.CLOSE);
+		alert.show();
 	}
 
 	/**
-	 * 
-	 * @param MessageSeen
+	 * sets message seen to true for this session
 	 */
 	public void setMessageSeen() {
 		this.messageSeen = true;

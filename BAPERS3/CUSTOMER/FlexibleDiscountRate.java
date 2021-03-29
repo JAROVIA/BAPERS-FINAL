@@ -2,84 +2,83 @@ package CUSTOMER;
 
 import PROCESS.*;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class FlexibleDiscountRate extends Discount {
 
-	private int bandNumber;
 	private int accountNumber;
-	private int volumeLowerBound;
-	private int volumeUpperBound;
-	private int flexibleDiscountRate;
+	private ArrayList<int[]> bandsToRate;
 
-	static String url = "jdbc:mysql://localhost:3306/Bapers";
-	static String username = "jaroviadb";
-	static String password = "Jarovia123#@!";
-	static Connection connection;
+	public FlexibleDiscountRate(){
+		bandsToRate = new ArrayList<>();
+	}
 
-	static {
-		try {
-			connection = DriverManager.getConnection(
-					url, username, password);
-		} catch (SQLException e) {
-			e.printStackTrace();
+	public FlexibleDiscountRate(int accountNumber, ArrayList<int[]> bandsToRate) throws SQLException {
+		this.accountNumber = accountNumber;
+		this.bandsToRate = bandsToRate;
+	}
+
+	public FlexibleDiscountRate(int discountId, int accountNumber, ArrayList<int[]> bandsToRate){
+		this.discountId = discountId;
+		this.accountNumber = accountNumber;
+		this.bandsToRate = bandsToRate;
+	}
+
+	public ArrayList<int[]> getDiscountRate() {
+		return bandsToRate;
+	}
+
+	/**
+	 */
+	public void setDiscountRate(ArrayList<int[]> bandsToRate) {
+		this.bandsToRate = bandsToRate;
+	}
+
+	public void retrieveDiscount(int accountNumber) throws SQLException {
+		String sql = "SELECT * FROM FlexibleDiscount WHERE AccountNumber = " + accountNumber + " ORDER BY BandNumber ASC;";
+		Statement statement = connection.createStatement();
+		ResultSet resultSet = statement.executeQuery(sql);
+
+		boolean isIdSet = false;
+		while(resultSet.next()){
+			if(!isIdSet){
+				bandsToRate.clear();
+				this.discountId = resultSet.getInt("DiscountID");
+				this.accountNumber = accountNumber;
+				isIdSet = true;
+			}
+			int lower = resultSet.getInt("VolumeLowerBound");
+			int upper = resultSet.getInt("VolumeUpperBound");
+			int rate = resultSet.getInt("FlexibleDiscountRate");
+
+			bandsToRate.add(new int[]{lower, upper, rate});
 		}
 	}
 
-	public FlexibleDiscountRate(int bandNumber, int accountNumber, int volumeLowerBound,
-								int volumeUpperBound, int flexibleDiscountRate) throws SQLException {
+	public void saveDiscount() throws SQLException {
 
-		this.bandNumber = bandNumber;
-		this.accountNumber = accountNumber;
-		this.volumeLowerBound = volumeLowerBound;
-		this.volumeUpperBound = volumeUpperBound;
-		this.flexibleDiscountRate = flexibleDiscountRate;
+		for(int i = 0; i < bandsToRate.size(); i++) {
+			String sql = "INSERT INTO FlexibleDiscount (BandNumber, AccountNumber, VolumeLowerBound, VolumeUpperBound, FlexibleDiscountRate)" +
+					" values(" + i + ","
+					+ accountNumber + ","
+					+ bandsToRate.get(i)[0] + ","
+					+ bandsToRate.get(i)[1] + ","
+					+ bandsToRate.get(i)[2] + ");";
+			System.out.println(sql);
+			Statement statement = connection.createStatement();
+			statement.executeUpdate(sql);
+		}
+	}
 
-		String sql = "";
-		System.out.println(sql);
+	public static boolean ifFlexDiscountExists(int accountNumber) throws SQLException {
+		String sql = "SELECT COUNT(*) AS 'count' FROM FlexibleDiscount WHERE AccountNumber = " + accountNumber + ";";
 		Statement statement = connection.createStatement();
-	}
+		ResultSet resultSet = statement.executeQuery(sql);
 
-	/**
-	 * 
-	 * @param job
-	 */
-	public float CalculateDiscountRate(Job job) {
-		// TODO - implement FlexibleDiscountRate.CalculateDiscountRate
-		throw new UnsupportedOperationException();
+		if(resultSet.next()){
+			return resultSet.getInt("count") > 0;
+		}
+		return false;
 	}
-
-	public int getDiscountRate() {
-		// TODO - implement FlexibleDiscountRate.getDiscountRate
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param DiscountRate
-	 */
-	public int setDiscountRate(int DiscountRate) {
-		// TODO - implement FlexibleDiscountRate.setDiscountRate
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param JobPrice
-	 * @param AccountNumber
-	 * @param DiscountRate
-	 */
-	public float SetFinalPrice(float JobPrice, int AccountNumber, int DiscountRate) {
-		// TODO - implement FlexibleDiscountRate.SetFinalPrice
-		throw new UnsupportedOperationException();
-	}
-
-	public static FlexibleDiscountRate FlexibleDiscountRate() {
-		// TODO - implement FlexibleDiscountRate.FlexibleDiscountRate
-		throw new UnsupportedOperationException();
-	}
-
 }
