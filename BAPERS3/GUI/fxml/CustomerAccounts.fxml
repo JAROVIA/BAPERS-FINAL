@@ -173,7 +173,7 @@
                               </Button>
                               <Label fx:id="addressLabel" text="address" GridPane.columnIndex="2" GridPane.rowIndex="4" />
                               <Label fx:id="emailLabel" text="email" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                              <TableView fx:id="discountTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="6" GridPane.rowSpan="2147483647" />
+                              <TableView fx:id="discountTable" maxWidth="800.0" prefHeight="200.0" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.rowSpan="2147483647" />
                               <Label fx:id="valuedLabel" text="valuedornot" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                               <Button fx:id="closeButton" mnemonicParsing="false" text="x" GridPane.columnIndex="3" />
                            </children>

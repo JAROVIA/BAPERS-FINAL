@@ -85,7 +85,7 @@ public class ACCT_UI_Controller {
 
 	public void submitDiscountData(String discountType, int accountNumber, ArrayList<String[]> discountData) throws SQLException {
 		//delete previous entry if exists
-		if(Discount.ifDiscountExists(accountNumber)){
+		if(getCustomerDiscountType(accountNumber) != null){
 			Discount.deleteDiscount(accountNumber, getCustomerDiscountType(accountNumber));
 		}
 
@@ -114,7 +114,6 @@ public class ACCT_UI_Controller {
 			VariableDiscountRate variable = new VariableDiscountRate(accountNumber, varDiscData);
 			variable.saveDiscount();
 		}
-		System.out.println("3num = " + accountNumber);
 	}
 
 	public void deleteCustomer() {

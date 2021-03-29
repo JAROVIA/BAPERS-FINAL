@@ -269,7 +269,20 @@ public class RegisterNewCustomerScreen extends Window {
 				}
 				if (discountType.equals(DISCOUNT_VAR)) {
 					if (taskBox.getValue() != null) {
-						data.add(new String[]{taskBox.getValue().split(",")[0], discountRate});
+						boolean isInsertOkay = true;
+						for(String[] currentData : discountTable.getItems()) {
+							if (currentData[0].equals(taskBox.getValue().split(",")[0])) {
+								isInsertOkay = false;
+								break;
+							}
+						}
+						if(isInsertOkay) {
+							data.add(new String[]{taskBox.getValue().split(",")[0], discountRate});
+						}
+						else {
+							Alert alert = new Alert(Alert.AlertType.ERROR, "Make sure there are no duplicates", ButtonType.CLOSE);
+							alert.show();
+						}
 					} else {
 						Alert alert = new Alert(Alert.AlertType.ERROR, "select task", ButtonType.CLOSE);
 						alert.show();

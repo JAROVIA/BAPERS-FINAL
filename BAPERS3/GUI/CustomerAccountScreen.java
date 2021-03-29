@@ -6,9 +6,11 @@ import CUSTOMER.Discount;
 import CUSTOMER.FixedDiscountRate;
 import CUSTOMER.FlexibleDiscountRate;
 import CUSTOMER.VariableDiscountRate;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -60,6 +62,8 @@ public class CustomerAccountScreen extends Window {
 	private TableView<String[]> discountTable;
 	@FXML
 	private Button closeButton;
+	@FXML
+	private ScrollPane scrollPane;
 
 	private int selectedCustomerId = -1;
 
@@ -85,11 +89,13 @@ public class CustomerAccountScreen extends Window {
 				throwables.printStackTrace();
 				AlertUser.showDBError();
 			}
+			setColumnsEven();
 		}
 	}
 
 	private void setupDiscountTable(int accountNumber) throws SQLException {
 		String discountType = "";
+
 		if(discountTable.getItems() != null){
 			discountTable.getItems().clear();
 		}
@@ -136,11 +142,20 @@ public class CustomerAccountScreen extends Window {
 						return new SimpleStringProperty((property.getValue()[j]));
 					}
 				});
-				tc.setMinWidth(discountTable.getWidth() / columns.length);
+
 				discountTable.getColumns().add(tc);
 			}
 			ObservableList<String[]> data = FXCollections.observableArrayList(discountData);
 			discountTable.setItems(data);
+		}
+	}
+
+	/**
+	 * listens to split pane and adjusts columns
+	 */
+	private void setColumnsEven(){
+		for(TableColumn<String[], ?> col : discountTable.getColumns()){
+			col.setMinWidth(discountTable.widthProperty().get() / discountTable.getColumns().size());
 		}
 	}
 
@@ -255,6 +270,7 @@ public class CustomerAccountScreen extends Window {
 	public void onLeave(){
 		customerAccountTable.setItems(null);
 		discountTable.getItems().clear();
+		onClose();
 	}
 
 	@Override
@@ -296,6 +312,12 @@ public class CustomerAccountScreen extends Window {
 		closeButton.setOnAction(actionEvent -> onClose());
 
 		discountTable.setPlaceholder(new Label("No discounts are applied"));
+		discountTable.widthProperty().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observableValue, Number number, Number newSize) {
+				setColumnsEven();
+			}
+		});
 
 		customerAccountTable.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
