@@ -1,100 +1,82 @@
 package CUSTOMER;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+import javafx.util.Pair;
+
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class VariableDiscountRate extends Discount {
 
-	private int taskID;
-	private int accountNumebr;
-	private int taskDiscountRate;
+	private int accountNumber;
+	private ArrayList<Pair<Integer, Integer>> taskIdToRate;
 
-	static String url = "jdbc:mysql://localhost:3306/Bapers";
-	static String username = "jaroviadb";
-	static String password = "Jarovia123#@!";
-	static Connection connection;
+	public VariableDiscountRate(){
+	}
 
-	static {
-		try {
-			connection = DriverManager.getConnection(
-					url, username, password);
-		} catch (SQLException e) {
-			e.printStackTrace();
+	public VariableDiscountRate(int accountNumber, ArrayList<Pair<Integer, Integer>> taskIdToRate) throws SQLException {
+		this.accountNumber = accountNumber;
+		this.taskIdToRate = taskIdToRate;
+	}
+
+	public VariableDiscountRate(int discountId, int accountNumber, ArrayList<Pair<Integer, Integer>> taskIdToRate){
+		this.discountId = discountId;
+		this.accountNumber = accountNumber;
+		this.taskIdToRate = taskIdToRate;
+	}
+
+	public void saveDiscount() throws SQLException {
+		for (Pair<Integer, Integer> varDiscData : taskIdToRate) {
+			String sql = "INSERT INTO VariableDiscount (TaskID, AccountNumber, TaskDiscount) VALUES (" +
+					varDiscData.getKey() + "," +
+					accountNumber + "," +
+					varDiscData.getValue() +
+					")";
+			System.out.println(sql);
+			Statement statement = connection.createStatement();
+			statement.executeUpdate(sql);
 		}
 	}
 
-	public VariableDiscountRate(int taskID, int accountNumebr, int taskDiscountRate) throws SQLException {
-
-		this.taskID = taskID;
-		this.accountNumebr = accountNumebr;
-		this.taskDiscountRate = taskDiscountRate;
-
-		String sql = "";
-		System.out.println(sql);
+	public void retrieveVariableDiscount(int accountNumber) throws SQLException {
+		String sql = "SELECT * FROM VariableDiscount WHERE AccountNumber = " + accountNumber + " ORDER BY TaskID ASC;";
 		Statement statement = connection.createStatement();
+		ResultSet resultSet = statement.executeQuery(sql);
 
+		boolean isIdSet = false;
+		while(resultSet.next()){
+			if(!isIdSet){
+				taskIdToRate = new ArrayList<>();
+				this.discountId = resultSet.getInt("DiscountID");
+				this.accountNumber = accountNumber;
+				isIdSet = true;
+			}
+			Pair<Integer, Integer> idRate = new Pair<>(resultSet.getInt("TaskID"), resultSet.getInt("TaskDiscount"));
+			taskIdToRate.add(idRate);
+		}
 	}
 
-	@Override
-	public int setDiscountRate(int DiscountRate) {
-		return 0;
-	}
-
-	/**
-	 * 
-	 * @param JobPrice
-	 * @param AccountNumber
-	 * @param DiscountRate
-	 */
-	public float SetFinalPrice(float JobPrice, int AccountNumber, int DiscountRate) {
-		// TODO - implement VariableDiscountRate.SetFinalPrice
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param AccountNumber
-	 * @param TaskID
-	 * @param DiscountRate
-	 */
-	public int CalculateTaskDiscountRate(int AccountNumber, int TaskID, int DiscountRate) {
-		// TODO - implement VariableDiscountRate.CalculateTaskDiscountRate
-		throw new UnsupportedOperationException();
-	}
-
-	public int[] getTaskDiscountRate() {
-		// TODO - implement VariableDiscountRate.getTaskDiscountRate
-		throw new UnsupportedOperationException();
+	public ArrayList<Pair<Integer, Integer>> getTaskDiscountRate() {
+		return taskIdToRate;
 	}
 
 	/**
 	 * 
-	 * @param TaskDiscountRate
+	 * @param taskDiscountRate
 	 */
-	public void setTaskDiscountRate(int[] TaskDiscountRate) {
-		// TODO - implement VariableDiscountRate.setTaskDiscountRate
-		throw new UnsupportedOperationException();
+	public void setTaskDiscountRate(ArrayList<Pair<Integer, Integer>> taskDiscountRate) {
+		this.taskIdToRate = taskDiscountRate;
 	}
 
-	public static VariableDiscountRate VariableDiscountRate() {
-		// TODO - implement VariableDiscountRate.VariableDiscountRate
-		throw new UnsupportedOperationException();
-	}
+	public static boolean ifVariableDiscountExists(int accountNumber) throws SQLException {
+		String sql = "SELECT COUNT(*) AS 'count' FROM VariableDiscount WHERE AccountNumber = " + accountNumber + ";";
+		Statement statement = connection.createStatement();
+		ResultSet resultSet = statement.executeQuery(sql);
 
-	public int getVariableDiscountRate() {
-		// TODO - implement VariableDiscountRate.getVariableDiscountRate
-		throw new UnsupportedOperationException();
+		if(resultSet.next()){
+			return resultSet.getInt("count") > 0;
+		}
+		return false;
 	}
-
-	/**
-	 * 
-	 * @param VariableDiscountRate
-	 */
-	public void setVariableDiscountRate(int VariableDiscountRate) {
-		// TODO - implement VariableDiscountRate.setVariableDiscountRate
-		throw new UnsupportedOperationException();
-	}
-
 }

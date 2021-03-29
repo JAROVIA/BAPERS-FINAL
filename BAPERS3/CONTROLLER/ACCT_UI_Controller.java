@@ -2,10 +2,16 @@ package CONTROLLER;
 
 import ACCOUNT.*;
 import ADMIN.UserAccount;
+import CUSTOMER.Discount;
+import CUSTOMER.FixedDiscountRate;
+import CUSTOMER.FlexibleDiscountRate;
+import CUSTOMER.VariableDiscountRate;
 import GUI.*;
+import javafx.util.Pair;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,6 +52,69 @@ public class ACCT_UI_Controller {
 	public boolean submit(String[] CustomerData) {
 		// TODO - implement ACCT_UI_Controller.Submit
 		throw new UnsupportedOperationException();
+	}
+
+	public ArrayList<String[]> discountToStringArray(FlexibleDiscountRate flexible){
+		ArrayList<String[]> newData = new ArrayList<>();
+		for(int[] data : flexible.getDiscountRate()){
+			newData.add(new String[]{String.valueOf(data[0]), String.valueOf(data[1]), String.valueOf(data[2])});
+		}
+		return newData;
+	}
+
+	public ArrayList<String[]> discountToStringArray(VariableDiscountRate variable){
+		ArrayList<String[]> newData = new ArrayList<>();
+		for(Pair<Integer, Integer> data : variable.getTaskDiscountRate()){
+			newData.add(new String[]{String.valueOf(data.getKey()), String.valueOf(data.getValue())});
+		}
+		return newData;
+	}
+
+	public String getCustomerDiscountType(int accountNumber) throws SQLException {
+		if(FlexibleDiscountRate.ifFlexDiscountExists(accountNumber)){
+			return "FlexibleDiscount";
+		}
+		if(FixedDiscountRate.ifFixDiscountExists(accountNumber)){
+			return "FixedDiscount";
+		}
+		if(VariableDiscountRate.ifVariableDiscountExists(accountNumber)){
+			return "VariableDiscount";
+		}
+		return null;
+	}
+
+	public void submitDiscountData(String discountType, int accountNumber, ArrayList<String[]> discountData) throws SQLException {
+		//delete previous entry if exists
+		if(Discount.ifDiscountExists(accountNumber)){
+			Discount.deleteDiscount(accountNumber, getCustomerDiscountType(accountNumber));
+		}
+
+		//new discount entry depending on type
+		if(discountType.equals("Fixed")){
+			FixedDiscountRate fixed = new FixedDiscountRate(accountNumber, Integer.parseInt(discountData.get(0)[0]));
+			fixed.saveDiscount();
+		}
+		if(discountType.equals("Flexible")){
+			ArrayList<int[]> bandsData = new ArrayList<>();
+			for(String[] bands : discountData){
+				bandsData.add(new int[]{
+						Integer.parseInt(bands[0]),
+						Integer.parseInt(bands[1]),
+						Integer.parseInt(bands[2])
+				});
+			}
+			FlexibleDiscountRate flexible = new FlexibleDiscountRate(accountNumber, bandsData);
+			flexible.saveDiscount();
+		}
+		if(discountType.equals("Variable")){
+			ArrayList<Pair<Integer, Integer>> varDiscData = new ArrayList<>();
+			for(String[] data : discountData){
+				varDiscData.add(new Pair<Integer, Integer>(Integer.parseInt(data[0]), Integer.parseInt(data[1])));
+			}
+			VariableDiscountRate variable = new VariableDiscountRate(accountNumber, varDiscData);
+			variable.saveDiscount();
+		}
+		System.out.println("3num = " + accountNumber);
 	}
 
 	public void deleteCustomer() {
@@ -101,6 +170,11 @@ public class ACCT_UI_Controller {
 
 		//get implementation class from interface
 		customerAccountHandler = new Impl_CustomerAccount();
+	}
+
+	public void setEditingCustomerNumber(int accountNumber){
+		registerNewCustomerScreen.setAccountNumber(accountNumber);
+		editCustomerDetailsScreen.setAccountNumber(accountNumber);
 	}
 
     public void addNewCustomer(String status,

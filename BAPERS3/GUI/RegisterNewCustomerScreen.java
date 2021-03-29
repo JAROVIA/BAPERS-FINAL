@@ -1,5 +1,6 @@
 package GUI;
 
+import CUSTOMER.Discount;
 import PROCESS.TaskDescription;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -61,6 +62,8 @@ public class RegisterNewCustomerScreen extends Window {
 
 	protected ObservableList<String[]> data;
 
+	protected int accountNumber = -1;
+
 	/*
 	maybe some refactor can be done with repeated code but it works
 	 */
@@ -72,6 +75,7 @@ public class RegisterNewCustomerScreen extends Window {
 	protected void onSubmit() {
 		//make sure inputs are correct
 		//listing boolean so easier to see
+		System.out.println("onsubmit = " + this.accountNumber);
 		boolean isValuedCustomer = discountBox.getValue() != null && valuedCheckBox.isSelected();
 		//check inputs are correct
 		if (isValueNotEmpty(
@@ -89,15 +93,16 @@ public class RegisterNewCustomerScreen extends Window {
 						alert.show();
 					} else {
 						//TODO submit as valued customer
-						if(discountBox.getValue().equals(DISCOUNT_FIXED)){
-							//submitCustomerData();
-						}
-						if(discountBox.getValue().equals(DISCOUNT_FLEX)){
-							//submitCustomerData();
-						}
-						if(discountBox.getValue().equals(DISCOUNT_VAR)){
-							//submitCustomerData();
-						}
+						submitCustomerData(
+								"valued",
+								phoneField.getText(),
+								addressField.getText(),
+								emailField.getText(),
+								nameField.getText(),
+								contactNameField.getText()
+						);
+						System.out.println(discountBox.getValue());
+						submitDiscountData(discountBox.getValue(), new ArrayList<String[]>(discountTable.getItems()));
 						showScreen(this, "CustomerAccounts");
 					}
 				} else {
@@ -118,6 +123,20 @@ public class RegisterNewCustomerScreen extends Window {
 				Alert alert = new Alert(Alert.AlertType.ERROR, "email field has incorrect format : should be like some@thing.com", ButtonType.CLOSE);
 				alert.show();
 			}
+		}
+	}
+
+	public void setAccountNumber(int accountNumber){
+		this.accountNumber = accountNumber;
+		System.out.println("set num = " + this.accountNumber);
+	}
+
+	protected void submitDiscountData(String discountType, ArrayList<String[]> discountData) {
+		try {
+			System.out.println("set num = " + this.accountNumber);
+			acctUiController.submitDiscountData(discountType, accountNumber, discountData);
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
 		}
 	}
 
@@ -217,29 +236,45 @@ public class RegisterNewCustomerScreen extends Window {
 	 * adds String[] to data table of discount type chosen
 	 */
 	protected void onAdd(){
-		String discountType = discountBox.getValue();
-		String discountRate = discountRateField.getText();
+		if(discountBox.getValue() != null) {
+			String discountType = discountBox.getValue();
+			String discountRate = discountRateField.getText();
 
-		if(isAppropriateRate(discountRate)) {
-			if (discountType.equals(DISCOUNT_FIXED) && data.size() == 0) {
-				data.add(new String[]{discountRate});
-			}
-			if (discountType.equals(DISCOUNT_FLEX)) {
-				boolean isInsertOkay = true;
-				if (data.size() > 0) {
-					int oldUpper = Integer.parseInt(data.get(data.size() - 1)[1]);
-					int newUpper = Integer.parseInt(bandField.getText());
-					if (oldUpper >= newUpper) {
-						isInsertOkay = false;
+			if (discountRateField.getText().trim().isEmpty()) {
+				Alert alert = new Alert(Alert.AlertType.ERROR, "Enter discount rate", ButtonType.CLOSE);
+				alert.show();
+			} else {
+				if (discountType.equals(DISCOUNT_FIXED) && data.size() == 0) {
+					data.add(new String[]{discountRate});
+				}
+				if (discountType.equals(DISCOUNT_FLEX)) {
+					boolean isInsertOkay = true;
+					if (data.size() > 0) {
+						int oldUpper = Integer.parseInt(data.get(data.size() - 1)[1]);
+						int newUpper = Integer.parseInt(bandField.getText());
+						if (oldUpper >= newUpper) {
+							isInsertOkay = false;
+						}
+					}
+					if(!bandField.getText().trim().isEmpty()) {
+						if (isInsertOkay) {
+							data.add(new String[]{bandLabel.getText(), bandField.getText(), discountRate});
+							bandLabel.setText(bandField.getText());
+						}
+					}
+					else {
+						Alert alert = new Alert(Alert.AlertType.ERROR, "Make sure to set bands correctly", ButtonType.CLOSE);
+						alert.show();
 					}
 				}
-				if(isInsertOkay) {
-					data.add(new String[]{bandLabel.getText(), bandField.getText(), discountRate});
-					bandLabel.setText(bandField.getText());
+				if (discountType.equals(DISCOUNT_VAR)) {
+					if (taskBox.getValue() != null) {
+						data.add(new String[]{taskBox.getValue().split(",")[0], discountRate});
+					} else {
+						Alert alert = new Alert(Alert.AlertType.ERROR, "select task", ButtonType.CLOSE);
+						alert.show();
+					}
 				}
-			}
-			if (discountType.equals(DISCOUNT_VAR)) {
-				data.add(new String[]{taskBox.getValue().split(",")[0], discountRate});
 			}
 		}
 		discountTable.setItems(data);
@@ -309,6 +344,7 @@ public class RegisterNewCustomerScreen extends Window {
 	}
 
 	public void onLeave(){
+		accountNumber = -1;
 		//customer detail fields
 		nameField.clear();
 		phoneField.clear();
@@ -331,6 +367,8 @@ public class RegisterNewCustomerScreen extends Window {
 		showVar(false);
 		showFixed(false);
 		showFlex(false);
+
+		valuedCheckBox.setSelected(false);
 
 		for(int i = GridPane.getRowIndex(valuedCheckBox); i < GridPane.getRowIndex(discountTable)+1; i++){
 			gridPane.getRowConstraints().get(i).setPercentHeight(0);
@@ -364,9 +402,13 @@ public class RegisterNewCustomerScreen extends Window {
 	}
 
 	protected void showFixed(boolean isInUse){
+		addButton.setDisable(!isInUse);
+		removeButton.setDisable(!isInUse);
 		discountTable.setDisable(!isInUse);
 		discountRateField.setDisable(!isInUse);
 
+		addButton.setStyle(visibilityByBoolean(isInUse));
+		removeButton.setStyle(visibilityByBoolean(isInUse));
 		discountRateLabel.setStyle(visibilityByBoolean(isInUse));
 		discountTable.setStyle(visibilityByBoolean(isInUse));
 		discountRateField.setStyle(visibilityByBoolean(isInUse));
@@ -439,7 +481,7 @@ public class RegisterNewCustomerScreen extends Window {
 			}
 		});
 
-		addIntegerNumberListener(discountRateField);
+		addIntegerNumberListener(discountRateField, 2);
 		addIntegerNumberListener(bandField);
 		addIntegerNumberListener(phoneField, 15);
 		addNameListener(nameField);
