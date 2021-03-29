@@ -110,21 +110,21 @@ public class CustomerAccountScreen extends Window {
 			String[] columns = new String[]{};
 			ArrayList<String[]> discountData = new ArrayList<>();
 
-			if(discountType.equals("FixedDiscount")){
+			if(discountType.equals("Fixed")){
 				columns = new String[]{"Discount rate"};
 
 				FixedDiscountRate fixed = new FixedDiscountRate();
 				fixed.retrieveDiscount(accountNumber);
 				discountData.add(new String[]{String.valueOf(fixed.getDiscountRate())});
 			}
-			if(discountType.equals("FlexibleDiscount")){
+			if(discountType.equals("Flexible")){
 				columns = new String[]{"Volume lower", "Volume upper", "Discount rate"};
 
 				FlexibleDiscountRate flex = new FlexibleDiscountRate();
 				flex.retrieveDiscount(accountNumber);
 				discountData = acctUiController.discountToStringArray(flex);
 			}
-			if(discountType.equals("VariableDiscount")){
+			if(discountType.equals("Variable")){
 				columns = new String[]{"TaskID", "Discount rate"};
 
 				VariableDiscountRate variable = new VariableDiscountRate();
@@ -188,8 +188,9 @@ public class CustomerAccountScreen extends Window {
 	private void toEditCustomer(){
 		if(selectedCustomerId >= 0) {
 			//TODO assign id somewhere
-			showScreen(this, "EditCustomerDetails");
 			acctUiController.setEditingCustomerNumber(selectedCustomerId);
+			acctUiController.setEditingCustomer(customerAccountTable.getSelectionModel().getSelectedItem());
+			showScreen(this, "EditCustomerDetails");
 		}
 	}
 

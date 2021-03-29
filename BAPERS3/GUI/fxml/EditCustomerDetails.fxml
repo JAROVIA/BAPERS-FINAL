@@ -87,7 +87,6 @@
                   <TextField fx:id="nameField" prefHeight="25.0" prefWidth="167.0" promptText="Customer name" style="-fx-border-color: Black;" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.rowIndex="3" />
                   <TextField fx:id="phoneField" prefHeight="25.0" prefWidth="167.0" promptText="Phone Number" style="-fx-border-color: black;" GridPane.columnIndex="7" GridPane.columnSpan="4" GridPane.rowIndex="3" />
                   <TextField fx:id="addressField" prefHeight="25.0" prefWidth="167.0" promptText="Address" style="-fx-border-color: black;" GridPane.columnIndex="7" GridPane.columnSpan="4" GridPane.rowIndex="4" />
-                  <TextField fx:id="postcodeField" prefHeight="25.0" prefWidth="167.0" promptText="Post Code" style="-fx-border-color: black;" GridPane.columnIndex="7" GridPane.columnSpan="4" GridPane.rowIndex="5" />
                   <Button fx:id="logoutButton" mnemonicParsing="false" prefHeight="21.0" prefWidth="59.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Logout" GridPane.columnIndex="11">
                      <font>
                         <Font size="9.0" />

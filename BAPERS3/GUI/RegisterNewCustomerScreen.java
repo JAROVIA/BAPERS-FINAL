@@ -26,8 +26,6 @@ public class RegisterNewCustomerScreen extends Window {
 	@FXML
 	protected TextField addressField;
 	@FXML
-	protected TextField postcodeField;
-	@FXML
 	protected TextField emailField;
 	@FXML
 	protected TextField contactNameField;
@@ -83,8 +81,7 @@ public class RegisterNewCustomerScreen extends Window {
 					contactNameField,
 					emailField,
 					addressField,
-					phoneField,
-					postcodeField
+					phoneField
 			)) {
 			if (matchEmail(emailField.getText())) {
 				if (isValuedCustomer) {
@@ -128,12 +125,10 @@ public class RegisterNewCustomerScreen extends Window {
 
 	public void setAccountNumber(int accountNumber){
 		this.accountNumber = accountNumber;
-		System.out.println("set num = " + this.accountNumber);
 	}
 
 	protected void submitDiscountData(String discountType, ArrayList<String[]> discountData) {
 		try {
-			System.out.println("set num = " + this.accountNumber);
 			acctUiController.submitDiscountData(discountType, accountNumber, discountData);
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
@@ -214,6 +209,7 @@ public class RegisterNewCustomerScreen extends Window {
 						return new SimpleStringProperty((property.getValue()[j]));
 					}
 				});
+				System.out.println(discountTable.getWidth());
 				tc.setMinWidth(discountTable.getWidth() / columns.length);
 				discountTable.getColumns().add(tc);
 			}
@@ -363,7 +359,6 @@ public class RegisterNewCustomerScreen extends Window {
 		phoneField.clear();
 		emailField.clear();
 		contactNameField.clear();
-		postcodeField.clear();
 		addressField.clear();
 		discountRateField.clear();
 
