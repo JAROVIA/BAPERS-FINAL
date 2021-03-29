@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 
@@ -67,14 +68,16 @@ public class DBConfiguration {
 		}
 	}
 
-	public static void GetListOfFiles(){
+	public static ArrayList<String> GetListOfFiles(){
 		File file = new File("../BAPERS-FINAL/BAPERS3/GENERATED/DATABASES"); //file location
 		String[] files = file.list();
 		// file.list method returns all the files and puts it in a list.
-
+		ArrayList<String> backups = new ArrayList<>();
 		for (String name : files) { // outputting the contents of list.
-			System.out.println(name);
+			backups.add(name);
 		}
+
+		return backups;
 	}
 
 	public static void RestoreBackup() throws IOException, SQLException {
