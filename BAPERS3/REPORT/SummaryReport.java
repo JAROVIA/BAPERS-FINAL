@@ -5,12 +5,15 @@ import java.sql.Date;
 // summary performance report
 public class SummaryReport extends Report {
 
-//	private int ShiftID;
-//	private String Department;
-//	private float TimeInCopyRoom;
-//	private float TimeInDevelopment;
-//	private float TimeInFinishing;
-//	private float TimeInPacking;
+	public static void main(String[] args) {
+
+	}
+
+	/**
+	 * This code was written following the following tutorial
+	 * https://github.com/itext/i7js-examples/blob/develop/src/main/java/com/itextpdf/samples/sandbox/tables/ArrayToTable.java
+	 */
+
 
 	public SummaryReport() {
 

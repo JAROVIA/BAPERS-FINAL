@@ -30,6 +30,7 @@ public class DBConfiguration {
 
 	public static void main(String[] args) throws IOException {
 		DBConfiguration.MakeBackup();
+		DBConfiguration.GetListOfFiles();
 	}
 
 
@@ -39,6 +40,7 @@ public class DBConfiguration {
 		Process process = Runtime.getRuntime().exec(string);
 
 	}
+
 	public static void RestoreListedBackup(String FileName) throws IOException, SQLException {
 
 		/**
@@ -65,7 +67,18 @@ public class DBConfiguration {
 		}
 	}
 
+	public static void GetListOfFiles(){
+		File file = new File("../BAPERS-FINAL/BAPERS3/GENERATED/DATABASES"); //file location
+		String[] files = file.list();
+		// file.list method returns all the files and puts it in a list.
+
+		for (String name : files) { // outputting the contents of list.
+			System.out.println(name);
+		}
+	}
+
 	public static void RestoreBackup() throws IOException, SQLException {
+
 
 		/**
 		 * This code was written following this guide

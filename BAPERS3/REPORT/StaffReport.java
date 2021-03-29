@@ -5,12 +5,37 @@ import java.sql.Date;
 // individual performance report
 public class StaffReport extends Report {
 
-	private String EmployeeName;
-	private int TaskID;
-	private String Department;
-	private double StartTime;
-	private int TimeTakenPerTask;
-	private int TotalTimeTaken;
+	public static void main(String[] args) {
+		// create query
+		// create first result set
+		// create second result set
+		// create second third set
+		//
+	}
+
+	public static void GR(){
+
+		String sql = "SELECT `EmployeeCompletedBy` AS 'Name', T.`TaskID` AS 'Tasks IDs', `TaskLocation` AS 'Department', `TaskStartTime` AS 'Date/Start time', `ActualDuration` AS 'Time taken'\n" +
+				"FROM TaskInAJob TIJ,\n" +
+				"     Tasks T\n" +
+				"WHERE TIJ.TaskID = T.TaskID\n" +
+				"  AND TIJ.TaskStartTime LIKE '%'\n" +
+				"  AND TIJ.isCompleted = 1\n" +
+				"ORDER BY EmployeeCompletedBy;\n";
+
+
+
+
+
+
+
+
+	}
+	
+	/**
+	 * This code was written following the following tutorial
+	 * https://github.com/itext/i7js-examples/blob/develop/src/main/java/com/itextpdf/samples/sandbox/tables/ArrayToTable.java
+	 */
 
 	/**
 	 * 

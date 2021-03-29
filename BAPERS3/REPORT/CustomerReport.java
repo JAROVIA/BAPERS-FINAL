@@ -39,8 +39,8 @@ public class CustomerReport extends Report {
     static String dbusername = "jaroviadb";
     static String dbpassword = "Jarovia123#@!";
     static Connection connection;
-	private static final String DEST = "../PLEASE.pdf";
-//	private static final String DEST = "/home/javonne/IdeaProjects/BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/CUSTOMERREPORT/CustomerReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
+//	private static final String DEST = "../PLEASE.pdf";
+	private static final String DEST = "/home/javonne/IdeaProjects/BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/CUSTOMERREPORT/CustomerReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
 
     static {
         try {
@@ -107,12 +107,17 @@ public class CustomerReport extends Report {
 		return arrayList;
 	}
 
+	/**
+	 * This code was written following the following tutorial
+	 * https://github.com/itext/i7js-examples/blob/develop/src/main/java/com/itextpdf/samples/sandbox/tables/ArrayToTable.java
+	 */
+
 	public void printCustomerReport(int accountNumber, String date) throws Exception {
 		PdfDocument pdfDoc = new PdfDocument(new PdfWriter(DEST));
 		Document doc = new Document(pdfDoc);
 		doc.add(new Paragraph("Customer Report!"));
-// By default column width is calculated automatically for the best fit.
-// useAllAvailableWidth() method makes table use the whole page's width while placing the content.
+		// By default column width is calculated automatically for the best fit.
+		// useAllAvailableWidth() method makes table use the whole page's width while placing the content.
 		Table table = new Table(UnitValue.createPercentArray(10)).useAllAvailableWidth();
 		List<List<String>> dataset = null;
 
