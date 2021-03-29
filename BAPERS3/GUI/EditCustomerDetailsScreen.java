@@ -15,10 +15,26 @@ import java.util.ArrayList;
 
 public class EditCustomerDetailsScreen extends RegisterNewCustomerScreen{
 
+	@Override
+	public void onShow(){
+		super.onShow();
+
+		System.out.println();
+		gridPane.getRowConstraints().get(GridPane.getRowIndex(valuedCheckBox)).setPercentHeight(-1);
+	}
 
 	@Override
-	protected void submitCustomerData(){
-		System.out.println("edit customer");
+	protected void submitCustomerData(String status, String phone, String address, String email, String name, String contactName){
+
+	}
+
+	@FXML
+	public void initialize(){
+		super.initialize();
+
+		valuedCheckBox.setStyle("visibility : visible");
+		valuedCheckBox.setDisable(false);
+		discountBox.setDisable(false);
 	}
 
 }

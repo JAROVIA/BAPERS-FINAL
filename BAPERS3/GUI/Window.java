@@ -182,6 +182,21 @@ public abstract class Window{
 	}
 
 	/**
+	 * used for text fields with price input, only allows numeric characters
+	 * @param tf  field to assign this listener
+	 */
+	protected void addPriceNumberListener(TextField tf){
+		tf.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observableValue, String oldText, String newText) {
+				if(!newText.matches("[0-9]*\\.?([0-9]?[0-9]?)") || newText.length() > 10){
+					tf.setText(oldText);
+				}
+			}
+		});
+	}
+
+	/**
 	 * Tests if a string input can be parsed as a float
 	 * Uses exception therefore should not be abused
 	 * @param stringToParse string to be converted to a float
