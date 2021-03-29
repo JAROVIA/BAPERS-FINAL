@@ -22,7 +22,7 @@ public abstract class Discount {
 	}
 
 	public static void deleteDiscount(int accountNumber, String discountTable) throws SQLException {
-		String sql = "DELETE FROM " + discountTable + " WHERE AccountNumber = " + accountNumber + ";";
+		String sql = "DELETE FROM " + discountTable + "Discount " + " WHERE AccountNumber = " + accountNumber + ";";
 		Statement statement = connection.createStatement();
 		statement.executeUpdate(sql);
 	}

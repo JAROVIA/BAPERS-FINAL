@@ -72,13 +72,13 @@ public class ACCT_UI_Controller {
 
 	public String getCustomerDiscountType(int accountNumber) throws SQLException {
 		if(FlexibleDiscountRate.ifFlexDiscountExists(accountNumber)){
-			return "FlexibleDiscount";
+			return "Flexible";
 		}
 		if(FixedDiscountRate.ifFixDiscountExists(accountNumber)){
-			return "FixedDiscount";
+			return "Fixed";
 		}
 		if(VariableDiscountRate.ifVariableDiscountExists(accountNumber)){
-			return "VariableDiscount";
+			return "Variable";
 		}
 		return null;
 	}
@@ -172,8 +172,11 @@ public class ACCT_UI_Controller {
 	}
 
 	public void setEditingCustomerNumber(int accountNumber){
-		registerNewCustomerScreen.setAccountNumber(accountNumber);
 		editCustomerDetailsScreen.setAccountNumber(accountNumber);
+	}
+
+	public void setEditingCustomer(String[] customerData){
+		editCustomerDetailsScreen.setAccountData(customerData);
 	}
 
     public void addNewCustomer(String status,
