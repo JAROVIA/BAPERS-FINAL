@@ -41,10 +41,9 @@ public class UI_Controller {
 					Float.parseFloat(paymentDetails[2]),
 					paymentDetails[3],
 					paymentDetails[4],
-					Integer.parseInt(paymentDetails[5]),
+					paymentDetails[5],
 					paymentDetails[6],
-					paymentDetails[7],
-					Integer.parseInt(paymentDetails[8]),
+					Integer.parseInt(paymentDetails[7]),
 					Integer.parseInt(paymentDetails[9])
 			);
 		} catch (SQLException throwables) {
