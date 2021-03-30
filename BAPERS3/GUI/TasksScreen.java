@@ -87,9 +87,8 @@ public class TasksScreen extends Window {
 
 	public void toEditTask() {
 		if(tasksTable.getSelectionModel().getSelectedItem() != null) {
-			//TODO match id
-			String id = tasksTable.getSelectionModel().getSelectedItem()[0];
-			//TODO assign to pro_ui
+			String[] taskData = tasksTable.getSelectionModel().getSelectedItem();
+			procUiController.setEditingTask(taskData);
 			showScreen(this, "EditExistingTasks");
 		}
 		else{

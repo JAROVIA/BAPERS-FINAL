@@ -6,6 +6,7 @@ import GUI.*;
 import PROCESS.*;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -160,6 +161,23 @@ public class PROC_UI_Controller {
 
 	public void setJobBeingPaid(String[] jobData){
 		main.getUiController().setJobBeingPaid(jobData);
+	}
+
+	public void setEditingTask(String[] taskData){
+		editExistingTaskScreen.setTaskData(taskData);
+	}
+
+	public void submitEditTask(String[] taskData) throws SQLException {
+		String[] columns = new String[]{
+				"TaskDescription",
+				"TaskLocation",
+				"TaskPrice",
+				"PredictedDuration"
+		};
+
+		for(int i =  0; i < columns.length; i++){
+			TaskDescription.UpdateTask(columns[i], taskData[i+1], "TaskID", Integer.parseInt(taskData[0]));
+		}
 	}
 
 	public UserAccount getLoggedInUser(){

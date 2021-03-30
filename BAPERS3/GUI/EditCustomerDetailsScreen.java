@@ -29,15 +29,14 @@ public class EditCustomerDetailsScreen extends RegisterNewCustomerScreen{
 	@Override
 	public void onShow(){
 		super.onShow();
-		if(accountData[1].equals("valued")) {
+		if(accountData[1].equals("valued : Fixed")
+				|| accountData[1].equals("valued : Flexible")
+				|| accountData[1].equals("valued : Variable")) {
 			valuedCheckBox.setSelected(true);
+
 			setupExistingDiscount();
 		}
-		valuedCheckBox.setSelected(true);
-		showFixed(false);
-		showFlex(false);
-		showVar(false);
-		setupExistingDiscount();
+
 		phoneField.setText(accountData[2]);
 		addressField.setText(accountData[3]);
 		emailField.setText(accountData[4]);
@@ -100,7 +99,12 @@ public class EditCustomerDetailsScreen extends RegisterNewCustomerScreen{
 
 	@Override
 	protected void submitCustomerData(String status, String phone, String address, String email, String name, String contactName){
-
+		try {
+			acctUiController.submitEditCustomer(Integer.parseInt(accountData[0]), status, phone, address, email, name, contactName);
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+			AlertUser.showDBError();
+		}
 	}
 
 	@FXML

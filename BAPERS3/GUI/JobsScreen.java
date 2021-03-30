@@ -12,8 +12,6 @@ import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Locale;
 import java.util.function.Predicate;
 
 public class JobsScreen extends Window {
