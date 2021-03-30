@@ -45,12 +45,19 @@ public class CustomerAccountDetails {
 		this.contactName = contactName;
 
 		String sql =
-				"INSERT INTO CustomerAccounts (AccountStatus,PhoneNumber,Address,EmailAddress,CustomerName,ContactName) "
-				+ "VALUES(" + "\"" + accountStatus  + "\", \"" + phoneNumber + "\", \"" + address + "\", \""
-				+ email + "\", \"" + customerName + "\", \"" + contactName + "\");";
+		"INSERT INTO CustomerAccounts (AccountStatus,PhoneNumber,Address,EmailAddress,CustomerName,ContactName) "
+		+ "VALUES(" + "\"" + accountStatus  + "\", \"" + phoneNumber + "\", \"" + address + "\", \""
+		+ email + "\", \"" + customerName + "\", \"" + contactName + "\");";
 		Statement statement = connection.createStatement();
 		statement.executeUpdate(sql);
 
+	}
+
+	public static void ArchiveCustAcc(int TaskID) throws SQLException {
+		String sql = "UPDATE CustomerAccounts SET IsArchived = 1 WHERE TaskID = " + TaskID + ";";
+		Statement statement = connection.createStatement();
+		System.out.println(sql);
+		statement.executeUpdate(sql);
 	}
 
 	public static ArrayList<String[]> getCustomerList() throws SQLException {

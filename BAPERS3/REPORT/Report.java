@@ -1,6 +1,9 @@
 package REPORT;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public abstract class Report {
 
@@ -8,12 +11,12 @@ public abstract class Report {
 	protected java.sql.Date Date;
 	private String ReportData;
 
-	/**
-	 * 
-	 * @param ReportID
-	 * @param Date
-	 * @param ReportData
-	 */
-	protected abstract boolean GenerateReport(int ReportID, Date Date, String ReportData);
-
+	// convert types
+	public static List<List<String>> convertTypes(ArrayList<String[]> oldList){
+		List<List<String>> list = new ArrayList<>();
+		for (String[] strings : oldList){
+			list.add(Arrays.asList(strings));
+		}
+		return list;
+	}
 }

@@ -16,7 +16,7 @@ import java.util.List;
 
 //https://github.com/itext/i7js-examples/blob/develop/src/main/java/com/itextpdf/samples/sandbox/tables/ArrayToTable.java
 
-public class PDFGeneration {
+public class PDFGeneration extends Report{
 
     private static final String DEST = "/home/javonne/IdeaProjects/BAPERS-FINAL/BAPERS3/GENERATED/pls.pdf";
     public static void main(String[] args) throws Exception {
@@ -28,8 +28,10 @@ public class PDFGeneration {
 
     }
 
+
+
     // this should be the method in each report class
-    protected void manipulatePdf() throws Exception {
+    public void manipulatePdf() throws Exception {
         PdfDocument pdfDoc = new PdfDocument(new PdfWriter(PDFGeneration.DEST));
         Document doc = new Document(pdfDoc);
         doc.add(new Paragraph("Customer Report!"));
@@ -52,14 +54,7 @@ public class PDFGeneration {
         doc.close();
     }
 
-    // convert types
-    private static List<List<String>> convertTypes(ArrayList<String[]> oldList){
-        List<List<String>> list = new ArrayList<>();
-        for (String[] strings : oldList){
-            list.add(Arrays.asList(strings));
-        }
-        return list;
-    }
+
 
 
 //    private static List<List<String>> getData() throws SQLException {

@@ -16,23 +16,10 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
+import static REPORT.PDFGeneration.convertTypes;
+
 // Jobsheet
 public class CustomerReport extends Report {
-
-//	private int InvoiceNumber;
-//	private int AccountNumber;
-//	private int JobID;
-//	private String CustomerName;
-//	private String ContactName;
-//	private String Address;
-//	private int PhoneNumber;
-//	private String DescriptionOfWork;
-//	private boolean JobCompletion;
-//	private String DiscountType;
-//	private int VariableDiscountRate;
-//	private int NumberOfCompletedTasks;
-//	private float TaskPrice;
-//	private float TotalPrice;
 
     static String tablename = "UserAccounts";
     static String url = "jdbc:mysql://localhost:3306/Bapers";
@@ -133,41 +120,6 @@ public class CustomerReport extends Report {
 
 		doc.add(table);
 		doc.close();
-	}
-
-	public static List<List<String>> convertTypes(ArrayList<String[]> oldList){
-		List<List<String>> list = new ArrayList<>();
-		for (String[] strings : oldList){
-			list.add(Arrays.asList(strings));
-		}
-		return list;
-	}
-
-	/**
-	 *
-	 * @param ReportID
-	 * @param Date
-	 * @param ReportData
-	 */
-
-
-
-	public boolean GenerateReport(int ReportID, Date Date, String ReportData) {
-		// TODO - implement CustomerReport.GenerateReport
-		throw new UnsupportedOperationException();
-	}
-
-
-
-	/**
-	 *
-	 * @param ReportID
-	 * @param Date
-	 * @param ReportData
-	 */
-	public static CustomerReport CustomerReport(int ReportID, Date Date, String ReportData) {
-		// TODO - implement CustomerReport.CustomerReport
-		throw new UnsupportedOperationException();
 	}
 
 }
