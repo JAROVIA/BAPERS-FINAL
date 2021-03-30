@@ -50,28 +50,43 @@
             <Image url="@../images/Reports-Icon.png" />
          </image>
       </ImageView>
-      <Button layoutX="107.0" layoutY="507.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="219.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Generate Customer Report">
+      <Button fx:id="customerReportButton" layoutX="105.0" layoutY="546.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="219.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Generate Customer Report">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <TextField layoutX="104.0" layoutY="440.0" prefHeight="40.0" prefWidth="226.0" promptText="Input Account No" style="-fx-border-color: black;">
+      <TextField fx:id="accountNumberField" layoutX="104.0" layoutY="440.0" prefHeight="40.0" prefWidth="226.0" promptText="Input Account No" style="-fx-border-color: black;">
          <font>
             <Font size="17.0" />
          </font>
       </TextField>
-      <Button layoutX="530.0" layoutY="507.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="219.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Generate Staff Report">
+      <Button fx:id="staffReportButton" layoutX="530.0" layoutY="507.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="219.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Generate Staff Report">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Button layoutX="925.0" layoutY="507.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="239.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Generate BIPL Summary Report">
+      <Button fx:id="summaryReportButton" layoutX="919.0" layoutY="544.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="239.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Generate BIPL Summary Report">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <ComboBox layoutX="91.0" layoutY="586.0" prefHeight="39.0" prefWidth="252.0" promptText="Select Automatic Generation of Report" />
+      <ComboBox layoutX="91.0" layoutY="619.0" prefHeight="39.0" prefWidth="252.0" promptText="Select Automatic Generation of Report" />
       <ComboBox layoutX="514.0" layoutY="586.0" prefHeight="39.0" prefWidth="252.0" promptText="Select Automatic Generation of Report" />
-      <ComboBox layoutX="919.0" layoutY="586.0" prefHeight="39.0" prefWidth="252.0" promptText="Select Automatic Generation of Report" />
+      <ComboBox layoutX="913.0" layoutY="623.0" prefHeight="39.0" prefWidth="252.0" promptText="Select Automatic Generation of Report" />
+      <TextField fx:id="dateField1" layoutX="105.0" layoutY="491.0" prefHeight="40.0" prefWidth="226.0" promptText="Input date" style="-fx-border-color: black;">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="dateField2" layoutX="528.0" layoutY="458.0" prefHeight="40.0" prefWidth="226.0" promptText="Input date" style="-fx-border-color: black;">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="dateField3" layoutX="928.0" layoutY="489.0" prefHeight="40.0" prefWidth="226.0" promptText="Input date" style="-fx-border-color: black;">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </TextField>
    </children>
 </AnchorPane>

@@ -50,7 +50,7 @@ public class DBConfiguration {
 		 * */
 
 		String q = "";
-		File f = new File("/home/javonne/IdeaProjects/BAPERS-FINAL/BAPERS3/GENERATED/DATABASES/" + FileName + ".sql"); // source path is the absolute path of dumpfile.
+		File f = new File("../BAPERS-FINAL/BAPERS3/GENERATED/DATABASES/" + FileName + ".sql"); // source path is the absolute path of dumpfile.
 
 		BufferedReader bf = new BufferedReader(new FileReader(f));
 		String line = null;
@@ -74,7 +74,7 @@ public class DBConfiguration {
 		// file.list method returns all the files and puts it in a list.
 		ArrayList<String> backups = new ArrayList<>();
 		for (String name : files) { // outputting the contents of list.
-			backups.add(name);
+			backups.add(name.split("\\.")[0]);
 		}
 
 		return backups;

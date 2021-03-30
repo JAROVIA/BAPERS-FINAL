@@ -103,7 +103,7 @@ public class TaskDescription {
 
 			int TaskID = resultSet.getInt("TaskID");
 			String TaskLocation = resultSet.getString("TaskLocation");
-			int TaskPrice = resultSet.getInt("TaskPrice");
+			float TaskPrice = resultSet.getFloat("TaskPrice");
 			String DescriptionOfTask = resultSet.getString("TaskDescription");
 			int Duration = resultSet.getInt("PredictedDuration");
 
@@ -116,7 +116,7 @@ public class TaskDescription {
 			tuple = TaskID + "`"
 					+ DescriptionOfTask + "`"
 					+ TaskLocation + "`"
-					+ TaskPrice + "`"
+					+ String.format("%.2f", TaskPrice) + "`"
 					+ Duration + "`"
 			;
 

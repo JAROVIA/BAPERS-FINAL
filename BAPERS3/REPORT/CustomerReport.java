@@ -27,7 +27,7 @@ public class CustomerReport extends Report {
     static String dbpassword = "Jarovia123#@!";
     static Connection connection;
 //	private static final String DEST = "../PLEASE.pdf";
-	private static final String DEST = "/home/javonne/IdeaProjects/BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/CUSTOMERREPORT/CustomerReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
+	//private static final String DEST = "/home/javonne/IdeaProjects/BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/CUSTOMERREPORT/CustomerReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
 
     static {
         try {
@@ -38,10 +38,10 @@ public class CustomerReport extends Report {
         }
     }
 
-	public static void main(String[] args) throws Exception {
-		File file = new File(DEST);
-        new CustomerReport().printCustomerReport(1,"");
-	}
+//	public static void main(String[] args) throws Exception {
+//		File file = new File(DEST);
+//        new CustomerReport().printCustomerReport(1,"");
+//	}
 
 	public ArrayList<String[]> CustomerReportList(int AccountNumber, String date) throws SQLException {
 		String sql =
@@ -100,6 +100,7 @@ public class CustomerReport extends Report {
 	 */
 
 	public void printCustomerReport(int accountNumber, String date) throws Exception {
+		String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/CUSTOMERREPORT/CustomerReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
 		PdfDocument pdfDoc = new PdfDocument(new PdfWriter(DEST));
 		Document doc = new Document(pdfDoc);
 		doc.add(new Paragraph("Customer Report!"));

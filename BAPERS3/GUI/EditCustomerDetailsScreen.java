@@ -29,9 +29,7 @@ public class EditCustomerDetailsScreen extends RegisterNewCustomerScreen{
 	@Override
 	public void onShow(){
 		super.onShow();
-		if(accountData[1].equals("valued : Fixed")
-				|| accountData[1].equals("valued : Flexible")
-				|| accountData[1].equals("valued : Variable")) {
+		if(accountData[1].equals("valued")) {
 			valuedCheckBox.setSelected(true);
 
 			setupExistingDiscount();

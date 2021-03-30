@@ -45,6 +45,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.ComboBox?>
 <VBox prefHeight="500.0" prefWidth="803.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.DatabaseScreen">
   <children>
     <MenuBar prefHeight="0.0" prefWidth="545.0" VBox.vgrow="NEVER">
@@ -117,8 +118,8 @@
                   <Image url="@../images/DatabaseIcon2.jpg" />
                </image>
             </ImageView>
-            <Button layoutX="197.0" layoutY="277.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" style="-fx-background-color: #DDF8FF; -fx-border-color: black;" text="Database Backup" />
-            <Button layoutX="439.0" layoutY="277.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" style="-fx-background-color: #DDF8FF; -fx-border-color: black;" text="Database Restore" />
+            <Button fx:id="backupButton" layoutX="197.0" layoutY="277.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" style="-fx-background-color: #DDF8FF; -fx-border-color: black;" text="Database Backup" />
+            <Button fx:id="restoreButton" layoutX="439.0" layoutY="277.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" style="-fx-background-color: #DDF8FF; -fx-border-color: black;" text="Database Restore" />
             <Label layoutX="258.0" layoutY="309.0" text="OR">
                <font>
                   <Font name="System Bold" size="12.0" />
@@ -129,10 +130,8 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <ChoiceBox layoutX="148.0" layoutY="336.0" prefHeight="27.0" prefWidth="220.0" style="-fx-background-color: WHITE; -fx-border-color: black;" />
-            <ChoiceBox layoutX="405.0" layoutY="336.0" prefHeight="27.0" prefWidth="220.0" style="-fx-background-color: WHITE; -fx-border-color: black;" />
-            <Label layoutX="158.0" layoutY="341.0" prefHeight="17.0" prefWidth="178.0" text="Select automatic time for Backup" />
-            <Label layoutX="414.0" layoutY="341.0" prefHeight="17.0" prefWidth="178.0" text="Select automatic time for Restore" />
+            <ComboBox fx:id="backupBox" layoutX="148.0" layoutY="336.0" prefHeight="27.0" prefWidth="220.0" style="-fx-background-color: WHITE; -fx-border-color: black;" />
+            <ComboBox fx:id="restoreBox" layoutX="405.0" layoutY="336.0" prefHeight="27.0" prefWidth="220.0" style="-fx-background-color: WHITE; -fx-border-color: black;" />
       </children>
     </AnchorPane>
   </children>

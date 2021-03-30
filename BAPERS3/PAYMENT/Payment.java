@@ -138,7 +138,7 @@ public class Payment implements I_Payment {
 			tuple =
 				jobID + "`"
 				+ accountNumber + "`"
-				+ price + "`"
+				+ String.format("%.2f",price) + "`"
 				+ discountedPrice + "`"
 				+ dateOfPayment + "`"
 				//+ dueDate + "`"
