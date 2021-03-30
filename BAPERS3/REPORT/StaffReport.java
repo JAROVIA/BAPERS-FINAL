@@ -21,7 +21,7 @@ public class StaffReport extends Report {
 	static String dbusername = "jaroviadb";
 	static String dbpassword = "Jarovia123#@!";
 	static Connection connection;
-	private static final String DEST = "/home/javonne/IdeaProjects/BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/STAFFREPORT/StaffReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
+	private static final String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/STAFFREPORT/StaffReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
 
 	static {
 		try {

@@ -73,7 +73,6 @@ public class RegisterNewCustomerScreen extends Window {
 	protected void onSubmit() {
 		//make sure inputs are correct
 		//listing boolean so easier to see
-		System.out.println("onsubmit = " + this.accountNumber);
 		boolean isValuedCustomer = discountBox.getValue() != null && valuedCheckBox.isSelected();
 		//check inputs are correct
 		if (isValueNotEmpty(
@@ -91,7 +90,7 @@ public class RegisterNewCustomerScreen extends Window {
 					} else {
 						//TODO submit as valued customer
 						submitCustomerData(
-								"valued : " + discountBox.getValue(),
+								"valued",
 								phoneField.getText(),
 								addressField.getText(),
 								emailField.getText(),

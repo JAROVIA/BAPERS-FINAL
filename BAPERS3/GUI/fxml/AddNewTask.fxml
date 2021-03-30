@@ -20,7 +20,7 @@
       <TextField fx:id="locationField" layoutX="471.0" layoutY="364.0" prefHeight="36.0" prefWidth="337.0" promptText="New Tasl Location" style="-fx-border-color: black;" />
       <ImageView fx:id="homeButton" fitHeight="219.0" fitWidth="463.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/BAPERS%20Logo%20Final.png" />
+            <Image url="@../images/BAPERS Logo Final.png" />
          </image>
       </ImageView>
       <Label layoutX="925.0" layoutY="14.0" prefHeight="36.0" prefWidth="239.0" style="-fx-border-color: Black;" text="Welcome [logged in user]" textAlignment="RIGHT">

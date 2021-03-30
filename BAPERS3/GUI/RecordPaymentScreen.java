@@ -90,6 +90,11 @@ public class RecordPaymentScreen extends Window {
 		priceField.clear();
 		cardNumberField.clear();
 		cardHolderNameField.clear();
+		cardTypeField.clear();
+		cvcField.clear();
+		monthField.clear();
+		yearField.clear();
+
 		jobData = null;
 	}
 

@@ -100,6 +100,6 @@ public class EditExistingTaskScreen extends Window {
 		confirmButton.setOnAction(actionEvent -> onConfirm());
 
 		addIntegerNumberListener(durationField);
-		addIntegerNumberListener(priceField);
+		addPriceNumberListener(priceField);
 	}
 }

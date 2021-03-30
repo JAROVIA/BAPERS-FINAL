@@ -29,19 +29,9 @@ public class EditUserScreen extends Window {
 
 	private void onSave() throws SQLException {
 		UserAccount editingUser = adminUiController.getEditingUser();
-		if(roleBox.getValue() != null) {
-			editingUser.setUserRole(roleBox.getValue());
+		if(isValueNotEmpty(new TextField[]{staffNameField, passwordField, usernameField}, new ComboBox[]{roleBox})) {
+			saveUser(editingUser);
 		}
-		if(usernameField.getText() != null && !usernameField.getText().equals("")) {
-			editingUser.setUsername(usernameField.getText());
-		}
-		if(passwordField.getText() != null && !passwordField.getText().equals("")) {
-			editingUser.setPassword(passwordField.getText());
-		}
-		if(staffNameField.getText() != null && !staffNameField.getText().equals("")) {
-			editingUser.setEmployeeName(staffNameField.getText());
-		}
-		saveUser(editingUser);
 		showScreen(this, "UserAccounts");
 	}
 
@@ -60,6 +50,12 @@ public class EditUserScreen extends Window {
 
 	public void onShow(){
 		super.onShow();
+
+		UserAccount editingUser = adminUiController.getEditingUser();
+		staffNameField.setText(editingUser.getEmployeeName());
+		passwordField.setText(editingUser.getPassword());
+		usernameField.setText(editingUser.getUsername());
+		roleBox.setValue(editingUser.getUserRole());
 	}
 
 	/**
