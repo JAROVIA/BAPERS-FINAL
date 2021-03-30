@@ -48,8 +48,8 @@ public class UI_Controller {
 					Integer.parseInt(paymentDetails[9])
 			);
 		} catch (SQLException throwables) {
-			AlertUser.showDBError();
 			throwables.printStackTrace();
+			AlertUser.showDBError();
 		}
 	}
 
@@ -68,6 +68,16 @@ public class UI_Controller {
 			AlertUser.showDBError();
 			throwables.printStackTrace();
 		}
+	}
+
+	public boolean checkIfPaid(int jobId) throws SQLException {
+		String id = String.valueOf(jobId);
+		for(String[] paymentData : Payment.GetPaymentList()){
+			if(id.equals(paymentData[0])){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public boolean CancelPayment() {

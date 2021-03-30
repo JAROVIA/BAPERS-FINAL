@@ -58,8 +58,14 @@ public class Payment implements I_Payment {
 		// need to figure out how to make these insert statements work.
 		// look at GUI first
 		String sql =
-		"INSERT INTO Payments VALUES (" + jobID + ", " + accountNumber + ", " + price + ", " +
-		discountedPrice + ", " + dateOfPayment + ", \"" + paymentType + "\");";
+		"INSERT INTO Payments (JobID, " +
+				"AccountNumber, " +
+				"Price, " +
+				"DiscountedPrice, " +
+				"DateOfPayment, " +
+				"PaymentType" +
+				" ) VALUES (" + jobID + ", " + accountNumber + ", " + price + ", " +
+		discountedPrice + ", '" + dateOfPayment + "', \"" + paymentType + "\");";
 		System.out.println(sql);
 		Statement statement = connection.createStatement();
 		statement.executeUpdate(sql);

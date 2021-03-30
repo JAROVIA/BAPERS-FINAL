@@ -180,6 +180,10 @@ public class PROC_UI_Controller {
 		}
 	}
 
+	public boolean checkIfJobPaid(int jobId) throws SQLException {
+		return main.getUiController().checkIfPaid(jobId);
+	}
+
 	public UserAccount getLoggedInUser(){
 		return main.getAdminUiController().getLoggedInUser();
 	}

@@ -106,8 +106,18 @@ public class JobsScreen extends Window {
 		if (jobsTable.getSelectionModel().getSelectedItem() != null) {
 			String[] jobData = jobsTable.getSelectionModel().getSelectedItem();
 			//TODO assign job id
-			procUiController.setJobBeingPaid(jobData);
-			showScreen(this, "RecordPayment");
+			try {
+				if(!procUiController.checkIfJobPaid(Integer.parseInt(jobData[0]))){
+					procUiController.setJobBeingPaid(jobData);
+					showScreen(this, "RecordPayment");
+				}
+				else{
+					Alert alert = new Alert(Alert.AlertType.WARNING, "This job is paid already", ButtonType.CLOSE);
+					alert.show();
+				}
+			} catch (SQLException throwables) {
+				throwables.printStackTrace();
+			}
 		}
 		else{
 			Alert alert = new Alert(Alert.AlertType.ERROR, "Select job to process payment", ButtonType.CLOSE);

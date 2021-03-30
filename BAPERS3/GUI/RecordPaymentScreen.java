@@ -44,7 +44,7 @@ public class RecordPaymentScreen extends Window {
 						String[] paymentData = new String[]{
 								jobData[0],
 								jobData[1],
-								jobData[6],
+								priceField.getText(),
 								"date",
 								paymentMethodBox.getValue(),
 								monthField.getText() + yearField.getText(),
@@ -54,6 +54,7 @@ public class RecordPaymentScreen extends Window {
 								cvcField.getText()
 						};
 						uiController.saveCardPayment(paymentData);
+						showScreen(this, "Payments");
 					} else {
 						Alert alert = new Alert(Alert.AlertType.ERROR, "Price format is incorrect, check if value is appropriate", ButtonType.CLOSE);
 						alert.show();
@@ -67,11 +68,12 @@ public class RecordPaymentScreen extends Window {
 						String[] paymentData = new String[]{
 								jobData[0],
 								jobData[1],
-								jobData[6],
+								priceField.getText(),
 								"date",
 								paymentMethodBox.getValue()
 						};
 						uiController.saveCashPayment(paymentData);
+						showScreen(this, "Payments");
 					} else {
 						Alert alert = new Alert(Alert.AlertType.ERROR, "Price format is incorrect, check if value is appropriate", ButtonType.CLOSE);
 						alert.show();
