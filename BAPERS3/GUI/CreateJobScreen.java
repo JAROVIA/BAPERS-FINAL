@@ -11,8 +11,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.util.Callback;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static PROCESS.TaskInAJob.CreateTIJInsertList;
 import static PROCESS.TaskInAJob.EnterTasksIntoJob;
@@ -39,6 +43,20 @@ public class CreateJobScreen extends Window {
 	private ObservableList<String[]> data;
 	private ArrayList<String[]> list = new ArrayList<>();
 
+	static String url = "jdbc:mysql://localhost:3306/Bapers";
+	static String username = "jaroviadb";
+	static String password = "Jarovia123#@!";
+	static Connection connection;
+
+	static {
+		try {
+			connection = DriverManager.getConnection(
+					url, username, password);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public CustomerAccountDetails searchAccount() {
 		// TODO - implement CreateJobScreen.SearchAccount
 		throw new UnsupportedOperationException();
@@ -56,7 +74,12 @@ public class CreateJobScreen extends Window {
 	public void confirmJob() {
 		try {
 			EnterTasksIntoJob();
+			String sql = "UPDATE Jobs SET Price = " + Job.getJobPrice() + " WHERE JobID = " + Job.getJobID() + ";";
+			System.out.println(sql);
+			Statement statement = connection.createStatement();
+			statement.executeUpdate(sql);
 			super.showScreen(this, "Jobs");
+
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
 		}
@@ -103,6 +126,8 @@ public class CreateJobScreen extends Window {
 			float total = Float.parseFloat(jobPriceLabel.getText());
 			total += Float.parseFloat(taskData[2]);
 			jobPriceLabel.setText(String.format("%.2f", total));
+			Job.setJobPrice(total);
+
 		}
 
 		try {
@@ -121,6 +146,7 @@ public class CreateJobScreen extends Window {
 			total -= Float.parseFloat(taskData[2]);
 
 			jobPriceLabel.setText(String.format("%.2f", total));
+			Job.setJobPrice(total);
 
 			data.remove(taskTable.getSelectionModel().getSelectedItem());
 			taskTable.getSelectionModel().clearSelection();

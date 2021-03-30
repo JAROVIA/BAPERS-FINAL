@@ -17,7 +17,7 @@ public class Job implements I_PROCESS {
 	private int TasksCompleted = 0;
 	private String DateOfJob;
 	private int TaskProgress = 0;
-	private float JobPrice = 0;
+	private static float JobPrice = 0;
 	private int IsCompleted = 0;
 	private static String jobInsert;
 	private static String sqlStatement;
@@ -162,7 +162,7 @@ public class Job implements I_PROCESS {
 			String DateOfJob = resultSet.getString("DateOfJob");
 			String JobDeadline = resultSet.getString("JobDeadline");
 			String JobUrgency = resultSet.getString("JobUrgency");
-			int Price = resultSet.getInt("price");
+			float Price = resultSet.getFloat("price");
 			int TasksCompleted = resultSet.getInt("TasksCompleted");
 			int IsCompleted = resultSet.getInt("IsCompleted");
 
@@ -172,7 +172,7 @@ public class Job implements I_PROCESS {
 					+ DateOfJob + "`"
 					+ JobDeadline + "`"
 					+ JobUrgency + "`"
-					+ Price + "`"
+					+ String.format("%.2f",Price) + "`"
 					+ TasksCompleted + "`"
 					+ IsCompleted;
 
@@ -233,6 +233,7 @@ public class Job implements I_PROCESS {
 
 			){
 
+				// change islate to true
 			tuple =
 				JobID + "`"
 				+ AccountNumber + "`"
@@ -245,6 +246,9 @@ public class Job implements I_PROCESS {
 				+ IsCompleted;
 
 				arrayList.add(tuple.split("`"));
+
+				System.out.println(Job.getJobID());
+				String sqlSetlATE = "UPDATE Jobs SET IsLate = 1 WHERE JobID = " + Job.getJobID() + ";";
 
 			}
 
@@ -404,18 +408,12 @@ public class Job implements I_PROCESS {
 		throw new UnsupportedOperationException();
 	}
 
-	public float getJobPrice() {
-		// TODO - implement Job.getJobPrice
-		throw new UnsupportedOperationException();
+	public static float getJobPrice() {
+		return JobPrice;
 	}
 
-	/**
-	 * 
-	 * @param JobPrice
-	 */
-	public void setJobPrice(float JobPrice) {
-		// TODO - implement Job.setJobPrice
-		throw new UnsupportedOperationException();
+	public static void setJobPrice(float jobPrice) {
+		JobPrice = jobPrice;
 	}
 
 	@Override

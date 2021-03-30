@@ -10,8 +10,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.util.Callback;
 
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ProcessTasksScreen extends Window {
 
@@ -34,6 +35,21 @@ public class ProcessTasksScreen extends Window {
 
 	public static void setJobID(int JobID) {
 		jobID = JobID;
+	}
+
+	static String url = "jdbc:mysql://localhost:3306/Bapers";
+	static String username = "jaroviadb";
+	static String password = "Jarovia123#@!";
+	static Connection connection;
+
+
+	static {
+		try {
+			connection = DriverManager.getConnection(
+					url, username, password);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -101,9 +117,14 @@ public class ProcessTasksScreen extends Window {
 		if ( ((double)completed / (double)total) == 1.0 ){
 			// mark corresponding job as completed
 
-			String[] taskInAJobData = tasksInJobTable.getSelectionModel().getSelectedItem();
-			String markJobCompleted = "UPDATE Jobs SET IsCompleted = 1 Where JobID = " + taskInAJobData[1] + ";";
-
+			int jobid = Integer.parseInt(tasksInJobTable.getItems().get(0)[1]);
+			String markJobCompleted = "UPDATE Jobs SET IsCompleted = 1 Where JobID = " + jobid + ";";
+			try {
+				Statement statement = connection.createStatement();
+				statement.executeUpdate(markJobCompleted);
+			} catch (SQLException throwables) {
+				throwables.printStackTrace();
+			}
 		}
 	}
 
@@ -130,7 +151,7 @@ public class ProcessTasksScreen extends Window {
 				}
 				try {
 					//TODO use employee name
-					TaskInAJob.CompleteTask(Integer.parseInt(taskInAJobData[0]));
+					TaskInAJob.CompleteTask(Integer.parseInt(taskInAJobData[0]), completedByField.getText());
 					onShow();
 				} catch (SQLException throwables) {
 					throwables.printStackTrace();

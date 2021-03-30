@@ -41,13 +41,7 @@ public interface I_PROCESS {
 	 */
 	abstract boolean SetUrgency(String NewUrgency);
 
-	abstract float getJobPrice();
 
-	/**
-	 * 
-	 * @param JobPrice
-	 */
-	abstract void setJobPrice(float JobPrice);
 
 	/**
 	 * 
