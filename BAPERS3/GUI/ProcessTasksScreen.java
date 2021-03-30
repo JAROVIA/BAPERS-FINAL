@@ -55,6 +55,8 @@ public class ProcessTasksScreen extends Window {
 			}
 		}
 		showProgress(completed, data.size());
+
+		completedByField.setDisable(true);
 	}
 
 	@Override
@@ -114,7 +116,7 @@ public class ProcessTasksScreen extends Window {
 				Alert alert = new Alert(Alert.AlertType.ERROR, "Task already complete", ButtonType.CLOSE);
 				alert.show();
 			}
-			else if(taskInAJobData[4].equals("")){
+			else if(taskInAJobData[4].equals("UNSPECIFIED")){
 				Alert alert = new Alert(Alert.AlertType.ERROR, "Task not yet started", ButtonType.CLOSE);
 				alert.show();
 			}
@@ -169,7 +171,7 @@ public class ProcessTasksScreen extends Window {
 			tc.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<String[], String>, ObservableValue<String>>() {
 				@Override
 				public ObservableValue<String> call(TableColumn.CellDataFeatures<String[], String> property) {
-					return new SimpleStringProperty((property.getValue()[j]));
+					return new SimpleStringProperty((property.getValue()[j+1]));
 				}
 			});
 		}
