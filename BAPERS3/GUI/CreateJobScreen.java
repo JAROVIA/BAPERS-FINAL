@@ -101,7 +101,7 @@ public class CreateJobScreen extends Window {
 			data.add(taskData);
 
 			float total = Float.parseFloat(jobPriceLabel.getText());
-			total += Float.parseFloat(taskData[3]);
+			total += Float.parseFloat(taskData[2]);
 			jobPriceLabel.setText(String.format("%.2f", total));
 		}
 
@@ -118,7 +118,7 @@ public class CreateJobScreen extends Window {
 		if(taskTable.getSelectionModel().getSelectedItem() != null) {
 			String[] taskData = taskTable.getSelectionModel().getSelectedItem();
 			float total = Float.parseFloat(jobPriceLabel.getText());
-			total -= Float.parseFloat(taskData[3]);
+			total -= Float.parseFloat(taskData[2]);
 
 			jobPriceLabel.setText(String.format("%.2f", total));
 

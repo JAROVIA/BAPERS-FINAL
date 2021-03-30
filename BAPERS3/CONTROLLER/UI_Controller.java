@@ -43,7 +43,8 @@ public class UI_Controller {
 					paymentDetails[4],
 					paymentDetails[5],
 					paymentDetails[6],
-					Integer.parseInt(paymentDetails[7]),
+					paymentDetails[7],
+					Integer.parseInt(paymentDetails[8]),
 					Integer.parseInt(paymentDetails[9])
 			);
 		} catch (SQLException throwables) {

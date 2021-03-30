@@ -112,6 +112,7 @@ public class RecordPaymentScreen extends Window {
 		userAllowed = new String[]{ROLE_OFFICE_MANAGER, ROLE_SHIFT_MANAGER, ROLE_RECEPTIONIST};
 		cancelButton.setOnAction(actionEvent -> onCancel());
 		saveButton.setOnAction(actionEvent -> savePayment());
+		addNameListener(cardHolderNameField);
 		addPriceNumberListener(priceField);
 		addIntegerNumberListener(cvcField, 3);
 		addIntegerNumberListener(cardNumberField, 4);
