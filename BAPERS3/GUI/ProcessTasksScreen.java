@@ -60,6 +60,7 @@ public class ProcessTasksScreen extends Window {
 	@Override
 	public void onLeave(){
 		completedByField.clear();
+		completedByField.setDisable(true);
 		completedByCheckBox.setSelected(false);
 	}
 
@@ -154,10 +155,11 @@ public class ProcessTasksScreen extends Window {
 		cancelButton.setOnAction(actionEvent -> onCancel());
 		completeButton.setOnAction(actionEvent -> onTaskComplete());
 		startButton.setOnAction(actionEvent -> onTaskStart());
+
 		completedByCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean newValue) {
-				completedByField.setDisable(newValue);
+				completedByField.setDisable(!newValue);
 			}
 		});
 

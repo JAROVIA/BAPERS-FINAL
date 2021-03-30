@@ -7,6 +7,7 @@ import CUSTOMER.FixedDiscountRate;
 import CUSTOMER.FlexibleDiscountRate;
 import CUSTOMER.VariableDiscountRate;
 import GUI.*;
+import PROCESS.TaskDescription;
 import javafx.util.Pair;
 
 import java.io.IOException;
@@ -47,11 +48,24 @@ public class ACCT_UI_Controller {
 
 	/**
 	 * 
-	 * @param CustomerData
+	 * @param
 	 */
-	public boolean submit(String[] CustomerData) {
-		// TODO - implement ACCT_UI_Controller.Submit
-		throw new UnsupportedOperationException();
+	public void submitEditCustomer(int accountNumber, String status, String phone, String address, String email, String name, String contactName) throws SQLException {
+		String[] columns = new String[]{
+				"AccountStatus",
+				"PhoneNumber",
+				"Address",
+				"EmailAddress",
+				"CustomerName",
+				"ContactName"
+		};
+
+		CustomerAccountDetails.updateCustomer(columns[0], status, "AccountNumber", accountNumber);
+		CustomerAccountDetails.updateCustomer(columns[1], phone, "AccountNumber", accountNumber);
+		CustomerAccountDetails.updateCustomer(columns[2], address, "AccountNumber", accountNumber);
+		CustomerAccountDetails.updateCustomer(columns[3], email, "AccountNumber", accountNumber);
+		CustomerAccountDetails.updateCustomer(columns[4], name, "AccountNumber", accountNumber);
+		CustomerAccountDetails.updateCustomer(columns[5], contactName, "AccountNumber", accountNumber);
 	}
 
 	public ArrayList<String[]> discountToStringArray(FlexibleDiscountRate flexible){

@@ -125,6 +125,16 @@ public class CustomerAccountDetails {
 		throw new UnsupportedOperationException();
 	}
 
+	public static void updateCustomer(String columnToEdit, String newValue, String identifierOfTableToEdit, int identifierCurrentValue) throws SQLException {
+
+		// TaskInAJob.UpdateJob("TaskPrice", 76, "TaskID", 1);
+		String sql = "UPDATE CustomerAccounts SET " + columnToEdit + " = '" + newValue + "' WHERE " + identifierOfTableToEdit + " = " + identifierCurrentValue + ";" ;
+		System.out.println(sql);
+		Statement statement = connection.createStatement();
+		statement.executeUpdate(sql);
+
+	}
+
 	/**
 	 * 
 	 * @param NewName

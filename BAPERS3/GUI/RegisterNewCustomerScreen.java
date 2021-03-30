@@ -91,7 +91,7 @@ public class RegisterNewCustomerScreen extends Window {
 					} else {
 						//TODO submit as valued customer
 						submitCustomerData(
-								"valued",
+								"valued : " + discountBox.getValue(),
 								phoneField.getText(),
 								addressField.getText(),
 								emailField.getText(),

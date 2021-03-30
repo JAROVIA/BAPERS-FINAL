@@ -176,6 +176,16 @@ public class TaskDescription {
 
 	}
 
+	public static void UpdateTask(String columnToEdit, String newValue, String identifierOfTableToEdit, int identifierCurrentValue) throws SQLException {
+
+		// TaskInAJob.UpdateJob("TaskPrice", 76, "TaskID", 1);
+		String sql = "UPDATE Tasks SET " + columnToEdit + " = '" + newValue + "' WHERE " + identifierOfTableToEdit + " = " + identifierCurrentValue + ";" ;
+		System.out.println(sql);
+		Statement statement = connection.createStatement();
+		statement.executeUpdate(sql);
+
+	}
+
 
 
 
