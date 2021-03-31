@@ -127,7 +127,7 @@ public abstract class Window{
 		tf.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observableValue, String oldText, String newText) {
-				if(newText.matches("[\\s]*")){
+				if(newText.matches("[\\s]+")){
 					tf.setText(oldText);
 				}
 			}
