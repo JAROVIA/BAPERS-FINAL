@@ -229,12 +229,13 @@ public class Job implements I_PROCESS {
 			// can add year to make sure no duplication same time next year
 			if (
 					(FullDateNow.equals(FullDateDue) && ( hourNow.equals(hourDue) || hourNow.equals(hourAlmostDue)))
-//					|| ()
-
 			){
-
 				// change islate to true
-			tuple =
+				// change db entry
+				String s = "UPDATE Jobs SET IsLate = 1 WHERE JobID = " + JobID + ";";
+				statement.executeUpdate(s);
+
+				tuple =
 				JobID + "`"
 				+ AccountNumber + "`"
 				+ NumberOfTasks + "`"
@@ -248,13 +249,52 @@ public class Job implements I_PROCESS {
 				arrayList.add(tuple.split("`"));
 
 				System.out.println(Job.getJobID());
-				String sqlSetlATE = "UPDATE Jobs SET IsLate = 1 WHERE JobID = " + Job.getJobID() + ";";
-
+//				String sqlSetlATE = "UPDATE Jobs SET IsLate = 1 WHERE JobID = " + Job.getJobID() + ";";
+				String sqlSetlATE = "UPDATE Jobs SET IsLate = 1 WHERE JobID = " + JobID + ";";
+				statement.executeUpdate(sqlSetlATE);
 			}
 
 		}
 		return arrayList;
 	}
+
+	public static ArrayList<String[]> GetLateJobListPermanent() throws SQLException {
+		Statement statement = connection.createStatement();
+		String sql = "SELECT * FROM Jobs WHERE IsLate = 1;"; /* SELECT * FROM Jobs WHERE IsArchived = 0; */
+		ResultSet resultSet = statement.executeQuery(sql);
+
+		ArrayList<String[]> arrayList = new ArrayList<String[]>();
+		String tuple;
+		// adding changes to an array list
+		while (resultSet.next()){
+
+			int JobID = resultSet.getInt("JobID");
+			int AccountNumber = resultSet.getInt("AccountNumber");
+			int NumberOfTasks = resultSet.getInt("NumberOfTasks");
+			String DateOfJob = resultSet.getString("DateOfJob"); // date of job order
+			String JobDeadline = resultSet.getString("JobDeadline"); // dependant on urgency
+			String JobUrgency = resultSet.getString("JobUrgency");
+			int Price = resultSet.getInt("Price");
+			int TasksCompleted = resultSet.getInt("TasksCompleted");
+			int IsCompleted = resultSet.getInt("IsCompleted");
+
+			tuple =
+			JobID + "`"
+			+ AccountNumber + "`"
+			+ NumberOfTasks + "`"
+			+ DateOfJob + "`"
+			+ JobDeadline + "`"
+			+ JobUrgency + "`"
+			+ Price + "`"
+			+ TasksCompleted + "`"
+			+ IsCompleted;
+
+			arrayList.add(tuple.split("`"));
+
+		}
+		return arrayList;
+	}
+
 
 	public static boolean AreLateJobs() throws SQLException {
 		Statement statement = connection.createStatement();
@@ -481,3 +521,4 @@ public class Job implements I_PROCESS {
 
 
 }
+

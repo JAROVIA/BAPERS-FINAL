@@ -11,10 +11,7 @@ import com.itextpdf.layout.property.UnitValue;
 
 import java.io.File;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 import static REPORT.PDFGeneration.convertTypes;
 
@@ -38,10 +35,11 @@ public class CustomerReport extends Report {
         }
     }
 
-//	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws Exception {
 //		File file = new File(DEST);
+		CustomerReport.autoGenerateReport(1,1,"");
 //        new CustomerReport().printCustomerReport(1,"");
-//	}
+	}
 
 	public ArrayList<String[]> CustomerReportList(int AccountNumber, String date) throws SQLException {
 		String sql =
@@ -121,6 +119,24 @@ public class CustomerReport extends Report {
 
 		doc.add(table);
 		doc.close();
+	}
+
+
+	public static void autoGenerateReport(int minutes, int acccountNumber, String dayOfYear){
+
+    Timer timer = new Timer();
+    TimerTask task = new TimerTask() {
+        @Override
+        public void run() {
+			try {
+				new CustomerReport().printCustomerReport(acccountNumber, dayOfYear);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+    };
+		timer.schedule(task, 1,minutes*60*1000);
 	}
 
 }
