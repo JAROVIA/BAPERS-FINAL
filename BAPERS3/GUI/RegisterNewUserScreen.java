@@ -1,5 +1,6 @@
 package GUI;
 
+import ADMIN.AlertUser;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -37,6 +38,7 @@ public class RegisterNewUserScreen extends Window{
 
 		if(isValueNotEmpty(new TextField[]{staffNameField, userNameField, pwField}, new ComboBox[]{roleBox})){
 			adminUiController.saveUser(userRole, employeeName, password, userName);
+			AlertUser.showCompletion("Customer data submit");
 			showScreen(this, "UserAccounts");
 		}
 	}

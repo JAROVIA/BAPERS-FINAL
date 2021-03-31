@@ -1,5 +1,6 @@
 package GUI;
 
+import ADMIN.AlertUser;
 import CUSTOMER.Discount;
 import PROCESS.TaskDescription;
 import javafx.beans.property.SimpleStringProperty;
@@ -97,8 +98,9 @@ public class RegisterNewCustomerScreen extends Window {
 								nameField.getText(),
 								contactNameField.getText()
 						);
-						System.out.println(discountBox.getValue());
+
 						submitDiscountData(discountBox.getValue(), new ArrayList<String[]>(discountTable.getItems()));
+						AlertUser.showCompletion("Customer data submit");
 						showScreen(this, "CustomerAccounts");
 					}
 				} else {
@@ -111,6 +113,7 @@ public class RegisterNewCustomerScreen extends Window {
 							nameField.getText(),
 							contactNameField.getText()
 							);
+					AlertUser.showCompletion("Customer data submit");
 					showScreen(this, "CustomerAccounts");
 				}
 

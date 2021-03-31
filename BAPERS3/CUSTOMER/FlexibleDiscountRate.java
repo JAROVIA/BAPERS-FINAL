@@ -81,4 +81,56 @@ public class FlexibleDiscountRate extends Discount {
 		}
 		return false;
 	}
+/*
+	private class FlexBands{
+		private int bandNumber;
+		private int lower;
+		private int upper;
+		private int discountRate;
+
+		public int getBandNumber() {
+			return bandNumber;
+		}
+
+		public void setBandNumber(int bandNumber) {
+			this.bandNumber = bandNumber;
+		}
+
+		public int getLower() {
+			return lower;
+		}
+
+		public void setLower(int lower) {
+			this.lower = lower;
+		}
+
+		public int getUpper() {
+			return upper;
+		}
+
+		public void setUpper(int upper) {
+			this.upper = upper;
+		}
+
+		public int getDiscountRate() {
+			return discountRate;
+		}
+
+		public void setDiscountRate(int discountRate) {
+			this.discountRate = discountRate;
+		}
+
+		public FlexBands(
+				int bandNumber,
+				int lower,
+				int upper,
+				int discountRate){
+			this.bandNumber = bandNumber;
+			this.lower = lower;
+			this.upper = upper;
+			this.discountRate = discountRate;
+		}
+	}
+
+ */
 }

@@ -1,5 +1,6 @@
 package GUI;
 
+import ADMIN.AlertUser;
 import ADMIN.UserAccount;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -30,8 +31,13 @@ public class EditUserScreen extends Window {
 	private void onSave() throws SQLException {
 		UserAccount editingUser = adminUiController.getEditingUser();
 		if(isValueNotEmpty(new TextField[]{staffNameField, passwordField, usernameField}, new ComboBox[]{roleBox})) {
+			editingUser.setEmployeeName(staffNameField.getText());
+			editingUser.setPassword(passwordField.getText());
+			editingUser.setUserRole(roleBox.getValue());
+			editingUser.setUsername(usernameField.getText());
 			saveUser(editingUser);
 		}
+		AlertUser.showCompletion("Edit user data");
 		showScreen(this, "UserAccounts");
 	}
 

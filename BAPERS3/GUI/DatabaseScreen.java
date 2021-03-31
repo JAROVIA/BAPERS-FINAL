@@ -39,19 +39,20 @@ public class DatabaseScreen extends Window {
 
 	private void onBackup(){
 		try {
+			AlertUser.showCompletion("Database backup");
 			DBConfiguration.MakeBackup();
 			onShow();
 		} catch (IOException e) {
-			e.printStackTrace();
+			AlertUser.showDBError();
 		}
 	}
 
 	private void onRestore(){
 		try {
+			AlertUser.showCompletion("Database restore");
 			DBConfiguration.RestoreListedBackup(restoreBox.getValue());
 		} catch (IOException | SQLException e) {
 			AlertUser.showDBError();
-			e.printStackTrace();
 		}
 	}
 

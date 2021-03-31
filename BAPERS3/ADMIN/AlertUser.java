@@ -64,6 +64,10 @@ public class AlertUser {
 		alert.show();
 	}
 
+	public static void showCompletion(String whatWasDone){
+		new Alert(Alert.AlertType.CONFIRMATION, whatWasDone + " confirmed", ButtonType.CLOSE);
+	}
+
 	/**
 	 * sets message seen to true for this session
 	 */

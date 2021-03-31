@@ -88,6 +88,23 @@ public class TaskDescription {
 		throw new UnsupportedOperationException();
 	}
 
+	public static String[] getTask(int taskID) throws SQLException {
+		Statement statement = connection.createStatement();
+		String sql = "SELECT * FROM " + tablename + " where TaskID = " + taskID + " AND IsArchived = 0";
+		ResultSet resultSet = statement.executeQuery(sql);
+
+		if(resultSet.next()){
+			return new String[]{
+					String.valueOf(resultSet.getInt("TaskID")),
+					resultSet.getString("TaskLocation"),
+					String.format("%.2f",resultSet.getFloat("TaskPrice")),
+					resultSet.getString("TaskDescription"),
+					String.valueOf(resultSet.getInt("PredictedDuration"))
+			};
+		}
+		return null;
+	}
+
 	/**
 	 * returns an arraylist of all tasks BIPL offers
 	 * */

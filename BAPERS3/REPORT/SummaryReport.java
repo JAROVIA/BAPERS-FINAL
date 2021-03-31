@@ -22,7 +22,7 @@ public class SummaryReport extends Report {
 	static String dbusername = "jaroviadb";
 	static String dbpassword = "Jarovia123#@!";
 	static Connection connection;
-	private static final String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/SUMMARYREPORT/SummaryReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
+//	private static final String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/SUMMARYREPORT/SummaryReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
 
 	static {
 		try {
@@ -35,7 +35,7 @@ public class SummaryReport extends Report {
 
 
 	public static void main(String[] args) throws Exception {
-		File file = new File(DEST);
+		//File file = new File(DEST);
 		new SummaryReport().printSummaryReport("sun mar 28");
 	}
 
@@ -45,6 +45,8 @@ public class SummaryReport extends Report {
 	 */
 
 	public void printSummaryReport(String date) throws Exception {
+
+		String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/STAFFREPORT/StaffReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
 
 		PdfDocument pdfDoc = new PdfDocument(new PdfWriter(DEST));
 		Document doc = new Document(pdfDoc);

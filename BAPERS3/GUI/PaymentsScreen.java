@@ -2,6 +2,7 @@ package GUI;
 
 import PAYMENT.Payment;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,10 +10,9 @@ import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.util.Callback;
-
-import java.lang.reflect.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javafx.scene.control.TextField;
 import java.util.function.Predicate;
 
 public class PaymentsScreen extends Window{
@@ -27,6 +27,8 @@ public class PaymentsScreen extends Window{
     private TableView<String[]> paymentsTable;
     @FXML
     private TableView<String[]> latePaymentJobTable;
+    @FXML
+    private TextField searchField;
 
     private final String[] paymentCol = new String[]{
             "JobId",
@@ -78,6 +80,13 @@ public class PaymentsScreen extends Window{
         ObservableList<String[]> paymentData = FXCollections.observableArrayList(new ArrayList<>());
         FilteredList<String[]> filteredPayment = new FilteredList<>(paymentData);
         paymentsTable.setItems(filteredPayment);
+
+        searchField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String newValue) {
+                filteredPayment.setPredicate(paymentDataPredicate(newValue));
+            }
+        });
         try {
             paymentData.addAll(Payment.GetPaymentList());
         } catch (SQLException throwables) {
@@ -125,7 +134,7 @@ public class PaymentsScreen extends Window{
      * @param input input in the search field
      * @return predicate to inform filter list if input matches some data in the list
      */
-    private Predicate<String[]> userDataPredicate(String input){
+    private Predicate<String[]> paymentDataPredicate(String input){
         return (String[] data) -> {
             if(input == null || input.trim().isEmpty()){
                 return true;
