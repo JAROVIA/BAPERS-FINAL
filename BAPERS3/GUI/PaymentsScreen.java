@@ -140,7 +140,7 @@ public class PaymentsScreen extends Window{
                 return true;
             }
             else{
-                return matchPayment(data, input);
+                return matchPayment(data, input.trim());
             }
         };
     }

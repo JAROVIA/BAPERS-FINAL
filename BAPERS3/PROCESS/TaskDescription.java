@@ -160,7 +160,7 @@ public class TaskDescription {
 	 *
 	 *
 	 * */
-	public static void NewTask(String TaskLocation, int TaskPrice, String TaskDescription, int Duration) throws SQLException {
+	public static void NewTask(String TaskLocation, float TaskPrice, String TaskDescription, int Duration) throws SQLException {
 		String sql =
 				"INSERT INTO " + tablename + " ( TaskLocation, TaskPrice, TaskDescription, PredictedDuration) "
 				+ "VALUES (" + "\"" + TaskLocation + "\", " + TaskPrice + ", \"" + TaskDescription + "\", " + Duration + ");";

@@ -1,38 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--
-  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
-  All rights reserved. Use is subject to license terms.
-
-  This file is available and licensed under the following license:
-
-  Redistribution and use in source and binary forms, with or without
-  modification, are permitted provided that the following conditions
-  are met:
-
-  - Redistributions of source code must retain the above copyright
-    notice, this list of conditions and the following disclaimer.
-  - Redistributions in binary form must reproduce the above copyright
-    notice, this list of conditions and the following disclaimer in
-    the documentation and/or other materials provided with the distribution.
-  - Neither the name of Oracle Corporation nor the names of its
-    contributors may be used to endorse or promote products derived
-    from this software without specific prior written permission.
-
-  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
--->
-
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -43,216 +10,180 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox minHeight="640.0" minWidth="960.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.JobsScreen">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.JobsScreen">
    <children>
-      <GridPane VBox.vgrow="ALWAYS">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Button fx:id="logoutButton" mnemonicParsing="false" prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Logout" GridPane.columnIndex="12">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Button>
-            <ImageView fx:id="homeButton" fitHeight="101.0" fitWidth="453.0" pickOnBounds="true" preserveRatio="true" GridPane.valignment="TOP">
-               <image>
-                  <Image url="@../images/BAPERS Logo Final.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="welcomeLabel" prefHeight="36.0" prefWidth="239.0" style="-fx-border-color: Black;" text="Welcome [logged in user]" textAlignment="RIGHT" GridPane.columnIndex="10" GridPane.columnSpan="2">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-            <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" GridPane.rowSpan="2147483647" GridPane.vgrow="ALWAYS">
-              <tabs>
-                <Tab text="Jobs">
-                     <content>
-                        <GridPane>
-                           <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="JOBS" wrappingWidth="76.43367513020826" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font size="27.0" />
-                                 </font>
-                              </Text>
-                              <TextField fx:id="searchField1" prefHeight="36.0" prefWidth="172.0" promptText="Search" style="-fx-border-style: solid;" GridPane.columnIndex="10" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </TextField>
-                              <Button fx:id="createJobOrderButton" mnemonicParsing="false" prefHeight="39.0" prefWidth="205.0" style="-fx-background-color: #DDF8FF; -fx-border-style: Solid;" text="Create New Job " GridPane.columnIndex="8" GridPane.columnSpan="2" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Button>
-                              <TableView fx:id="jobsTable" editable="true" style="-fx-border-style: solid;" GridPane.columnIndex="1" GridPane.columnSpan="10" GridPane.rowIndex="3" GridPane.rowSpan="4">
-                                 <columns>
-                                    <TableColumn fx:id="jobIdColumn1" minWidth="100.0" prefWidth="-1.0" text="Job ID" />
-                                    <TableColumn fx:id="accountNumberColumn11" minWidth="100.0" prefWidth="-1.0" text="Account No" />
-                                    <TableColumn fx:id="numberOfTasksColumn1" minWidth="100.0" prefWidth="-1.0" text="No. of Tasks" />
-                                    <TableColumn fx:id="dateOfJobColumn1" minWidth="100.0" prefWidth="-1.0" text="Date of Job" />
-                                    <TableColumn minWidth="100.0" prefWidth="-1.0" text="Job deadline" />
-                                    <TableColumn fx:id="urgencyColumn1" minWidth="100.0" prefWidth="-1.0" text="Job Urgency" />
-                                    <TableColumn fx:id="priceColumn" minWidth="100.0" prefWidth="-1.0" text="Price" />
-                                    <TableColumn fx:id="completedByColumn1" minWidth="100.0" prefWidth="-1.0" text="Tasks Completed" />
-                                    <TableColumn minWidth="100.0" prefWidth="-1.0" text="is Completed" />
-                                 </columns>
-                                 <cursor>
-                                    <Cursor fx:constant="DEFAULT" />
-                                 </cursor>
-                              </TableView>
-                              <Button fx:id="processTasksButton1" mnemonicParsing="false" prefHeight="39.0" prefWidth="139.0" style="-fx-background-color: #DDF8FF; -fx-border-style: solid;" text="Process Tasks" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="3">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                                 <GridPane.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </GridPane.margin>
-                              </Button>
-                              <ImageView fx:id="recordPaymentButton1" fitHeight="49.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="12" GridPane.halignment="CENTER" GridPane.rowIndex="4">
-                                 <image>
-                                    <Image url="@../images/Record-Payment-Icon.png" />
-                                 </image>
-                              </ImageView>
-                              <Button fx:id="paymentsButton1" mnemonicParsing="false" text="Payment" GridPane.columnIndex="11" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-                           </children>
-                        </GridPane>
-                     </content>
-                </Tab>
-                <Tab text="Late jobs">
-                     <content>
-                        <GridPane>
-                           <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Late jobs" wrappingWidth="124.04330952962232" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font size="27.0" />
-                                 </font>
-                              </Text>
-                              <TextField fx:id="searchField2" prefHeight="36.0" prefWidth="172.0" promptText="Search" style="-fx-border-style: solid;" GridPane.columnIndex="9" GridPane.columnSpan="2" GridPane.rowIndex="2">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </TextField>
-                              <TableView fx:id="lateJobsTable" editable="true" style="-fx-border-style: solid;" GridPane.columnIndex="1" GridPane.columnSpan="10" GridPane.rowIndex="3" GridPane.rowSpan="4">
-                                 <columns>
-                                    <TableColumn fx:id="jobIdColumn11" minWidth="100.0" prefWidth="-1.0" text="Job ID" />
-                                    <TableColumn fx:id="accountNumberColumn111" minWidth="100.0" prefWidth="-1.0" text="Account No" />
-                                    <TableColumn fx:id="numberOfTasksColumn11" minWidth="100.0" prefWidth="-1.0" text="No. of Tasks" />
-                                    <TableColumn fx:id="dateOfJobColumn11" minWidth="100.0" prefWidth="-1.0" text="Date of Job" />
-                                    <TableColumn fx:id="urgencyColumn11" minWidth="100.0" prefWidth="-1.0" text="Job Deadline" />
-                                    <TableColumn minWidth="100.0" prefWidth="-1.0" text="Job urgency" />
-                                    <TableColumn fx:id="priceColumn1" minWidth="100.0" prefWidth="-1.0" text="Price" />
-                                    <TableColumn fx:id="completedByColumn11" minWidth="100.0" prefWidth="-1.0" text="Tasks Completed" />
-                                    <TableColumn minWidth="100.0" prefWidth="-1.0" text="is Completed" />
-                                 </columns>
-                                 <cursor>
-                                    <Cursor fx:constant="DEFAULT" />
-                                 </cursor>
-                              </TableView>
-                              <Button fx:id="processTasksButton2" mnemonicParsing="false" prefHeight="39.0" prefWidth="139.0" style="-fx-background-color: #DDF8FF; -fx-border-style: solid;" text="Process Tasks" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.rowIndex="3">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Button>
-                              <ImageView fx:id="recordPaymentButton2" fitHeight="49.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="12" GridPane.halignment="CENTER" GridPane.rowIndex="5">
-                                 <image>
-                                    <Image url="@../images/Record-Payment-Icon.png" />
-                                 </image>
-                              </ImageView>
-                              <Button fx:id="paymentsButton2" mnemonicParsing="false" text="Payment" GridPane.columnIndex="11" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-                           </children>
-                        </GridPane>
-                     </content>
-                </Tab>
-              </tabs>
-            </TabPane>
-         </children>
-      </GridPane>
+      <Button fx:id="logoutButton" layoutX="1806.0" layoutY="20.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Logout">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="219.0" fitWidth="463.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/BAPERS Logo Final.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="welcomeLabel" layoutX="1556.0" layoutY="20.0" prefHeight="36.0" prefWidth="239.0" style="-fx-border-color: Black;" text="Welcome [logged in user]" textAlignment="RIGHT">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Button layoutX="1098.0" layoutY="241.0" mnemonicParsing="false" style="-fx-background-color: -white;" />
+      <Button layoutX="1180.0" layoutY="240.0" mnemonicParsing="false" style="-fx-background-color: -white;" />
+      <Button layoutX="1735.0" layoutY="298.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="70.0" style="-fx-background-color: -white;" />
+      <TabPane layoutX="14.0" layoutY="127.0" prefHeight="916.0" prefWidth="1891.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Active jobs">
+            <content>
+              <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="883.0" prefWidth="2006.0">
+                     <children>
+                        <TableView fx:id="jobsTable" editable="true" layoutY="104.0" prefHeight="702.0" prefWidth="1590.0" style="-fx-border-style: solid;">
+                           <columns>
+                              <TableColumn fx:id="jobIdColumn" prefWidth="79.33334541320801" text="Job ID" />
+                              <TableColumn fx:id="accountNumberColumn1" minWidth="1.0" prefWidth="170.66666412353516" text="Account No" />
+                              <TableColumn fx:id="numberOfTasksColumn" minWidth="0.0" prefWidth="110.66668701171875" text="No. of Tasks" />
+                              <TableColumn fx:id="dateOfJobColumn" prefWidth="290.0" text="Date of Job" />
+                              <TableColumn prefWidth="290.0" text="Job deadline" />
+                              <TableColumn fx:id="urgencyColumn" prefWidth="207.86944580078125" text="Job Urgency" />
+                              <TableColumn prefWidth="242.93408203125" text="Price" />
+                              <TableColumn fx:id="completedByColumn" prefWidth="184.3431396484375" text="Tasks Completed" />
+                           </columns>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </TableView>
+                        <Text layoutX="14.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="JOBS" wrappingWidth="93.33335622151685">
+                           <font>
+                              <Font size="27.0" />
+                           </font>
+                        </Text>
+                        <Button fx:id="createJobOrderButton" layoutX="1120.0" layoutY="16.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="205.0" style="-fx-background-color: #DDF8FF; -fx-border-style: Solid;" text="Create New Job ">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                        <TextField fx:id="searchField1" layoutX="1352.0" layoutY="17.0" prefHeight="36.0" prefWidth="234.0" promptText="Search" style="-fx-border-style: solid;">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </TextField>
+                        <Button fx:id="processTasksButton1" layoutX="1641.0" layoutY="110.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="184.0" style="-fx-background-color: #DDF8FF; -fx-border-style: solid;" text="Process Tasks">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                        <ImageView fx:id="recordPaymentButton1" fitHeight="49.0" fitWidth="50.0" layoutX="1700.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/Record-Payment-Icon.png" />
+                           </image>
+                        </ImageView>
+                        <Button fx:id="paymentsButton1" layoutX="1641.0" layoutY="200.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="184.0" style="-fx-background-color: #DDF8FF; -fx-border-style: solid;" text="Recorded Payments">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                        <Label alignment="CENTER" layoutX="1641.0" layoutY="290.0" prefHeight="39.0" prefWidth="184.0" text="Record payment" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Late Jobs">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Text layoutX="14.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LATE JOBS" wrappingWidth="156.6666920979817">
+                           <font>
+                              <Font size="27.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="searchField2" layoutX="1352.0" layoutY="17.0" prefHeight="36.0" prefWidth="234.0" promptText="Search" style="-fx-border-style: solid;">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </TextField>
+                        <Button fx:id="processTasksButton2" layoutX="1641.0" layoutY="110.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="184.0" style="-fx-background-color: #DDF8FF; -fx-border-style: solid;" text="Process Tasks">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                        <ImageView fx:id="recordPaymentButton2" fitHeight="49.0" fitWidth="50.0" layoutX="1700.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/Record-Payment-Icon.png" />
+                           </image>
+                        </ImageView>
+                        <Button fx:id="paymentsButton2" layoutX="1641.0" layoutY="200.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="184.0" style="-fx-background-color: #DDF8FF; -fx-border-style: solid;" text="Recorded Payments">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                        <Label alignment="CENTER" layoutX="1641.0" layoutY="290.0" prefHeight="39.0" prefWidth="184.0" text="Record payment" />
+                        <TableView fx:id="lateJobsTable" editable="true" layoutY="104.0" prefHeight="702.0" prefWidth="1590.0" style="-fx-border-style: solid;">
+                           <columns>
+                              <TableColumn fx:id="jobIdColumn1" prefWidth="79.33334541320801" text="Job ID" />
+                              <TableColumn fx:id="accountNumberColumn11" minWidth="1.0" prefWidth="170.66666412353516" text="Account No" />
+                              <TableColumn fx:id="numberOfTasksColumn1" minWidth="0.0" prefWidth="110.66668701171875" text="No. of Tasks" />
+                              <TableColumn fx:id="dateOfJobColumn1" prefWidth="290.0" text="Date of Job" />
+                              <TableColumn prefWidth="290.0" text="Job deadline" />
+                              <TableColumn fx:id="urgencyColumn1" prefWidth="207.86944580078125" text="Job Urgency" />
+                              <TableColumn prefWidth="242.93408203125" text="Price" />
+                              <TableColumn fx:id="completedByColumn1" prefWidth="184.3431396484375" text="Tasks Completed" />
+                           </columns>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Completed jobs">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Text layoutX="14.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="COMPLETE JOBS" wrappingWidth="259.3217671712239">
+                           <font>
+                              <Font size="27.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="searchField3" layoutX="1352.0" layoutY="17.0" prefHeight="36.0" prefWidth="234.0" promptText="Search" style="-fx-border-style: solid;">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </TextField>
+                        <ImageView fx:id="recordPaymentButton3" fitHeight="49.0" fitWidth="50.0" layoutX="1700.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/Record-Payment-Icon.png" />
+                           </image>
+                        </ImageView>
+                        <Button fx:id="paymentsButton3" layoutX="1641.0" layoutY="110.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="184.0" style="-fx-background-color: #DDF8FF; -fx-border-style: solid;" text="Recorded Payments">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                        <Label alignment="CENTER" layoutX="1641.0" layoutY="200.0" prefHeight="39.0" prefWidth="184.0" text="Record payment" />
+                        <TableView fx:id="completeJobsTable" editable="true" layoutY="104.0" prefHeight="702.0" prefWidth="1590.0" style="-fx-border-style: solid;">
+                           <columns>
+                              <TableColumn fx:id="jobIdColumn2" prefWidth="79.33334541320801" text="Job ID" />
+                              <TableColumn fx:id="accountNumberColumn12" minWidth="1.0" prefWidth="170.66666412353516" text="Account No" />
+                              <TableColumn fx:id="numberOfTasksColumn2" minWidth="0.0" prefWidth="110.66668701171875" text="No. of Tasks" />
+                              <TableColumn fx:id="dateOfJobColumn2" prefWidth="290.0" text="Date of Job" />
+                              <TableColumn prefWidth="290.0" text="Job deadline" />
+                              <TableColumn fx:id="urgencyColumn2" prefWidth="207.86944580078125" text="Job Urgency" />
+                              <TableColumn prefWidth="242.93408203125" text="Price" />
+                              <TableColumn fx:id="completedByColumn2" prefWidth="184.3431396484375" text="Tasks Completed" />
+                           </columns>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
    </children>
-</VBox>
+</AnchorPane>

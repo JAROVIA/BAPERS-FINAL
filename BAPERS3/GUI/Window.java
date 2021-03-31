@@ -120,6 +120,21 @@ public abstract class Window{
 	}
 
 	/**
+	 * used for text fields for password, should not have space
+	 * @param tf text field to assign this listener
+	 */
+	protected void addPasswordListener(TextField tf){
+		tf.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observableValue, String oldText, String newText) {
+				if(newText.matches("[\\s]*")){
+					tf.setText(oldText);
+				}
+			}
+		});
+	}
+
+	/**
 	 * used for text fields with numeric input, only allows integer numeric characters
 	 * @param tf text field to assign this listener
 	 */

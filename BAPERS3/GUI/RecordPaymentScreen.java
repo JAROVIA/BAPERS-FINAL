@@ -44,14 +44,14 @@ public class RecordPaymentScreen extends Window {
 						String[] paymentData = new String[]{
 								jobData[0],
 								jobData[1],
-								priceField.getText(),
+								priceField.getText().trim(),
 								"date",
-								paymentMethodBox.getValue(),
-								monthField.getText() + yearField.getText(),
-								cardHolderNameField.getText(),
-								cardTypeField.getText(),
-								cardNumberField.getText(),
-								cvcField.getText()
+								paymentMethodBox.getValue().trim(),
+								monthField.getText().trim() + yearField.getText().trim(),
+								cardHolderNameField.getText().trim(),
+								cardTypeField.getText().trim(),
+								cardNumberField.getText().trim(),
+								cvcField.getText().trim()
 						};
 						uiController.saveCardPayment(paymentData);
 						AlertUser.showCompletion("Payment");
@@ -69,9 +69,9 @@ public class RecordPaymentScreen extends Window {
 						String[] paymentData = new String[]{
 								jobData[0],
 								jobData[1],
-								priceField.getText(),
+								priceField.getText().trim(),
 								"date",
-								paymentMethodBox.getValue()
+								paymentMethodBox.getValue().trim()
 						};
 						uiController.saveCashPayment(paymentData);
 						AlertUser.showCompletion("Payment");

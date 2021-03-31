@@ -96,7 +96,14 @@ public class EditCustomerDetailsScreen extends RegisterNewCustomerScreen{
 	@Override
 	protected void submitCustomerData(String status, String phone, String address, String email, String name, String contactName){
 		try {
-			acctUiController.submitEditCustomer(Integer.parseInt(accountData[0]), status, phone, address, email, name, contactName);
+			acctUiController.submitEditCustomer(
+					Integer.parseInt(accountData[0]),
+					status,
+					phone,
+					address.trim(),
+					email.trim(),
+					name.trim(),
+					contactName.trim());
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
 			AlertUser.showDBError();

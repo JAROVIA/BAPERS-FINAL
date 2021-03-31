@@ -42,8 +42,8 @@ public class EditExistingTaskScreen extends Window {
 			if(isStringFloat(priceField.getText()) && isStringFloat(durationField.getText())){
 				submit(new String[]{
 						taskData[0],
-						descriptionField.getText(),
-						locationField.getText(),
+						descriptionField.getText().trim(),
+						locationField.getText().trim(),
 						priceField.getText(),
 						durationField.getText(),
 			});
