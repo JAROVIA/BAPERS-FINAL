@@ -21,7 +21,7 @@ public class StaffReport extends Report {
 	static String dbusername = "jaroviadb";
 	static String dbpassword = "Jarovia123#@!";
 	static Connection connection;
-	private static final String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/STAFFREPORT/StaffReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
+//	private static final String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/STAFFREPORT/StaffReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
 
 	static {
 		try {
@@ -35,8 +35,10 @@ public class StaffReport extends Report {
 
 	public static void main(String[] args) throws Exception {
 
-		File file = new File(DEST);
+		//File file = new File(DEST);
 		new StaffReport().printStaffReport("sun mar 28");
+		new StaffReport().printStaffReport("sun mar 29");
+		new StaffReport().printStaffReport("sun mar 29");
 //		ArrayList<String> t = StaffReport.GetTechnicianNames();
 //		for (String st : t){
 //			System.out.println(st);
@@ -44,6 +46,8 @@ public class StaffReport extends Report {
 	}
 
 	public void printCustomerReport(String date) throws Exception {
+		String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/STAFFREPORT/StaffReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
+
 		PdfDocument pdfDoc = new PdfDocument(new PdfWriter(DEST));
 		Document doc = new Document(pdfDoc);
 		doc.add(new Paragraph("TITLE0"));
@@ -94,6 +98,8 @@ public class StaffReport extends Report {
 	 * https://github.com/itext/i7js-examples/blob/develop/src/main/java/com/itextpdf/samples/sandbox/tables/ArrayToTable.java
 	 */
 	public void printStaffReport(String date) throws Exception {
+
+		String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/STAFFREPORT/StaffReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
 
 		PdfDocument pdfDoc = new PdfDocument(new PdfWriter(DEST));
 		Document doc = new Document(pdfDoc);

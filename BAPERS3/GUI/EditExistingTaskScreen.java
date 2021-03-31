@@ -47,6 +47,7 @@ public class EditExistingTaskScreen extends Window {
 						priceField.getText(),
 						durationField.getText(),
 			});
+				AlertUser.showCompletion("Task data edit");
 				showScreen(this, "Tasks");
 			}
 			else{

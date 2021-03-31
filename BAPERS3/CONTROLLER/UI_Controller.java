@@ -90,6 +90,10 @@ public class UI_Controller {
 		throw new UnsupportedOperationException();
 	}
 
+	public float calculateFinalPrice(int accountNumber, int jobID) throws SQLException {
+		return main.getAcctUiController().calculateFinalPrice(accountNumber, jobID);
+	}
+
 	public void setJobBeingPaid(String[] jobData){
 		recordPaymentScreen.setJobData(jobData);
 	}

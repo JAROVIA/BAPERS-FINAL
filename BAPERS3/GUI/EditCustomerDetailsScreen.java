@@ -66,10 +66,9 @@ public class EditCustomerDetailsScreen extends RegisterNewCustomerScreen{
 			if(discountType.equals(DISCOUNT_FLEX)){
 				FlexibleDiscountRate flex = new FlexibleDiscountRate();
 				flex.retrieveDiscount(accountNumber);
-				int mostUpper = 0;
-				for(int[] bands : flex.getDiscountRate()){
-					mostUpper = bands[1];
-				}
+
+				int mostUpper = flex.getDiscountRate().get(flex.getDiscountRate().size()-1)[1];
+
 				bandLabel.setText(""+mostUpper);
 				data.addAll(acctUiController.discountToStringArray(flex));
 			}
@@ -81,7 +80,6 @@ public class EditCustomerDetailsScreen extends RegisterNewCustomerScreen{
 
 			discountTable.setItems(data);
 		} catch (SQLException throwables) {
-			throwables.printStackTrace();
 			AlertUser.showDBError();
 		}
 	}

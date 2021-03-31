@@ -54,7 +54,8 @@ public class RecordPaymentScreen extends Window {
 								cvcField.getText()
 						};
 						uiController.saveCardPayment(paymentData);
-						showScreen(this, "Payments");
+						AlertUser.showCompletion("Payment");
+						showScreen(this, "Jobs");
 					} else {
 						Alert alert = new Alert(Alert.AlertType.ERROR, "Price format is incorrect, check if value is appropriate", ButtonType.CLOSE);
 						alert.show();
@@ -73,7 +74,8 @@ public class RecordPaymentScreen extends Window {
 								paymentMethodBox.getValue()
 						};
 						uiController.saveCashPayment(paymentData);
-						showScreen(this, "Payments");
+						AlertUser.showCompletion("Payment");
+						showScreen(this, "Jobs");
 					} else {
 						Alert alert = new Alert(Alert.AlertType.ERROR, "Price format is incorrect, check if value is appropriate", ButtonType.CLOSE);
 						alert.show();
@@ -104,6 +106,12 @@ public class RecordPaymentScreen extends Window {
 
 	public void onShow(){
 		super.onShow();
+		try {
+			uiController.calculateFinalPrice(Integer.parseInt(jobData[1]), Integer.parseInt(jobData[0]));
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+			AlertUser.showDBError();
+		}
 	}
 
 	public void setJobData(String[] jobData){

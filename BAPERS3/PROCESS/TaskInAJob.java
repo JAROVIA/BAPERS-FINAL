@@ -220,7 +220,7 @@ public class TaskInAJob {
 	//  todo !!!!!!!!!!! ProcessTasksScreen
 	public static ArrayList<String[]> GetTIJList(int JobID) throws SQLException {
 		Statement statement = connection.createStatement();
-		String sql = "SELECT * FROM TaskInAJob;";
+		String sql = "SELECT * FROM TaskInAJob WHERE JobID = " + JobID + ";";
 		ResultSet resultSet = statement.executeQuery(sql);
 
 		ArrayList<String[]> arrayList = new ArrayList<String[]>();

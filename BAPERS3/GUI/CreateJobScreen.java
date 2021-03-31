@@ -1,6 +1,7 @@
 package GUI;
 
 import ACCOUNT.*;
+import ADMIN.AlertUser;
 import PROCESS.Job;
 import PROCESS.TaskDescription;
 import javafx.beans.property.SimpleStringProperty;
@@ -78,6 +79,7 @@ public class CreateJobScreen extends Window {
 			System.out.println(sql);
 			Statement statement = connection.createStatement();
 			statement.executeUpdate(sql);
+			AlertUser.showCompletion("Job data submit");
 			super.showScreen(this, "Jobs");
 
 		} catch (SQLException throwables) {

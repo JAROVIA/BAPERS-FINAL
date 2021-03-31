@@ -42,7 +42,7 @@ public class ReportsScreen extends Window {
 	public void generateSummaryReport() {
 		if (!dateField2.getText().trim().isEmpty()) {
 			try {
-				new StaffReport().printStaffReport(dateField3.getText());
+				new SummaryReport().printSummaryReport(dateField3.getText());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -54,7 +54,7 @@ public class ReportsScreen extends Window {
 	public void generateStaffReport() {
 		if(!dateField2.getText().trim().isEmpty()) {
 			try {
-				new SummaryReport().printSummaryReport(dateField2.getText());
+				new StaffReport().printStaffReport(dateField2.getText());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

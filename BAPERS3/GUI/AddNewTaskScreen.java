@@ -1,5 +1,6 @@
 package GUI;
 
+import ADMIN.AlertUser;
 import PROCESS.TaskDescription;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -72,13 +73,17 @@ public class AddNewTaskScreen extends Window {
 				if (!matchAnyNumberType(priceField.getText())) {
 					message += "price\n";
 				}
-				Alert alert = new Alert(Alert.AlertType.ERROR, message, ButtonType.CLOSE);
+				new Alert(Alert.AlertType.ERROR, message, ButtonType.CLOSE).show();
 			}
 			else {
-				TaskDescription.NewTask(locationField.getText(),
+				TaskDescription.NewTask(
+						locationField.getText(),
 						Integer.parseInt(priceField.getText()),
 						descriptionField.getText(),
-						Integer.parseInt(durationField.getText()));
+						Integer.parseInt(durationField.getText())
+				);
+				AlertUser.showCompletion("Adding new task");
+				showScreen(this, "Tasks");
 			}
 		}
 	}

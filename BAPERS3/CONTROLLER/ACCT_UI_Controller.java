@@ -7,7 +7,9 @@ import CUSTOMER.FixedDiscountRate;
 import CUSTOMER.FlexibleDiscountRate;
 import CUSTOMER.VariableDiscountRate;
 import GUI.*;
+import PROCESS.Job;
 import PROCESS.TaskDescription;
+import PROCESS.TaskInAJob;
 import javafx.util.Pair;
 
 import java.io.IOException;
@@ -20,9 +22,6 @@ public class ACCT_UI_Controller {
 	private Main main;
 
 	//gui this controller handles
-	//TODO which screen is this
-	private ActiveJobScreen activeJobScreen;
-	private String activeJobFxml = "Jobs";
 
 	private EditCustomerDetailsScreen editCustomerDetailsScreen;
 	private String editCustomerFxml = "EditCustomerDetails";
@@ -128,6 +127,64 @@ public class ACCT_UI_Controller {
 			VariableDiscountRate variable = new VariableDiscountRate(accountNumber, varDiscData);
 			variable.saveDiscount();
 		}
+	}
+
+	public float calculateFinalPrice(int accountNumber, int jobId) throws SQLException {
+		String discountType = getCustomerDiscountType(accountNumber);
+		String[] jobData = null;
+		System.out.println("calculating");
+
+		for(String[] data : Job.GetJobList()){
+			if(Integer.parseInt(data[1]) == accountNumber){
+				jobData = data;
+				break;
+			}
+		}
+		if(jobData != null) {
+			float price = Float.parseFloat(jobData[6]);
+
+			if (discountType.equals("Fixed")) {
+				FixedDiscountRate fixed = new FixedDiscountRate();
+				fixed.retrieveDiscount(accountNumber);
+
+				return price * (100 - fixed.getDiscountRate()) / 100;
+			}
+			if (discountType.equals("Flexible")) {
+				FlexibleDiscountRate flex = new FlexibleDiscountRate();
+				flex.retrieveDiscount(accountNumber);
+
+				//TODO match customer total paid this month
+				int appliedDiscount = flex.getDiscountRate().get(0)[2]; //applying random one
+
+				return price * (100 - appliedDiscount) / 100;
+			}
+			if (discountType.equals("Variable")) {
+				VariableDiscountRate variable = new VariableDiscountRate();
+				variable.retrieveVariableDiscount(accountNumber);
+
+				ArrayList<String[]> taskInaJobDataList = TaskInAJob.GetTIJList(jobId);
+
+				for(String[] taskInAJobData : taskInaJobDataList){
+					System.out.print("task id = " + taskInAJobData[2]);
+					for(Pair<Integer, Integer> discount : variable.getTaskDiscountRate()){
+						System.out.println(", task id in discount = " + discount.getKey());
+						if(Integer.parseInt(taskInAJobData[2]) == discount.getKey()){
+							System.out.println("match");
+							String[] taskDescriptionData = TaskDescription.getTask(Integer.parseInt(taskInAJobData[2]));
+							if(taskDescriptionData != null) {
+								System.out.print("\ntask id in description = " + taskDescriptionData[0]);
+								System.out.print("\ntask price in description = " + taskDescriptionData[2]);
+								float taskPrice = Float.parseFloat(taskDescriptionData[3]);
+								System.out.print("\nprice deducted = " + taskPrice * discount.getValue());
+								price -= (taskPrice * discount.getValue());
+							}
+						}
+					}
+				}
+				return price;
+			}
+		}
+		return -1;
 	}
 
 	public void deleteCustomer() {
