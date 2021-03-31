@@ -379,6 +379,13 @@ public class RegisterNewCustomerScreen extends Window {
 		showFlex(false);
 
 		valuedCheckBox.setSelected(false);
+		valuedCheckBox.setDisable(true);
+
+		discountRateField.setStyle("visibility : hidden;");
+		discountRateLabel.setStyle("visibility : hidden;");
+		discountTable.setStyle("visibility : hidden;");
+		addButton.setStyle("visibility : hidden;");
+		removeButton.setStyle("visibility : hidden;");
 
 		for(int i = GridPane.getRowIndex(valuedCheckBox); i < GridPane.getRowIndex(discountTable)+1; i++){
 			gridPane.getRowConstraints().get(i).setPercentHeight(0);
@@ -483,6 +490,7 @@ public class RegisterNewCustomerScreen extends Window {
 					showVar(false);
 					for (int i = GridPane.getRowIndex(discountBox); i < GridPane.getRowIndex(discountTable) + 1; i++) {
 						gridPane.getRowConstraints().get(i).setPercentHeight(0);
+						gridPane.getRowConstraints().get(i).setPrefHeight(0);
 						gridPane.getRowConstraints().get(i).setMinHeight(0);
 					}
 				}

@@ -29,6 +29,7 @@ public class EditCustomerDetailsScreen extends RegisterNewCustomerScreen{
 	@Override
 	public void onShow(){
 		super.onShow();
+		valuedCheckBox.setDisable(false);
 		if(accountData[1].equals("valued")) {
 			valuedCheckBox.setSelected(true);
 

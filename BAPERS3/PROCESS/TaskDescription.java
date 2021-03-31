@@ -58,11 +58,10 @@ public class TaskDescription {
 
 	/**
 	 * 
-	 * @param TaskID
+	 * @param taskID
 	 */
-	public void setTaskID(int TaskID) {
-		// TODO - implement TaskDescription.setTaskID
-		this.TaskID = TaskID;
+	public void setTaskID(int taskID) {
+		TaskID = taskID;
 	}
 
 	public String getTaskLocation() {

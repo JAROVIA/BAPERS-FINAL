@@ -164,7 +164,7 @@ public class TaskInAJob {
 		// set start time millis later on, when startTask is pressed, not insert
 		String insert =
 		"INSERT INTO TaskInAJob (JobID, TaskID, AccountNumber, JobUrgency) VALUES ("
-		+ Job.getJobID() + ", " + TaskDescription.getTaskIDStatic() + ", " + Job.getAccountNumber()
+		+ Job.getJobID() + ", " + taskID + ", " + Job.getAccountNumber()
 		+ ", \"" + Job.getUrgency() + "\"" + ");";
 
 
@@ -206,6 +206,7 @@ public class TaskInAJob {
 			statement.executeUpdate(sqlInsert);
 			System.out.println("ENTERING");
 		}
+		sqlStatements.clear();
 	}
 
 	public static void main(String[] args) throws SQLException {
@@ -385,21 +386,35 @@ public class TaskInAJob {
 
 	}
 
-	public static void CompleteTask(int id, String completedby) throws SQLException {
+	public static void CompleteTask(int taskInAJobID, int jobID, String completedby) throws SQLException {
 		// Set the endtime
-		String sql = "UPDATE TaskInAJob SET IsCompleted = 1 WHERE JobTaskID = " + id + ";";
+		String sql = "UPDATE TaskInAJob SET IsCompleted = 1 WHERE JobTaskID = " + taskInAJobID + ";";
 		System.out.println(sql);
 		Statement statement = connection.createStatement();
 		statement.executeUpdate(sql);
+
+		//set completed task on job
+		String sql2 = "SELECT * FROM Jobs WHERE JobID = " + jobID + ";";
+		System.out.println(sql2);
+		ResultSet resultSet2 = statement.executeQuery(sql2);
+
+		int tasksCompleted = -1;
+		if(resultSet2.next()){
+			tasksCompleted = resultSet2.getInt("TasksCompleted");
+		}
+
+		String sql3 = "UPDATE Jobs SET TasksCompleted = " + (tasksCompleted+1) + " WHERE JobID = " + jobID + ";";
+		System.out.println(sql3);
+		statement.executeUpdate(sql3);
 
 		// Collect the end time in milliseconds
 		BigInteger EndTimeMillis = new BigInteger(String.valueOf(Calendar.getInstance().getTimeInMillis()));
 
 		// Collect the start time in milliseconds
-		String startTimeMillisQuery = "select * from TaskInAJob where JobTaskID = " + id + ";";
-		ResultSet resultSet = statement.executeQuery(startTimeMillisQuery);
-		resultSet.next();
-		BigInteger StartTimeMillis = new BigInteger(resultSet.getString("StartTimeMillis"));
+		String startTimeMillisQuery = "select * from TaskInAJob where JobTaskID = " + taskInAJobID + ";";
+		ResultSet resultSet3 = statement.executeQuery(startTimeMillisQuery);
+		resultSet3.next();
+		BigInteger StartTimeMillis = new BigInteger(resultSet3.getString("StartTimeMillis"));
 
 		// you find the duration via subtraction
 		BigInteger duration = EndTimeMillis.subtract(StartTimeMillis);
@@ -408,7 +423,7 @@ public class TaskInAJob {
 
 		//you convert the duration to minutes and update the duration with this value
 		String DurationQuery = "UPDATE TaskInAJob SET ActualDuration = \"" + duration + "\", "
-		+ "EmployeeCompletedBy = \"" + completedby +  "\" WHERE JobTaskID = " + id + ";";
+		+ "EmployeeCompletedBy = \"" + completedby +  "\" WHERE JobTaskID = " + taskInAJobID + ";";
 		statement.executeUpdate(DurationQuery);
 
 		// ---------------------------------------------------------------------------------------------------
@@ -421,20 +436,20 @@ public class TaskInAJob {
 
 		if (now.get(Calendar.HOUR_OF_DAY) > 5 &&
 			(now.get(Calendar.HOUR_OF_DAY) <= 14 && now.get(Calendar.MINUTE) <= 30)){
-			String shiftQuery = "UPDATE TaskInAJob SET ShiftCompleted = " + 1 + " WHERE JobTaskID = " + id + ";";
+			String shiftQuery = "UPDATE TaskInAJob SET ShiftCompleted = " + 1 + " WHERE JobTaskID = " + taskInAJobID + ";";
 			System.out.println(shiftQuery);
 			statement.executeUpdate(shiftQuery);
 		}
 
 		else if ((now.get(Calendar.HOUR_OF_DAY) > 14 && now.get(Calendar.MINUTE) > 30)
 				&& (now.get(Calendar.HOUR_OF_DAY) >= 20)){
-			String shiftQuery = "UPDATE TaskInAJob SET ShiftCompleted = " + 2 + " WHERE JobTaskID = " + id + ";";
+			String shiftQuery = "UPDATE TaskInAJob SET ShiftCompleted = " + 2 + " WHERE JobTaskID = " + taskInAJobID + ";";
 			System.out.println(shiftQuery);
 			statement.executeUpdate(shiftQuery);
 		}
 
 		else if ((now.get(Calendar.HOUR_OF_DAY) > 20) && (now.get(Calendar.HOUR_OF_DAY) <= 5)){
-			String shiftQuery = "UPDATE TaskInAJob SET ShiftCompleted = " + 3 + " WHERE JobTaskID = " + id + ";";
+			String shiftQuery = "UPDATE TaskInAJob SET ShiftCompleted = " + 3 + " WHERE JobTaskID = " + taskInAJobID + ";";
 			System.out.println(shiftQuery);
 			statement.executeUpdate(shiftQuery);
 		}

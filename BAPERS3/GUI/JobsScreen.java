@@ -111,8 +111,18 @@ public class JobsScreen extends Window {
 
 	private void toMakePayment() {
 
-		if (jobsTable.getSelectionModel().getSelectedItem() != null) {
-			String[] jobData = jobsTable.getSelectionModel().getSelectedItem();
+		if (jobsTable.getSelectionModel().getSelectedItem() != null
+				|| completeJobsTable.getSelectionModel().getSelectedItem() != null
+				|| lateJobsTable.getSelectionModel().getSelectedItem() != null) {
+			String[] jobData;
+			if(jobsTable.getSelectionModel().getSelectedItem() != null) {
+				jobData = jobsTable.getSelectionModel().getSelectedItem();
+			}
+			else if (lateJobsTable.getSelectionModel().getSelectedItem() != null){
+				jobData = lateJobsTable.getSelectionModel().getSelectedItem();
+			}else {
+				jobData = completeJobsTable.getSelectionModel().getSelectedItem();
+			}
 			//TODO assign job id
 			try {
 				if(!procUiController.checkIfJobPaid(Integer.parseInt(jobData[0]))){
@@ -140,9 +150,12 @@ public class JobsScreen extends Window {
 	protected void toProcessTasks(){
 		if(jobsTable.getSelectionModel().getSelectedItem() != null) {
 			String[] jobData = jobsTable.getSelectionModel().getSelectedItem();
-			if (jobData[7].equals("0")) {
+			if (jobData[8].equals("0")) {
 				ProcessTasksScreen.setJobID(Integer.parseInt(jobData[0]));
 				showScreen(this, "ProgressTasks");
+			}
+			else{
+				new Alert(Alert.AlertType.ERROR, "Job is complete", ButtonType.CLOSE).show();
 			}
 		}
 		else{
@@ -154,7 +167,7 @@ public class JobsScreen extends Window {
 	protected void toProcessLateTasks(){
 		if(lateJobsTable.getSelectionModel().getSelectedItem() != null) {
 			String[] jobData = lateJobsTable.getSelectionModel().getSelectedItem();
-			if (jobData[7].equals("0")) {
+			if (jobData[8].equals("0")) {
 				ProcessTasksScreen.setJobID(Integer.parseInt(jobData[0]));
 				showScreen(this, "ProgressTasks");
 			}
@@ -214,8 +227,10 @@ public class JobsScreen extends Window {
 		processTasksButton2.setOnAction(actionEvent -> toProcessLateTasks());
 		paymentsButton1.setOnAction(actionEvent -> toPayment());
 		paymentsButton2.setOnAction(actionEvent -> toPayment());
+		paymentsButton3.setOnAction(actionEvent -> toPayment());
 		recordPaymentButton1.setOnMouseClicked(mouseEvent -> toMakePayment());
 		recordPaymentButton2.setOnMouseClicked(mouseEvent -> toMakePayment());
+		recordPaymentButton3.setOnMouseClicked(mouseEvent -> toMakePayment());
 		userAllowed = new String[]{ROLE_OFFICE_MANAGER, ROLE_SHIFT_MANAGER, ROLE_RECEPTIONIST, ROLE_TECHNICIAN_COPY, ROLE_TECHNICIAN_DEV, ROLE_TECHNICIAN_PACK, ROLE_TECHNICIAN_FIN};
 
 		//populate columns for job table
