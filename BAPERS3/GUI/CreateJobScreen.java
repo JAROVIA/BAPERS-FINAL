@@ -79,11 +79,12 @@ public class CreateJobScreen extends Window {
 			System.out.println(sql);
 			Statement statement = connection.createStatement();
 			statement.executeUpdate(sql);
+
 			AlertUser.showCompletion("Job data submit");
 			super.showScreen(this, "Jobs");
 
 		} catch (SQLException throwables) {
-			throwables.printStackTrace();
+			AlertUser.showDBError();
 		}
 	}
 
@@ -130,13 +131,11 @@ public class CreateJobScreen extends Window {
 			jobPriceLabel.setText(String.format("%.2f", total));
 			Job.setJobPrice(total);
 
-		}
-
-		try {
-			CreateTIJInsertList(Job.getJobID(), TaskDescription.getTaskIDStatic(), Job.getAccountNumber(), Job.getUrgency());
-		}
-		catch (Exception e){
-			System.out.println(e.toString());
+			try {
+				CreateTIJInsertList(Job.getJobID(), Integer.parseInt(taskData[0]), Job.getAccountNumber(), Job.getUrgency());
+			} catch (Exception e) {
+				System.out.println(e.toString());
+			}
 		}
 	}
 

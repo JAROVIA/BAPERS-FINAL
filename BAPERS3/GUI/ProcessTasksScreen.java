@@ -1,5 +1,6 @@
 package GUI;
 
+import ADMIN.AlertUser;
 import PROCESS.TaskInAJob;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -100,7 +101,7 @@ public class ProcessTasksScreen extends Window {
 					TaskInAJob.StartTask(Integer.parseInt(taskInAJobData[0]));
 					onShow();
 				} catch (SQLException throwables) {
-					throwables.printStackTrace();
+					AlertUser.showDBError();
 				}
 			}
 		}
@@ -142,16 +143,12 @@ public class ProcessTasksScreen extends Window {
 				alert.show();
 			}
 			else{
-				String completedByEmployeeName = "";
-				if(completedByCheckBox.isSelected()){
-					completedByEmployeeName = completedByField.getText().trim();
-
-				}else {
-					completedByEmployeeName = procUiController.getLoggedInUser().getEmployeeName();
-				}
+				String completedByEmployeeName =
+						(completedByCheckBox.isSelected())
+								? completedByField.getText().trim() : procUiController.getLoggedInUser().getEmployeeName();
 				try {
 					//TODO use employee name
-					TaskInAJob.CompleteTask(Integer.parseInt(taskInAJobData[0]), completedByField.getText());
+					TaskInAJob.CompleteTask(Integer.parseInt(taskInAJobData[0]), Integer.parseInt(taskInAJobData[1]), completedByEmployeeName);
 					onShow();
 				} catch (SQLException throwables) {
 					throwables.printStackTrace();
