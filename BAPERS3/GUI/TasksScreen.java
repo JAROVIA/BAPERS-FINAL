@@ -38,7 +38,11 @@ public class TasksScreen extends Window {
 			return data[1].toLowerCase().contains(input.toLowerCase())
 					|| data[2].toLowerCase().contains(input.toLowerCase());
 		}
-
+		if(matchAnyNumberType(input)){
+			return data[0].contains(input)
+					|| data[3].contains(input)
+					|| data[4].contains(input);
+		}
 		if(matchNumber(input)){
 			return data[0].contains(input)
 					|| data[3].contains(input)

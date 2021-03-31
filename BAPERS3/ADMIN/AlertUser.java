@@ -65,7 +65,7 @@ public class AlertUser {
 	}
 
 	public static void showCompletion(String whatWasDone){
-		new Alert(Alert.AlertType.CONFIRMATION, whatWasDone + " confirmed", ButtonType.CLOSE);
+		new Alert(Alert.AlertType.CONFIRMATION, whatWasDone + " confirmed", ButtonType.CLOSE).show();
 	}
 
 	/**
