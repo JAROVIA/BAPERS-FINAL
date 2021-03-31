@@ -293,3 +293,5 @@ target/classes/REPORT/PDFGeneration.class
 target/classes/REPORT/Report.class
 target/classes/REPORT/StaffReport.class
 target/classes/REPORT/SummaryReport.class
+*.pdf
+target/*
