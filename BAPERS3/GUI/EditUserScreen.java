@@ -3,9 +3,7 @@ package GUI;
 import ADMIN.AlertUser;
 import ADMIN.UserAccount;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.sql.SQLException;
 
@@ -35,10 +33,15 @@ public class EditUserScreen extends Window {
 			editingUser.setPassword(passwordField.getText().trim());
 			editingUser.setUserRole(roleBox.getValue().trim());
 			editingUser.setUsername(usernameField.getText().trim());
-			saveUser(editingUser);
+			if(!UserAccount.checkUserExistsOnEdit(editingUser.getEmployeeID(), editingUser.getUsername())) {
+				saveUser(editingUser);
+				AlertUser.showCompletion("Edit user data");
+				showScreen(this, "UserAccounts");
+			}
+			else{
+				new Alert(Alert.AlertType.ERROR, "User with same username exists", ButtonType.CLOSE).show();
+			}
 		}
-		AlertUser.showCompletion("Edit user data");
-		showScreen(this, "UserAccounts");
 	}
 
 	private void onCancel(){

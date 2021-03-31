@@ -23,6 +23,8 @@ public class JobsScreen extends Window {
 	@FXML
 	private Button processTasksButton2;
 	@FXML
+	private Button processTasksButton3;
+	@FXML
 	private ImageView recordPaymentButton1;
 	@FXML
 	private ImageView recordPaymentButton2;
@@ -150,7 +152,7 @@ public class JobsScreen extends Window {
 	protected void toProcessTasks(){
 		if(jobsTable.getSelectionModel().getSelectedItem() != null) {
 			String[] jobData = jobsTable.getSelectionModel().getSelectedItem();
-			if (jobData[8].equals("0")) {
+			if (/*jobData[8].equals("0")*/true) {
 				ProcessTasksScreen.setJobID(Integer.parseInt(jobData[0]));
 				showScreen(this, "ProgressTasks");
 			}
@@ -167,7 +169,21 @@ public class JobsScreen extends Window {
 	protected void toProcessLateTasks(){
 		if(lateJobsTable.getSelectionModel().getSelectedItem() != null) {
 			String[] jobData = lateJobsTable.getSelectionModel().getSelectedItem();
-			if (jobData[8].equals("0")) {
+			if (/*jobData[8].equals("0")*/true) {
+				ProcessTasksScreen.setJobID(Integer.parseInt(jobData[0]));
+				showScreen(this, "ProgressTasks");
+			}
+		}
+		else{
+			Alert alert = new Alert(Alert.AlertType.ERROR, "Select job to process", ButtonType.CLOSE);
+			alert.show();
+		}
+	}
+
+	protected void toProcessCompleteTasks(){
+		if(completeJobsTable.getSelectionModel().getSelectedItem() != null) {
+			String[] jobData = completeJobsTable.getSelectionModel().getSelectedItem();
+			if (/*jobData[8].equals("0")*/true) {
 				ProcessTasksScreen.setJobID(Integer.parseInt(jobData[0]));
 				showScreen(this, "ProgressTasks");
 			}
@@ -225,6 +241,7 @@ public class JobsScreen extends Window {
 		createJobOrderButton.setOnAction(actionEvent -> toCreateJobSetup());
 		processTasksButton1.setOnAction(actionEvent -> toProcessTasks());
 		processTasksButton2.setOnAction(actionEvent -> toProcessLateTasks());
+		processTasksButton3.setOnAction(actionEvent -> toProcessCompleteTasks());
 		paymentsButton1.setOnAction(actionEvent -> toPayment());
 		paymentsButton2.setOnAction(actionEvent -> toPayment());
 		paymentsButton3.setOnAction(actionEvent -> toPayment());

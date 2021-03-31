@@ -1,6 +1,7 @@
 package GUI;
 
 import ADMIN.AlertUser;
+import ADMIN.UserAccount;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -37,9 +38,14 @@ public class RegisterNewUserScreen extends Window{
 		String userRole = roleBox.getValue().trim();
 
 		if(isValueNotEmpty(new TextField[]{staffNameField, userNameField, pwField}, new ComboBox[]{roleBox})){
-			adminUiController.saveUser(userRole, employeeName, password, userName);
-			AlertUser.showCompletion("User data submit");
-			showScreen(this, "UserAccounts");
+			if(!UserAccount.checkUserExists(userName)) {
+				adminUiController.saveUser(userRole, employeeName, password, userName);
+				AlertUser.showCompletion("User data submit");
+				showScreen(this, "UserAccounts");
+			}
+			else{
+				new Alert(Alert.AlertType.ERROR, "User with same username exists", ButtonType.CLOSE).show();
+			}
 		}
 	}
 

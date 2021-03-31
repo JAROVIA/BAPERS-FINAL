@@ -123,6 +123,37 @@ public class UserAccount {
 		statement.executeUpdate(sql);
 	}
 
+	/**
+	 *
+	 * @param username
+	 * @return true if user exists, else if does not
+	 * @throws SQLException
+	 */
+	public static boolean checkUserExistsOnEdit(int userID, String username) throws SQLException {
+		String sql = "SELECT COUNT(*) AS 'count' " +
+				"FROM UserAccounts " +
+				"WHERE Username = '" + username + "'" +
+				"AND NOT EmployeeID = " + userID + ";";
+		Statement statement = connection.createStatement();
+		ResultSet resultSet = statement.executeQuery(sql);
+
+		if(resultSet.next()){
+			return resultSet.getInt("count") > 0;
+		}
+		return false;
+	}
+
+	public static boolean checkUserExists(String username) throws SQLException {
+		String sql = "SELECT COUNT(*) AS 'count' FROM UserAccounts WHERE Username = '" + username + "';";
+		Statement statement = connection.createStatement();
+		ResultSet resultSet = statement.executeQuery(sql);
+
+		if(resultSet.next()){
+			return resultSet.getInt("count") > 0;
+		}
+		return false;
+	}
+
 	public UserAccount retrieveUser() {
 		// TODO - implement UserAccount.RetrieveUser
 		throw new UnsupportedOperationException();
