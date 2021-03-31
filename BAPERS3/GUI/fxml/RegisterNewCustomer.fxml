@@ -50,9 +50,9 @@
 
 <VBox prefHeight="434.0" prefWidth="668.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.RegisterNewCustomerScreen">
   <children>
-      <ScrollPane fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS">
+      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <content>
-            <GridPane fx:id="gridPane" maxHeight="1.7976931348623157E308" vgap="10.0">
+            <GridPane fx:id="gridPane" minHeight="700.0" vgap="10.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -70,42 +70,41 @@
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="100.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="ALWAYS" />
-                  <RowConstraints maxHeight="50.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="100.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="100.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="300.0" percentHeight="20.0" prefHeight="100.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="40.0" percentHeight="5.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="40.0" percentHeight="5.0" prefHeight="40.0" vgrow="ALWAYS" />
+                  <RowConstraints minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="40.0" percentHeight="20.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="40.0" percentHeight="5.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="40.0" percentHeight="5.0" prefHeight="40.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ImageView fitHeight="39.0" fitWidth="258.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+                  <ImageView fitHeight="39.0" fitWidth="258.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                      <image>
                         <Image url="@../images/Register-New-Customer-Page.jpg" />
                      </image>
                   </ImageView>
-                  <TextField fx:id="nameField" prefHeight="25.0" prefWidth="167.0" promptText="Customer name" style="-fx-border-color: Black;" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.rowIndex="4" />
-                  <TextField fx:id="phoneField" prefHeight="25.0" prefWidth="167.0" promptText="Phone Number" style="-fx-border-color: black;" GridPane.columnIndex="7" GridPane.columnSpan="4" GridPane.rowIndex="4" />
-                  <TextField fx:id="addressField" prefHeight="25.0" prefWidth="167.0" promptText="Address" style="-fx-border-color: black;" GridPane.columnIndex="7" GridPane.columnSpan="4" GridPane.rowIndex="6" />
-                  <Button fx:id="logoutButton" mnemonicParsing="false" prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Logout" GridPane.columnIndex="11" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+                  <TextField fx:id="nameField" prefHeight="25.0" prefWidth="167.0" promptText="Customer name" style="-fx-border-color: Black;" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.rowIndex="3" />
+                  <TextField fx:id="phoneField" prefHeight="25.0" prefWidth="167.0" promptText="Phone Number" style="-fx-border-color: black;" GridPane.columnIndex="7" GridPane.columnSpan="4" GridPane.rowIndex="3" />
+                  <TextField fx:id="addressField" prefHeight="25.0" prefWidth="167.0" promptText="Address" style="-fx-border-color: black;" GridPane.columnIndex="7" GridPane.columnSpan="4" GridPane.rowIndex="5" />
+                  <Button fx:id="logoutButton" mnemonicParsing="false" prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Logout" GridPane.columnIndex="11">
                      <font>
                         <Font size="9.0" />
                      </font>
                   </Button>
-                  <Label fx:id="welcomeLabel" prefHeight="36.0" prefWidth="239.0" style="-fx-border-color: Black;" text="Welcome [logged in user]" textAlignment="RIGHT" GridPane.columnIndex="9" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+                  <Label fx:id="welcomeLabel" prefHeight="36.0" prefWidth="239.0" style="-fx-border-color: Black;" text="Welcome [logged in user]" textAlignment="RIGHT" GridPane.columnIndex="9" GridPane.columnSpan="2">
                      <font>
                         <Font size="9.0" />
                      </font>
                   </Label>
-                  <ImageView fx:id="homeButton" fitHeight="219.0" fitWidth="463.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                  <ImageView fx:id="homeButton" fitHeight="219.0" fitWidth="463.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/BapersLogo.jpg" />
                      </image>
@@ -113,26 +112,26 @@
                         <Insets left="20.0" />
                      </GridPane.margin>
                   </ImageView>
-                  <Button fx:id="submitButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Submit" GridPane.columnIndex="6" GridPane.rowIndex="14">
+                  <Button fx:id="submitButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Submit" GridPane.columnIndex="6" GridPane.rowIndex="13">
                      <font>
                         <Font size="9.0" />
                      </font>
                   </Button>
-                  <ComboBox fx:id="discountBox" prefHeight="27.0" prefWidth="167.0" promptText="Select discount plan" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="10" />
-                  <TextField fx:id="contactNameField" promptText="Contact name" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.rowIndex="6" />
-                  <TextField fx:id="emailField" promptText="email" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.rowIndex="8" />
-                  <TableView fx:id="discountTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="9" GridPane.rowIndex="13">
+                  <ComboBox fx:id="discountBox" prefHeight="27.0" prefWidth="167.0" promptText="Select discount plan" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="9" />
+                  <TextField fx:id="contactNameField" promptText="Contact name" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.rowIndex="5" />
+                  <TextField fx:id="emailField" promptText="email" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.rowIndex="7" />
+                  <TableView fx:id="discountTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="9" GridPane.rowIndex="12">
                      <GridPane.margin>
                         <Insets bottom="10.0" />
                      </GridPane.margin>
                   </TableView>
-                  <TextField fx:id="bandField" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="11" />
-                  <Button fx:id="addButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="+" GridPane.columnIndex="8" GridPane.rowIndex="12" />
-                  <Button fx:id="removeButton" mnemonicParsing="false" text="-" GridPane.columnIndex="9" GridPane.rowIndex="12" />
-                  <TextField fx:id="discountRateField" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="12" />
-                  <Label fx:id="discountRateLabel" text="Discount rate" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="12" />
-                  <ComboBox fx:id="taskBox" prefWidth="150.0" promptText="Select task" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="11" />
-                  <GridPane GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="11">
+                  <TextField fx:id="bandField" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="10" />
+                  <Button fx:id="addButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="+" GridPane.columnIndex="8" GridPane.rowIndex="11" />
+                  <Button fx:id="removeButton" mnemonicParsing="false" text="-" GridPane.columnIndex="9" GridPane.rowIndex="11" />
+                  <TextField fx:id="discountRateField" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="11" />
+                  <Label fx:id="discountRateLabel" text="Discount rate" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="11" />
+                  <ComboBox fx:id="taskBox" prefWidth="150.0" promptText="Select task" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="10" />
+                  <GridPane GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="10">
                     <columnConstraints>
                       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -145,12 +144,12 @@
                         <Label fx:id="bandLabel2" text="To" GridPane.columnIndex="1" />
                      </children>
                   </GridPane>
-                  <CheckBox fx:id="valuedCheckBox" mnemonicParsing="false" text="Valued customer" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
-                  <Label text="Customer name" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="BOTTOM" />
-                  <Label text="Phone number" GridPane.columnIndex="7" GridPane.columnSpan="4" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="BOTTOM" />
-                  <Label text="Contact name" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.halignment="LEFT" GridPane.rowIndex="5" GridPane.valignment="BOTTOM" />
-                  <Label text="Address" GridPane.columnIndex="7" GridPane.halignment="LEFT" GridPane.rowIndex="5" GridPane.valignment="BOTTOM" />
-                  <Label text="e-mail" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.halignment="LEFT" GridPane.rowIndex="7" GridPane.valignment="BOTTOM" />
+                  <CheckBox fx:id="valuedCheckBox" mnemonicParsing="false" text="Valued customer" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+                  <Label text="Customer name" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+                  <Label text="Phone number" GridPane.columnIndex="7" GridPane.columnSpan="4" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+                  <Label text="Contact name" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM" />
+                  <Label text="Address" GridPane.columnIndex="7" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM" />
+                  <Label text="e-mail" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="6" GridPane.valignment="BOTTOM" />
                </children>
             </GridPane>
          </content>

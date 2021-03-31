@@ -1,19 +1,15 @@
 package GUI;
 
+import ACCOUNT.CustomerAccountDetails;
 import ADMIN.AlertUser;
 import CUSTOMER.FixedDiscountRate;
 import CUSTOMER.FlexibleDiscountRate;
 import CUSTOMER.VariableDiscountRate;
-import PROCESS.TaskDescription;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import javafx.util.Callback;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -95,18 +91,55 @@ public class EditCustomerDetailsScreen extends RegisterNewCustomerScreen{
 	}
 
 	@Override
-	protected void submitCustomerData(String status, String phone, String address, String email, String name, String contactName){
+	protected void submitCustomerData(String phone, String address, String email, String name, String contactName){
 		try {
-			acctUiController.submitEditCustomer(
-					Integer.parseInt(accountData[0]),
-					status,
-					phone,
-					address.trim(),
-					email.trim(),
-					name.trim(),
-					contactName.trim());
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
+			if (!CustomerAccountDetails.checkIfCustomerExistsOnEdit(Integer.parseInt(accountData[0]), contactName)) {
+				acctUiController.submitEditCustomer(
+						Integer.parseInt(accountData[0]),
+						"non-valued",
+						phone,
+						address.trim(),
+						email.trim(),
+						name.trim(),
+						contactName.trim());
+			}
+			else{
+				new Alert(Alert.AlertType.ERROR, "Customer account with same contact name exists").show();
+			}
+		} catch (SQLException e) {
+			AlertUser.showDBError();
+		}
+	}
+
+	@Override
+	protected void submitCustomerDataWithDiscount(
+			String phone,
+			String address,
+			String email,
+			String name,
+			String contactName,
+			String discountType,
+			int accountNumber,
+			ArrayList<String[]> discountData
+	){
+		try {
+			if (!CustomerAccountDetails.checkIfCustomerExistsOnEdit(Integer.parseInt(accountData[0]), contactName)) {
+				acctUiController.submitEditCustomer(
+						Integer.parseInt(accountData[0]),
+						"valued",
+						phone,
+						address.trim(),
+						email.trim(),
+						name.trim(),
+						contactName.trim());
+				submitDiscountData(discountType, discountData);
+				AlertUser.showCompletion("Customer data submit");
+				showScreen(this, "CustomerAccounts");
+			}
+			else{
+				new Alert(Alert.AlertType.ERROR, "Customer account with same contact name exists").show();
+			}
+		} catch (SQLException e) {
 			AlertUser.showDBError();
 		}
 	}

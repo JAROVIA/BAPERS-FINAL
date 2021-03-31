@@ -136,6 +136,37 @@ public class CustomerAccountDetails {
 	}
 
 	/**
+	 * checks customer with same contact exists, should not exist
+	 * @return if customer exists - true -  or not - false -
+	 */
+	public static boolean checkIfCustomerExistsOnEdit(int accountNumber, String contactName) throws SQLException {
+		String sql = "SELECT COUNT(*) AS 'count' " +
+				"FROM CustomerAccounts " +
+				"WHERE ContactName = '" + contactName.trim() +"'" +
+				"AND NOT AccountNumber = " + accountNumber + ";";
+		Statement statement = connection.createStatement();
+		System.out.println(sql);
+		ResultSet resultSet = statement.executeQuery(sql);
+
+		if(resultSet.next()){
+			return resultSet.getInt("count") > 0;
+		}
+		return false;
+	}
+
+	public static boolean checkIfCustomerExists(String contactName) throws SQLException {
+		String sql = "SELECT COUNT(*) AS 'count' FROM CustomerAccounts WHERE ContactName = '" + contactName.trim() + "';";
+		Statement statement = connection.createStatement();
+		ResultSet resultSet = statement.executeQuery(sql);
+		System.out.println(sql);
+
+		if(resultSet.next()){
+			return resultSet.getInt("count") > 0;
+		}
+		return false;
+	}
+
+	/**
 	 * 
 	 * @param NewName
 	 */

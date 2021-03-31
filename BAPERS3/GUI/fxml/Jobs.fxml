@@ -21,7 +21,7 @@
             <Font size="15.0" />
          </font>
       </Button>
-      <ImageView fx:id="homeButton" fitHeight="219.0" fitWidth="463.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="219.0" fitWidth="463.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/BAPERS Logo Final.png" />
          </image>
@@ -153,17 +153,17 @@
                               <Font size="15.0" />
                            </font>
                         </TextField>
-                        <ImageView fx:id="recordPaymentButton3" fitHeight="49.0" fitWidth="50.0" layoutX="1700.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="recordPaymentButton3" fitHeight="49.0" fitWidth="50.0" layoutX="1700.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/Record-Payment-Icon.png" />
                            </image>
                         </ImageView>
-                        <Button fx:id="paymentsButton3" layoutX="1641.0" layoutY="110.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="184.0" style="-fx-background-color: #DDF8FF; -fx-border-style: solid;" text="Recorded Payments">
+                        <Button fx:id="paymentsButton3" layoutX="1641.0" layoutY="200.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="184.0" style="-fx-background-color: #DDF8FF; -fx-border-style: solid;" text="Recorded Payments">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Button>
-                        <Label alignment="CENTER" layoutX="1641.0" layoutY="200.0" prefHeight="39.0" prefWidth="184.0" text="Record payment" />
+                        <Label alignment="CENTER" layoutX="1641.0" layoutY="290.0" prefHeight="39.0" prefWidth="184.0" text="Record payment" />
                         <TableView fx:id="completeJobsTable" editable="true" layoutY="104.0" prefHeight="702.0" prefWidth="1590.0" style="-fx-border-style: solid;">
                            <columns>
                               <TableColumn fx:id="jobIdColumn2" prefWidth="79.33334541320801" text="Job ID" />
@@ -179,6 +179,11 @@
                               <Cursor fx:constant="DEFAULT" />
                            </cursor>
                         </TableView>
+                        <Button fx:id="processTasksButton3" layoutX="1641.0" layoutY="110.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="184.0" style="-fx-background-color: #DDF8FF; -fx-border-style: solid;" text="Process Tasks">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
                      </children>
                   </AnchorPane>
               </content>

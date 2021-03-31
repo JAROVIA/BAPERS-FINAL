@@ -62,7 +62,7 @@ public class ADMIN_UI_Controller {
 				if(loggedInUser.getUserRole().equals("Office Manager")){
 					AlertUser jobAlert = new AlertUser(this);
 					if(Job.AreLateJobs()) {
-						String message = "Alert\n" + "There are " + Job.SetLateJobList().size() + " late jobs.";
+						String message = "Alert\n" + "There are " + Job.GetLateJobList().size() + " late jobs.";
 
 						jobAlert.setAlertMessage(message);
 						jobAlert.setDestination("Jobs");
@@ -74,7 +74,7 @@ public class ADMIN_UI_Controller {
 				if(loggedInUser.getUserRole().equals("Shift Manager")){
 					AlertUser jobAlert = new AlertUser(this);
 					if(Job.AreLateJobs()) {
-						String message = "Alert\n" + "There are " + Job.SetLateJobList().size() + " late jobs.";
+						String message = "Alert\n" + "There are " + Job.GetLateJobList().size() + " late jobs.";
 
 						jobAlert.setAlertMessage(message);
 						jobAlert.setDestination("Jobs");

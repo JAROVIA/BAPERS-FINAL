@@ -1,7 +1,7 @@
 package GUI;
 
+import ACCOUNT.CustomerAccountDetails;
 import ADMIN.AlertUser;
-import CUSTOMER.Discount;
 import PROCESS.TaskDescription;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -75,7 +75,7 @@ public class RegisterNewCustomerScreen extends Window {
 		//make sure inputs are correct
 		//listing boolean so easier to see
 		boolean isValuedCustomer = discountBox.getValue() != null && valuedCheckBox.isSelected();
-		//check inputs are correct
+		//check inputs are not empty
 		if (isValueNotEmpty(
 					nameField,
 					contactNameField,
@@ -83,38 +83,38 @@ public class RegisterNewCustomerScreen extends Window {
 					addressField,
 					phoneField
 			)) {
+			//check email format is correct
 			if (matchEmail(emailField.getText())) {
+				//check if person is valued customer type
 				if (isValuedCustomer) {
+					//check discount info is not empty
 					if (discountTable.getItems().size() <= 0 || discountTable.getItems() == null) {
 						Alert alert = new Alert(Alert.AlertType.ERROR, "Enter discount settings", ButtonType.CLOSE);
 						alert.show();
-					} else {
+					}
+					else {
+						//check customer account is not empty
 						//TODO submit as valued customer
-						submitCustomerData(
-								"valued",
+						submitCustomerDataWithDiscount(
 								phoneField.getText().trim(),
 								addressField.getText().trim(),
 								emailField.getText().trim(),
 								nameField.getText().trim(),
-								contactNameField.getText().trim()
+								contactNameField.getText().trim(),
+								discountBox.getValue(),
+								accountNumber,
+								new ArrayList<>(discountTable.getItems())
 						);
-
-						submitDiscountData(discountBox.getValue(), new ArrayList<String[]>(discountTable.getItems()));
-						AlertUser.showCompletion("Customer data submit");
-						showScreen(this, "CustomerAccounts");
 					}
 				} else {
 					//TODO submit as non valued customer
 					submitCustomerData(
-							"non-valued",
 							phoneField.getText().trim(),
 							addressField.getText().trim(),
 							emailField.getText().trim(),
 							nameField.getText().trim(),
 							contactNameField.getText().trim()
-							);
-					AlertUser.showCompletion("Customer data submit");
-					showScreen(this, "CustomerAccounts");
+					);
 				}
 
 			}
@@ -133,15 +133,45 @@ public class RegisterNewCustomerScreen extends Window {
 		try {
 			acctUiController.submitDiscountData(discountType, accountNumber, discountData);
 		} catch (SQLException throwables) {
-			throwables.printStackTrace();
+			AlertUser.showDBError();
 		}
 	}
 
-	protected void submitCustomerData(String status, String phone, String address, String email, String name, String contactName){
+	protected void submitCustomerData(String phone, String address, String email, String name, String contactName){
 		try {
-			acctUiController.addNewCustomer(status, phone, address, email, name, contactName);
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
+			if (CustomerAccountDetails.checkIfCustomerExists(contactNameField.getText())) {
+				new Alert(Alert.AlertType.ERROR, "Customer with same contact name exists", ButtonType.CLOSE).show();
+			} else {
+				acctUiController.addNewCustomer("non-valued", phone, address, email, name, contactName);
+				AlertUser.showCompletion("Customer data submit");
+				showScreen(this, "CustomerAccounts");
+			}
+		} catch(SQLException throwables) {
+			AlertUser.showDBError();
+		}
+	}
+
+	protected void submitCustomerDataWithDiscount(
+			String phone,
+			String address,
+			String email,
+			String name,
+			String contactName,
+			String discountType,
+			int accountNumber,
+			ArrayList<String[]> discountData
+	){
+		try {
+			if(CustomerAccountDetails.checkIfCustomerExists(contactNameField.getText())){
+				new Alert(Alert.AlertType.ERROR, "Customer with same contact name exists", ButtonType.CLOSE).show();
+			} else {
+				acctUiController.addNewCustomer("valued", phone, address, email, name, contactName);
+				acctUiController.submitDiscountData(discountType, accountNumber, discountData);
+				AlertUser.showCompletion("Customer data submit");
+				showScreen(this, "CustomerAccounts");
+			}
+		} catch (SQLException e) {
+			AlertUser.showDBError();
 		}
 	}
 
