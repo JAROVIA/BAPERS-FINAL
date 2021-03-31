@@ -2,6 +2,7 @@ package GUI;
 
 import ACCOUNT.CustomerAccountDetails;
 import ADMIN.AlertUser;
+import CUSTOMER.Discount;
 import CUSTOMER.FixedDiscountRate;
 import CUSTOMER.FlexibleDiscountRate;
 import CUSTOMER.VariableDiscountRate;
@@ -49,33 +50,39 @@ public class EditCustomerDetailsScreen extends RegisterNewCustomerScreen{
 	private void setupExistingDiscount(){
 		String discountType = "";
 		try {
-			discountType = acctUiController.getCustomerDiscountType(accountNumber);
 			if(acctUiController.getCustomerDiscountType(accountNumber) != null) {
+				discountType = acctUiController.getCustomerDiscountType(accountNumber);
 				discountBox.getSelectionModel().select(discountType);
-			}
-			onDiscountSelect();
+				onDiscountSelect();
 
-			if(discountType.equals(DISCOUNT_FIXED)){
-				FixedDiscountRate fixed = new FixedDiscountRate();
-				fixed.retrieveDiscount(accountNumber);
-				data.add(new String[]{""+fixed.getDiscountRate()});
-			}
-			if(discountType.equals(DISCOUNT_FLEX)){
-				FlexibleDiscountRate flex = new FlexibleDiscountRate();
-				flex.retrieveDiscount(accountNumber);
 
-				int mostUpper = flex.getDiscountRate().get(flex.getDiscountRate().size()-1)[1];
+				if (discountType.equals(DISCOUNT_FIXED)) {
+					FixedDiscountRate fixed = new FixedDiscountRate();
+					fixed.retrieveDiscount(accountNumber);
+					data.add(new String[]{"" + fixed.getDiscountRate()});
+				}
+				if (discountType.equals(DISCOUNT_FLEX)) {
+					FlexibleDiscountRate flex = new FlexibleDiscountRate();
+					flex.retrieveDiscount(accountNumber);
 
-				bandLabel.setText(""+mostUpper);
-				data.addAll(acctUiController.discountToStringArray(flex));
-			}
-			if (discountType.equals(DISCOUNT_VAR)){
-				VariableDiscountRate variable = new VariableDiscountRate();
-				variable.retrieveVariableDiscount(accountNumber);
-				data.addAll(acctUiController.discountToStringArray(variable));
-			}
+					int mostUpper = flex.getDiscountRate().get(flex.getDiscountRate().size() - 1)[1];
 
-			discountTable.setItems(data);
+					bandLabel.setText("" + mostUpper);
+					data.addAll(acctUiController.discountToStringArray(flex));
+				}
+				if (discountType.equals(DISCOUNT_VAR)) {
+					VariableDiscountRate variable = new VariableDiscountRate();
+					variable.retrieveVariableDiscount(accountNumber);
+					data.addAll(acctUiController.discountToStringArray(variable));
+				}
+
+				discountTable.setItems(data);
+			} else{
+				new Alert(Alert.AlertType.WARNING,
+						"Error loading conflicting customer status;" +
+								"\ncheck : if a customer is valued, the customer should have a discount plan",
+						ButtonType.CLOSE).show();
+			}
 		} catch (SQLException throwables) {
 			AlertUser.showDBError();
 		}
@@ -102,11 +109,15 @@ public class EditCustomerDetailsScreen extends RegisterNewCustomerScreen{
 						email.trim(),
 						name.trim(),
 						contactName.trim());
+				Discount.deleteDiscount(accountNumber, acctUiController.getCustomerDiscountType(accountNumber));
+				AlertUser.showCompletion("Customer data submit");
+				showScreen(this, "CustomerAccounts");
 			}
 			else{
 				new Alert(Alert.AlertType.ERROR, "Customer account with same contact name exists").show();
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
 			AlertUser.showDBError();
 		}
 	}
@@ -140,6 +151,7 @@ public class EditCustomerDetailsScreen extends RegisterNewCustomerScreen{
 				new Alert(Alert.AlertType.ERROR, "Customer account with same contact name exists").show();
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
 			AlertUser.showDBError();
 		}
 	}

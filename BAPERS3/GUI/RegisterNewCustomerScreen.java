@@ -74,7 +74,7 @@ public class RegisterNewCustomerScreen extends Window {
 	protected void onSubmit() {
 		//make sure inputs are correct
 		//listing boolean so easier to see
-		boolean isValuedCustomer = discountBox.getValue() != null && valuedCheckBox.isSelected();
+		boolean isValuedCustomer = valuedCheckBox.isSelected();
 		//check inputs are not empty
 		if (isValueNotEmpty(
 					nameField,
@@ -88,7 +88,7 @@ public class RegisterNewCustomerScreen extends Window {
 				//check if person is valued customer type
 				if (isValuedCustomer) {
 					//check discount info is not empty
-					if (discountTable.getItems().size() <= 0 || discountTable.getItems() == null) {
+					if (discountBox.getValue() == null || discountTable.getItems().size() <= 0 || discountTable.getItems() == null) {
 						Alert alert = new Alert(Alert.AlertType.ERROR, "Enter discount settings", ButtonType.CLOSE);
 						alert.show();
 					}

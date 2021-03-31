@@ -103,6 +103,7 @@ public class ACCT_UI_Controller {
 		}
 
 		//new discount entry depending on type
+
 		if(discountType.equals("Fixed")){
 			FixedDiscountRate fixed = new FixedDiscountRate(accountNumber, Integer.parseInt(discountData.get(0)[0]));
 			fixed.saveDiscount();
