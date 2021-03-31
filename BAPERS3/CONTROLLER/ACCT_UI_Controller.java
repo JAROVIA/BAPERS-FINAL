@@ -135,54 +135,58 @@ public class ACCT_UI_Controller {
 		System.out.println("calculating");
 
 		for(String[] data : Job.GetJobList()){
-			if(Integer.parseInt(data[1]) == accountNumber){
+			if(Integer.parseInt(data[0]) == jobId){
+				System.out.println(data[0] + " = " + jobId);
 				jobData = data;
 				break;
 			}
 		}
 		if(jobData != null) {
 			float price = Float.parseFloat(jobData[6]);
-
+			System.out.println("initial price = " + price);
+			if(discountType == null){
+				return price;
+			}
 			if (discountType.equals("Fixed")) {
 				FixedDiscountRate fixed = new FixedDiscountRate();
 				fixed.retrieveDiscount(accountNumber);
 
+				System.out.println("price with fixed applied = " + price * (100 - fixed.getDiscountRate()) / 100);
 				return price * (100 - fixed.getDiscountRate()) / 100;
 			}
-			if (discountType.equals("Flexible")) {
+			else if (discountType.equals("Flexible")) {
 				FlexibleDiscountRate flex = new FlexibleDiscountRate();
 				flex.retrieveDiscount(accountNumber);
 
 				//TODO match customer total paid this month
 				int appliedDiscount = flex.getDiscountRate().get(0)[2]; //applying random one
 
+				System.out.println("price with flexible applied" + price * (100 - appliedDiscount) / 100);
 				return price * (100 - appliedDiscount) / 100;
 			}
-			if (discountType.equals("Variable")) {
+			else if (discountType.equals("Variable")) {
 				VariableDiscountRate variable = new VariableDiscountRate();
 				variable.retrieveVariableDiscount(accountNumber);
 
 				ArrayList<String[]> taskInaJobDataList = TaskInAJob.GetTIJList(jobId);
 
 				for(String[] taskInAJobData : taskInaJobDataList){
-					System.out.print("task id = " + taskInAJobData[2]);
 					for(Pair<Integer, Integer> discount : variable.getTaskDiscountRate()){
-						System.out.println(", task id in discount = " + discount.getKey());
 						if(Integer.parseInt(taskInAJobData[2]) == discount.getKey()){
 							System.out.println("match");
 							String[] taskDescriptionData = TaskDescription.getTask(Integer.parseInt(taskInAJobData[2]));
 							if(taskDescriptionData != null) {
-								System.out.print("\ntask id in description = " + taskDescriptionData[0]);
-								System.out.print("\ntask price in description = " + taskDescriptionData[2]);
-								float taskPrice = Float.parseFloat(taskDescriptionData[3]);
-								System.out.print("\nprice deducted = " + taskPrice * discount.getValue());
-								price -= (taskPrice * discount.getValue());
+								System.out.print("\ndiscount amount = " + discount.getValue());
+								float taskPrice = Float.parseFloat(taskDescriptionData[2]);
+								System.out.print("\nprice deducted with variable = " + (taskPrice * (discount.getValue()) / 100 ));
+								price -= (taskPrice * (discount.getValue()) / 100 );
 							}
 						}
 					}
 				}
-				return price;
 			}
+			System.out.println("calculated price = " + price);
+			return price;
 		}
 		return -1;
 	}
