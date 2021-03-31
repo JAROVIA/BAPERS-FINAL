@@ -10,9 +10,7 @@ import com.itextpdf.layout.property.UnitValue;
 
 import java.io.File;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 public class StaffReport extends Report {
 
@@ -21,7 +19,7 @@ public class StaffReport extends Report {
 	static String dbusername = "jaroviadb";
 	static String dbpassword = "Jarovia123#@!";
 	static Connection connection;
-//	private static final String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/STAFFREPORT/StaffReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
+	private static final String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/STAFFREPORT/StaffReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
 
 	static {
 		try {
@@ -32,46 +30,60 @@ public class StaffReport extends Report {
 		}
 	}
 
-
 	public static void main(String[] args) throws Exception {
 
 		//File file = new File(DEST);
 		new StaffReport().printStaffReport("sun mar 28");
-		new StaffReport().printStaffReport("sun mar 29");
-		new StaffReport().printStaffReport("sun mar 29");
 //		ArrayList<String> t = StaffReport.GetTechnicianNames();
 //		for (String st : t){
 //			System.out.println(st);
 //		}
 	}
 
-	public void printCustomerReport(String date) throws Exception {
-		String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/STAFFREPORT/StaffReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
+//	public void printCustomerReport(String date) throws Exception {
+////		String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/STAFFREPORT/StaffReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
+//
+//		PdfDocument pdfDoc = new PdfDocument(new PdfWriter(DEST));
+//		Document doc = new Document(pdfDoc);
+//		doc.add(new Paragraph("TITLE0"));
+//		// By default column width is calculated automatically for the best fit.
+//		// useAllAvailableWidth() method makes table use the whole page's width while placing the content.
+//		Table table = new Table(UnitValue.createPercentArray(10)).useAllAvailableWidth();
+//		List<List<String>> dataset = null;
+//
+//		// change toLoad to decide what you load
+//		ArrayList<String[]> toLoad = StaffReport1("");
+//		dataset = convertTypes(toLoad);
+//
+//		for (List<String> record : dataset) {
+//			for (String field : record) {
+//				table.addCell(new Cell().add(new Paragraph(field)));
+//			}
+//		}
+//		doc.add(table);
+//		table = new Table(6);
+//		for (List<String> record : dataset) {
+//			for (String field : record) {
+//				table.addCell(new Cell().add(new Paragraph(field)));
+//			}
+//		}
+//	}
 
-		PdfDocument pdfDoc = new PdfDocument(new PdfWriter(DEST));
-		Document doc = new Document(pdfDoc);
-		doc.add(new Paragraph("TITLE0"));
-		// By default column width is calculated automatically for the best fit.
-		// useAllAvailableWidth() method makes table use the whole page's width while placing the content.
-		Table table = new Table(UnitValue.createPercentArray(10)).useAllAvailableWidth();
-		List<List<String>> dataset = null;
+	public static void autoGenerateReport(int minutes, int acccountNumber, String /**dddmm*/dayOfYear){
 
-		// change toLoad to decide what you load
-		ArrayList<String[]> toLoad = StaffReport1("");
-		dataset = convertTypes(toLoad);
+		Timer timer = new Timer();
+		TimerTask task = new TimerTask() {
+			@Override
+			public void run() {
+				try {
+					new StaffReport().printStaffReport(dayOfYear);
 
-		for (List<String> record : dataset) {
-			for (String field : record) {
-				table.addCell(new Cell().add(new Paragraph(field)));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
-		}
-		doc.add(table);
-		table = new Table(6);
-		for (List<String> record : dataset) {
-			for (String field : record) {
-				table.addCell(new Cell().add(new Paragraph(field)));
-			}
-		}
+		};
+		timer.schedule(task, 1,minutes*60*1000);
 	}
 
 	// todo

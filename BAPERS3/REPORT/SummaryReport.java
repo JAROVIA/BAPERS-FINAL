@@ -10,9 +10,7 @@ import com.itextpdf.layout.property.UnitValue;
 
 import java.io.File;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 // summary performance report
 public class SummaryReport extends Report {
@@ -39,14 +37,31 @@ public class SummaryReport extends Report {
 		new SummaryReport().printSummaryReport("sun mar 28");
 	}
 
+	public static void autoGenerateReport(int minutes, int acccountNumber, String /**dddmm*/dayOfYear){
+
+		Timer timer = new Timer();
+		TimerTask task = new TimerTask() {
+			@Override
+			public void run() {
+				try {
+					new SummaryReport().printSummaryReport(dayOfYear);
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		timer.schedule(task, 1,minutes*60*1000);
+	}
+
+
 	/**
 	 * This code was written following the following tutorial
 	 * https://github.com/itext/i7js-examples/blob/develop/src/main/java/com/itextpdf/samples/sandbox/tables/ArrayToTable.java
 	 */
+	public void printSummaryReport(String date, String year) throws Exception {
 
-	public void printSummaryReport(String date) throws Exception {
-
-		String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/STAFFREPORT/StaffReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
+		String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/SUMMARYREPORT/SummaryReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
 
 		PdfDocument pdfDoc = new PdfDocument(new PdfWriter(DEST));
 		Document doc = new Document(pdfDoc);
@@ -55,7 +70,7 @@ public class SummaryReport extends Report {
 		Table table = new Table(UnitValue.createPercentArray(2)).useAllAvailableWidth();
 		List<List<String>> dataset = null;
 
-		ArrayList<String[]> SR1 = SummaryReport1(date);
+		ArrayList<String[]> SR1 = SummaryReport1(date, year);
 		dataset = convertTypes(SR1);
 		for (List<String> record : dataset) {
 			for (String field : record) {
@@ -67,7 +82,7 @@ public class SummaryReport extends Report {
 
 		//--
 		doc.add(new Paragraph("Title2"));
-		ArrayList<String[]> SR2 = SummaryReport2(date);
+		ArrayList<String[]> SR2 = SummaryReport2(date, year);
 		dataset = convertTypes(SR2);
 		for (List<String> record : dataset) {
 			for (String field : record) {
@@ -79,7 +94,7 @@ public class SummaryReport extends Report {
 
 		//--
 		doc.add(new Paragraph("Title3"));
-		ArrayList<String[]> SR3 = SummaryReport3(date);
+		ArrayList<String[]> SR3 = SummaryReport3(date, year);
 		dataset = convertTypes(SR3);
 		for (List<String> record : dataset) {
 			for (String field : record) {
@@ -91,7 +106,7 @@ public class SummaryReport extends Report {
 
 		//--
 		doc.add(new Paragraph("Title4"));
-		ArrayList<String[]> SR4 = SummaryReport4(date);
+		ArrayList<String[]> SR4 = SummaryReport4(date, year);
 		dataset = convertTypes(SR4);
 		for (List<String> record : dataset) {
 			for (String field : record) {
@@ -104,12 +119,13 @@ public class SummaryReport extends Report {
 		doc.close();
 	}
 
-	public static ArrayList<String[]> SummaryReport1(String date) throws SQLException {
+	public static ArrayList<String[]> SummaryReport1(String date, String year) throws SQLException {
 		String sql =
 				"SELECT SUM(TIJ.ActualDuration) AS 'Time in Copy Room', ANY_VALUE(TIJ.ShiftCompleted) AS 'During Shift'\n" +
 						"FROM TaskInAJob TIJ,\n" +
 						"     Tasks T\n" +
 						"WHERE TIJ.TaskStartTime LIKE '%" + date + "%'\n" +
+						"AND WHERE TIJ.TaskStartTime LIKE '%" + year + "%'\n" +
 						"  AND T.TaskLocation LIKE '%copy room%'\n" +
 						"GROUP BY TIJ.ShiftCompleted\n" +
 						";\n";
@@ -133,12 +149,13 @@ public class SummaryReport extends Report {
 		return arrayList;
 	}
 
-	public static ArrayList<String[]> SummaryReport2(String date) throws SQLException {
+	public static ArrayList<String[]> SummaryReport2(String date, String year) throws SQLException {
 		String sql =
 				"SELECT SUM(TIJ.ActualDuration) AS 'Time in Development', ANY_VALUE(TIJ.ShiftCompleted) AS 'During Shift'\n" +
 						"FROM TaskInAJob TIJ,\n" +
 						"     Tasks T\n" +
 						"WHERE TIJ.TaskStartTime LIKE '%" + date + "%'\n" +
+						"AND WHERE TIJ.TaskStartTime LIKE '%" + year + "%'\n" +
 						"  AND T.TaskLocation LIKE '%Development area%'\n" +
 						"GROUP BY TIJ.ShiftCompleted\n" +
 						";";
@@ -163,12 +180,13 @@ public class SummaryReport extends Report {
 		return arrayList;
 	}
 
-	public static ArrayList<String[]> SummaryReport3(String date) throws SQLException {
+	public static ArrayList<String[]> SummaryReport3(String date, String year) throws SQLException {
 		String sql =
 				"SELECT SUM(TIJ.ActualDuration) AS 'Time in Packing', ANY_VALUE(TIJ.ShiftCompleted) AS 'During Shift'\n" +
 						"FROM TaskInAJob TIJ,\n" +
 						"     Tasks T\n" +
 						"WHERE TIJ.TaskStartTime LIKE '%" + date + "%'\n" +
+						"AND WHERE TIJ.TaskStartTime LIKE '%" + year + "%'\n" +
 						"  AND T.TaskLocation LIKE '%Packing Departments%'\n" +
 						"GROUP BY TIJ.ShiftCompleted\n" +
 						";\n";
@@ -193,12 +211,13 @@ public class SummaryReport extends Report {
 		return arrayList;
 	}
 
-	public static ArrayList<String[]> SummaryReport4(String date) throws SQLException {
+	public static ArrayList<String[]> SummaryReport4(String date, String year) throws SQLException {
 		String sql =
 				"SELECT SUM(TIJ.ActualDuration) AS 'Time in Finishing', ANY_VALUE(TIJ.ShiftCompleted) AS 'During Shift'\n" +
 						"FROM TaskInAJob TIJ,\n" +
 						"     Tasks T\n" +
 						"WHERE TIJ.TaskStartTime LIKE '%" + date + "%'\n" +
+						"AND WHERE TIJ.TaskStartTime LIKE '%" + year + "%'\n" +
 						"  AND T.TaskLocation LIKE '%Finishing Room%'\n" +
 						"GROUP BY TIJ.ShiftCompleted\n" +
 						";";

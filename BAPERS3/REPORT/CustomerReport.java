@@ -121,8 +121,7 @@ public class CustomerReport extends Report {
 		doc.close();
 	}
 
-
-	public static void autoGenerateReport(int minutes, int acccountNumber, String dayOfYear){
+	public static void autoGenerateReport(int minutes, int acccountNumber, String /**dddmm*/dayOfYear){
 
     Timer timer = new Timer();
     TimerTask task = new TimerTask() {
