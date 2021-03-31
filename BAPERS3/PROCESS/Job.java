@@ -145,6 +145,7 @@ public class Job implements I_PROCESS {
 
 	/**
 	 * Pulls a list of Jobs from the db
+	 * that are active and not at risk of being late
 	 * */
 	public static ArrayList<String[]> GetJobList() throws SQLException {
 		Statement statement = connection.createStatement();
@@ -183,9 +184,90 @@ public class Job implements I_PROCESS {
 		return arrayList;
 	}
 
+	public static ArrayList<String[]> GetCompleteJobList() throws SQLException {
+		Statement statement = connection.createStatement();
+		String sql = "SELECT * FROM Jobs WHERE IsCompleted = 0;";
+		ResultSet resultSet = statement.executeQuery(sql);
 
-	// any jobs within 2 hours of deadline
+		ArrayList<String[]> arrayList = new ArrayList<String[]>();
+		String tuple;
+		// adding changes to an array list
+		while (resultSet.next()){
+
+			int JobID = resultSet.getInt("JobID");
+			int AccountNumber = resultSet.getInt("AccountNumber");
+			int NumberOfTasks = resultSet.getInt("NumberOfTasks");
+			String DateOfJob = resultSet.getString("DateOfJob");
+			String JobDeadline = resultSet.getString("JobDeadline");
+			String JobUrgency = resultSet.getString("JobUrgency");
+			float Price = resultSet.getFloat("price");
+			int TasksCompleted = resultSet.getInt("TasksCompleted");
+			int IsCompleted = resultSet.getInt("IsCompleted");
+
+			tuple = JobID + "`"
+					+ AccountNumber + "`"
+					+ NumberOfTasks + "`"
+					+ DateOfJob + "`"
+					+ JobDeadline + "`"
+					+ JobUrgency + "`"
+					+ String.format("%.2f",Price) + "`"
+					+ TasksCompleted + "`"
+					+ IsCompleted;
+
+			arrayList.add(tuple.split("`"));
+
+		}
+		resultSet.close();
+		return arrayList;
+	}
+
+	/**
+	 * Gets the list of jobs where islate = 1
+	 * Displays them in a tab in the jobs table
+	 * */
 	public static ArrayList<String[]> GetLateJobList() throws SQLException {
+		Statement statement = connection.createStatement();
+		String sql = "SELECT * FROM Jobs WHERE IsLate = 1 AND IsCompleted = 0;"; /* SELECT * FROM Jobs WHERE IsArchived = 0; */
+		ResultSet resultSet = statement.executeQuery(sql);
+
+		ArrayList<String[]> arrayList = new ArrayList<String[]>();
+		String tuple;
+		// adding changes to an array list
+		while (resultSet.next()){
+			System.out.println("thats late");
+			int JobID = resultSet.getInt("JobID");
+			int AccountNumber = resultSet.getInt("AccountNumber");
+			int NumberOfTasks = resultSet.getInt("NumberOfTasks");
+			String DateOfJob = resultSet.getString("DateOfJob"); // date of job order
+			String JobDeadline = resultSet.getString("JobDeadline"); // dependant on urgency
+			String JobUrgency = resultSet.getString("JobUrgency");
+			int Price = resultSet.getInt("Price");
+			int TasksCompleted = resultSet.getInt("TasksCompleted");
+			int IsCompleted = resultSet.getInt("IsCompleted");
+
+			tuple =
+					JobID + "`"
+							+ AccountNumber + "`"
+							+ NumberOfTasks + "`"
+							+ DateOfJob + "`"
+							+ JobDeadline + "`"
+							+ JobUrgency + "`"
+							+ Price + "`"
+							+ TasksCompleted + "`"
+							+ IsCompleted;
+
+			arrayList.add(tuple.split("`"));
+
+		}
+		resultSet.close();
+		return arrayList;
+	}
+
+		/**
+	 * This goes through the jobs,
+	 * and will set jobs as late on login
+	 * */
+	public static ArrayList<String[]> SetLateJobList() throws SQLException {
 		Statement statement = connection.createStatement();
 		Statement statement1 = connection.createStatement();
 		Statement statement2 = connection.createStatement();
@@ -234,7 +316,6 @@ public class Job implements I_PROCESS {
 					(FullDateNow.equals(FullDateDue) && ( hourNow.equals(hourDue) || hourNow.equals(hourAlmostDue)))
 			){
 				// change islate to true
-				// change db entry
 				String s = "UPDATE Jobs SET IsLate = 1 WHERE JobID = " + JobID + ";";
 				statement1.executeUpdate(s);
 
@@ -252,7 +333,6 @@ public class Job implements I_PROCESS {
 				arrayList.add(tuple.split("`"));
 
 				System.out.println(Job.getJobID());
-//				String sqlSetlATE = "UPDATE Jobs SET IsLate = 1 WHERE JobID = " + Job.getJobID() + ";";
 				String sqlSetlATE = "UPDATE Jobs SET IsLate = 1 WHERE JobID = " + JobID + ";";
 				statement2.executeUpdate(sqlSetlATE);
 			}
@@ -262,48 +342,12 @@ public class Job implements I_PROCESS {
 		return arrayList;
 	}
 
-	public static ArrayList<String[]> GetLateJobListPermanent() throws SQLException {
-		Statement statement = connection.createStatement();
-		String sql = "SELECT * FROM Jobs WHERE IsLate = 1;"; /* SELECT * FROM Jobs WHERE IsArchived = 0; */
-		ResultSet resultSet = statement.executeQuery(sql);
 
-		ArrayList<String[]> arrayList = new ArrayList<String[]>();
-		String tuple;
-		// adding changes to an array list
-		while (resultSet.next()){
-
-			int JobID = resultSet.getInt("JobID");
-			int AccountNumber = resultSet.getInt("AccountNumber");
-			int NumberOfTasks = resultSet.getInt("NumberOfTasks");
-			String DateOfJob = resultSet.getString("DateOfJob"); // date of job order
-			String JobDeadline = resultSet.getString("JobDeadline"); // dependant on urgency
-			String JobUrgency = resultSet.getString("JobUrgency");
-			int Price = resultSet.getInt("Price");
-			int TasksCompleted = resultSet.getInt("TasksCompleted");
-			int IsCompleted = resultSet.getInt("IsCompleted");
-
-			tuple =
-			JobID + "`"
-			+ AccountNumber + "`"
-			+ NumberOfTasks + "`"
-			+ DateOfJob + "`"
-			+ JobDeadline + "`"
-			+ JobUrgency + "`"
-			+ Price + "`"
-			+ TasksCompleted + "`"
-			+ IsCompleted;
-
-			arrayList.add(tuple.split("`"));
-
-		}
-		resultSet.close();
-		return arrayList;
-	}
 
 
 	public static boolean AreLateJobs() throws SQLException {
 		Statement statement = connection.createStatement();
-		String sql = "SELECT * FROM Jobs;"; /* SELECT * FROM Jobs WHERE IsArchived = 0; */
+		String sql = "SELECT * FROM Jobs WHERE IsComplete = 0;"; /* SELECT * FROM Jobs WHERE IsArchived = 0; */
 		ResultSet resultSet = statement.executeQuery(sql);
 
 		ArrayList<String[]> arrayList = new ArrayList<String[]>();
@@ -322,6 +366,7 @@ public class Job implements I_PROCESS {
 			int Price = resultSet.getInt("Price");
 			int TasksCompleted = resultSet.getInt("TasksCompleted");
 			int IsCompleted = resultSet.getInt("IsCompleted");
+			int IsLate = resultSet.getInt("IsLate");
 
 
 			// im trying to check the current hour a job is due. vs the current system hour.
@@ -345,18 +390,21 @@ public class Job implements I_PROCESS {
 			String hourAlmostDue = String.valueOf(hourAlmostDueInt);
 
 			// can add year to make sure no duplication same time next year
-			if (FullDateNow.equals(FullDateDue) && ( hourNow.equals(hourDue) || hourNow.equals(hourAlmostDue) )){
+			if (
+					(FullDateNow.equals(FullDateDue) && ( hourNow.equals(hourDue) || hourNow.equals(hourAlmostDue)))
+					|| IsLate == 1
+			){
 
 				tuple =
 						JobID + "`"
-								+ AccountNumber + "`"
-								+ NumberOfTasks + "`"
-								+ DateOfJob + "`"
-								+ JobDeadline + "`"
-								+ JobUrgency + "`"
-								+ Price + "`"
-								+ TasksCompleted + "`"
-								+ IsCompleted;
+						+ AccountNumber + "`"
+						+ NumberOfTasks + "`"
+						+ DateOfJob + "`"
+						+ JobDeadline + "`"
+						+ JobUrgency + "`"
+						+ Price + "`"
+						+ TasksCompleted + "`"
+						+ IsCompleted;
 
 				arrayList.add(tuple.split("`"));
 
@@ -364,9 +412,7 @@ public class Job implements I_PROCESS {
 
 		}
 
-
 		bool = !arrayList.isEmpty();
-//		boolean bool = tuple.isEmpty();
 		return bool;
 	}
 

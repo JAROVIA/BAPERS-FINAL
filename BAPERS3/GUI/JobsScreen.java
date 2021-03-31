@@ -165,8 +165,8 @@ public class JobsScreen extends Window {
 		ObservableList<String[]> lateJobData = FXCollections.observableArrayList();
 		try {
 			jobData.addAll(Job.GetJobList());
-			Job.GetLateJobList();
-			lateJobData.addAll(Job.GetLateJobListPermanent());
+			Job.SetLateJobList();
+			lateJobData.addAll(Job.GetLateJobList());
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
 		}
