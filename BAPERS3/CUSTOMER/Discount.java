@@ -22,9 +22,11 @@ public abstract class Discount {
 	}
 
 	public static void deleteDiscount(int accountNumber, String discountTable) throws SQLException {
-		String sql = "DELETE FROM " + discountTable + "Discount " + " WHERE AccountNumber = " + accountNumber + ";";
-		Statement statement = connection.createStatement();
-		statement.executeUpdate(sql);
+		if(discountTable != null) {
+			String sql = "DELETE FROM " + discountTable + "Discount " + " WHERE AccountNumber = " + accountNumber + ";";
+			Statement statement = connection.createStatement();
+			statement.executeUpdate(sql);
+		}
 	}
 
 	public static boolean ifDiscountExists(int accountNumber) throws SQLException {
