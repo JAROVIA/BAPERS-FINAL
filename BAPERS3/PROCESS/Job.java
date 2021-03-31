@@ -186,7 +186,7 @@ public class Job implements I_PROCESS {
 
 	public static ArrayList<String[]> GetCompleteJobList() throws SQLException {
 		Statement statement = connection.createStatement();
-		String sql = "SELECT * FROM Jobs WHERE IsCompleted = 0;";
+		String sql = "SELECT * FROM Jobs WHERE IsCompleted = 1;";
 		ResultSet resultSet = statement.executeQuery(sql);
 
 		ArrayList<String[]> arrayList = new ArrayList<String[]>();
@@ -347,7 +347,7 @@ public class Job implements I_PROCESS {
 
 	public static boolean AreLateJobs() throws SQLException {
 		Statement statement = connection.createStatement();
-		String sql = "SELECT * FROM Jobs WHERE IsComplete = 0;"; /* SELECT * FROM Jobs WHERE IsArchived = 0; */
+		String sql = "SELECT * FROM Jobs WHERE IsCompleted = 0;"; /* SELECT * FROM Jobs WHERE IsArchived = 0; */
 		ResultSet resultSet = statement.executeQuery(sql);
 
 		ArrayList<String[]> arrayList = new ArrayList<String[]>();
@@ -411,7 +411,7 @@ public class Job implements I_PROCESS {
 			}
 
 		}
-
+		statement.close();
 		bool = !arrayList.isEmpty();
 		return bool;
 	}

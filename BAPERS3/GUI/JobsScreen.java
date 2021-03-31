@@ -27,17 +27,25 @@ public class JobsScreen extends Window {
 	@FXML
 	private ImageView recordPaymentButton2;
 	@FXML
+	private ImageView recordPaymentButton3;
+	@FXML
 	private Button paymentsButton1;
 	@FXML
 	private Button paymentsButton2;
+	@FXML
+	private Button paymentsButton3;
 	@FXML
 	private TextField searchField1;
 	@FXML
 	private TextField searchField2;
 	@FXML
+	private TextField searchField3;
+	@FXML
 	private TableView<String[]> jobsTable;
 	@FXML
 	private TableView<String[]> lateJobsTable;
+	@FXML
+	private TableView<String[]> completeJobsTable;
 
 	/**
 	 * 
@@ -163,16 +171,19 @@ public class JobsScreen extends Window {
 		//get list of jobs here
 		ObservableList<String[]> jobData = FXCollections.observableArrayList();
 		ObservableList<String[]> lateJobData = FXCollections.observableArrayList();
+		ObservableList<String[]> completeJobData = FXCollections.observableArrayList();
 		try {
 			jobData.addAll(Job.GetJobList());
 			Job.SetLateJobList();
 			lateJobData.addAll(Job.GetLateJobList());
+			completeJobData.addAll(Job.GetCompleteJobList());
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
 		}
 
 		FilteredList<String[]> jobFilteredList = new FilteredList<>(jobData);
 		FilteredList<String[]> lateJobFilteredList = new FilteredList<>(lateJobData);
+		FilteredList<String[]> completeJobFilteredList = new FilteredList<>(completeJobData);
 
 		searchField1.textProperty().addListener(((observableValue, old, newValue) -> {
 			jobsTable.getSelectionModel().clearSelection();
@@ -182,9 +193,14 @@ public class JobsScreen extends Window {
 			lateJobsTable.getSelectionModel().clearSelection();
 			lateJobFilteredList.setPredicate(jobDataPredicate(newValue));
 		}));
+		searchField3.textProperty().addListener(((observableValue, old, newValue) -> {
+			lateJobsTable.getSelectionModel().clearSelection();
+			completeJobFilteredList.setPredicate(jobDataPredicate(newValue));
+		}));
 
 		jobsTable.setItems(jobFilteredList);
 		lateJobsTable.setItems(lateJobFilteredList);
+		completeJobsTable.setItems(completeJobFilteredList);
 	}
 	/**
 	 *
@@ -225,6 +241,16 @@ public class JobsScreen extends Window {
 				}
 			});
 		}
-	}
 
+		for (int i = 0; i < completeJobsTable.getColumns().size(); i++) {
+			TableColumn tc = completeJobsTable.getColumns().get(i);
+			int j = i;
+			tc.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<String[], String>, ObservableValue<String>>() {
+				@Override
+				public ObservableValue<String> call(TableColumn.CellDataFeatures<String[], String> property) {
+					return new SimpleStringProperty((property.getValue()[j]));
+				}
+			});
+		}
+	}
 }

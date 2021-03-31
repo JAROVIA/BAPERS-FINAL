@@ -78,7 +78,7 @@ public class AddNewTaskScreen extends Window {
 			else {
 				TaskDescription.NewTask(
 						locationField.getText(),
-						Integer.parseInt(priceField.getText()),
+						Float.parseFloat(priceField.getText()),
 						descriptionField.getText(),
 						Integer.parseInt(durationField.getText())
 				);
@@ -108,7 +108,7 @@ public class AddNewTaskScreen extends Window {
 		super.initialize();
 		userAllowed = new String[]{ROLE_OFFICE_MANAGER};
 
-		addFloatNumberListener(priceField);
+		addPriceNumberListener(priceField);
 		addIntegerNumberListener(durationField);
 
 		cancelButton.setOnAction(actionEvent -> onCancel());

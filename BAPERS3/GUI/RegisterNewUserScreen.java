@@ -31,14 +31,14 @@ public class RegisterNewUserScreen extends Window{
 	 * @param
 	 */
 	private void saveUser() throws SQLException {
-		String employeeName = staffNameField.getText();
-		String userName = userNameField.getText();
-		String password = pwField.getText();
-		String userRole = roleBox.getValue();
+		String employeeName = staffNameField.getText().trim();
+		String userName = userNameField.getText().trim();
+		String password = pwField.getText().trim();
+		String userRole = roleBox.getValue().trim();
 
 		if(isValueNotEmpty(new TextField[]{staffNameField, userNameField, pwField}, new ComboBox[]{roleBox})){
 			adminUiController.saveUser(userRole, employeeName, password, userName);
-			AlertUser.showCompletion("Customer data submit");
+			AlertUser.showCompletion("User data submit");
 			showScreen(this, "UserAccounts");
 		}
 	}
@@ -67,6 +67,7 @@ public class RegisterNewUserScreen extends Window{
 		roleBox.setPromptText("Select role");
 		setComboBoxPromptText(roleBox, "Select role");
 		addNameListener(staffNameField);
+		addPasswordListener(pwField);
 		cancelButton.setOnAction(actionEvent -> onCancel());
 		submitButton.setOnAction(actionEvent -> {
 			try {

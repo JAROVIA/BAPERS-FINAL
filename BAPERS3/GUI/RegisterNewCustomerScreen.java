@@ -92,11 +92,11 @@ public class RegisterNewCustomerScreen extends Window {
 						//TODO submit as valued customer
 						submitCustomerData(
 								"valued",
-								phoneField.getText(),
-								addressField.getText(),
-								emailField.getText(),
-								nameField.getText(),
-								contactNameField.getText()
+								phoneField.getText().trim(),
+								addressField.getText().trim(),
+								emailField.getText().trim(),
+								nameField.getText().trim(),
+								contactNameField.getText().trim()
 						);
 
 						submitDiscountData(discountBox.getValue(), new ArrayList<String[]>(discountTable.getItems()));
@@ -107,11 +107,11 @@ public class RegisterNewCustomerScreen extends Window {
 					//TODO submit as non valued customer
 					submitCustomerData(
 							"non-valued",
-							phoneField.getText(),
-							addressField.getText(),
-							emailField.getText(),
-							nameField.getText(),
-							contactNameField.getText()
+							phoneField.getText().trim(),
+							addressField.getText().trim(),
+							emailField.getText().trim(),
+							nameField.getText().trim(),
+							contactNameField.getText().trim()
 							);
 					AlertUser.showCompletion("Customer data submit");
 					showScreen(this, "CustomerAccounts");

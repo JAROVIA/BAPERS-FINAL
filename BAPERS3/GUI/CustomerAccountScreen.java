@@ -254,7 +254,7 @@ public class CustomerAccountScreen extends Window {
 			}
 			else{
 				System.out.println("attempt match" + matchCustomer(data, input));
-				return matchCustomer(data, input);
+				return matchCustomer(data, input.trim());
 			}
 		};
 	}

@@ -144,7 +144,7 @@ public class ProcessTasksScreen extends Window {
 			else{
 				String completedByEmployeeName = "";
 				if(completedByCheckBox.isSelected()){
-					completedByEmployeeName = completedByField.getText();
+					completedByEmployeeName = completedByField.getText().trim();
 
 				}else {
 					completedByEmployeeName = procUiController.getLoggedInUser().getEmployeeName();

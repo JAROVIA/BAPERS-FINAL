@@ -31,10 +31,10 @@ public class EditUserScreen extends Window {
 	private void onSave() throws SQLException {
 		UserAccount editingUser = adminUiController.getEditingUser();
 		if(isValueNotEmpty(new TextField[]{staffNameField, passwordField, usernameField}, new ComboBox[]{roleBox})) {
-			editingUser.setEmployeeName(staffNameField.getText());
-			editingUser.setPassword(passwordField.getText());
-			editingUser.setUserRole(roleBox.getValue());
-			editingUser.setUsername(usernameField.getText());
+			editingUser.setEmployeeName(staffNameField.getText().trim());
+			editingUser.setPassword(passwordField.getText().trim());
+			editingUser.setUserRole(roleBox.getValue().trim());
+			editingUser.setUsername(usernameField.getText().trim());
 			saveUser(editingUser);
 		}
 		AlertUser.showCompletion("Edit user data");
@@ -71,6 +71,8 @@ public class EditUserScreen extends Window {
 	public void initialize(){
 		super.initialize();
 		userAllowed = new String[]{ROLE_OFFICE_MANAGER};
+		addPasswordListener(passwordField);
+		addNameListener(staffNameField);
 		saveButton.setOnAction(actionEvent -> {
 			try {
 				onSave();
