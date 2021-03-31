@@ -179,6 +179,7 @@ public class Job implements I_PROCESS {
 			arrayList.add(tuple.split("`"));
 
 		}
+		resultSet.close();
 		return arrayList;
 	}
 
@@ -186,6 +187,8 @@ public class Job implements I_PROCESS {
 	// any jobs within 2 hours of deadline
 	public static ArrayList<String[]> GetLateJobList() throws SQLException {
 		Statement statement = connection.createStatement();
+		Statement statement1 = connection.createStatement();
+		Statement statement2 = connection.createStatement();
 		String sql = "SELECT * FROM Jobs;"; /* SELECT * FROM Jobs WHERE IsArchived = 0; */
 		ResultSet resultSet = statement.executeQuery(sql);
 
@@ -233,7 +236,7 @@ public class Job implements I_PROCESS {
 				// change islate to true
 				// change db entry
 				String s = "UPDATE Jobs SET IsLate = 1 WHERE JobID = " + JobID + ";";
-				statement.executeUpdate(s);
+				statement1.executeUpdate(s);
 
 				tuple =
 				JobID + "`"
@@ -251,10 +254,11 @@ public class Job implements I_PROCESS {
 				System.out.println(Job.getJobID());
 //				String sqlSetlATE = "UPDATE Jobs SET IsLate = 1 WHERE JobID = " + Job.getJobID() + ";";
 				String sqlSetlATE = "UPDATE Jobs SET IsLate = 1 WHERE JobID = " + JobID + ";";
-				statement.executeUpdate(sqlSetlATE);
+				statement2.executeUpdate(sqlSetlATE);
 			}
 
 		}
+		resultSet.close();
 		return arrayList;
 	}
 
@@ -292,6 +296,7 @@ public class Job implements I_PROCESS {
 			arrayList.add(tuple.split("`"));
 
 		}
+		resultSet.close();
 		return arrayList;
 	}
 
