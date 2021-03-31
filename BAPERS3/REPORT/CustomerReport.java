@@ -37,9 +37,108 @@ public class CustomerReport extends Report {
 
 	public static void main(String[] args) throws Exception {
 //		File file = new File(DEST);
-		CustomerReport.autoGenerateReport(1,1,"");
-//        new CustomerReport().printCustomerReport(1,"");
+//		CustomerReport.autoGenerateReport(1,1,"");
+        new CustomerReport().printCustomerReport(1,"");
 	}
+
+	public ArrayList<String[]> CustomerReportList(int AccountNumber, String date, String year) throws SQLException {
+		String sql =
+				"SELECT CA.AccountNumber AS 'Account number',\n" +
+						"       CA.CustomerName,\n" +
+						"       CA.ContactName,\n" +
+						"\n" +
+						"       J.JobID AS 'Job',\n" +
+						"       T.TaskPrice AS 'Price, £',\n" +
+						"       T.`TaskID` AS 'Task',\n" +
+						"       T.`TaskLocation` AS 'Department',\n" +
+						"       `TaskStartTime` AS 'Start time/Date',\n" +
+						"       `ActualDuration` AS 'Time Taken',\n" +
+						"       `EmployeeCompletedBy`,\n" +
+						"       JobTaskID\n" +
+						"FROM TaskInAJob TIJ,\n" +
+						"     Jobs J,\n" +
+						"     Tasks T,\n" +
+						"     CustomerAccounts CA\n" +
+						"WHERE TIJ.isCompleted = 1\n" +
+						"  AND CA.AccountNumber = " + AccountNumber + "\n" +
+						"  AND TaskStartTime LIKE '%" + date + "%'\n" +
+						"AND TIJ.TaskStartTime LIKE '%" + year + "%'\n" +
+						"  AND J.`JobID` = TIJ.`JobID`\n" +
+						"  AND T.TaskID = TIJ.TaskID\n" +
+						"  AND J.`AccountNumber` = CA.`AccountNumber`\n" +
+						";\n";
+		Statement statement = connection.createStatement();
+		ResultSet resultSet = statement.executeQuery(sql);
+
+		ArrayList<String[]> arrayList = new ArrayList<String[]>();
+		String tuple;
+		// adding changes to an array list
+		while (resultSet.next()){
+
+			int a = resultSet.getInt("Account number");
+			String b = resultSet.getString("CustomerName");
+			String c = resultSet.getString("ContactName");
+			int d = resultSet.getInt("Job");
+			int e = resultSet.getInt("Price, £");
+			int f = resultSet.getInt("Task");
+			String g = resultSet.getString("Department");
+			String h = resultSet.getString("Start time/Date");
+			int i = resultSet.getInt("Time Taken");
+			String j = resultSet.getString("EmployeeCompletedBy");
+
+			tuple = a + "`"	+ b + "`" + c + "`" + d + "`" + e + "`" + f + "`" + g + "`" + h + "`" + i + "`" + j;
+			arrayList.add(tuple.split("`"));
+
+		}
+		return arrayList;
+	}
+
+	/**
+	 * This code was written following the following tutorial
+	 * https://github.com/itext/i7js-examples/blob/develop/src/main/java/com/itextpdf/samples/sandbox/tables/ArrayToTable.java
+	 */
+	public void printCustomerReport(int accountNumber, String date, String year) throws Exception {
+		String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/CUSTOMERREPORT/CustomerReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
+		PdfDocument pdfDoc = new PdfDocument(new PdfWriter(DEST));
+		Document doc = new Document(pdfDoc);
+		doc.add(new Paragraph("Customer Report!"));
+		// By default column width is calculated automatically for the best fit.
+		// useAllAvailableWidth() method makes table use the whole page's width while placing the content.
+		Table table = new Table(UnitValue.createPercentArray(10)).useAllAvailableWidth();
+		List<List<String>> dataset = null;
+
+		// change toLoad to decide what you load
+		ArrayList<String[]> toLoad = CustomerReportList(accountNumber,date, year);
+		dataset = convertTypes(toLoad);
+
+		for (List<String> record : dataset) {
+			for (String field : record) {
+				table.addCell(new Cell().add(new Paragraph(field)));
+			}
+		}
+
+		doc.add(table);
+		doc.close();
+	}
+
+	public static void autoGenerateReport(int minutes, int acccountNumber, String /**dddmm*/dayOfYear, String year){
+
+		Timer timer = new Timer();
+		TimerTask task = new TimerTask() {
+			@Override
+			public void run() {
+				try {
+					new CustomerReport().printCustomerReport(acccountNumber, dayOfYear, year);
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		timer.schedule(task, 1,minutes*60*1000);
+	}
+
+	// old
 
 	public ArrayList<String[]> CustomerReportList(int AccountNumber, String date) throws SQLException {
 		String sql =
@@ -96,7 +195,6 @@ public class CustomerReport extends Report {
 	 * This code was written following the following tutorial
 	 * https://github.com/itext/i7js-examples/blob/develop/src/main/java/com/itextpdf/samples/sandbox/tables/ArrayToTable.java
 	 */
-
 	public void printCustomerReport(int accountNumber, String date) throws Exception {
 		String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/CUSTOMERREPORT/CustomerReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
 		PdfDocument pdfDoc = new PdfDocument(new PdfWriter(DEST));
@@ -121,7 +219,7 @@ public class CustomerReport extends Report {
 		doc.close();
 	}
 
-	public static void autoGenerateReport(int minutes, int acccountNumber, String /**dddmm*/dayOfYear){
+	public static void autoGenerateReport(int minutes, int acccountNumber, String dayOfYear){
 
     Timer timer = new Timer();
     TimerTask task = new TimerTask() {
