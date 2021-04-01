@@ -21,6 +21,9 @@ public class StaffReport extends Report {
 	static Connection connection;
 	private static final String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/STAFFREPORT/StaffReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
 
+	private static Timer timer = new Timer();
+	private static boolean isTimerStarted = false;
+
 	static {
 		try {
 			connection = DriverManager.getConnection(
@@ -33,11 +36,17 @@ public class StaffReport extends Report {
 	public static void main(String[] args) throws Exception {
 
 		//File file = new File(DEST);
-		new StaffReport().printStaffReport("sun mar 28", "2021");
+//		new StaffReport().printStaffReport("sun mar 28", "2021");
+		new StaffReport().printStaffReport("wed dec 23", "2020");
 //		ArrayList<String> t = StaffReport.GetTechnicianNames();
 //		for (String st : t){
 //			System.out.println(st);
 //		}
+	}
+
+	public static void stopTimer(){
+		System.out.println("stopped");
+		timer.purge();
 	}
 
 	// todo
@@ -62,24 +71,30 @@ public class StaffReport extends Report {
 
 
 
-	public void autoGenerateReport(int minutes, int acccountNumber, String /**dddmm*/dayOfYear, String year){
+	public static void autoGenerateReport(int minutes, int acccountNumber, String /**dddmm*/dayOfYear, String year){
 
-		Timer timer = new Timer();
+		//Timer timer = new Timer();
+		if(isTimerStarted) {
+			stopTimer();
+		}
+		System.out.println(isTimerStarted);
+		isTimerStarted = true;
 		TimerTask task = new TimerTask() {
 			@Override
 			public void run() {
 				try {
-					new StaffReport().printStaffReport(dayOfYear, year);
+					//printStaffReport(dayOfYear, year);
+					System.out.println(System.currentTimeMillis());
 
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		};
-		timer.schedule(task, 1,minutes*60*1000);
+		timer.schedule(task, 1,minutes*5000);
 	}
 
-	public void printStaffReport(String date, String year) throws Exception {
+	public static void printStaffReport(String date, String year) throws Exception {
 
 		String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/STAFFREPORT/StaffReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
 
