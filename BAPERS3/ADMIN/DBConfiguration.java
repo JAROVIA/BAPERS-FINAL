@@ -33,8 +33,9 @@ public class DBConfiguration {
 	private Date AutoTimeDBRestore;
 
 	public static void main(String[] args) throws IOException {
-		DBConfiguration.MakeBackup();
-		DBConfiguration.GetListOfFiles();
+//		DBConfiguration.MakeBackup();
+//		DBConfiguration.GetListOfFiles();
+//		DBConfiguration.RestoreListedBackup(Backup1617245011074.sql);
 	}
 
 
@@ -83,6 +84,7 @@ public class DBConfiguration {
 		return backups;
 	}
 
+	//Backup1617245011074.sql
 	public static void RestoreBackup() throws IOException, SQLException {
 
 

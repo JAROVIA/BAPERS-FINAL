@@ -83,7 +83,7 @@ public class ACCT_UI_Controller {
 		return newData;
 	}
 
-	public String getCustomerDiscountType(int accountNumber) throws SQLException {
+	public static String getCustomerDiscountType(int accountNumber) throws SQLException {
 		if(FlexibleDiscountRate.ifFlexDiscountExists(accountNumber)){
 			return "Flexible";
 		}
@@ -130,7 +130,7 @@ public class ACCT_UI_Controller {
 		}
 	}
 
-	public float calculateFinalPrice(int accountNumber, int jobId) throws SQLException {
+	public static float calculateFinalPrice(int accountNumber, int jobId) throws SQLException {
 		String discountType = getCustomerDiscountType(accountNumber);
 		String[] jobData = null;
 		System.out.println("calculating");

@@ -1,5 +1,7 @@
 package PAYMENT;
 
+import ACCOUNT.CustomerAccountDetails;
+import CONTROLLER.ACCT_UI_Controller;
 import PROCESS.Job;
 
 import java.sql.*;
@@ -69,7 +71,13 @@ public class Payment implements I_Payment {
 		System.out.println(sql);
 		Statement statement = connection.createStatement();
 		statement.executeUpdate(sql);
+		// we have created the payment and recorded the price.
 
+		// Next we need to calculate the discounted price
+		discountedPrice = ACCT_UI_Controller.calculateFinalPrice(accountNumber, jobID);
+		String sqlDiscount = "UPDATE Payments SET DiscountedPrice = " + discountedPrice + " WHERE JobID = "+ jobID + ";";
+		statement.executeUpdate(sqlDiscount);
+		System.out.println(sqlDiscount);
 
 	}
 
@@ -100,6 +108,13 @@ public class Payment implements I_Payment {
 		System.out.println(sql);
 		Statement statement = connection.createStatement();
 		statement.executeUpdate(sql);
+		// we have created the payment and recorded the price.
+
+		// Next we need to calculate the discounted price
+		discountedPrice = ACCT_UI_Controller.calculateFinalPrice(accountNumber, jobID);
+		String sqlDiscount = "UPDATE Payments SET DiscountedPrice = " + discountedPrice + " WHERE JobID = "+ jobID + ";";
+		statement.executeUpdate(sqlDiscount);
+		System.out.println(sqlDiscount);
 
 	}
 
