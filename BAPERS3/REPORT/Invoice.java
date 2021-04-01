@@ -42,13 +42,21 @@ public class Invoice extends Report{
         doc.add(new Paragraph("Customer Report!"));
         // By default column width is calculated automatically for the best fit.
         // useAllAvailableWidth() method makes table use the whole page's width while placing the content.
-        Table table = new Table(UnitValue.createPercentArray(9)).useAllAvailableWidth();
+        Table table = new Table(UnitValue.createPercentArray(9),true);
         List<List<String>> dataset = null;
 
         // change toLoad to decide what you load
         ArrayList<String[]> toLoad = GetInvoice(JobID);
         dataset = convertTypes(toLoad);
-
+        table.addCell("JobID");
+        table.addCell("TaskID");
+        table.addCell("Account Number");
+        table.addCell("Account Status");
+        table.addCell("Phone Number");
+        table.addCell("Contact Name");
+        table.addCell("Customer Name");
+        table.addCell("Price");
+        table.addCell("Discounted Price");
         for (List<String> record : dataset) {
             for (String field : record) {
                 table.addCell(new Cell().add(new Paragraph(field)));
@@ -82,7 +90,7 @@ public class Invoice extends Report{
         "  AND P.JobID = TIJ.JobID\n" +
         "  AND TIJ.JobID = " + JobID + "\n" +
         ";";
-
+        System.out.println(sql);
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
         ArrayList<String[]> arrayList = new ArrayList<String[]>();

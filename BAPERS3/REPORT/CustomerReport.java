@@ -117,15 +117,15 @@ public class CustomerReport extends Report {
 		ArrayList<String[]> toLoad = CustomerReportList(accountNumber, date, year);
 		dataset = convertTypes(toLoad);
 		table.addCell("Account Number");
-		table.addCell("CustomerName");
-		table.addCell("ContactName");
+		table.addCell("Customer Name");
+		table.addCell("Contact Name");
 		table.addCell("Job");
 		table.addCell("Price, £");
 		table.addCell("Task");
 		table.addCell("Department");
-		table.addCell("Start time/Date");
+		table.addCell("Start Time + Date");
 		table.addCell("Time Taken");
-		table.addCell("EmployeeCompletedBy");
+		table.addCell("Completed By");
 		for (List<String> record : dataset) {
 			for (String field : record) {
 				table.addCell(new Cell().add(new Paragraph(field)));

@@ -81,13 +81,11 @@ public class StaffReport extends Report {
 
 	public void printStaffReport(String date, String year) throws Exception {
 
-//		String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/STAFFREPORT/StaffReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
-		String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/STAFFREPORT/StaffReport.pdf";
+		String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/STAFFREPORT/StaffReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
 
 		PdfDocument pdfDoc = new PdfDocument(new PdfWriter(DEST));
 		Document doc = new Document(pdfDoc);
 		doc.add(new Paragraph("Staff report"));
-		doc.add(new Paragraph("Main breakdown"));
 
 		Table table = new Table(UnitValue.createPercentArray(5)).useAllAvailableWidth();
 		List<List<String>> dataset = null;
@@ -114,11 +112,11 @@ public class StaffReport extends Report {
 
 			dataset = convertTypes(individualSR2);
 			for (List<String> record : dataset) {
-				doc.add(new Paragraph("-"));
+				doc.add(new Paragraph(""));
 				doc.add(table);
 				table = new Table(2);
 
-				table.addCell("Time working");
+				table.addCell("Time spent working");
 				table.addCell("Staff name");
 				for (String field : record) {
 					table.addCell(new Cell().add(new Paragraph(field)));
@@ -129,9 +127,9 @@ public class StaffReport extends Report {
 
 
 		// ----------
-		doc.add(new Paragraph("Table of Group Working time"));
+		doc.add(new Paragraph(""));
 		table = new Table(1);
-		table.addCell("Time spent working on day");
+		table.addCell("Time spent working on day (all staff)");
 		ArrayList<String[]> SR3 = StaffReport3(date, year);
 		dataset = convertTypes(SR3);
 		for (List<String> record : dataset) {

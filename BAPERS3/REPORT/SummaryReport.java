@@ -47,7 +47,7 @@ public class SummaryReport extends Report {
 
 		PdfDocument pdfDoc = new PdfDocument(new PdfWriter(DEST));
 		Document doc = new Document(pdfDoc);
-		doc.add(new Paragraph("Title1"));
+		doc.add(new Paragraph("Summary Report"));
 
 		Table table = new Table(UnitValue.createPercentArray(2)).useAllAvailableWidth();
 		List<List<String>> dataset = null;
@@ -65,7 +65,7 @@ public class SummaryReport extends Report {
 		table = new Table(2);
 
 		//--
-		doc.add(new Paragraph("Title2"));
+		doc.add(new Paragraph(""));
 		ArrayList<String[]> SR2 = SummaryReport2(date, year);
 		dataset = convertTypes(SR2);
 		table.addCell("Time in Development");
@@ -79,7 +79,7 @@ public class SummaryReport extends Report {
 		table = new Table(2);
 
 		//--
-		doc.add(new Paragraph("Title3"));
+		doc.add(new Paragraph(""));
 		ArrayList<String[]> SR3 = SummaryReport3(date, year);
 		dataset = convertTypes(SR3);
 		table.addCell("Time in Packing");
@@ -93,7 +93,7 @@ public class SummaryReport extends Report {
 		table = new Table(2);
 
 		//--
-		doc.add(new Paragraph("Title4"));
+		doc.add(new Paragraph(""));
 		ArrayList<String[]> SR4 = SummaryReport4(date, year);
 		dataset = convertTypes(SR4);
 		table.addCell("Time in Finishing");
