@@ -11,32 +11,32 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.RegisterNewUserScreen">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.RegisterNewUserScreen">
    <children>
       <Button fx:id="logoutButton" layoutX="1180.0" layoutY="14.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Logout">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <TextField fx:id="staffNameField" layoutX="473.0" layoutY="307.0" prefHeight="36.0" prefWidth="337.0" promptText="Staff Name" style="-fx-border-color: black;" />
-      <TextField fx:id="userNameField" layoutX="471.0" layoutY="364.0" prefHeight="36.0" prefWidth="337.0" promptText="Username" style="-fx-border-color: black;" />
+      <TextField fx:id="staffNameField" layoutX="471.0" layoutY="340.0" prefHeight="36.0" prefWidth="337.0" promptText="Staff Name" style="-fx-border-color: black;" />
+      <TextField fx:id="userNameField" layoutX="469.0" layoutY="440.0" prefHeight="36.0" prefWidth="337.0" promptText="Username" style="-fx-border-color: black;" />
       <ImageView fx:id="homeButton" fitHeight="219.0" fitWidth="463.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/BAPERS Logo Final.png" />
          </image>
       </ImageView>
-      <Button fx:id="submitButton" layoutX="683.0" layoutY="645.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Submit">
+      <Button fx:id="submitButton" layoutX="685.0" layoutY="767.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Submit">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Label layoutX="925.0" layoutY="14.0" prefHeight="36.0" prefWidth="239.0" style="-fx-border-color: Black;" text="Welcome [logged in user]" textAlignment="RIGHT">
+      <Label fx:id="welcomeLabel" layoutX="925.0" layoutY="14.0" prefHeight="36.0" prefWidth="239.0" style="-fx-border-color: Black;" text="Welcome [logged in user]" textAlignment="RIGHT">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <PasswordField fx:id="pwField" layoutX="471.0" layoutY="420.0" prefHeight="36.0" prefWidth="337.0" promptText="Password" style="-fx-border-color: black;" />
-      <ComboBox fx:id="roleBox" layoutX="471.0" layoutY="475.0" prefHeight="36.0" prefWidth="337.0" promptText="Select Staff Role" style="-fx-border-color: black;" visibleRowCount="4" />
+      <PasswordField fx:id="pwField" layoutX="469.0" layoutY="540.0" prefHeight="36.0" prefWidth="337.0" promptText="Password" style="-fx-border-color: black;" />
+      <ComboBox fx:id="roleBox" layoutX="469.0" layoutY="640.0" prefHeight="36.0" prefWidth="337.0" promptText="Select Staff Role" style="-fx-border-color: black;" visibleRowCount="4" />
       <Text layoutX="470.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="REGISTER NEW USER" wrappingWidth="253.33333333333326">
          <font>
             <Font size="27.0" />
@@ -47,10 +47,13 @@
             <Image url="@../images/Register-New-Customer-User-Icon.png" />
          </image>
       </ImageView>
-      <Button fx:id="cancelButton" layoutX="498.0" layoutY="643.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="cancel">
+      <Button fx:id="cancelButton" layoutX="500.0" layoutY="765.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="cancel">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
+      <Label layoutX="471.0" layoutY="300.0" style="-fx-font-size: 20;" text="Staff Name" />
+      <Label layoutX="471.0" layoutY="400.0" style="-fx-font-size: 20;" text="User name" />
+      <Label layoutX="471.0" layoutY="500.0" style="-fx-font-size: 20;" text="Password" />
    </children>
 </AnchorPane>

@@ -9,41 +9,45 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.EditExistingTaskScreen">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.EditExistingTaskScreen">
    <children>
-      <Button fx:id="logoutButton" layoutX="1180.0" layoutY="14.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Logout">
+      <Button fx:id="logoutButton" layoutX="1756.0" layoutY="60.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Logout">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <TextField fx:id="descriptionField" layoutX="473.0" layoutY="307.0" prefHeight="36.0" prefWidth="337.0" promptText="Enter Task Description" style="-fx-border-color: black;" />
-      <TextField fx:id="locationField" layoutX="471.0" layoutY="364.0" prefHeight="36.0" prefWidth="337.0" promptText="Edit Tasl Location" style="-fx-border-color: black;" />
+      <TextField fx:id="descriptionField" layoutX="790.0" layoutY="400.0" prefHeight="36.0" prefWidth="337.0" promptText="Enter Task Description" style="-fx-border-color: black;" />
+      <TextField fx:id="locationField" layoutX="790.0" layoutY="500.0" prefHeight="36.0" prefWidth="337.0" promptText="Edit Task Location" style="-fx-border-color: black;" />
       <ImageView fx:id="homeButton" fitHeight="219.0" fitWidth="463.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/BAPERS Logo Final.png" />
          </image>
       </ImageView>
-      <Label fx:id="welcomeLabel" layoutX="925.0" layoutY="14.0" prefHeight="36.0" prefWidth="239.0" style="-fx-border-color: Black;" text="Welcome [logged in user]" textAlignment="RIGHT">
+      <Label fx:id="welcomeLabel" layoutX="1501.0" layoutY="60.0" prefHeight="36.0" prefWidth="239.0" style="-fx-border-color: Black;" text="Welcome [logged in user]" textAlignment="RIGHT">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Text layoutX="476.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UPDATE EXISTING TASK" textAlignment="CENTER" wrappingWidth="326.66658528645826">
+      <Text layoutX="792.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UPDATE EXISTING TASK" textAlignment="CENTER" wrappingWidth="326.66658528645826">
          <font>
             <Font size="27.0" />
          </font>
       </Text>
-      <Button fx:id="confirmButton" layoutX="656.0" layoutY="561.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="138.0" style="-fx-background-color: #95ed82; -fx-border-color: Black;" text="Confirm Changes">
+      <Button fx:id="confirmButton" layoutX="972.0" layoutY="800.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="138.0" style="-fx-background-color: #95ed82; -fx-border-color: Black;" text="Confirm Changes">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="cancelButton" layoutX="486.0" layoutY="561.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="138.0" style="-fx-background-color: #f26d6d; -fx-border-color: Black;" text="Cancel; Changes">
+      <Button fx:id="cancelButton" layoutX="802.0" layoutY="800.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="138.0" style="-fx-background-color: #f26d6d; -fx-border-color: Black;" text="Cancel Changes">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <TextField fx:id="durationField" layoutX="472.0" layoutY="494.0" prefHeight="36.0" prefWidth="337.0" promptText="Task duration" style="-fx-border-color: black;" />
-      <TextField fx:id="priceField" layoutX="473.0" layoutY="433.0" prefHeight="36.0" prefWidth="337.0" promptText="Task price" style="-fx-border-color: black;" />
+      <TextField fx:id="durationField" layoutX="790.0" layoutY="700.0" prefHeight="36.0" prefWidth="337.0" promptText="Task Duration" style="-fx-border-color: black;" />
+      <TextField fx:id="priceField" layoutX="790.0" layoutY="600.0" prefHeight="36.0" prefWidth="337.0" promptText="Task Price" style="-fx-border-color: black;" />
+      <Label layoutX="790.0" layoutY="370.0" style="-fx-font-size: 20;" text="Task description" />
+      <Label layoutX="790.0" layoutY="470.0" style="-fx-font-size: 20;" text="Task location" />
+      <Label layoutX="790.0" layoutY="570.0" style="-fx-font-size: 20;" text="Task price" />
+      <Label layoutX="790.0" layoutY="670.0" style="-fx-font-size: 20;" text="Task duration" />
    </children>
 </AnchorPane>

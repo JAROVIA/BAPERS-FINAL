@@ -54,6 +54,8 @@ public class RegisterNewCustomerScreen extends Window {
 	protected GridPane gridPane;
 	@FXML
 	protected CheckBox valuedCheckBox;
+	@FXML
+	protected Button cancelButton;
 
 	protected final String DISCOUNT_FIXED = "Fixed";
 	protected final String DISCOUNT_FLEX = "Flexible";
@@ -173,6 +175,10 @@ public class RegisterNewCustomerScreen extends Window {
 		} catch (SQLException e) {
 			AlertUser.showDBError();
 		}
+	}
+
+	protected void onCancel(){
+		showScreen(this, "CustomerAccounts");
 	}
 
 	/**
@@ -544,5 +550,6 @@ public class RegisterNewCustomerScreen extends Window {
 		addButton.setOnAction(actionEvent -> onAdd());
 		removeButton.setOnAction(actionEvent -> onRemove());
 		submitButton.setOnAction(actionEvent -> onSubmit());
+		cancelButton.setOnAction(actionEvent -> onCancel());
 	}
 }

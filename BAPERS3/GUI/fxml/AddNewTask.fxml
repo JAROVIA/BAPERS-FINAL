@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -9,41 +10,57 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AddNewTaskScreen">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AddNewTaskScreen">
    <children>
-      <Button fx:id="logoutButton" layoutX="1180.0" layoutY="14.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Logout">
+      <Button fx:id="logoutButton" layoutX="1820.0" layoutY="14.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Logout">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <TextField fx:id="descriptionField" layoutX="473.0" layoutY="307.0" prefHeight="36.0" prefWidth="337.0" promptText="New Task Description" style="-fx-border-color: black;" />
-      <TextField fx:id="locationField" layoutX="471.0" layoutY="364.0" prefHeight="36.0" prefWidth="337.0" promptText="New Tasl Location" style="-fx-border-color: black;" />
+      <TextField fx:id="descriptionField" layoutX="791.0" layoutY="370.0" prefHeight="36.0" prefWidth="337.0" promptText="New Task Description" style="-fx-border-color: black;">
+         <font>
+            <Font size="15.0" />
+         </font></TextField>
+      <TextField fx:id="locationField" layoutX="791.0" layoutY="470.0" prefHeight="36.0" prefWidth="337.0" promptText="New Task Location" style="-fx-border-color: black;">
+         <font>
+            <Font size="15.0" />
+         </font></TextField>
       <ImageView fx:id="homeButton" fitHeight="219.0" fitWidth="463.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/BAPERS Logo Final.png" />
          </image>
       </ImageView>
-      <Label layoutX="925.0" layoutY="14.0" prefHeight="36.0" prefWidth="239.0" style="-fx-border-color: Black;" text="Welcome [logged in user]" textAlignment="RIGHT">
+      <Label fx:id="welcomeLabel" layoutX="1572.0" layoutY="14.0" prefHeight="36.0" prefWidth="239.0" style="-fx-border-color: Black;" text="Welcome user" textAlignment="RIGHT">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Text layoutX="515.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD NEW TASK" textAlignment="CENTER" wrappingWidth="253.33333333333326">
+      <PasswordField fx:id="priceField" layoutX="791.0" layoutY="570.0" prefHeight="36.0" prefWidth="337.0" promptText="New Task Price" style="-fx-border-color: black;">
+         <font>
+            <Font size="15.0" />
+         </font></PasswordField>
+      <Text layoutX="833.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD NEW TASK" textAlignment="CENTER" wrappingWidth="253.33333333333326">
          <font>
             <Font size="27.0" />
          </font>
       </Text>
-      <Button fx:id="confirmButton" layoutX="656.0" layoutY="561.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="138.0" style="-fx-background-color: #95ed82; -fx-border-color: Black;" text="Confirm New Task">
+      <PasswordField fx:id="durationField" layoutX="791.0" layoutY="670.0" prefHeight="36.0" prefWidth="337.0" promptText="New Task Duration" style="-fx-border-color: black;">
+         <font>
+            <Font size="15.0" />
+         </font></PasswordField>
+      <Button fx:id="confirmButton" layoutX="990.0" layoutY="821.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="138.0" style="-fx-background-color: #95ed82; -fx-border-color: Black;" text="Confirm New Task">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="cancelButton" layoutX="486.0" layoutY="561.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="138.0" style="-fx-background-color: #f26d6d; -fx-border-color: Black;" text="Cancel">
+      <Button fx:id="cancelButton" layoutX="792.0" layoutY="821.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="138.0" style="-fx-background-color: #f26d6d; -fx-border-color: Black;" text="Cancel New Task">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <TextField fx:id="durationField" layoutX="469.0" layoutY="493.0" prefHeight="36.0" prefWidth="337.0" promptText="New Task duraction" style="-fx-border-color: black;" />
-      <TextField fx:id="priceField" layoutX="470.0" layoutY="431.0" prefHeight="36.0" prefWidth="337.0" promptText="New task price" style="-fx-border-color: black;" />
+      <Label layoutX="795.0" layoutY="330.0" style="-fx-font-size: 20;" text="Task description" />
+      <Label layoutX="791.0" layoutY="430.0" style="-fx-font-size: 20;" text="Task location" />
+      <Label layoutX="791.0" layoutY="530.0" style="-fx-font-size: 20;" text="Task price" />
+      <Label layoutX="791.0" layoutY="630.0" style="-fx-font-size: 20;" text="Task duration" />
    </children>
 </AnchorPane>

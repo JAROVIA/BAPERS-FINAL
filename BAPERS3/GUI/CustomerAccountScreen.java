@@ -18,6 +18,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
@@ -33,7 +34,7 @@ public class CustomerAccountScreen extends Window {
 	@FXML
 	private TableView<String[]> customerAccountTable;
 	@FXML
-	private Button deleteCustomerButton;
+	private ImageView deleteCustomerButton;
 	@FXML
 	private Button registerNewCustomerButton;
 	@FXML
@@ -59,6 +60,8 @@ public class CustomerAccountScreen extends Window {
 	@FXML
 	private Label valuedLabel;
 	@FXML
+	private Label discountTypeLabel;
+	@FXML
 	private TableView<String[]> discountTable;
 	@FXML
 	private Button closeButton;
@@ -69,7 +72,7 @@ public class CustomerAccountScreen extends Window {
 
 	private void onSelectCustomer() {
 
-		splitPane.setDividerPositions(.6);
+		splitPane.setDividerPositions(.55);
 		customerDetailGridPane.setStyle("visibility : visible");
 		if(customerAccountTable.getSelectionModel().getSelectedItem() != null) {
 			String[] customerData = customerAccountTable.getSelectionModel().getSelectedItem();
@@ -82,6 +85,13 @@ public class CustomerAccountScreen extends Window {
 			phoneLabel.setText(customerData[2]);
 			addressLabel.setText(customerData[3]);
 			emailLabel.setText(customerData[4]);
+			try {
+				if(acctUiController.getCustomerDiscountType(selectedCustomerId) != null) {
+					discountTypeLabel.setText(acctUiController.getCustomerDiscountType(selectedCustomerId));
+				}
+			} catch (SQLException throwables) {
+				AlertUser.showDBError();
+			}
 
 			try {
 				setupDiscountTable(Integer.parseInt(customerData[0]));

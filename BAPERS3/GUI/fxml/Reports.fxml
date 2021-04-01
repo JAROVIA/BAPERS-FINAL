@@ -11,25 +11,25 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ReportsScreen">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ReportsScreen">
    <children>
       <Button fx:id="logoutButton" layoutX="1180.0" layoutY="14.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="85.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Logout">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <TextField layoutX="875.0" layoutY="442.0" prefHeight="36.0" prefWidth="159.0" promptText="Username" style="-fx-border-color: black;" />
+      <TextField fx:id="usernameField" layoutX="875.0" layoutY="442.0" prefHeight="36.0" prefWidth="159.0" promptText="Username" style="-fx-border-color: black;" />
       <ImageView fx:id="homeButton" fitHeight="219.0" fitWidth="463.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/BAPERS Logo Final.png" />
          </image>
       </ImageView>
-      <Label layoutX="925.0" layoutY="14.0" prefHeight="36.0" prefWidth="239.0" style="-fx-border-color: Black;" text="Welcome [logged in user]" textAlignment="RIGHT">
+      <Label fx:id="welcomeLabel" layoutX="925.0" layoutY="14.0" prefHeight="36.0" prefWidth="239.0" style="-fx-border-color: Black;" text="Welcome [logged in user]" textAlignment="RIGHT">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <PasswordField layoutX="1057.0" layoutY="442.0" prefHeight="36.0" prefWidth="159.0" promptText="Password" style="-fx-border-color: black;" />
+      <PasswordField fx:id="passwordField" layoutX="1057.0" layoutY="442.0" prefHeight="36.0" prefWidth="159.0" promptText="Password" style="-fx-border-color: black;" />
       <Text layoutX="22.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="REPORTS" wrappingWidth="119.9999440511067">
          <font>
             <Font size="27.0" />
@@ -60,7 +60,7 @@
             <Font size="17.0" />
          </font>
       </TextField>
-      <Button fx:id="staffReportButton" layoutX="530.0" layoutY="507.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="219.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Generate Staff Report">
+      <Button fx:id="staffReportButton" layoutX="514.0" layoutY="546.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="219.0" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Generate Staff Report">
          <font>
             <Font size="15.0" />
          </font>
@@ -70,23 +70,29 @@
             <Font size="15.0" />
          </font>
       </Button>
-      <ComboBox layoutX="91.0" layoutY="619.0" prefHeight="39.0" prefWidth="252.0" promptText="Select Automatic Generation of Report" />
-      <ComboBox layoutX="514.0" layoutY="586.0" prefHeight="39.0" prefWidth="252.0" promptText="Select Automatic Generation of Report" />
-      <ComboBox layoutX="913.0" layoutY="623.0" prefHeight="39.0" prefWidth="252.0" promptText="Select Automatic Generation of Report" />
+      <ComboBox layoutX="90.0" layoutY="620.0" prefHeight="39.0" prefWidth="63.0" promptText="Select Automatic Generation of Report" />
+      <ComboBox layoutX="510.0" layoutY="620.0" prefHeight="39.0" prefWidth="63.0" promptText="Select Automatic Generation of Report" />
       <TextField fx:id="dateField1" layoutX="105.0" layoutY="491.0" prefHeight="40.0" prefWidth="226.0" promptText="Input date" style="-fx-border-color: black;">
          <font>
             <Font size="17.0" />
          </font>
       </TextField>
-      <TextField fx:id="dateField2" layoutX="528.0" layoutY="458.0" prefHeight="40.0" prefWidth="226.0" promptText="Input date" style="-fx-border-color: black;">
+      <TextField fx:id="dateField2" layoutX="514.0" layoutY="440.0" prefHeight="40.0" prefWidth="226.0" promptText="Input date" style="-fx-border-color: black;">
          <font>
             <Font size="17.0" />
          </font>
       </TextField>
-      <TextField fx:id="dateField3" layoutX="928.0" layoutY="489.0" prefHeight="40.0" prefWidth="226.0" promptText="Input date" style="-fx-border-color: black;">
+      <TextField fx:id="dateField3" layoutX="920.0" layoutY="489.0" prefHeight="40.0" prefWidth="237.0" promptText="Input date" style="-fx-border-color: black;">
          <font>
             <Font size="17.0" />
          </font>
       </TextField>
+      <ComboBox layoutX="180.0" layoutY="620.0" prefHeight="39.0" prefWidth="63.0" promptText="Select Automatic Generation of Report" />
+      <ComboBox layoutX="271.0" layoutY="620.0" prefHeight="39.0" prefWidth="63.0" promptText="Select Automatic Generation of Report" />
+      <ComboBox layoutX="600.0" layoutY="620.0" prefHeight="39.0" prefWidth="63.0" promptText="Select Automatic Generation of Report" />
+      <ComboBox layoutX="690.0" layoutY="620.0" prefHeight="39.0" prefWidth="63.0" promptText="Select Automatic Generation of Report" />
+      <ComboBox layoutX="920.0" layoutY="620.0" prefHeight="39.0" prefWidth="63.0" promptText="Select Automatic Generation of Report" />
+      <ComboBox layoutX="1010.0" layoutY="620.0" prefHeight="39.0" prefWidth="63.0" promptText="Select Automatic Generation of Report" />
+      <ComboBox layoutX="1100.0" layoutY="620.0" prefHeight="39.0" prefWidth="63.0" promptText="Select Automatic Generation of Report" />
    </children>
 </AnchorPane>
