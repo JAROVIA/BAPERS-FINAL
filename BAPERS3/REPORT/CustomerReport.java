@@ -41,7 +41,7 @@ public class CustomerReport extends Report {
 
 	public static void main(String[] args) throws Exception {
 //		File file = new File(DEST);
-		CustomerReport.autoGenerateReport(1,1,"", "");
+		//CustomerReport.autoGenerateReport(1,1,"", "");
         new CustomerReport().printCustomerReport(1,"","");
 	}
 
@@ -261,7 +261,7 @@ public class CustomerReport extends Report {
 		timer.purge();
 	}
 
-	public static void autoGenerateReport(int minutes, int accountNumber, String /**dddmm*/dayOfYear, String year) {
+	public static void autoGenerateReport(int minutes, int accountNumber) {
 
 		if (isTimerStarted) {
 			stopTimer();

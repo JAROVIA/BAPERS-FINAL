@@ -255,7 +255,7 @@ public class SummaryReport extends Report {
 		timer.purge();
 	}
 
-	public static void autoGenerateReport(int minutes, int acccountNumber, String /**dddmm*/dayOfYear, String year){
+	public static void autoGenerateReport(int minutes){
 
 		if(isTimerStarted) {
 			stopTimer();
@@ -270,7 +270,7 @@ public class SummaryReport extends Report {
 		System.out.println(str.substring(4,8));
 		System.out.println(str.substring(8,11));
 		System.out.println(str.substring(24,28));
-		
+
 		TimerTask task = new TimerTask() {
 			@Override
 			public void run() {

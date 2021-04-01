@@ -148,7 +148,17 @@ public class ReportsScreen extends Window {
 
 	private void autoGenerateStaffReport(){
 		if(isValueNotEmpty(staffGenerateMinutesField)){
-			StaffReport.autoGenerateReport(Integer.parseInt(staffGenerateMinutesField.getText()), 1, "wed dec 23", "20");
+			StaffReport.autoGenerateReport(Integer.parseInt(staffGenerateMinutesField.getText()));
+		}
+	}
+	private void autoGenerateCustomerReport(){
+		if(isValueNotEmpty(customerGenerateMinutesField, accountNumberField)){
+			CustomerReport.autoGenerateReport(Integer.parseInt(customerGenerateMinutesField.getText()), Integer.parseInt(accountNumberField.getText()));
+		}
+	}
+	private void autoGenerateSummaryReport(){
+		if(isValueNotEmpty(summaryGenerateMinutesField)){
+			SummaryReport.autoGenerateReport(Integer.parseInt(summaryGenerateMinutesField.getText()));
 		}
 	}
 
