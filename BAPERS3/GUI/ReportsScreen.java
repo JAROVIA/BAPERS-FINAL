@@ -93,8 +93,8 @@ public class ReportsScreen extends Window {
 				new CustomerReport().printCustomerReport(Integer.parseInt(
 						accountNumberField.getText()),
 						customerWeekBox.getValue() + " " +
-								customerDayBox.getValue() + " " +
 								customerMonthBox.getValue() + " " +
+								customerDayBox.getValue(),
 								customerYearBox.getValue()
 				);
 				AlertUser.showCompletion("Customer report generation");
@@ -107,13 +107,13 @@ public class ReportsScreen extends Window {
 		}
 	}
 
-	public void generateSummaryReport() {
+	private void generateSummaryReport() {
 		if (isValueNotEmpty(summaryWeekBox, summaryDayBox, summaryMonthBox, summaryYearBox)) {
 			try {
 				new SummaryReport().printSummaryReport(
 						summaryWeekBox.getValue() + " " +
-								summaryDayBox.getValue() + " " +
 								summaryMonthBox.getValue() + " " +
+								summaryDayBox.getValue(),
 								summaryYearBox.getValue()
 				);
 				AlertUser.showCompletion("Summary report generation");
@@ -127,13 +127,13 @@ public class ReportsScreen extends Window {
 		}
 	}
 
-	public void generateStaffReport() {
+	private void generateStaffReport() {
 		if(isValueNotEmpty(staffWeekBox, staffDayBox, staffMonthBox, staffYearBox)) {
 			try {
 				new StaffReport().printStaffReport(
 						staffWeekBox.getValue() + " " +
-								staffDayBox.getValue() + " " +
 								staffMonthBox.getValue() + " " +
+								staffDayBox.getValue(),
 								staffYearBox.getValue()
 				);
 				AlertUser.showCompletion("Staff report generation");
@@ -143,6 +143,12 @@ public class ReportsScreen extends Window {
 			}
 		}else{
 			new Alert(Alert.AlertType.ERROR, "Enter date", ButtonType.CLOSE).show();
+		}
+	}
+
+	private void autoGenerateStaffReport(){
+		if(isValueNotEmpty(staffGenerateMinutesField)){
+			StaffReport.autoGenerateReport(Integer.parseInt(staffGenerateMinutesField.getText()), 1, "wed dec 23", "20");
 		}
 	}
 
@@ -168,12 +174,19 @@ public class ReportsScreen extends Window {
 		staffReportButton.setOnAction(actionEvent -> generateStaffReport());
 		summaryReportButton.setOnAction(actionEvent -> generateSummaryReport());
 
+		addIntegerNumberListener(accountNumberField);
+		addIntegerNumberListener(staffGenerateMinutesField);
+		addIntegerNumberListener(customerGenerateMinutesField);
+		addIntegerNumberListener(summaryGenerateMinutesField);
+
+		confirmAutoStaffButton.setOnAction(actionEvent -> autoGenerateStaffReport());
+
 		for(int i = 0; i < 31; i++){
 			days[i] = String.valueOf(i+1);
 		}
 
 		for(int i = 0; i < 99; i++){
-			years[i] = String.valueOf((i+21)%100);
+			years[i] = String.valueOf((i+20)%100);
 		}
 
 		ArrayList<ComboBox[]> boxes = new ArrayList<>(Arrays.asList(
