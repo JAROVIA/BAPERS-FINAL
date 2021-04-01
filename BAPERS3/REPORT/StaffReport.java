@@ -62,7 +62,7 @@ public class StaffReport extends Report {
 
 
 
-	public static void autoGenerateReport(int minutes, int acccountNumber, String /**dddmm*/dayOfYear, String year){
+	public void autoGenerateReport(int minutes, int acccountNumber, String /**dddmm*/dayOfYear, String year){
 
 		Timer timer = new Timer();
 		TimerTask task = new TimerTask() {

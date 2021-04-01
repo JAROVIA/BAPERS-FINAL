@@ -1,5 +1,7 @@
 package ADMIN;
 
+import REPORT.SummaryReport;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -7,7 +9,8 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Calendar;
-
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class DBConfiguration {
@@ -106,6 +109,22 @@ public class DBConfiguration {
 			statement.execute(s);
 			}
 		}
+
+	public void autoGenerateBackup(int minutes){
+
+		Timer timer = new Timer();
+		TimerTask task = new TimerTask() {
+			@Override
+			public void run() {
+				try {
+					RestoreBackup();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		timer.schedule(task, 1,minutes*60*1000);
+	}
 
 
 	public Date getAutoTimeDBBackup() {

@@ -67,7 +67,6 @@ public class Invoice extends Report{
         doc.close();
     }
 
-
     public static ArrayList<String[]> GetInvoice(int JobID) throws SQLException {
 
         String sql =

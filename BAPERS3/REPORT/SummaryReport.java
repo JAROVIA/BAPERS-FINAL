@@ -10,9 +10,7 @@ import com.itextpdf.layout.property.UnitValue;
 
 import java.io.File;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 // summary performance report
 public class SummaryReport extends Report {
@@ -38,7 +36,7 @@ public class SummaryReport extends Report {
 	public static void main(String[] args) throws Exception {
 		//File file = new File(DEST);
 		new SummaryReport().printSummaryReport("wed mar 31", "2021");
-//		new SummaryReport().printSummaryReport("sun mar 28");
+		new SummaryReport().autoGenerateReport(1,"wed mar 31", "2021");
 	}
 
 	public void printSummaryReport(String date, String year) throws Exception {
@@ -232,7 +230,22 @@ public class SummaryReport extends Report {
 		return arrayList;
 	}
 
+	public void autoGenerateReport(int minutes, String /**dddmm*/dayOfYear, String year){
 
+		Timer timer = new Timer();
+		TimerTask task = new TimerTask() {
+			@Override
+			public void run() {
+				try {
+					new SummaryReport().printSummaryReport(dayOfYear, year);
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		timer.schedule(task, 1,minutes*60*1000);
+	}
 
 
 
