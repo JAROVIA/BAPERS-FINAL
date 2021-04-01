@@ -7,6 +7,7 @@ import CUSTOMER.FixedDiscountRate;
 import CUSTOMER.FlexibleDiscountRate;
 import CUSTOMER.VariableDiscountRate;
 import GUI.*;
+import PAYMENT.Payment;
 import PROCESS.Job;
 import PROCESS.TaskDescription;
 import PROCESS.TaskInAJob;
@@ -159,8 +160,13 @@ public class ACCT_UI_Controller {
 				FlexibleDiscountRate flex = new FlexibleDiscountRate();
 				flex.retrieveDiscount(accountNumber);
 
-				//TODO match customer total paid this month
-				int appliedDiscount = flex.getDiscountRate().get(0)[2]; //applying random one
+				float accumulated = Payment.getMonthAccumulated(accountNumber);
+				int appliedDiscount = 0;
+				for(int[] bands : flex.getDiscountRate()) {
+					if(bands[0] < accumulated && accumulated < bands[1]){
+						appliedDiscount = bands[2];
+					}
+				}
 
 				System.out.println("price with flexible applied" + price * (100 - appliedDiscount) / 100);
 				return price * (100 - appliedDiscount) / 100;

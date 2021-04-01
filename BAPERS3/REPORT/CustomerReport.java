@@ -105,6 +105,7 @@ public class CustomerReport extends Report {
 	 * https://github.com/itext/i7js-examples/blob/develop/src/main/java/com/itextpdf/samples/sandbox/tables/ArrayToTable.java
 	 */
 	public static void printCustomerReport(int accountNumber, String date, String year) throws Exception {
+
 		String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/CUSTOMERREPORT/CustomerReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
 		PdfDocument pdfDoc = new PdfDocument(new PdfWriter(DEST));
 
