@@ -221,6 +221,39 @@ public class Job implements I_PROCESS {
 		return arrayList;
 	}
 
+	public static String[] getJobData(int jobID) throws SQLException {
+		String sql = "SELECT * FROM Jobs WHERE JobID = " + jobID + ";";
+		Statement statement = connection.createStatement();
+		ResultSet resultSet = statement.executeQuery(sql);
+
+		System.out.println(sql);
+
+		if (resultSet.next()) {
+			int JobID = resultSet.getInt("JobID");
+			int AccountNumber = resultSet.getInt("AccountNumber");
+			int NumberOfTasks = resultSet.getInt("NumberOfTasks");
+			String DateOfJob = resultSet.getString("DateOfJob");
+			String JobDeadline = resultSet.getString("JobDeadline");
+			String JobUrgency = resultSet.getString("JobUrgency");
+			float Price = resultSet.getFloat("price");
+			int TasksCompleted = resultSet.getInt("TasksCompleted");
+			int IsCompleted = resultSet.getInt("IsCompleted");
+
+			return new String[]{
+					String.valueOf(JobID),
+					String.valueOf(AccountNumber),
+					String.valueOf(NumberOfTasks),
+					DateOfJob,
+					JobDeadline,
+					JobUrgency,
+					String.format("%.2f", Price),
+					String.valueOf(TasksCompleted),
+					String.valueOf(IsCompleted)
+			};
+		}
+		return null;
+	}
+
 	/**
 	 * Gets the list of jobs where islate = 1
 	 * Displays them in a tab in the jobs table

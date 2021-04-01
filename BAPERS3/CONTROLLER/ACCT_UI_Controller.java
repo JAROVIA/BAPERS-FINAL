@@ -136,13 +136,8 @@ public class ACCT_UI_Controller {
 		String[] jobData = null;
 		System.out.println("calculating");
 
-		for(String[] data : Job.GetJobList()){
-			if(Integer.parseInt(data[0]) == jobId){
-				System.out.println(data[0] + " = " + jobId);
-				jobData = data;
-				break;
-			}
-		}
+		jobData = Job.getJobData(jobId);
+
 		if(jobData != null) {
 			float price = Float.parseFloat(jobData[6]);
 			System.out.println("initial price = " + price);

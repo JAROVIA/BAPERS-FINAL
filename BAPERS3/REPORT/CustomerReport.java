@@ -106,13 +106,12 @@ public class CustomerReport extends Report {
 	 */
 	public static void printCustomerReport(int accountNumber, String date, String year) throws Exception {
 
-		String str = Calendar.getInstance().getTime().toString();
-		String weekday = str.substring(0,3);
-		String day = str.substring(4,8);
-		String month = str.substring(8,11);
-		String yearNow = str.substring(24,28);
-		String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/CUSTOMERREPORT/CustomerReport" +
-				weekday.trim() + day.trim() + month.trim() + yearNow.trim() + "_" + Calendar.getInstance().getTimeInMillis() + ".pdf";
+//		String str = Calendar.getInstance().getTime().toString();
+//		String weekday = str.substring(0,3);
+//		String day = str.substring(4,8);
+//		String month = str.substring(8,11);
+//		String yearNow = str.substring(24,28);
+		String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/CUSTOMERREPORT/CustomerReport" +Calendar.getInstance().getTimeInMillis() + ".pdf";
 		PdfDocument pdfDoc = new PdfDocument(new PdfWriter(DEST));
 
 		Document doc = new Document(pdfDoc);
