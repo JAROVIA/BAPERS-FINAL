@@ -65,7 +65,7 @@ public class ReportsScreen extends Window {
 			"Mon",
 			"Tue",
 			"Wed",
-			"Thurs",
+			"Thu",
 			"Fri",
 			"Sat",
 			"Sun"
@@ -78,7 +78,7 @@ public class ReportsScreen extends Window {
 			"Apr",
 			"May",
 			"Jun",
-			"July",
+			"Jul",
 			"Aug",
 			"Sep",
 			"Oct",

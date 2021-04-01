@@ -74,18 +74,24 @@ public class StaffReport extends Report {
 
 	public static void autoGenerateReport(int minutes, int acccountNumber, String /**dddmm*/dayOfYear, String year){
 
-		//Timer timer = new Timer();
 		if(isTimerStarted) {
 			stopTimer();
 		}
 		timer = new Timer();
 		System.out.println(isTimerStarted);
 		isTimerStarted = true;
+
+		String str  = Calendar.getInstance().getTime().toString();
+		System.out.println(Calendar.getInstance().getTime().toString());
+		System.out.println(str.substring(0,3));
+		System.out.println(str.substring(4,8));
+		System.out.println(str.substring(8,11));
+		System.out.println(str.substring(24,28));
 		TimerTask task = new TimerTask() {
 			@Override
 			public void run() {
 				try {
-					//printStaffReport(dayOfYear, year);
+					printStaffReport(str.substring(4,8), str.substring(24,28));
 					System.out.println(System.currentTimeMillis());
 
 				} catch (Exception e) {
@@ -255,22 +261,22 @@ public class StaffReport extends Report {
 
 	// old
 
-	public static void autoGenerateReport(int minutes, int acccountNumber, String /**dddmm*/dayOfYear){
-
-		Timer timer = new Timer();
-		TimerTask task = new TimerTask() {
-			@Override
-			public void run() {
-				try {
-					new StaffReport().printStaffReport(dayOfYear);
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		};
-		timer.schedule(task, 1,minutes*60*1000);
-	}
+//	public static void autoGenerateReport(int minutes, int acccountNumber, String /**dddmm*/dayOfYear){
+//
+//		Timer timer = new Timer();
+//		TimerTask task = new TimerTask() {
+//			@Override
+//			public void run() {
+//				try {
+//					new StaffReport().printStaffReport(dayOfYear);
+//
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		};
+//		timer.schedule(task, 1,minutes*60*1000);
+//	}
 
 	/**
 	 * This code was written following the following tutorial

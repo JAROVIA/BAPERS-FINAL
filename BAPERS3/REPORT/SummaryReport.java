@@ -31,15 +31,17 @@ public class SummaryReport extends Report {
 		}
 	}
 
+	private static Timer timer = new Timer();
+	private static boolean isTimerStarted = false;
 
 
 	public static void main(String[] args) throws Exception {
 		//File file = new File(DEST);
 		new SummaryReport().printSummaryReport("wed mar 31", "2021");
-		new SummaryReport().autoGenerateReport(1,"wed mar 31", "2021");
+		//new SummaryReport().autoGenerateReport(1,"wed mar 31", "2021");
 	}
 
-	public void printSummaryReport(String date, String year) throws Exception {
+	public static void printSummaryReport(String date, String year) throws Exception {
 
 		String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/SUMMARYREPORT/SummaryReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
 
@@ -230,14 +232,51 @@ public class SummaryReport extends Report {
 		return arrayList;
 	}
 
-	public void autoGenerateReport(int minutes, String /**dddmm*/dayOfYear, String year){
+//	public void autoGenerateReport(int minutes, String /**dddmm*/dayOfYear, String year){
+//
+//		Timer timer = new Timer();
+//		TimerTask task = new TimerTask() {
+//			@Override
+//			public void run() {
+//				try {
+//					new SummaryReport().printSummaryReport(dayOfYear, year);
+//
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		};
+//		timer.schedule(task, 1,minutes*60*1000);
+//	}
 
-		Timer timer = new Timer();
+	public static void stopTimer(){
+		System.out.println("stopped");
+		timer.cancel();
+		timer.purge();
+	}
+
+	public static void autoGenerateReport(int minutes, int acccountNumber, String /**dddmm*/dayOfYear, String year){
+
+		if(isTimerStarted) {
+			stopTimer();
+		}
+		timer = new Timer();
+		System.out.println(isTimerStarted);
+		isTimerStarted = true;
+
+		String str  = Calendar.getInstance().getTime().toString();
+		System.out.println(Calendar.getInstance().getTime().toString());
+		System.out.println(str.substring(0,3));
+		System.out.println(str.substring(4,8));
+		System.out.println(str.substring(8,11));
+		System.out.println(str.substring(24,28));
+		
 		TimerTask task = new TimerTask() {
 			@Override
 			public void run() {
 				try {
-					new SummaryReport().printSummaryReport(dayOfYear, year);
+					printSummaryReport(str.substring(4,8), str.substring(24,28));
+					System.out.println(System.currentTimeMillis());
 
 				} catch (Exception e) {
 					e.printStackTrace();

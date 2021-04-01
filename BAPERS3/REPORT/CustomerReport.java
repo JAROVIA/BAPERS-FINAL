@@ -36,13 +36,16 @@ public class CustomerReport extends Report {
         }
     }
 
+	private static Timer timer = new Timer();
+	private static boolean isTimerStarted = false;
+
 	public static void main(String[] args) throws Exception {
 //		File file = new File(DEST);
 		CustomerReport.autoGenerateReport(1,1,"", "");
         new CustomerReport().printCustomerReport(1,"","");
 	}
 
-	public ArrayList<String[]> CustomerReportList(int AccountNumber, String date, String year) throws SQLException {
+	public static ArrayList<String[]> CustomerReportList(int AccountNumber, String date, String year) throws SQLException {
 		System.out.println("line 45");
 
 		String sql =
@@ -101,7 +104,7 @@ public class CustomerReport extends Report {
 	 * This code was written following the following tutorial
 	 * https://github.com/itext/i7js-examples/blob/develop/src/main/java/com/itextpdf/samples/sandbox/tables/ArrayToTable.java
 	 */
-	public void printCustomerReport(int accountNumber, String date, String year) throws Exception {
+	public static void printCustomerReport(int accountNumber, String date, String year) throws Exception {
 		String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/CUSTOMERREPORT/CustomerReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
 		PdfDocument pdfDoc = new PdfDocument(new PdfWriter(DEST));
 
@@ -136,26 +139,26 @@ public class CustomerReport extends Report {
 		doc.close();
 	}
 
-	public static void autoGenerateReport(int minutes, int acccountNumber, String /**dddmm*/dayOfYear, String year){
-
-		Timer timer = new Timer();
-		TimerTask task = new TimerTask() {
-			@Override
-			public void run() {
-				try {
-					new CustomerReport().printCustomerReport(acccountNumber, dayOfYear, year);
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		};
-		timer.schedule(task, 1,minutes*60*1000);
-	}
+//	public static void autoGenerateReport(int minutes, int acccountNumber, String /**dddmm*/dayOfYear, String year){
+//
+//		Timer timer = new Timer();
+//		TimerTask task = new TimerTask() {
+//			@Override
+//			public void run() {
+//				try {
+//					new CustomerReport().printCustomerReport(acccountNumber, dayOfYear, year);
+//
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		};
+//		timer.schedule(task, 1,minutes*60*1000);
+//	}
 
 	// old
 
-	public ArrayList<String[]> CustomerReportList(int AccountNumber, String date) throws SQLException {
+	public static ArrayList<String[]> CustomerReportList(int AccountNumber, String date) throws SQLException {
 		String sql =
 				"SELECT CA.AccountNumber AS 'Account number',\n" +
                         "       CA.CustomerName,\n" +
@@ -211,7 +214,7 @@ public class CustomerReport extends Report {
 	 * This code was written following the following tutorial
 	 * https://github.com/itext/i7js-examples/blob/develop/src/main/java/com/itextpdf/samples/sandbox/tables/ArrayToTable.java
 	 */
-	public void printCustomerReport(int accountNumber, String date) throws Exception {
+	public static void printCustomerReport(int accountNumber, String date) throws Exception {
 		String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/CUSTOMERREPORT/CustomerReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
 		PdfDocument pdfDoc = new PdfDocument(new PdfWriter(DEST));
 		Document doc = new Document(pdfDoc);
@@ -235,21 +238,57 @@ public class CustomerReport extends Report {
 		doc.close();
 	}
 
-	public static void autoGenerateReport(int minutes, int acccountNumber, String dayOfYear){
+//	public static void autoGenerateReport(int minutes, int acccountNumber, String dayOfYear){
 
-    Timer timer = new Timer();
-    TimerTask task = new TimerTask() {
-        @Override
-        public void run() {
-			try {
-				new CustomerReport().printCustomerReport(acccountNumber, dayOfYear);
+//    Timer timer = new Timer();
+//    TimerTask task = new TimerTask() {
+//        @Override
+//        public void run() {
+//			try {
+//				new CustomerReport().printCustomerReport(acccountNumber, dayOfYear);
+//
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
+//    };
+//		timer.schedule(task, 1,minutes*60*1000);
+//	}
 
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+	public static void stopTimer() {
+		System.out.println("stopped");
+		timer.cancel();
+		timer.purge();
+	}
+
+	public static void autoGenerateReport(int minutes, int accountNumber, String /**dddmm*/dayOfYear, String year) {
+
+		if (isTimerStarted) {
+			stopTimer();
 		}
-    };
-		timer.schedule(task, 1,minutes*60*1000);
+		timer = new Timer();
+		System.out.println(isTimerStarted);
+		isTimerStarted = true;
+		String str  = Calendar.getInstance().getTime().toString();
+		System.out.println(Calendar.getInstance().getTime().toString());
+		System.out.println(str.substring(0,3));
+		System.out.println(str.substring(4,8));
+		System.out.println(str.substring(8,11));
+		System.out.println(str.substring(24,28));
+
+		TimerTask task = new TimerTask() {
+			@Override
+			public void run() {
+				try {
+					printCustomerReport(accountNumber, str.substring(4,8), str.substring(24,28));
+					System.out.println(System.currentTimeMillis());
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		timer.schedule(task, 1, minutes * 60 * 1000);
 	}
 
 }
