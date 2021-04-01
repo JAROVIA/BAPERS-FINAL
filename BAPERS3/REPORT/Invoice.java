@@ -35,7 +35,7 @@ public class Invoice extends Report{
         new Invoice().printInvoice(7);
     }
 
-    public void printInvoice(int JobID) throws Exception {
+    public static void printInvoice(int JobID) throws Exception {
         String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/INVOICE/Invoice" + Calendar.getInstance().getTimeInMillis() + ".pdf";
         PdfDocument pdfDoc = new PdfDocument(new PdfWriter(DEST));
         Document doc = new Document(pdfDoc);

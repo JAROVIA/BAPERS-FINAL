@@ -275,11 +275,6 @@
                               </Button>
                               <TableView fx:id="discountTable" maxWidth="800.0" prefHeight="200.0" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.rowSpan="2147483647" />
                               <Button fx:id="closeButton" mnemonicParsing="false" text="x" GridPane.columnIndex="3" />
-                              <ImageView fx:id="deleteCustomerButton" fitHeight="55.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
-                                 <image>
-                                    <Image url="@../images/Delete-Icon.png" />
-                                 </image>
-                              </ImageView>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ACCOUNT DETAILS" textAlignment="CENTER" wrappingWidth="312.20342000325513" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <font>
                                     <Font size="21.0" />

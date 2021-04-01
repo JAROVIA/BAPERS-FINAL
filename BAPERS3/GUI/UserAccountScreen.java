@@ -25,8 +25,6 @@ public class UserAccountScreen extends Window {
 	private Button registerNewUserButton;
 	@FXML
 	private Button editUserButton;
-	@FXML
-	private Button deleteButton;
 
 	/**
 	 * boolean to check if input is contained in the table. uses regex to match pattern first to check

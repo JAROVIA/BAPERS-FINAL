@@ -1,6 +1,8 @@
 package GUI;
 
+import ADMIN.AlertUser;
 import PROCESS.*;
+import REPORT.Invoice;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -129,6 +131,12 @@ public class JobsScreen extends Window {
 			try {
 				if(!procUiController.checkIfJobPaid(Integer.parseInt(jobData[0]))){
 					procUiController.setJobBeingPaid(jobData);
+					try {
+						Invoice.printInvoice(Integer.parseInt(jobData[0]));
+					} catch (Exception e) {
+						AlertUser.showDBError();
+						e.printStackTrace();
+					}
 					showScreen(this, "RecordPayment");
 				}
 				else{

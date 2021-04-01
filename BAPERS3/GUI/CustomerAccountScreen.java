@@ -34,8 +34,6 @@ public class CustomerAccountScreen extends Window {
 	@FXML
 	private TableView<String[]> customerAccountTable;
 	@FXML
-	private ImageView deleteCustomerButton;
-	@FXML
 	private Button registerNewCustomerButton;
 	@FXML
 	private Button editCustomerButton;

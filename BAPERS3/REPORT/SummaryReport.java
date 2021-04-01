@@ -43,7 +43,14 @@ public class SummaryReport extends Report {
 
 	public static void printSummaryReport(String date, String year) throws Exception {
 
-		String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/SUMMARYREPORT/SummaryReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
+		String str = Calendar.getInstance().getTime().toString();
+		String weekday = str.substring(0,3);
+		String day = str.substring(4,8);
+		String month = str.substring(8,11);
+		String yearNow = str.substring(24,28);
+
+		String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/SUMMARYREPORT/SummaryReport"
+				+ weekday.trim() + day.trim() + month.trim() + yearNow.trim() + "_" + Calendar.getInstance().getTimeInMillis() + ".pdf";
 
 		PdfDocument pdfDoc = new PdfDocument(new PdfWriter(DEST));
 		Document doc = new Document(pdfDoc);
@@ -271,7 +278,7 @@ public class SummaryReport extends Report {
 			@Override
 			public void run() {
 				try {
-					printSummaryReport(str.substring(4,8), str.substring(24,28));
+					printSummaryReport(str.substring(4,8).trim(), str.substring(24,28).trim());
 
 				} catch (Exception e) {
 					e.printStackTrace();

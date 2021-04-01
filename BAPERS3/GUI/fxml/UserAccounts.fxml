@@ -60,14 +60,6 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="deleteButton" layoutX="1180.0" layoutY="240.0" mnemonicParsing="false" style="-fx-background-color: -white;">
-         <graphic>
-            <ImageView fitHeight="51.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/Delete-Icon.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
+      <Button fx:id="deleteButton" layoutX="1180.0" layoutY="240.0" mnemonicParsing="false" style="-fx-background-color: -white;" />
    </children>
 </AnchorPane>
