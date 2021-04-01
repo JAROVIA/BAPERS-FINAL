@@ -50,7 +50,7 @@
 
 <VBox prefHeight="434.0" prefWidth="668.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.RegisterNewCustomerScreen">
   <children>
-      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" vvalue="1.0" VBox.vgrow="ALWAYS">
          <content>
             <GridPane fx:id="gridPane" minHeight="700.0" vgap="10.0">
               <columnConstraints>
@@ -112,22 +112,20 @@
                         <Insets left="20.0" />
                      </GridPane.margin>
                   </ImageView>
-                  <Button fx:id="submitButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Submit" GridPane.columnIndex="6" GridPane.rowIndex="13">
+                  <Button fx:id="submitButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Submit" GridPane.columnIndex="7" GridPane.rowIndex="13">
                      <font>
                         <Font size="9.0" />
                      </font>
                   </Button>
                   <ComboBox fx:id="discountBox" prefHeight="27.0" prefWidth="167.0" promptText="Select discount plan" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="9" />
-                  <TextField fx:id="contactNameField" promptText="Contact name" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.rowIndex="5" />
-                  <TextField fx:id="emailField" promptText="email" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.rowIndex="7" />
                   <TableView fx:id="discountTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="9" GridPane.rowIndex="12">
                      <GridPane.margin>
                         <Insets bottom="10.0" />
                      </GridPane.margin>
                   </TableView>
                   <TextField fx:id="bandField" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="10" />
-                  <Button fx:id="addButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="+" GridPane.columnIndex="8" GridPane.rowIndex="11" />
-                  <Button fx:id="removeButton" mnemonicParsing="false" text="-" GridPane.columnIndex="9" GridPane.rowIndex="11" />
+                  <Button fx:id="addButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Add setting" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="11" />
+                  <Button fx:id="removeButton" mnemonicParsing="false" text="Remove setting" GridPane.columnIndex="9" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
                   <TextField fx:id="discountRateField" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="11" />
                   <Label fx:id="discountRateLabel" text="Discount rate" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="11" />
                   <ComboBox fx:id="taskBox" prefWidth="150.0" promptText="Select task" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="10" />
@@ -147,9 +145,16 @@
                   <CheckBox fx:id="valuedCheckBox" mnemonicParsing="false" text="Valued customer" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
                   <Label text="Customer name" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
                   <Label text="Phone number" GridPane.columnIndex="7" GridPane.columnSpan="4" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
-                  <Label text="Contact name" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM" />
+                  <Label text="Contact name" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM" />
                   <Label text="Address" GridPane.columnIndex="7" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM" />
                   <Label text="e-mail" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="6" GridPane.valignment="BOTTOM" />
+                  <TextField fx:id="contactNameField" prefHeight="25.0" prefWidth="167.0" promptText="Contact name" style="-fx-border-color: black;" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.rowIndex="5" />
+                  <TextField fx:id="emailField" prefHeight="25.0" prefWidth="167.0" promptText="email" style="-fx-border-color: black;" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.rowIndex="7" />
+                  <Button fx:id="cancelButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #DDF8FF; -fx-border-color: Black;" text="Cancel" GridPane.columnIndex="5" GridPane.rowIndex="13">
+                     <font>
+                        <Font size="9.0" />
+                     </font>
+                  </Button>
                </children>
             </GridPane>
          </content>

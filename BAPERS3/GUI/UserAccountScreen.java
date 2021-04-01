@@ -74,7 +74,7 @@ public class UserAccountScreen extends Window {
 	 * overridden method invoked when page is shown
 	 */
 	public void onShow() {
-		//TODO get data here
+		super.onShow();
 		ArrayList<String[]> list = new ArrayList<>();
 		try {
 			 list = UserAccount.getUserList();

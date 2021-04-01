@@ -41,23 +41,23 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Login">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Login">
   <children>
     <AnchorPane VBox.vgrow="ALWAYS">
       <children>
-            <Button id="LoginButton" layoutX="600.0" layoutY="497.0" mnemonicParsing="false" onAction="#onClickLoginButton" prefHeight="41.0" prefWidth="79.0" style="-fx-background-color: #DDF8FF; -fx-border-color: #000000;" text="Login">
+            <Button id="LoginButton" fx:id="loginButton" layoutX="935.0" layoutY="638.0" mnemonicParsing="false" onAction="#onClickLoginButton" prefHeight="41.0" prefWidth="79.0" style="-fx-background-color: #DDF8FF; -fx-border-color: #000000;" text="Login">
                <font>
                   <Font size="18.0" />
                </font></Button>
-            <PasswordField id="PasswordInputField" fx:id="passwordField" layoutX="529.0" layoutY="432.0" promptText="Password">
+            <PasswordField id="PasswordInputField" fx:id="passwordField" layoutX="866.0" layoutY="547.0" promptText="Password">
                <font>
                   <Font size="18.0" />
                </font></PasswordField>
-            <TextField id="UsernameInputField" fx:id="usernameField" layoutX="529.0" layoutY="380.0" promptText="Username">
+            <TextField id="UsernameInputField" fx:id="usernameField" layoutX="866.0" layoutY="499.0" promptText="Username">
                <font>
                   <Font size="18.0" />
                </font></TextField>
-            <ImageView fitHeight="192.0" fitWidth="451.0" layoutX="414.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="192.0" fitWidth="451.0" layoutX="751.0" layoutY="332.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/BAPERS Logo Final.png" />
                </image>
