@@ -14,13 +14,30 @@ import PROCESS.TaskInAJob;
 import javafx.util.Pair;
 
 import java.io.IOException;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ACCT_UI_Controller {
 	private Main main;
+
+	static String tablename = "UserAccounts";
+	static String url = "jdbc:mysql://localhost:3306/Bapers";
+	static String dbusername = "jaroviadb";
+	static String dbpassword = "Jarovia123#@!";
+	static Connection connection;
+	private static final String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/STAFFREPORT/StaffReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
+
+	static {
+		try {
+			connection = DriverManager.getConnection(
+					url, dbusername, dbpassword);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	//gui this controller handles
 
@@ -131,12 +148,27 @@ public class ACCT_UI_Controller {
 		}
 	}
 
+//	public String[] getJobData(int JobID){
+//		String sql =
+//				"SELECT * FROM Jobs WHERE JobID = " + JobID + ";";
+//		System.out.println(sql);
+//		Statement statement = null;
+//		try {
+//			statement = connection.createStatement();
+//			ResultSet resultSet = statement.executeQuery(sql);
+//		} catch (SQLException throwables) {
+//			throwables.printStackTrace();
+//		}
+//
+//		String
+//	}
+
 	public static float calculateFinalPrice(int accountNumber, int jobId) throws SQLException {
 		String discountType = getCustomerDiscountType(accountNumber);
 		String[] jobData = null;
 		System.out.println("calculating");
 
-		for(String[] data : Job.GetJobList()){
+		for(String[] data : Job.GetCompleteJobList()){
 			if(Integer.parseInt(data[0]) == jobId){
 				System.out.println(data[0] + " = " + jobId);
 				jobData = data;

@@ -184,7 +184,7 @@ public class Payment implements I_Payment {
 			int accountNumber = resultSet.getInt("JobID");
 			float price = resultSet.getFloat("Price");
 			float discountedPrice = resultSet.getFloat("DiscountedPrice");
-			String dateOfPayment = resultSet.getString("JobUrgency");
+			String dateOfPayment = resultSet.getString("DateOfPayment");
 			String dueDate = resultSet.getString("JobUrgency");
 
 			String paymentType = resultSet.getString("JobUrgency");
@@ -326,7 +326,7 @@ public class Payment implements I_Payment {
 		String month = str.substring(8,11);
 		String year = str.substring(24,28);
 		String sql = "SELECT FLOOR(SUM(Price)) AS 'this_month_total' FROM Jobs WHERE AccountNumber = " + accountNumber +
-				"AND DateOfJob LIKE %" + month + "%" + year;
+				" AND \"DateOfJob\" LIKE %" + month.trim() + "% AND \"DateOfJob\" LIKE %" + year + "%;";
 		System.out.println(sql);
 
 		Statement statement = connection.createStatement();

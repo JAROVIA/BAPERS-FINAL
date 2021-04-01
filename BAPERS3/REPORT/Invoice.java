@@ -1,5 +1,6 @@
 package REPORT;
 
+import CONTROLLER.ACCT_UI_Controller;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
@@ -32,14 +33,14 @@ public class Invoice extends Report{
     }
 
     public static void main(String[] args) throws Exception {
-        new Invoice().printInvoice(7);
+        new Invoice().printInvoice(4);
     }
 
-    public void printInvoice(int JobID) throws Exception {
+    public static void printInvoice(int JobID) throws Exception {
         String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/INVOICE/Invoice" + Calendar.getInstance().getTimeInMillis() + ".pdf";
         PdfDocument pdfDoc = new PdfDocument(new PdfWriter(DEST));
         Document doc = new Document(pdfDoc);
-        doc.add(new Paragraph("Customer Report!"));
+        doc.add(new Paragraph("Invoice!"));
         // By default column width is calculated automatically for the best fit.
         // useAllAvailableWidth() method makes table use the whole page's width while placing the content.
         Table table = new Table(UnitValue.createPercentArray(9),true);
@@ -65,6 +66,7 @@ public class Invoice extends Report{
 
         doc.add(table);
         doc.close();
+
     }
 
     public static ArrayList<String[]> GetInvoice(int JobID) throws SQLException {
@@ -95,6 +97,7 @@ public class Invoice extends Report{
         ArrayList<String[]> arrayList = new ArrayList<String[]>();
         String tuple;
 
+
         while (resultSet.next()) {
 
             int a = resultSet.getInt("JobID");
@@ -104,8 +107,11 @@ public class Invoice extends Report{
             int e = resultSet.getInt("PhoneNumber");
             String f = resultSet.getString("ContactName");
             String g = resultSet.getString("CustomerName");
-            int h = resultSet.getInt("Price");
-            int i = resultSet.getInt("DiscountedPrice");
+            float h = resultSet.getFloat("Price");
+            float i = resultSet.getFloat("DiscountedPrice");
+
+            i = ACCT_UI_Controller.calculateFinalPrice(c, a);
+
 
             tuple = a + "`" + b + "`" + c + "`" + d + "`" + e + "`" + f + "`" + g + "`" + h + "`" + i;
             arrayList.add(tuple.split("`"));
