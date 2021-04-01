@@ -3,9 +3,7 @@ package GUI;
 import ADMIN.AlertUser;
 import ADMIN.DBConfiguration;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -45,6 +43,13 @@ public class DatabaseScreen extends Window {
 		}
 	}
 
+	private void onAutoBackup(){
+		if(isValueNotEmpty(backupMinutesField)){
+			DBConfiguration.autoGenerateBackup(Integer.parseInt(backupMinutesField.getText()));
+			AlertUser.showCompletion("Automatic database backup setting");
+		}
+	}
+
 	private void onRestore(){
 		try {
 			DBConfiguration.RestoreListedBackup(restoreBox.getValue());
@@ -72,5 +77,6 @@ public class DatabaseScreen extends Window {
 		setComboBoxPromptText(restoreBox, "Select file to restore from");
 		backupButton.setOnAction(actionEvent -> onBackup());
 		restoreButton.setOnAction(actionEvent -> onRestore());
+		confirmButton.setOnAction(actionEvent -> onAutoBackup());
 	}
 }

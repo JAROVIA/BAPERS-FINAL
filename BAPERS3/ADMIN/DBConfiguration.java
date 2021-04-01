@@ -32,6 +32,9 @@ public class DBConfiguration {
 	private Date AutoTimeDBBackup;
 	private Date AutoTimeDBRestore;
 
+	private static Timer timer;
+	private static boolean isTimerStarted = false;
+
 	public static void main(String[] args) throws IOException {
 //		DBConfiguration.MakeBackup();
 //		DBConfiguration.GetListOfFiles();
@@ -41,7 +44,14 @@ public class DBConfiguration {
 
 	// should run when db backup button is clicked
 	public static void MakeBackup() throws IOException {
-		String string = "mysqldump -u jaroviadb -pJarovia123#@! Bapers -r BAPERS3/GENERATED/DATABASES/Backup" + Calendar.getInstance().getTimeInMillis() + ".sql";
+		String str = Calendar.getInstance().getTime().toString();
+		String weekday = str.substring(0,3);
+		String day = str.substring(4,8);
+		String month = str.substring(8,11);
+		String year = str.substring(24,28);
+		String string = "mysqldump -u jaroviadb -pJarovia123#@! Bapers -r BAPERS3/GENERATED/DATABASES/Backup" +
+				weekday.trim() + day.trim() + month.trim() + year.trim() + "_" + Calendar.getInstance().getTimeInMillis() + ".sql";
+		System.out.println(string);
 		Process process = Runtime.getRuntime().exec(string);
 
 	}
@@ -109,23 +119,38 @@ public class DBConfiguration {
 
 		for (String s : commands) {
 			statement.execute(s);
-			}
 		}
+	}
 
-	public void autoGenerateBackup(int minutes){
+	public static void stopTimer(){
+		timer.cancel();
+		timer.purge();
+	}
 
-		Timer timer = new Timer();
+
+
+	public static void autoGenerateBackup(int minutes) {
+
+		if (isTimerStarted) {
+			stopTimer();
+		}
+		isTimerStarted = true;
+
+		timer = new Timer();
 		TimerTask task = new TimerTask() {
 			@Override
 			public void run() {
 				try {
-					RestoreBackup();
+					String str  = Calendar.getInstance().getTime().toString();
+					System.out.println("db backup"+Calendar.getInstance().getTime().toString());
+					MakeBackup();
 				} catch (Exception e) {
 					e.printStackTrace();
+					AlertUser.showDBError();
 				}
 			}
 		};
-		timer.schedule(task, 1,minutes*60*1000);
+		timer.schedule(task, 1, minutes * 60 * 1000);
 	}
 
 

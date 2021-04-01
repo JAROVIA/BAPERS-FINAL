@@ -105,6 +105,7 @@ public class CustomerReport extends Report {
 	 * https://github.com/itext/i7js-examples/blob/develop/src/main/java/com/itextpdf/samples/sandbox/tables/ArrayToTable.java
 	 */
 	public static void printCustomerReport(int accountNumber, String date, String year) throws Exception {
+
 		String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/CUSTOMERREPORT/CustomerReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
 		PdfDocument pdfDoc = new PdfDocument(new PdfWriter(DEST));
 
@@ -270,18 +271,13 @@ public class CustomerReport extends Report {
 		System.out.println(isTimerStarted);
 		isTimerStarted = true;
 		String str  = Calendar.getInstance().getTime().toString();
-		System.out.println(Calendar.getInstance().getTime().toString());
-		System.out.println(str.substring(0,3));
-		System.out.println(str.substring(4,8));
-		System.out.println(str.substring(8,11));
-		System.out.println(str.substring(24,28));
+		System.out.println("customer report : " + Calendar.getInstance().getTime().toString());
 
 		TimerTask task = new TimerTask() {
 			@Override
 			public void run() {
 				try {
 					printCustomerReport(accountNumber, str.substring(4,8), str.substring(24,28));
-					System.out.println(System.currentTimeMillis());
 
 				} catch (Exception e) {
 					e.printStackTrace();

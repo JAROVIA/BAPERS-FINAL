@@ -265,18 +265,13 @@ public class SummaryReport extends Report {
 		isTimerStarted = true;
 
 		String str  = Calendar.getInstance().getTime().toString();
-		System.out.println(Calendar.getInstance().getTime().toString());
-		System.out.println(str.substring(0,3));
-		System.out.println(str.substring(4,8));
-		System.out.println(str.substring(8,11));
-		System.out.println(str.substring(24,28));
+		System.out.println("summary report"+Calendar.getInstance().getTime().toString());
 
 		TimerTask task = new TimerTask() {
 			@Override
 			public void run() {
 				try {
 					printSummaryReport(str.substring(4,8), str.substring(24,28));
-					System.out.println(System.currentTimeMillis());
 
 				} catch (Exception e) {
 					e.printStackTrace();

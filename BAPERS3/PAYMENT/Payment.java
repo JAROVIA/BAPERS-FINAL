@@ -318,6 +318,28 @@ public class Payment implements I_Payment {
 		throw new UnsupportedOperationException();
 	}
 
+	public static float getMonthAccumulated(int accountNumber) throws SQLException {
+		float price = -1;
+		String str = Calendar.getInstance().getTime().toString();
+		String weekday = str.substring(0,3);
+		String day = str.substring(4,8);
+		String month = str.substring(8,11);
+		String year = str.substring(24,28);
+		String sql = "SELECT FLOOR(SUM(Price)) AS 'this_month_total' FROM Jobs WHERE AccountNumber = " + accountNumber +
+				"AND DateOfJob LIKE %" + month + "%" + year;
+		System.out.println(sql);
+
+		Statement statement = connection.createStatement();
+		ResultSet resultSet = statement.executeQuery(sql);
+
+		while(resultSet.next()){
+			price = resultSet.getFloat("this_month_total");
+		}
+		System.out.println(price);
+
+		return price;
+	}
+
 	/**
 	 * 
 	 * @param discountedPrice
