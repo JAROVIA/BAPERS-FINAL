@@ -46,6 +46,7 @@ public class StaffReport extends Report {
 
 	public static void stopTimer(){
 		System.out.println("stopped");
+		timer.cancel();
 		timer.purge();
 	}
 
@@ -77,6 +78,7 @@ public class StaffReport extends Report {
 		if(isTimerStarted) {
 			stopTimer();
 		}
+		timer = new Timer();
 		System.out.println(isTimerStarted);
 		isTimerStarted = true;
 		TimerTask task = new TimerTask() {
@@ -91,7 +93,7 @@ public class StaffReport extends Report {
 				}
 			}
 		};
-		timer.schedule(task, 1,minutes*5000);
+		timer.schedule(task, 1,minutes*60*1000);
 	}
 
 	public static void printStaffReport(String date, String year) throws Exception {
