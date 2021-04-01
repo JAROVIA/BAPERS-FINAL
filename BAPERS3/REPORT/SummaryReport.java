@@ -37,7 +37,7 @@ public class SummaryReport extends Report {
 
 	public static void main(String[] args) throws Exception {
 		//File file = new File(DEST);
-		new SummaryReport().printSummaryReport("sun mar 28", "2064");
+		new SummaryReport().printSummaryReport("wed mar 31", "2021");
 //		new SummaryReport().printSummaryReport("sun mar 28");
 	}
 
@@ -54,6 +54,8 @@ public class SummaryReport extends Report {
 
 		ArrayList<String[]> SR1 = SummaryReport1(date, year);
 		dataset = convertTypes(SR1);
+		table.addCell("Time in Copy Coom");
+		table.addCell("Shift Completed");
 		for (List<String> record : dataset) {
 			for (String field : record) {
 				table.addCell(new Cell().add(new Paragraph(field)));
@@ -66,6 +68,8 @@ public class SummaryReport extends Report {
 		doc.add(new Paragraph("Title2"));
 		ArrayList<String[]> SR2 = SummaryReport2(date, year);
 		dataset = convertTypes(SR2);
+		table.addCell("Time in Development");
+		table.addCell("Shift Completed");
 		for (List<String> record : dataset) {
 			for (String field : record) {
 				table.addCell(new Cell().add(new Paragraph(field)));
@@ -78,6 +82,8 @@ public class SummaryReport extends Report {
 		doc.add(new Paragraph("Title3"));
 		ArrayList<String[]> SR3 = SummaryReport3(date, year);
 		dataset = convertTypes(SR3);
+		table.addCell("Time in Packing");
+		table.addCell("Shift Completed");
 		for (List<String> record : dataset) {
 			for (String field : record) {
 				table.addCell(new Cell().add(new Paragraph(field)));
@@ -90,6 +96,8 @@ public class SummaryReport extends Report {
 		doc.add(new Paragraph("Title4"));
 		ArrayList<String[]> SR4 = SummaryReport4(date, year);
 		dataset = convertTypes(SR4);
+		table.addCell("Time in Finishing");
+		table.addCell("Shift Completed");
 		for (List<String> record : dataset) {
 			for (String field : record) {
 				table.addCell(new Cell().add(new Paragraph(field)));

@@ -81,18 +81,24 @@ public class StaffReport extends Report {
 
 	public void printStaffReport(String date, String year) throws Exception {
 
-		String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/STAFFREPORT/StaffReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
+//		String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/STAFFREPORT/StaffReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
+		String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/STAFFREPORT/StaffReport.pdf";
 
 		PdfDocument pdfDoc = new PdfDocument(new PdfWriter(DEST));
 		Document doc = new Document(pdfDoc);
-		doc.add(new Paragraph("Title1"));
+		doc.add(new Paragraph("Staff report"));
+		doc.add(new Paragraph("Main breakdown"));
 
 		Table table = new Table(UnitValue.createPercentArray(5)).useAllAvailableWidth();
 		List<List<String>> dataset = null;
 
 		ArrayList<String[]> SR1 = StaffReport1(date, year);
 		dataset = convertTypes(SR1);
-
+		table.addCell("Name");
+		table.addCell("Tasks IDs");
+		table.addCell("Department");
+		table.addCell("Date/Start time");
+		table.addCell("Time taken");
 		for (List<String> record : dataset) {
 			for (String field : record) {
 				table.addCell(new Cell().add(new Paragraph(field)));
@@ -103,11 +109,17 @@ public class StaffReport extends Report {
 		ArrayList<ArrayList<String[]>> SR2 = StaffReport2(date, year);
 		for (ArrayList<String[]> individualSR2 : SR2){
 
-			doc.add(table);
-			table = new Table(2);
+//			doc.add(table);
+//			table = new Table(2);
+
 			dataset = convertTypes(individualSR2);
 			for (List<String> record : dataset) {
-				doc.add(new Paragraph("Title2"));
+				doc.add(new Paragraph("-"));
+				doc.add(table);
+				table = new Table(2);
+
+				table.addCell("Time working");
+				table.addCell("Staff name");
 				for (String field : record) {
 					table.addCell(new Cell().add(new Paragraph(field)));
 				}
@@ -115,10 +127,11 @@ public class StaffReport extends Report {
 
 		}
 
-		// ----------
-		doc.add(table);
-		doc.add(new Paragraph("Title3"));
 
+		// ----------
+		doc.add(new Paragraph("Table of Group Working time"));
+		table = new Table(1);
+		table.addCell("Time spent working on day");
 		ArrayList<String[]> SR3 = StaffReport3(date, year);
 		dataset = convertTypes(SR3);
 		for (List<String> record : dataset) {
@@ -126,7 +139,7 @@ public class StaffReport extends Report {
 				table.addCell(new Cell().add(new Paragraph(field)));
 			}
 		}
-
+		doc.add(table);
 		doc.close();
 	}
 
@@ -141,6 +154,7 @@ public class StaffReport extends Report {
 						"  AND TIJ.isCompleted = 1\n" +
 						"ORDER BY EmployeeCompletedBy;";
 
+		System.out.println(sql);
 		Statement statement = connection.createStatement();
 		ResultSet resultSet = statement.executeQuery(sql);
 
@@ -285,16 +299,19 @@ public class StaffReport extends Report {
 
 		// ----------
 		doc.add(table);
+		table = new Table(1);
 		doc.add(new Paragraph("Title3"));
-
 		ArrayList<String[]> SR3 = StaffReport3(date);
+		System.out.println("295");
 		dataset = convertTypes(SR3);
+		System.out.println("295");
+
 		for (List<String> record : dataset) {
 			for (String field : record) {
 				table.addCell(new Cell().add(new Paragraph(field)));
 			}
 		}
-
+		doc.add(table);
 		doc.close();
 	}
 
@@ -364,6 +381,7 @@ public class StaffReport extends Report {
 	}
 
 	public static ArrayList<String[]> StaffReport3(String date) throws SQLException {
+		System.out.println("line 271");
 		String sql =
 				"SELECT SUM(TIJ.ActualDuration) AS 'Total time on chosen date'\n" +
 				"FROM TaskInAJob TIJ,\n" +
@@ -371,6 +389,7 @@ public class StaffReport extends Report {
 				"WHERE TIJ.TaskStartTime LIKE '%" + date + "%'\n" +
 				"  AND TIJ.isCompleted = 1" +
 				"  AND TIJ.TaskID = T.TaskID;";
+		System.out.println(sql);
 
 		Statement statement = connection.createStatement();
 		ResultSet resultSet = statement.executeQuery(sql);

@@ -8,6 +8,7 @@ import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.UnitValue;
+import javafx.scene.text.Font;
 
 import java.io.File;
 import java.sql.*;
@@ -38,10 +39,12 @@ public class CustomerReport extends Report {
 	public static void main(String[] args) throws Exception {
 //		File file = new File(DEST);
 //		CustomerReport.autoGenerateReport(1,1,"");
-        new CustomerReport().printCustomerReport(1,"");
+        new CustomerReport().printCustomerReport(1,"","");
 	}
 
 	public ArrayList<String[]> CustomerReportList(int AccountNumber, String date, String year) throws SQLException {
+		System.out.println("line 45");
+
 		String sql =
 				"SELECT CA.AccountNumber AS 'Account number',\n" +
 						"       CA.CustomerName,\n" +
@@ -67,6 +70,7 @@ public class CustomerReport extends Report {
 						"  AND T.TaskID = TIJ.TaskID\n" +
 						"  AND J.`AccountNumber` = CA.`AccountNumber`\n" +
 						";\n";
+		System.out.println(sql);
 		Statement statement = connection.createStatement();
 		ResultSet resultSet = statement.executeQuery(sql);
 
@@ -100,17 +104,28 @@ public class CustomerReport extends Report {
 	public void printCustomerReport(int accountNumber, String date, String year) throws Exception {
 		String DEST = "../BAPERS-FINAL/BAPERS3/GENERATED/REPORTS/CUSTOMERREPORT/CustomerReport" + Calendar.getInstance().getTimeInMillis() + ".pdf";
 		PdfDocument pdfDoc = new PdfDocument(new PdfWriter(DEST));
+
 		Document doc = new Document(pdfDoc);
 		doc.add(new Paragraph("Customer Report!"));
 		// By default column width is calculated automatically for the best fit.
 		// useAllAvailableWidth() method makes table use the whole page's width while placing the content.
-		Table table = new Table(UnitValue.createPercentArray(10)).useAllAvailableWidth();
+//		Table table = new Table(UnitValue.createPercentArray(10));
+		Table table = new Table(10,true);
 		List<List<String>> dataset = null;
-
+		Font yourCustomFont = new Font(1);
 		// change toLoad to decide what you load
-		ArrayList<String[]> toLoad = CustomerReportList(accountNumber,date, year);
+		ArrayList<String[]> toLoad = CustomerReportList(accountNumber, date, year);
 		dataset = convertTypes(toLoad);
-
+		table.addCell("Account Number");
+		table.addCell("CustomerName");
+		table.addCell("ContactName");
+		table.addCell("Job");
+		table.addCell("Price, £");
+		table.addCell("Task");
+		table.addCell("Department");
+		table.addCell("Start time/Date");
+		table.addCell("Time Taken");
+		table.addCell("EmployeeCompletedBy");
 		for (List<String> record : dataset) {
 			for (String field : record) {
 				table.addCell(new Cell().add(new Paragraph(field)));
@@ -165,6 +180,7 @@ public class CustomerReport extends Report {
                         "  AND T.TaskID = TIJ.TaskID\n" +
                         "  AND J.`AccountNumber` = CA.`AccountNumber`\n" +
                         ";\n";
+
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
 
@@ -208,8 +224,8 @@ public class CustomerReport extends Report {
 		// change toLoad to decide what you load
 		ArrayList<String[]> toLoad = CustomerReportList(accountNumber,date);
 		dataset = convertTypes(toLoad);
-
 		for (List<String> record : dataset) {
+
 			for (String field : record) {
 				table.addCell(new Cell().add(new Paragraph(field)));
 			}
