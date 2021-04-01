@@ -5,6 +5,7 @@ import ADMIN.DBConfiguration;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -12,17 +13,14 @@ import java.util.ArrayList;
 
 public class DatabaseScreen extends Window {
 
-	/*
-	private Button LogOutButton;
-	private Button DBBackupButton;
-	private Button DBRestoreButton;
-	 */
-	@FXML
-	private ComboBox<String> backupBox;
 	@FXML
 	private ComboBox<String> restoreBox;
 	@FXML
 	private Button backupButton;
+	@FXML
+	private TextField backupMinutesField;
+	@FXML
+	private Button confirmButton;
 	@FXML
 	private Button restoreButton;
 
@@ -59,7 +57,7 @@ public class DatabaseScreen extends Window {
 	public void onShow(){
 		super.onShow();
 
-		backupBox.getSelectionModel().clearSelection();
+		backupMinutesField.clear();
 		restoreBox.getSelectionModel().clearSelection();
 		setFilesToBox();
 	}
@@ -72,7 +70,6 @@ public class DatabaseScreen extends Window {
 		userAllowed = new String[]{ROLE_OFFICE_MANAGER};
 
 		setComboBoxPromptText(restoreBox, "Select file to restore from");
-		restoreBox.setPromptText("Select file to restore from");
 		backupButton.setOnAction(actionEvent -> onBackup());
 		restoreButton.setOnAction(actionEvent -> onRestore());
 	}

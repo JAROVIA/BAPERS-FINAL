@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -29,18 +30,13 @@
                </font>
             </Label>
             <Button fx:id="backupButton" layoutX="655.0" layoutY="563.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" style="-fx-background-color: #DDF8FF; -fx-border-color: black;" text="Database Backup" />
-            <Button fx:id="restoreButton" layoutX="1147.0" layoutY="561.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" style="-fx-background-color: #DDF8FF; -fx-border-color: black;" text="Database Restore" />
+            <Button fx:id="restoreButton" layoutX="1143.0" layoutY="631.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" style="-fx-background-color: #DDF8FF; -fx-border-color: black;" text="Database Restore" />
             <Label layoutX="712.0" layoutY="618.0" text="OR">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="1212.0" layoutY="615.0" text="OR">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Label>
-            <ComboBox fx:id="restoreBox" layoutX="1109.0" layoutY="665.0" prefHeight="27.0" prefWidth="220.0" style="-fx-background-color: WHITE; -fx-border-color: black;" />
+            <ComboBox fx:id="restoreBox" layoutX="1109.0" layoutY="563.0" prefHeight="27.0" prefWidth="220.0" style="-fx-background-color: WHITE; -fx-border-color: black;" />
             <ImageView fitHeight="220.0" fitWidth="220.0" layoutX="1133.0" layoutY="319.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/Database-Restore-Icon.png" />
@@ -56,9 +52,9 @@
                   <Font size="27.0" />
                </font>
             </Text>
-            <ComboBox fx:id="dayBox" layoutX="550.0" layoutY="664.0" prefHeight="27.0" prefWidth="83.0" />
-            <ComboBox fx:id="monthBox" layoutX="670.0" layoutY="664.0" prefHeight="27.0" prefWidth="83.0" />
-            <ComboBox fx:id="yearBox" layoutX="790.0" layoutY="664.0" prefHeight="27.0" prefWidth="83.0" />
+            <TextField fx:id="backupMinutesField" layoutX="640.0" layoutY="678.0" promptText="back up in ... minutes" />
+            <Button fx:id="confirmButton" layoutX="648.0" layoutY="718.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" style="-fx-background-color: #DDF8FF; -fx-border-color: black;" text="Confirm" />
+            <Label layoutX="634.0" layoutY="651.0" text="Autoback up setting in minutes :" />
       </children>
     </AnchorPane>
   </children>

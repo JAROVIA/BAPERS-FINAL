@@ -150,8 +150,9 @@ public class ProcessTasksScreen extends Window {
 					//TODO use employee name
 					TaskInAJob.CompleteTask(Integer.parseInt(taskInAJobData[0]), Integer.parseInt(taskInAJobData[1]), completedByEmployeeName);
 					onShow();
-				} catch (SQLException throwables) {
-					throwables.printStackTrace();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					AlertUser.showDBError();
 				}
 			}
 		}
