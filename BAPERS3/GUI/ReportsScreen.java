@@ -149,16 +149,24 @@ public class ReportsScreen extends Window {
 	private void autoGenerateStaffReport(){
 		if(isValueNotEmpty(staffGenerateMinutesField)){
 			StaffReport.autoGenerateReport(Integer.parseInt(staffGenerateMinutesField.getText()));
+			AlertUser.showCompletion("Staff report set to generate every " +
+					Integer.parseInt(staffGenerateMinutesField.getText()) + " minutes");
 		}
 	}
 	private void autoGenerateCustomerReport(){
 		if(isValueNotEmpty(customerGenerateMinutesField, accountNumberField)){
-			CustomerReport.autoGenerateReport(Integer.parseInt(customerGenerateMinutesField.getText()), Integer.parseInt(accountNumberField.getText()));
+			CustomerReport.autoGenerateReport(
+					Integer.parseInt(customerGenerateMinutesField.getText()),
+					Integer.parseInt(accountNumberField.getText()));
+			AlertUser.showCompletion("Customer report set to generate every " +
+					Integer.parseInt(customerGenerateMinutesField.getText()) + " minutes");
 		}
 	}
 	private void autoGenerateSummaryReport(){
 		if(isValueNotEmpty(summaryGenerateMinutesField)){
 			SummaryReport.autoGenerateReport(Integer.parseInt(summaryGenerateMinutesField.getText()));
+			AlertUser.showCompletion("Summary report set to generate every " +
+					Integer.parseInt(summaryGenerateMinutesField.getText()) + " minutes");
 		}
 	}
 
@@ -190,6 +198,8 @@ public class ReportsScreen extends Window {
 		addIntegerNumberListener(summaryGenerateMinutesField);
 
 		confirmAutoStaffButton.setOnAction(actionEvent -> autoGenerateStaffReport());
+		confirmAutoCustomerButton.setOnAction(actionEvent -> autoGenerateCustomerReport());
+		confirmAutoSummaryButton.setOnAction(actionEvent -> autoGenerateSummaryReport());
 
 		for(int i = 0; i < 31; i++){
 			days[i] = String.valueOf(i+1);
