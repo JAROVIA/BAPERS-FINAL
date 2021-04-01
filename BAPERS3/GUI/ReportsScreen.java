@@ -1,17 +1,20 @@
 package GUI;
 
+import ADMIN.AlertUser;
 import REPORT.CustomerReport;
 import REPORT.StaffReport;
 import REPORT.SummaryReport;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ReportsScreen extends Window {
 
 	@FXML
 	private Button customerReportButton;
-	@FXML
-	private ComboBox<String> reportGenerationBox;
 	@FXML
 	private Button staffReportButton;
 	@FXML
@@ -19,19 +22,84 @@ public class ReportsScreen extends Window {
 	@FXML
 	private TextField accountNumberField;
 	@FXML
-	private TextField dateField1;
+	private TextField staffGenerateMinutesField;
 	@FXML
-	private TextField dateField2;
+	private TextField customerGenerateMinutesField;
 	@FXML
-	private TextField dateField3;
+	private TextField summaryGenerateMinutesField;
 	@FXML
-	private TextField shiftField;
+	private Button confirmAutoCustomerButton;
+	@FXML
+	private Button confirmAutoStaffButton;
+	@FXML
+	private Button confirmAutoSummaryButton;
+	//customer
+	@FXML
+	private ComboBox<String> customerWeekBox;
+	@FXML
+	private ComboBox<String> customerDayBox;
+	@FXML
+	private ComboBox<String> customerMonthBox;
+	@FXML
+	private ComboBox<String> customerYearBox;
+	//staff
+	@FXML
+	private ComboBox<String> staffWeekBox;
+	@FXML
+	private ComboBox<String> staffDayBox;
+	@FXML
+	private ComboBox<String> staffMonthBox;
+	@FXML
+	private ComboBox<String> staffYearBox;
+	//summery
+	@FXML
+	private ComboBox<String> summaryWeekBox;
+	@FXML
+	private ComboBox<String> summaryDayBox;
+	@FXML
+	private ComboBox<String> summaryMonthBox;
+	@FXML
+	private ComboBox<String> summaryYearBox;
+
+	private static final String[] daysOfWeek = new String[]{
+			"Mon",
+			"Tue",
+			"Wed",
+			"Thurs",
+			"Fri",
+			"Sat",
+			"Sun"
+	};
+	private static final String[] days = new String[31];
+	private static final String[] months = new String[]{
+			"Jan",
+			"Feb",
+			"Mar",
+			"Apr",
+			"May",
+			"Jun",
+			"July",
+			"Aug",
+			"Sep",
+			"Oct",
+			"Nov",
+			"Dec"
+	};
+	private static final String[] years = new String[99];
 
 	public void generateCustomerReport() {
-		if(!accountNumberField.getText().trim().isEmpty() && !dateField1.getText().trim().isEmpty()) {
+		if(isValueNotEmpty(new TextField[]{accountNumberField}, new ComboBox[]{customerWeekBox, customerDayBox, customerMonthBox, customerYearBox})) {
 			try {
-				new CustomerReport().printCustomerReport(Integer.parseInt(accountNumberField.getText()), dateField1.getText());
+				new CustomerReport().printCustomerReport(Integer.parseInt(
+						accountNumberField.getText()),
+						customerWeekBox.getValue() + " " +
+								customerDayBox.getValue() + " " +
+								customerMonthBox.getValue() + " " +
+								customerYearBox.getValue()
+				);
+				AlertUser.showCompletion("Customer report generation");
 			} catch (Exception e) {
+				AlertUser.showDBError();
 				e.printStackTrace();
 			}
 		}else {
@@ -40,10 +108,18 @@ public class ReportsScreen extends Window {
 	}
 
 	public void generateSummaryReport() {
-		if (!dateField2.getText().trim().isEmpty()) {
+		if (isValueNotEmpty(summaryWeekBox, summaryDayBox, summaryMonthBox, summaryYearBox)) {
 			try {
-				new SummaryReport().printSummaryReport(dateField3.getText());
+				new SummaryReport().printSummaryReport(
+						summaryWeekBox.getValue() + " " +
+								summaryDayBox.getValue() + " " +
+								summaryMonthBox.getValue() + " " +
+								summaryYearBox.getValue()
+				);
+				AlertUser.showCompletion("Summary report generation");
+
 			} catch (Exception e) {
+				AlertUser.showDBError();
 				e.printStackTrace();
 			}
 		} else {
@@ -52,11 +128,18 @@ public class ReportsScreen extends Window {
 	}
 
 	public void generateStaffReport() {
-		if(!dateField2.getText().trim().isEmpty()) {
+		if(isValueNotEmpty(staffWeekBox, staffDayBox, staffMonthBox, staffYearBox)) {
 			try {
-				new StaffReport().printStaffReport(dateField2.getText());
+				new StaffReport().printStaffReport(
+						staffWeekBox.getValue() + " " +
+								staffDayBox.getValue() + " " +
+								staffMonthBox.getValue() + " " +
+								staffYearBox.getValue()
+				);
+				AlertUser.showCompletion("Staff report generation");
 			} catch (Exception e) {
 				e.printStackTrace();
+				AlertUser.showDBError();
 			}
 		}else{
 			new Alert(Alert.AlertType.ERROR, "Enter date", ButtonType.CLOSE).show();
@@ -65,9 +148,9 @@ public class ReportsScreen extends Window {
 
 	public void onLeave(){
 		accountNumberField.clear();
-		dateField1.clear();
-		dateField2.clear();
-		dateField3.clear();
+		customerGenerateMinutesField.clear();
+		staffGenerateMinutesField.clear();
+		summaryGenerateMinutesField.clear();
 	}
 
 	public void onShow(){
@@ -84,5 +167,31 @@ public class ReportsScreen extends Window {
 		customerReportButton.setOnAction(actionEvent -> generateCustomerReport());
 		staffReportButton.setOnAction(actionEvent -> generateStaffReport());
 		summaryReportButton.setOnAction(actionEvent -> generateSummaryReport());
+
+		for(int i = 0; i < 31; i++){
+			days[i] = String.valueOf(i+1);
+		}
+
+		for(int i = 0; i < 99; i++){
+			years[i] = String.valueOf((i+21)%100);
+		}
+
+		ArrayList<ComboBox[]> boxes = new ArrayList<>(Arrays.asList(
+				new ComboBox[]{customerWeekBox, customerMonthBox, customerDayBox, customerYearBox},
+				new ComboBox[]{summaryWeekBox, summaryMonthBox, summaryDayBox, summaryYearBox},
+				new ComboBox[]{staffWeekBox, staffMonthBox, staffDayBox, staffYearBox}
+		));
+
+		for(ComboBox<String>[] box : boxes){
+			setComboBoxPromptText(box[0], "Days");
+			setComboBoxPromptText(box[1], "Month");
+			setComboBoxPromptText(box[2], "Day");
+			setComboBoxPromptText(box[3], "Year");
+
+			box[0].setItems(FXCollections.observableList(Arrays.asList(daysOfWeek)));
+			box[1].setItems(FXCollections.observableList(Arrays.asList(months)));
+			box[2].setItems(FXCollections.observableList(Arrays.asList(days)));
+			box[3].setItems(FXCollections.observableList(Arrays.asList(years)));
+		}
 	}
 }

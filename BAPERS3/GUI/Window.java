@@ -370,6 +370,23 @@ public abstract class Window{
 		return pass;
 	}
 
+	protected boolean isValueNotEmpty(ComboBox<String>... boxes){
+		boolean pass = true;
+		StringBuilder message = new StringBuilder("Empty field at : ");
+
+		for(ComboBox<String> box : boxes){
+			if(box.getValue() == null){
+				pass = false;
+				message.append("\n").append(box.getPromptText());
+			}
+		}
+		if(!pass){
+			Alert alert = new Alert(Alert.AlertType.ERROR, message.toString(), ButtonType.CLOSE);
+			alert.show();
+		}
+		return pass;
+	}
+
 	protected boolean isValueNotEmpty(TextField... textFields){
 		boolean pass = true;
 		StringBuilder message = new StringBuilder("Empty field at : ");
@@ -387,6 +404,7 @@ public abstract class Window{
 	}
 
 	protected void setComboBoxPromptText(ComboBox<String> box, String promptText){
+		box.setPromptText(promptText);
 		box.setButtonCell(new ListCell<String>() {
 			@Override
 			protected void updateItem(String item, boolean empty) {
