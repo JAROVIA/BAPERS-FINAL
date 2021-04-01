@@ -54,7 +54,10 @@ public class FixedDiscountRate extends Discount {
 		Statement statement = connection.createStatement();
 		ResultSet resultSet = statement.executeQuery(sql);
 
+		System.out.println(sql);
+
 		if(resultSet.next()){
+			System.out.println(resultSet.getInt("count"));
 			return resultSet.getInt("count") > 0;
 		}
 		return false;
