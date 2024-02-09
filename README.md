@@ -13,10 +13,10 @@ It's a full-stack group project.
 ## Some of the features include
 
 - Signing In, and User Accounts with different permissions
-  [](https://github.com/Javonnep/BAPERS-FINAL/assets/28714185/8251f17f-4f1e-41ea-8fa6-bbf0a1aeeec9)
+  [Signing In, and User Accounts with different permissions](https://github.com/Javonnep/BAPERS-FINAL/assets/28714185/8251f17f-4f1e-41ea-8fa6-bbf0a1aeeec9)
 
 - Creating new Jobs (Jobs are tasks to be completed)
-  [](https://github.com/Javonnep/BAPERS-FINAL/assets/28714185/7fb6209a-9c4d-4e16-bf91-bc0795aa1188)
+  [Creating new Jobs (Jobs are tasks to be completed)](https://github.com/Javonnep/BAPERS-FINAL/assets/28714185/7fb6209a-9c4d-4e16-bf91-bc0795aa1188)
 
 - Automatically Generating Reports
 ![image](https://github.com/Javonnep/BAPERS-FINAL/assets/28714185/2cff208d-4af1-4dab-b93a-bbd89d98948b)
