@@ -14,6 +14,7 @@ It's a full-stack group project.
 
 - Signing In, and User Accounts with different permissions
   [Signing In, and User Accounts with different permissions](https://github.com/Javonnep/BAPERS-FINAL/assets/28714185/8251f17f-4f1e-41ea-8fa6-bbf0a1aeeec9)
+https://github.com/Javonnep/BAPERS-FINAL/assets/28714185/8251f17f-4f1e-41ea-8fa6-bbf0a1aeeec9
 
 - Creating new Jobs (Jobs are tasks to be completed)
   [Creating new Jobs (Jobs are tasks to be completed)](https://github.com/Javonnep/BAPERS-FINAL/assets/28714185/7fb6209a-9c4d-4e16-bf91-bc0795aa1188)
