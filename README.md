@@ -19,7 +19,7 @@ It's a full-stack group project.
   [Creating new Jobs (Jobs are tasks to be completed)](https://github.com/Javonnep/BAPERS-FINAL/assets/28714185/7fb6209a-9c4d-4e16-bf91-bc0795aa1188)
 
 - Automatically Generating Reports
-![image](https://github.com/Javonnep/BAPERS-FINAL/assets/28714185/2cff208d-4af1-4dab-b93a-bbd89d98948b)
+![image](https://github.com/Javonnep/BAPERS-FINAL/assets/28714185/115dd885-612f-4d1f-b23c-30e4bbdd830b)
 ![image](https://github.com/Javonnep/BAPERS-FINAL/assets/28714185/f74af234-ce17-4ca0-b808-328195f79094)
 
 - Generating system backups and restoring from backups using SQL databases
